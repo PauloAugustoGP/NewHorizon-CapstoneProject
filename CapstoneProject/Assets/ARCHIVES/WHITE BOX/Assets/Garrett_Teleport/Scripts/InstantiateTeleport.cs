@@ -33,7 +33,11 @@ public class InstantiateTeleport : MonoBehaviour {
         {
             
             Destroy(fakePlayer);
-            transform.SetPositionAndRotation(teleportPoint.transform.position, transform.rotation);
+
+            if (Vector3.Distance(transform.position, teleportPoint.transform.position) < 5 && Vector3.Distance(transform.position, teleportPoint.transform.position) > 1)
+            {
+                transform.SetPositionAndRotation(teleportPoint.transform.position, transform.rotation);
+            }
         }
 
 

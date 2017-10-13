@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TeleportPoint : MonoBehaviour {
 
-    
+    // Vector3 playerPosition;
+    // Vector3 currentPosition;
 
     
 
@@ -16,6 +17,8 @@ public class TeleportPoint : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // currentPosition = transform.position;
+        // playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
 
         // setting up new variable raycasts hit for raycast to return its hit point to
         RaycastHit hit;
