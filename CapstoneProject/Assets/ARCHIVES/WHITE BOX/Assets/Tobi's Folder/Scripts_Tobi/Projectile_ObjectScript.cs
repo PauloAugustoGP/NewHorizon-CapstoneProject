@@ -4,54 +4,72 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class Projectile : MonoBehaviour
-{
-    
-    private Rigidbody rb;
-    public float projectileSpeed;
-	public float deltaStunTime;
-	public float deltaSize;
-	public float stunTime;
-	public float timeToDone;
+public class Projectile_ObjectScript : MonoBehaviour {
 
-    // Use this for initialization
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        projectileSpeed = 10.0f;
+	private Rigidbody rb;
+	private float deltaStunTime;
+	private float stunTime;
+	private float timeToDone;
 
-        rb.useGravity = false;
-        //rb.velocity = transform.forward * projectileSpeed;
+	private float projectileSpeed;
+	private float maxChargeTime;
+	private float deltaSize;
+
+	// Use this for initialization
+	void Start()
+	{
+		rb = GetComponent<Rigidbody>();
+
+		rb.useGravity = false;
 		deltaStunTime = 1.0f;
-		deltaSize = 0.05f;
 
-		timeToDone = Time.time + 10.0f;
-    }
+		timeToDone = 0.0f;
+	}
 
-    // Update is called once per frame
-    public void Charge()
-    {
-		if(timeToDone > Time.time)
-		{
-			stunTime += (deltaStunTime * Time.deltaTime);
-			Vector3 i = transform.localScale;
-			i.x += (deltaSize * Time.deltaTime);
-			i.y += (deltaSize * Time.deltaTime);
-			i.z += (deltaSize * Time.deltaTime);
-			transform.localScale = i;
-		}
-    }
+	public void StartCharge(float _projectileSpeed, float _maxChargeTime, float _deltaSize)
+	{
+		projectileSpeed = _projectileSpeed;
+		maxChargeTime = _maxChargeTime;
+		deltaSize = _deltaSize;
+
+		StartCoroutine(Charge());
+	}
 
 	public void Fire()
 	{
 		rb.velocity = transform.forward * projectileSpeed;
+		StopAllCoroutines();
 	}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag != "Player")
-        {
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.tag != "Player")
+		{
 			Destroy(gameObject);
-        }
-    }
+		}
+	}
+
+	private IEnumerator Charge()
+	{
+		float deltaC = 0.1f;
+
+		yield return new WaitForSeconds(deltaC);
+
+		if(timeToDone < maxChargeTime)
+		{
+			timeToDone += deltaC;
+
+			Vector3 i = transform.localScale;
+			i.x += (deltaSize * deltaC);
+			i.y += (deltaSize * deltaC);
+			i.z += (deltaSize * deltaC);
+			transform.localScale = i;
+		
+			StartCoroutine(Charge());
+		}
+		else
+		{
+			timeToDone = 0.0f;
+		}
+	}
 }
