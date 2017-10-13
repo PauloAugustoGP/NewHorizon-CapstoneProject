@@ -19,7 +19,7 @@ public class distractObject1 : MonoBehaviour
     {
 		if (activated)
         {
-            //PingPong is a match function to variate between 0 and the given value(in this case 1).
+            //PingPong is a math function to variate between 0 and the given value(in this case 1).
             Timer += Time.deltaTime;
             Vector3 v = Ball.localPosition;
             v.y = -1 - Mathf.PingPong(Timer, 1);
