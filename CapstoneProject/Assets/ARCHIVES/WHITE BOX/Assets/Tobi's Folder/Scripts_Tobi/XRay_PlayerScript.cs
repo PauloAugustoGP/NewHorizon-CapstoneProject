@@ -10,8 +10,6 @@ public class XRay_PlayerScript : MonoBehaviour {
 		[SerializeField]
 		private string _XRayTag = "XRay";
 		[SerializeField]
-		private string _shaderLocation = "Transparent";
-		[SerializeField]
 		private float _touchDistance = 1.0f;
 
 		public string XRayTag
@@ -21,15 +19,6 @@ public class XRay_PlayerScript : MonoBehaviour {
 			{ 
 				if(_XRayTag == "")
 					_XRayTag = value; 
-			}
-		}
-		public string shaderLocation
-		{ 
-			get { return _shaderLocation; } 
-			set 
-			{ 
-				if(_shaderLocation == "")
-					_shaderLocation = value; 
 			}
 		}
 		public float touchDistance
@@ -113,18 +102,11 @@ public class XRay_PlayerScript : MonoBehaviour {
 			Debug.LogError("No XRay_Tag string defined in the Inspector. Defaulting to XRay.");
 			definitions.XRayTag = "XRay";
 		}
-		if(definitions.shaderLocation == "")
-		{
-			Debug.LogError("No shaderLocation string defined in the Inspector. Defaulting to Transparent.");
-			definitions.shaderLocation = "Transparent";
-		}
 		if(definitions.touchDistance <= 0.0f)
 		{
 			Debug.LogError("No Touch Distance set in the Inspector. Defaulting to 1.0f");
 			definitions.touchDistance = 1.0f;
 		}
-
-		dragAndDropVariables.transparent = Shader.Find(definitions.shaderLocation);
 
 		if(!dragAndDropVariables.rayOrigin)
 		{
@@ -132,7 +114,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 		}
 		if(!dragAndDropVariables.transparent)
 		{
-			Debug.LogError("Cannot find Shadder at defined location: " + definitions.shaderLocation + ".");
+			Debug.LogError("No Transparent shader attached.");
 		}	
 
 		currentObject = null;

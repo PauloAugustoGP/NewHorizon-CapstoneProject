@@ -71,12 +71,12 @@ public class Projectile_PlayerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space) /*&& Time.time > rechargeTime*/)
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			ProjSpawn();
 		}
 
-		if(Input.GetKeyUp(KeyCode.Space)/* && Time.time > rechargeTime*/)
+		if(Input.GetKeyUp(KeyCode.Space))
 		{
 			ProjFire();
 		}
