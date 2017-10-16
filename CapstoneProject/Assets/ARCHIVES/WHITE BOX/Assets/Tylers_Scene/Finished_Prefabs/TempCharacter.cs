@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class TempCharacter : MonoBehaviour
     public Transform projectileSpawn;
     public GameObject projectilePrefab;
 
-	public Projectile currentProjectile;
+	public Projectile_ObjectScript currentProjectile;
 
 	bool projSpawned;
 	public float rechargeTime;
@@ -27,14 +27,14 @@ public class TempCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKey(KeyCode.Space) /*&& Time.time > rechargeTime*/)
+		if (Input.GetKey(KeyCode.Space) /*&& Time.time > rechargeTime)
 		{
 			if(!projSpawned)
 			{
 				var projectile = (GameObject) Instantiate (projectilePrefab, 
 					projectileSpawn.position, 
 					projectileSpawn.rotation);
-				currentProjectile = projectile.GetComponent<Projectile>();
+				currentProjectile = projectile.GetComponent<Projectile_ObjectScript>();
 
 				projSpawned = true;
 			}
@@ -46,7 +46,7 @@ public class TempCharacter : MonoBehaviour
 			//Debug.Log("You pressed fire");
         }
 
-		if(Input.GetKeyUp(KeyCode.Space)/* && Time.time > rechargeTime*/)
+		if(Input.GetKeyUp(KeyCode.Space)/* && Time.time > rechargeTime)
 		{
 			//rechargeTime += Time.time;
 			currentProjectile.Fire();
@@ -55,3 +55,4 @@ public class TempCharacter : MonoBehaviour
 		}
     }
 }
+*/

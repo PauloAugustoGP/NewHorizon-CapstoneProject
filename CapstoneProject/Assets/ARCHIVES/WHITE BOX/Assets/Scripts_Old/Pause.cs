@@ -7,12 +7,15 @@ public class Pause : MonoBehaviour
 {
 
     public Button resumeBtn;
-    public Button optBtn;
+    public Button restartBtn;
     public Button quitBtn;
+
+    public bool isPaused;
 
     // Use this for initialization
     void Start()
     {
+        isPaused = false;
         if (resumeBtn)
         {
 
@@ -23,9 +26,14 @@ public class Pause : MonoBehaviour
             });
         }
 
-        /* if (optBtn)
-             optBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL("options"); });
-          */
+        if (restartBtn)
+        {
+            restartBtn.onClick.AddListener(delegate { Scene_Manager.instance.Reload_LEVEL(); });
+            GetComponentInChildren<Canvas>().enabled = false;
+            Time.timeScale = 1.0f;
+            isPaused = false;
+        }
+          
         if (quitBtn)
         {
             quitBtn.onClick.AddListener (Scene_Manager.instance.GoTo_MENU); 
@@ -35,17 +43,19 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown(KeyCode.Escape))
         {
             if (GetComponentInChildren<Canvas>().enabled == false)
             {
                 GetComponentInChildren<Canvas>().enabled = true;
                 Time.timeScale = 0f;
+                isPaused = true;
             }
             else if (GetComponentInChildren<Canvas>().enabled == true)
             {
                 GetComponentInChildren<Canvas>().enabled = false;
                 Time.timeScale = 1.0f;
+                isPaused = false;
             }
 
             
