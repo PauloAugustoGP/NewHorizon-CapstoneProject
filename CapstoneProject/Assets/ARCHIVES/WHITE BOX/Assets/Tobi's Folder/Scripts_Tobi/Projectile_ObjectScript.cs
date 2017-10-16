@@ -11,7 +11,6 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	//private ParticleSystem _ps;
 	private float deltaStunTime;
 	private float stunTime;
-	[SerializeField]
 	private float timeToDone;
 
 	private float projectileSpeed;
