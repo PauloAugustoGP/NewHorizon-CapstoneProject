@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 223432263880967908}
   - component: {fileID: 114552787558817282}
   - component: {fileID: 114143143961456168}
-  - component: {fileID: 114685825506728100}
+  - component: {fileID: 114018525016467070}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 222000170027890412}
   - component: {fileID: 114396733146203370}
   m_Layer: 5
-  m_Name: damageFlash
+  m_Name: DamageIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 222904917307763232}
   - component: {fileID: 114778234013171412}
   m_Layer: 5
-  m_Name: scoreText
+  m_Name: Score
   m_TagString: ScoreText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,6 +468,37 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114018525016467070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1394735273372214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff16a3dd7c762b140894f0b060cdb3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  fColor: {r: 1, g: 0, b: 0, a: 0.1}
+  fSpeed: 0
+  fScreen: {fileID: 0}
+  timer: {fileID: 114963032009512124}
+  minutes: 0
+  seconds: 0
+  startTime: 0
+  currentTime: 0
+  pauseTime: 0
+  countDown: 0
+  mval: 0
+  score: {fileID: 114778234013171412}
+  broadcast: {fileID: 0}
+  bcMessage: 
+  bcColor: {r: 1, g: 1, b: 1, a: 1}
+  bcDelay: 5
+  healthBar: {fileID: 224474554703716976}
+  healthBarBg: {fileID: 224731116205841520}
+  phealth: 0
 --- !u!114 &114139070001686158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1071,37 +1102,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114685825506728100
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1394735273372214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dacca87901b1684593836a9b123ab22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  flashSpeed: 5
-  flashScreen: {fileID: 114396733146203370}
-  timer: {fileID: 114963032009512124}
-  scoreText: {fileID: 114778234013171412}
-  broadcast: {fileID: 114008890892416694}
-  continuousBroadcast: 0
-  broadcastMessage: Hi, this is a test
-  broadcastColor: {r: 1, g: 1, b: 1, a: 1}
-  broadcastDelay: 5
-  minutes: 0
-  seconds: 0
-  startTime: 0
-  stopTime: 0
-  currentTime: 0
-  countDown: 0
-  healthBar: {fileID: 224474554703716976}
-  healthBarBg: {fileID: 224731116205841520}
-  phealth: 0
 --- !u!114 &114764001396828458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1163,7 +1163,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2e11ab76acfc43d40a0103b93f0f2862, type: 3}
+    m_Font: {fileID: 12800000, guid: 6ae68e37eb7ea9545a82a2cde5f4fa6c, type: 3}
     m_FontSize: 25
     m_FontStyle: 1
     m_BestFit: 0
@@ -1256,7 +1256,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2e11ab76acfc43d40a0103b93f0f2862, type: 3}
+    m_Font: {fileID: 12800000, guid: 6ae68e37eb7ea9545a82a2cde5f4fa6c, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
