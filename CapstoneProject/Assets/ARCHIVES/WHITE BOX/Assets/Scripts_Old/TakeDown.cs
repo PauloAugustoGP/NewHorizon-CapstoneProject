@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class TakeDown : MonoBehaviour {
 
-    
+
+    //meleeScript goes on the character
+    //takedown script goes on the meleePrefab
 
     public float lifeTime; 
 
 	// Use this for initialization
 	void Start ()
     {
-        lifeTime = 1;
+        lifeTime = 0.05f;
 
         Destroy(gameObject, lifeTime);
     }
