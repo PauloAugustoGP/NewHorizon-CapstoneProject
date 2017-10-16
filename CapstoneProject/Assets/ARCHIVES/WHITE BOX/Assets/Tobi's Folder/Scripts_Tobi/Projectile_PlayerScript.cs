@@ -51,7 +51,24 @@ public class Projectile_PlayerScript : MonoBehaviour
 	private Projectile_ObjectScript currentProjectile;
 
 	private bool projSpawned;
-	private float rechargeTime;
+
+	[SerializeField]
+	private bool useCoolDown = true;
+
+	private float _coolDownTime;
+
+	/// <summary>
+	/// Returns Cool Down Time (time until power can be used again)
+	/// </summary>
+	public float coolDownTime
+	{
+		get{ return _coolDownTime; }
+	}
+
+	[SerializeField]
+	private MonoBehaviour[] componentsToDisable;
+
+
 
 	[SerializeField]
 	private DragDrop dragAndDropVariables = new DragDrop ();
@@ -86,12 +103,21 @@ public class Projectile_PlayerScript : MonoBehaviour
 	{
 		if(!projSpawned)
 		{
+			if(useCoolDown)
+				StartCoroutine(TimeCounter());
+
 			var projectile = (GameObject) Instantiate (dragAndDropVariables.projectilePrefab, 
 				dragAndDropVariables.projectileSpawn.position, 
 				dragAndDropVariables.projectileSpawn.rotation);
 			currentProjectile = projectile.GetComponent<Projectile_ObjectScript>();
 
 			projSpawned = true;
+
+			foreach(MonoBehaviour script in componentsToDisable)
+			{
+				if(componentsToDisable.Length > 0)
+					script.enabled = false;
+			}
 
 			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize);
 		}
@@ -100,11 +126,52 @@ public class Projectile_PlayerScript : MonoBehaviour
 	public void ProjFire()
 	{
 		if(currentProjectile)
+		{
 			currentProjectile.Fire();
-		
 
-		projSpawned = false;
+			foreach(MonoBehaviour script in componentsToDisable)
+			{
+				if(componentsToDisable.Length > 0)
+					script.enabled = true;
+			}	
+
+			if(useCoolDown)
+			{
+				StopAllCoroutines();
+				StartCoroutine(CoolDown());
+				//_coolDownTime = 0.0f;
+			}
+			else
+			{
+				projSpawned = false;
+			}
+		}
+
 		currentProjectile = null;
+	}
+
+	private IEnumerator CoolDown()
+	{
+		yield return new WaitForSeconds(1.0f);
+		if(_coolDownTime <= 0.0f)
+		{
+			projSpawned = false;
+		}
+		else
+		{
+			_coolDownTime -= 1.0f;
+			StartCoroutine(CoolDown());
+		}
+	}
+
+	private IEnumerator TimeCounter()
+	{
+		_coolDownTime += 1.0f; 
+		yield return new WaitForSeconds(1.0f);
+		if(_coolDownTime < 10)
+		{
+			StartCoroutine(TimeCounter());
+		}
 	}
 		
 }

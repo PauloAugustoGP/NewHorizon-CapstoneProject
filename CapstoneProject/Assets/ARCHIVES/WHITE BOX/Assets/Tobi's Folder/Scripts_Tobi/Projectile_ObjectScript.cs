@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(ParticleSystem))]
 
 public class Projectile_ObjectScript : MonoBehaviour {
 
-	private Rigidbody rb;
+	private Rigidbody _rb;
+	//private ParticleSystem _ps;
 	private float deltaStunTime;
 	private float stunTime;
+	[SerializeField]
 	private float timeToDone;
 
 	private float projectileSpeed;
@@ -18,9 +21,10 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		rb = GetComponent<Rigidbody>();
+		_rb = GetComponent<Rigidbody>();
+		//_ps = GetComponent<ParticleSystem>();
 
-		rb.useGravity = false;
+		_rb.useGravity = false;
 		deltaStunTime = 1.0f;
 
 		timeToDone = 0.0f;
@@ -37,7 +41,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 
 	public void Fire()
 	{
-		rb.velocity = transform.forward * projectileSpeed;
+		_rb.velocity = transform.forward * projectileSpeed;
 		StopAllCoroutines();
 	}
 
@@ -60,6 +64,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 			timeToDone += deltaC;
 
 			Vector3 i = transform.localScale;
+			
 			i.x += (deltaSize * deltaC);
 			i.y += (deltaSize * deltaC);
 			i.z += (deltaSize * deltaC);

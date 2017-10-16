@@ -64,7 +64,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 	private bool _xrayActive;
 	private bool canXray;
 	[SerializeField]
-	private bool useCoolDown = true;
+	private bool useCoolDown = false;
 
 	private float _coolDownTime;
 
