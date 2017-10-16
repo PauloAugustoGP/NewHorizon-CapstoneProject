@@ -565,11 +565,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2bca32d5e00dc64bb97685a40b3f93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCam: {fileID: 903270175}
+  mainCam: {fileID: 903270175}
   target: {fileID: 279183561}
   walkDist: 2
-  runDist: 4
   heightDist: 1
+  heightDamping: 0
+  rotationDamping: 0
+  _yAngleMin: 0
+  _yAngleMax: 0
+  _rotSpeedX: 0
+  _rotSpeedY: 0
 --- !u!1 &992576713
 GameObject:
   m_ObjectHideFlags: 0
