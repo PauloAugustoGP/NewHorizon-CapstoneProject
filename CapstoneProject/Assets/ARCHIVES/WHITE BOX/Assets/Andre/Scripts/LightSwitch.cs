@@ -7,7 +7,7 @@ public class LightSwitch : MonoBehaviour {
     //Audio
     public AudioClip OpenedSFX;
 
-    public AudioSourcaaaaaae audioSource;
+    public AudioSource audioSource;
 
     // Use this for initialization
     void Start()
