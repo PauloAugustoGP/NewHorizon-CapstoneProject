@@ -4,58 +4,101 @@ using UnityEngine;
 
 public class TeleportScript : MonoBehaviour
 {
+    // fake player, teleport point and radius objects assigned in the inspector
+    [SerializeField] private GameObject fakePlayer;
+    [SerializeField] private GameObject teleportPoint;
+    [SerializeField] private GameObject radius;
 
-    public GameObject fakePlayerPrefab;
-    public GameObject radiusPrefab;
+    // minimum and maximum teleport distances
+    [SerializeField] private float maxTeleportDistance = 5;
+    [SerializeField] private float minTeleportDistance = 1;
 
-    private GameObject fakePlayer;
-    GameObject teleportPoint;
-    private GameObject radius;
-
-    Vector3 fakePlayerSpawnLocation;
+    // used for cooldown of teleport
+    [SerializeField] private bool isCooled;
+    // used for making sure player cannot hold down shift while cooling down then not be able to see radius
+    private bool isActive;
 
 
     // Use this for initialization
     void Start()
     {
-        teleportPoint = GameObject.FindGameObjectWithTag("TeleportLocation");
+        // make sure there is a teleport point in the scene
         if(!teleportPoint)
         {
             Debug.Log("No Teleport Point Prefab added to scene.");
         }
 
-        fakePlayerSpawnLocation = new Vector3(0, 2, 0);
+        // initializing variables
+        isCooled = true;
+        isActive = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        // raycast creation
+        RaycastHit hit;
+        // raycast points to mouse location
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // if raycast hits something
+        if (Physics.Raycast(ray, out hit))
         {
-
-            
-
-            Instantiate(fakePlayerPrefab, teleportPoint.transform.position + fakePlayerSpawnLocation, teleportPoint.transform.rotation);
-
-            fakePlayer = GameObject.FindGameObjectWithTag("FakePlayer");
-
-            radius = Instantiate(radiusPrefab, transform.position, radiusPrefab.transform.rotation);
-                
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-
-            Destroy(fakePlayer);
-            Destroy(radius);
-
-            if (Vector3.Distance(transform.position, teleportPoint.transform.position) < 5 && Vector3.Distance(transform.position, teleportPoint.transform.position) > 1)
+            // check to see if the distance between hit and player is less than the max teleport distance
+            if (Vector3.Distance(transform.position, hit.point) < maxTeleportDistance)
             {
-                transform.SetPositionAndRotation(teleportPoint.transform.position, transform.rotation);
+                // move the teleport point to the hit location of raycast
+                teleportPoint.transform.position = hit.point;
             }
         }
+        else Debug.Log("Raycast not working properly!");
+
+        // set position of fake player to the position of the teleport point
+        fakePlayer.transform.position = teleportPoint.transform.position;
+
+        // draw ray so we can see in inspector
+        Debug.DrawRay(ray.origin, ray.direction, Color.green);
+
+        // check to make sure cooldown is finished
+        if (isCooled)
+        {
+            // initiate teleport with shift key
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                // activate the fake player and radius for visuals
+                fakePlayer.gameObject.SetActive(true);
+                radius.gameObject.SetActive(true);
+                //signal the teleport is active
+                isActive = true;
+            }
+            // finish teleport by letting go of shift, also make sure teleport was activated
+            if (Input.GetKeyUp(KeyCode.LeftShift) && isActive)
+            {
+                // deactivate visuals
+                fakePlayer.gameObject.SetActive(false);
+                radius.gameObject.SetActive(false);
+                //start cool down 
+                StartCoroutine(Cooldown());
+                isCooled = false;
+                // teleport finished
+                isActive = false;
+
+                // check if the teleport point is within acceptable range (max teleport distance and min teleport distance)
+                if (Vector3.Distance(transform.position, teleportPoint.transform.position) < maxTeleportDistance && Vector3.Distance(transform.position, teleportPoint.transform.position) > minTeleportDistance)
+                {
+                    // set this objects position to the location of the teleport point
+                    transform.SetPositionAndRotation(teleportPoint.transform.position, transform.rotation);
+                }
+            }
+
+        }
+        
 
 
+    }
+
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(2.0f);
+        isCooled = true;
     }
 }
