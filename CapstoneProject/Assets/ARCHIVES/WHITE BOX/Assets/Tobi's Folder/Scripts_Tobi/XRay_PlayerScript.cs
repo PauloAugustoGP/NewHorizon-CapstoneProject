@@ -60,11 +60,11 @@ public class XRay_PlayerScript : MonoBehaviour {
 		}
 	}
 
-	private bool isTouched;
+	private bool _isTouched;
 	private bool _xrayActive;
-	private bool canXray;
+	private bool _canXray;
 	[SerializeField]
-	private bool useCoolDown = false;
+	private bool _useCoolDown = false;
 
 	private float _coolDownTime;
 
@@ -119,9 +119,9 @@ public class XRay_PlayerScript : MonoBehaviour {
 
 		currentObject = null;
 		currentShader = null;
-		isTouched = false;
+		_isTouched = false;
 		_xrayActive = false;
-		canXray = true;
+		_canXray = true;
 		_coolDownTime = 0.0f;
 	}
 
@@ -144,7 +144,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 	/// </summary>
 	public void EnableXray(float touchDistance = -1.0f)
 	{
-		if(canXray)
+		if(_canXray)
 		{
 			if(touchDistance >= 0.0f)
 				definitions.touchDistance = touchDistance;
@@ -156,7 +156,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 
 			if (Physics.Raycast (ray, out hit, definitions.touchDistance) && hit.collider.tag == definitions.XRayTag) 
 			{
-				if(useCoolDown)
+				if(_useCoolDown)
 					StartCoroutine(TimeCounter());
 
 				foreach(MonoBehaviour script in componentsToDisable)
@@ -165,10 +165,10 @@ public class XRay_PlayerScript : MonoBehaviour {
 				}
 
 				currentObject = hit.collider.GetComponent<Renderer> ();
-				if(!isTouched)
+				if(!_isTouched)
 				{
 					currentShader = currentObject.material.shader;
-					isTouched = true;
+					_isTouched = true;
 				}
 				currentObject.material.shader = dragAndDropVariables.transparent;
 				_xrayActive = true;
@@ -181,10 +181,10 @@ public class XRay_PlayerScript : MonoBehaviour {
 	/// </summary>
 	public void DisableXray()
 	{
-		if (currentObject && canXray) 
+		if (currentObject && _canXray) 
 		{
-			if(useCoolDown)
-				canXray = false;
+			if(_useCoolDown)
+				_canXray = false;
 
 			foreach(MonoBehaviour script in componentsToDisable)
 			{
@@ -193,11 +193,11 @@ public class XRay_PlayerScript : MonoBehaviour {
 
 			_xrayActive = false;
 			currentObject.material.shader = currentShader;
-			isTouched = false;
+			_isTouched = false;
 			currentObject = null;
 			currentShader = null;
 
-			if(useCoolDown)
+			if(_useCoolDown)
 			{
 				StopAllCoroutines();
 				StartCoroutine(CoolDown());
@@ -211,7 +211,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 		yield return new WaitForSeconds(1.0f);
 		if(_coolDownTime <= 0.0f)
 		{
-			canXray = true;
+			_canXray = true;
 		}
 		else
 		{
@@ -241,7 +241,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 
 	private Transform rayOrigin;
 
-	private bool isTouched;
+	private bool _isTouched;
 	private bool xrayActive;
 
 	private Renderer currentObject;
@@ -256,7 +256,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 
 		transparent = Shader.Find("Transparent");
 
-		isTouched = false;
+		_isTouched = false;
 		xrayActive = false;
 	}
 
@@ -271,10 +271,10 @@ public class XRay_PlayerScript : MonoBehaviour {
 		{
 			if (hit.collider.tag == XRay_Tag) {
 				currentObject = hit.collider.GetComponent<Renderer> ();
-				if(!isTouched)
+				if(!_isTouched)
 				{
 					currentShader = currentObject.material.shader;
-					isTouched = true;
+					_isTouched = true;
 				}
 				currentObject.material.shader = transparent;
 				xrayActive = true;
@@ -288,7 +288,7 @@ public class XRay_PlayerScript : MonoBehaviour {
 		if (!xrayActive && currentObject) 
 		{
 			currentObject.material.shader = currentShader;
-			isTouched = false;
+			_isTouched = false;
 			currentObject = null;
 			currentShader = null;
 		}

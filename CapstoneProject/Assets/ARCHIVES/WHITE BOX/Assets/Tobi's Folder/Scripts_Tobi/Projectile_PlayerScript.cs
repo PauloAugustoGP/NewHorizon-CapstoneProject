@@ -47,13 +47,13 @@ public class Projectile_PlayerScript : MonoBehaviour
 			get { return _maxChargeTime; }
 		}
 	}
-		
+
 	private Projectile_ObjectScript currentProjectile;
 
-	private bool projSpawned;
+	private bool _projSpawned = false;
 
 	[SerializeField]
-	private bool useCoolDown = true;
+	private bool _useCoolDown = true;
 
 	private float _coolDownTime;
 
@@ -64,6 +64,9 @@ public class Projectile_PlayerScript : MonoBehaviour
 	{
 		get{ return _coolDownTime; }
 	}
+
+	[SerializeField]
+	private string _enemyTag = "Enemy";
 
 	[SerializeField]
 	private MonoBehaviour[] componentsToDisable;
@@ -77,7 +80,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	void Start()
 	{
-		projSpawned = false;
+		_projSpawned = false;
 
 		if (!dragAndDropVariables.projectilePrefab)
 			Debug.LogError("No prefab for projectile");
@@ -101,9 +104,9 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	private void ProjSpawn()
 	{
-		if(!projSpawned)
+		if(!_projSpawned)
 		{
-			if(useCoolDown)
+			if(_useCoolDown)
 				StartCoroutine(TimeCounter());
 
 			var projectile = (GameObject) Instantiate (dragAndDropVariables.projectilePrefab, 
@@ -111,7 +114,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 				dragAndDropVariables.projectileSpawn.rotation);
 			currentProjectile = projectile.GetComponent<Projectile_ObjectScript>();
 
-			projSpawned = true;
+			_projSpawned = true;
 
 			foreach(MonoBehaviour script in componentsToDisable)
 			{
@@ -119,7 +122,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 					script.enabled = false;
 			}
 
-			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize);
+			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize, _enemyTag);
 		}
 	}
 		
@@ -135,7 +138,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 					script.enabled = true;
 			}	
 
-			if(useCoolDown)
+			if(_useCoolDown)
 			{
 				StopAllCoroutines();
 				StartCoroutine(CoolDown());
@@ -143,7 +146,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 			}
 			else
 			{
-				projSpawned = false;
+				_projSpawned = false;
 			}
 		}
 
@@ -155,7 +158,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 		yield return new WaitForSeconds(1.0f);
 		if(_coolDownTime <= 0.0f)
 		{
-			projSpawned = false;
+			_projSpawned = false;
 		}
 		else
 		{
