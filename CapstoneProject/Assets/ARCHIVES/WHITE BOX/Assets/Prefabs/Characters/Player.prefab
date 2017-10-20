@@ -2589,9 +2589,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1562131446259454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53fc267111d981640a03fc87526dc6da, type: 3}
+  m_Script: {fileID: 11500000, guid: b43db619340c84045b9b72a586ec0a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCoolDown: 1
+  definitions:
+    _XRayTag: XRay
+    _touchDistance: 1
+  dragAndDropVariables:
+    _rayOrigin: {fileID: 0}
+    _transparent: {fileID: 0}
+  componentsToDisable: []
 --- !u!124 &124955048276911634
 Behaviour:
   m_ObjectHideFlags: 1
