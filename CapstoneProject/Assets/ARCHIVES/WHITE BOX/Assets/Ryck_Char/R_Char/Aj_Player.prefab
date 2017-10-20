@@ -97,10 +97,9 @@ GameObject:
   - component: {fileID: 4966061756546926}
   - component: {fileID: 95739642655974546}
   - component: {fileID: 54183671633454506}
-  - component: {fileID: 143695059008521272}
-  - component: {fileID: 114096073770636932}
   - component: {fileID: 114769420275281816}
-  - component: {fileID: 114970767493908108}
+  - component: {fileID: 114043771825228928}
+  - component: {fileID: 136659961419489792}
   m_Layer: 0
   m_Name: Aj_Player
   m_TagString: Untagged
@@ -2299,8 +2298,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102959661889288}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.29, y: 0.0000010938465, z: 3.19}
+  m_LocalRotation: {x: -0, y: -0.74451077, z: -0, w: 0.66761047}
+  m_LocalPosition: {x: -0.29, y: 0.0000010728836, z: 3.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4896164269780384}
@@ -2312,7 +2311,7 @@ Transform:
   - {fileID: 4629267868776554}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -96.234, z: 0}
 --- !u!4 &4967462493793578
 Transform:
   m_ObjectHideFlags: 1
@@ -2382,7 +2381,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!95 &95739642655974546
 Animator:
@@ -2393,15 +2392,15 @@ Animator:
   m_GameObject: {fileID: 1102959661889288}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6797ba2f3891a4c4194ef44838e8e352, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d4ca478d069f4f82a7de57c0a8a889b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114096073770636932
+--- !u!114 &114043771825228928
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2409,42 +2408,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1102959661889288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b32784a4c531d046829643af51442dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpPower: 0
-  GravityMult: 0
-  TurnSpeed: 0
-  MoveSpeedMultiplier: 0
-  AnimSpeedMultiplier: 0
-  health: 0
-  regSpeed: 0
-  proFireRate: 0
+  isCrouching: 0
+  ValueDebuger: 0
 --- !u!114 &114769420275281816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102959661889288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 170276d19cbd56f4dacb123467b6be6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114970767493908108
-MonoBehaviour:
+--- !u!136 &136659961419489792
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102959661889288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121284eba4aabea4e9bf61fde2a33456, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSpawn: {fileID: 4510146809624624}
-  projectilePrefab: {fileID: 1439236114412372, guid: 171cede3f4cfb7c48b21f6f779c0abf1,
-    type: 2}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137407194704236826
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2913,20 +2905,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000000014901161, y: 0.75206244, z: 0.18786098}
     m_Extent: {x: 0.14444116, y: 0.07109231, z: 0.048442885}
   m_DirtyAABB: 0
---- !u!143 &143695059008521272
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102959661889288}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.49
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.06, z: 0}
