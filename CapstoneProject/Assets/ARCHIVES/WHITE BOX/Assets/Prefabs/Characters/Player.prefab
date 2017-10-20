@@ -1568,7 +1568,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1468247834885976}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -0.21164757, y: 0.77, z: -6.766449}
+  m_LocalPosition: {x: -0.21164757, y: 0.77, z: 4.99}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 4963347567787152}
@@ -2392,8 +2392,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1562131446259454}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 6.175146, y: 0.1, z: 0.5900205}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.0443017, y: 0.1, z: -6.6956525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4411665183977576}
@@ -2407,7 +2407,7 @@ Transform:
   - {fileID: 4671330272072560}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4992051432006992
 Transform:
   m_ObjectHideFlags: 1
@@ -2527,7 +2527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9631bade4f37146b39c23ec33999a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 1562131446259454}
   playerTeleportPrefab: {fileID: 1632261212426454, guid: 903fbdcdaf221154194578b7e4e96dc4,
     type: 2}
   fakePlayer: {fileID: 0}
@@ -2597,8 +2597,8 @@ MonoBehaviour:
     _XRayTag: XRay
     _touchDistance: 1
   dragAndDropVariables:
-    _rayOrigin: {fileID: 0}
-    _transparent: {fileID: 0}
+    _rayOrigin: {fileID: 4525927122612000}
+    _transparent: {fileID: 4800000, guid: eab4b8bd340f74707b822cf34dcfd3dd, type: 3}
   componentsToDisable: []
 --- !u!124 &124955048276911634
 Behaviour:
