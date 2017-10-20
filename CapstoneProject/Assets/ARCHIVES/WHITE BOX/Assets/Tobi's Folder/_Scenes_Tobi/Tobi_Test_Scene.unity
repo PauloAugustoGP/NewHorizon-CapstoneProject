@@ -147,18 +147,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114432563134645290, guid: 3a68d4d4e0de04ce4ac86498881c72e5,
+    - target: {fileID: 114368124094971736, guid: 3a68d4d4e0de04ce4ac86498881c72e5,
         type: 2}
-      propertyPath: dragAndDropVariables._projectilePrefab
+      propertyPath: _hitBox
       value: 
-      objectReference: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
-        type: 2}
-    - target: {fileID: 114432563134645290, guid: 3a68d4d4e0de04ce4ac86498881c72e5,
-        type: 2}
-      propertyPath: projectileSettings._deltaSize
-      value: 0.05
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+      objectReference: {fileID: 1332786510}
+    m_RemovedComponents:
+    - {fileID: 114368124094971736, guid: 3a68d4d4e0de04ce4ac86498881c72e5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3a68d4d4e0de04ce4ac86498881c72e5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &149199031
@@ -498,6 +493,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1332786509 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1238912798192860, guid: 3a68d4d4e0de04ce4ac86498881c72e5,
+    type: 2}
+  m_PrefabInternal: {fileID: 35276982}
+--- !u!65 &1332786510 stripped
+BoxCollider:
+  m_PrefabParentObject: {fileID: 65935926180192266, guid: 3a68d4d4e0de04ce4ac86498881c72e5,
+    type: 2}
+  m_PrefabInternal: {fileID: 35276982}
+--- !u!114 &1332786511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332786509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3473b4610fe8e44968a5370cefb098df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitBox: {fileID: 0}
+  _stunTime: 15
+--- !u!54 &1332786512
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332786509}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2064243839
 GameObject:
   m_ObjectHideFlags: 0
