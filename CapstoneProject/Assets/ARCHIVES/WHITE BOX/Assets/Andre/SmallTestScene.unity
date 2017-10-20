@@ -552,7 +552,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4734078896571720, guid: a674fb13197beac478eeefbb4d7c29e6, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114945345180600586, guid: a674fb13197beac478eeefbb4d7c29e6,
         type: 2}
@@ -1820,7 +1820,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &552786012
 GameObject:
@@ -2337,7 +2337,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &648461489
 GameObject:
@@ -3766,6 +3766,39 @@ Transform:
   m_Father: {fileID: 621380372}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &966641281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 966641282}
+  m_Layer: 0
+  m_Name: HealthSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &966641282
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 966641281}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 280.49}
+  m_LocalScale: {x: 0.142726, y: 0.142726, z: 0.142726}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -29, y: 0.16}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &995989318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4412,7 +4445,7 @@ Transform:
   - {fileID: 16978406}
   - {fileID: 1187740741}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1200321344
 GameObject:
@@ -5159,7 +5192,7 @@ Transform:
   - {fileID: 528792786}
   - {fileID: 573924897}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1318487719
 GameObject:
@@ -5450,7 +5483,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 3c80ee0d3ba3b8744a95962746937a9a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 3c80ee0d3ba3b8744a95962746937a9a, type: 3}
       propertyPath: m_LocalScale.x
@@ -5498,6 +5531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453c156fd00b4594e9f3296fd89ec224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PickUpHealthSpawnPoint: {fileID: 966641282}
+  spawn: {fileID: 114676429243337672, guid: 6842d46d9cfc0cc498612dd19cd1ac51, type: 2}
 --- !u!1 &1427212505
 GameObject:
   m_ObjectHideFlags: 0
@@ -5851,7 +5886,7 @@ Transform:
   - {fileID: 1291673309}
   - {fileID: 332800694}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1505750848 stripped
 Transform:
@@ -7815,7 +7850,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2020962201
 GameObject:
