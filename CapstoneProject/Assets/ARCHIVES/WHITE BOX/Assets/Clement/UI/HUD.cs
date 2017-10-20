@@ -49,6 +49,7 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        SetTimer();
 		if(Time.timeScale == 0) {
             pauseTime = true;
         } else {
@@ -66,6 +67,19 @@ public class HUD : MonoBehaviour {
     public void damageFlash() {
         fColor = Color.red;
         fScreen.color = Color.Lerp(fColor, Color.clear, fSpeed * Time.deltaTime);
+    }
+
+    public void TakeDamage(float amount) {
+        phealth -= amount;
+        damageFlash();
+        if(phealth >= 100) {
+            phealth = 100;
+        } else if(phealth <= 0) {
+            phealth = 0;
+            Destroy(player);
+        }
+        fixHealthBar();
+        Debug.Log("Player took " + amount + " damage. Heath: " + phealth);
     }
 
     public void SetTimer() {
@@ -105,7 +119,7 @@ public class HUD : MonoBehaviour {
     }
 
     public float CalculateHealth() {
-        float maxHealth = 1;
+        float maxHealth = 100;
         float percentHealth = (maxHealth - getHealth()) * 100;
         float width = percentHealth / 100;
         width = healthBarBg.sizeDelta.x - width;
