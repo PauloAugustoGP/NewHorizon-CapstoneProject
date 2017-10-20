@@ -53,7 +53,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	{
 		if(collision.gameObject.tag == _enemyTag)
 		{
-			Debug.Log("Stunned the enemy");
+			Debug.Log("Stunned the enemy for " + _stunTime + " seconds.");
 			Destroy(gameObject);
 			//collision.gameObject.GetComponent<Enemy>().StunFunction();
 		}
