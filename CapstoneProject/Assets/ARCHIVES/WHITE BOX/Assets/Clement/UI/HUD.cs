@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour {
     public charControlScript player;
-    public Color fColor = new Color(1f, 0f, 0f, 0.1f);
-    public float fSpeed;
-    public Image fScreen;
+    [Tooltip("Colour to flash the screen with when the player takes damage.")]
+    public Color flashColor = new Color(1f, 0f, 0f, 0.3f);
+    [Tooltip("The speed at which the flash color flashes. Increase for faster flashes")]
+    public float flashSpeed;
+    public Image flashScreen;
+    Color clearColor = new Color(0, 0, 0, 0);
 
     public Text timer;
     public int minutes;
@@ -32,6 +35,8 @@ public class HUD : MonoBehaviour {
     public static int maxHealth = 100;
     public float testHealth = maxHealth;
 
+    public bool startFlash = false;
+
     void Awake() {
         if(!player) {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<charControlScript>();
@@ -39,14 +44,14 @@ public class HUD : MonoBehaviour {
         player.PlayerHealth = 100;
         timer = GameObject.Find("Timer").GetComponent<Text>();
         score = GameObject.Find("Score").GetComponent<Text>();
-        fScreen = GameObject.Find("DamageIndicator").GetComponent<Image>();
+        flashScreen = GameObject.Find("DamageIndicator").GetComponent<Image>();
         healthText = GameObject.Find("healthText").GetComponent<Text>();
     }
 
     // Use this for initialization
     void Start () {
-        if(fSpeed <= 0) {
-            fSpeed = 3;
+        if(flashSpeed <= 0) {
+            flashSpeed = 3;
         }
         if(startTime == 0) {
             startTime = Time.time;
@@ -57,7 +62,7 @@ public class HUD : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
         SetTimer();
 		if(Time.timeScale == 0) {
             pauseTime = true;
@@ -65,9 +70,14 @@ public class HUD : MonoBehaviour {
             pauseTime = false;
         }
         currentTime = (minutes * 60) + seconds;
-        Debug.Log(currentTime);
+        // Debug.Log(currentTime);
         // fixHealthBar();
         fixTestHealthBar();
+
+        if(startFlash) {
+            flashScreen.color = Color.Lerp(flashColor, clearColor, Time.deltaTime * flashSpeed);
+            StartCoroutine(damageFlash(1f));
+        }
     }
     
     public float getHealth() {
@@ -80,15 +90,16 @@ public class HUD : MonoBehaviour {
         return testHealth;
     }
 
-    public void damageFlash() {
-        fColor = new Color(255, 0, 0, 0.3f);
-        fScreen.color = Color.Lerp(fColor, Color.clear, fSpeed * Time.deltaTime);
-        Debug.Log("You've been hurt");
+    IEnumerator damageFlash(float delay) {
+        // fScreen.color = Color.Lerp(fColor, clearColor, Mathf.PingPong(Time.time, fSpeed));
+        yield return new WaitForSeconds(delay);
+        startFlash = false;
+        flashScreen.color = clearColor;
     }
 
     public void TakeDamage(float amount) {
         player.PlayerHealth -= amount;
-        damageFlash();
+        startFlash = true;
         if(player.PlayerHealth >= 100) {
             player.PlayerHealth = 100;
         } else if(player.PlayerHealth <= 0) {
@@ -96,12 +107,13 @@ public class HUD : MonoBehaviour {
             Destroy(player);
         }
         fixHealthBar();
+        Debug.Log("You've been hurt");
         Debug.Log("Player took " + amount + " damage. Heath: " + player.PlayerHealth);
     }
 
     public void TakeTestDamage(float amount) {
         testHealth -= amount;
-        damageFlash();
+        startFlash = true;
         if(testHealth >= 100) {
             testHealth = 100;
         } else if(testHealth <= 0) {
@@ -109,6 +121,7 @@ public class HUD : MonoBehaviour {
             Destroy(player);
         }
         fixTestHealthBar();
+        Debug.Log("You've been hurt");
         Debug.Log("Player took " + amount + " damage. Heath: " + testHealth);
     }
 
