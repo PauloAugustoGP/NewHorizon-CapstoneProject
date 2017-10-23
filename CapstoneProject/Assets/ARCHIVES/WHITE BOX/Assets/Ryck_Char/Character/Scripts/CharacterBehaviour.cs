@@ -59,7 +59,7 @@ public class CharacterBehaviour : CharacterBase
 
             if (!slowed)
             {
-                _MoveV = 180;
+                _MoveV = 380;
             }
 
             if (slowed)
@@ -102,7 +102,7 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //strafeRight
-            if ((Input.GetKey(KeyCode.E)))
+            /*if ((Input.GetKey(KeyCode.E)))
             {
                 anim.SetFloat("Speed", MoveV);
                 StrafeRight();
@@ -125,7 +125,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
-            }
+            }*/
 
             //Turning
             if (Input.GetKey(KeyCode.D))
