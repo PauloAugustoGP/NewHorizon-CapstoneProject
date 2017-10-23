@@ -12,6 +12,9 @@ public class CharacterBehaviour : CharacterBase
 
     Animator anim;
 
+    HUD pHud;
+
+
     /// <summary>
     /// Programmer Var
     /// 
@@ -24,6 +27,7 @@ public class CharacterBehaviour : CharacterBase
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        pHud = GetComponent<HUD>();
 
         Health = 100;
         TeleportResource = 1;
@@ -57,7 +61,7 @@ public class CharacterBehaviour : CharacterBase
 
             if (!slowed)
             {
-                _MoveV = 180;
+                _MoveV = 380;
             }
 
             if (slowed)
@@ -100,7 +104,7 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //strafeRight
-            if ((Input.GetKey(KeyCode.E)))
+            /*if ((Input.GetKey(KeyCode.E)))
             {
                 anim.SetFloat("Speed", MoveV);
                 StrafeRight();
@@ -123,7 +127,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
-            }
+            }*/
 
             //Turning
             if (Input.GetKey(KeyCode.D))
@@ -153,13 +157,34 @@ public class CharacterBehaviour : CharacterBase
 
         if (ValueDebuger)
         {
-            Debug.Log(MoveV);
-            Debug.Log(slowed);
+            //Debug.Log(MoveV);
+            //Debug.Log(slowed);
+            //Debug.Log(Health);
+            //Debug.Log(TeleportResource);
             Debug.Log(Health);
-            Debug.Log(TeleportResource);
         }
 
     }//Update
+
+    public static int Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = value;
+
+            if (_health > 100)
+            {
+                _health = 100;
+            }
+
+            if (_health < 0)
+            {
+                _health = 0;
+            }
+        }//set
+    }//health
+
 
     //On Death call
     protected void Died()
@@ -176,4 +201,22 @@ public class CharacterBehaviour : CharacterBase
             //SceneManager.LoadScene(******);
         }     
     }
+
+    protected void Damage(int value)
+    {
+
+        Health -= value;
+    }
+
+    void OnCollisionEnter(Collision c)
+    {
+        //collision timer
+        if (c.gameObject.tag == "Enemy")
+        {
+            
+            Damage(20);
+            
+        }
+    }
+
 }
