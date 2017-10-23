@@ -5,38 +5,33 @@ using UnityEngine;
 public class FakeEnemy : MonoBehaviour {
     public float damagePower;
     public float speed;
-    public charControlScript target;
+    public CharacterBehaviour target;
     public float health = 100f;
     public float phealth;
 	// Use this for initialization
 	void Start () {
         if(!target) {
-            target = GameObject.FindGameObjectWithTag("Player").GetComponent<charControlScript>();
+            target = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBehaviour>();
         }
-        phealth = target.PlayerHealth;
         if(damagePower <= 0f) {
             damagePower = 3f;
         }
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        phealth = CharacterBehaviour.Health;
+    }
 
     void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.CompareTag("Player") && phealth > 0f) {
             HUD h = GameObject.Find("HUD").GetComponent<HUD>();
-            // h.TakeDamage(damagePower);
-            h.TakeTestDamage(damagePower);
-        }
-    }
-
-    void OnTriggerEnter(Collider collider) {
-        if(collider.gameObject.CompareTag("Player") && phealth > 0f) {
-            HUD h = GameObject.Find("HUD").GetComponent<HUD>();
-            // h.TakeDamage(damagePower);
-            h.TakeTestDamage(damagePower);
+            phealth -= 20;
+            h.TakeDamage();
+            //phealth -= 20;
+            //h.startFlash = true;
+            //h.fixHealthBar();
         }
     }
 }

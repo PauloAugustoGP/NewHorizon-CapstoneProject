@@ -33,7 +33,7 @@ public class HUD : MonoBehaviour {
 	public Text healthText;
 
 	public static int maxHealth = 100;
-    public float currentHealth;
+    public static int currentHealth;
 	public float testHealth = maxHealth;
 
 	public bool startFlash = false;
@@ -42,8 +42,6 @@ public class HUD : MonoBehaviour {
 		if(!player) {
 			player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBehaviour>();
 		}
-		CharacterBehaviour.Health = 100;
-        currentHealth = CharacterBehaviour.Health;
 		timer = GameObject.Find("Timer").GetComponent<Text>();
 		score = GameObject.Find("Score").GetComponent<Text>();
 		flashScreen = GameObject.Find("DamageIndicator").GetComponent<Image>();
@@ -65,6 +63,7 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
+        //currentHealth = CharacterBehaviour.Health;
 		SetTimer();
 		if(Time.timeScale == 0) {
 			pauseTime = true;
@@ -72,27 +71,16 @@ public class HUD : MonoBehaviour {
 			pauseTime = false;
 		}
 		currentTime = (minutes * 60) + seconds;
-		// Debug.Log(currentTime);
-		// fixHealthBar();
-		fixTestHealthBar();
 
 		if(startFlash) {
 			flashScreen.color = Color.Lerp(flashColor, clearColor, Time.deltaTime * flashSpeed);
 			StartCoroutine(damageFlash(1f));
 		}
 
-        currentHealth = CharacterBehaviour.Health;
-        detectHealthChange();
 	}
 	
-	public float getHealth() {
-		Debug.Log(CharacterBehaviour.Health);
+	public int getHealth() {
 		return CharacterBehaviour.Health;
-	}
-
-	public float getTestHealth() {
-		Debug.Log(testHealth);
-		return testHealth;
 	}
 
 	IEnumerator damageFlash(float delay) {
@@ -108,44 +96,12 @@ public class HUD : MonoBehaviour {
         }
     }
 
-	public void TakeDamage(float amount) {
-		// CharacterBehaviour.Health -= amount;
-		startFlash = true;
-		if(CharacterBehaviour.Health >= 100) {
-			CharacterBehaviour.Health = 100;
-		} else if(CharacterBehaviour.Health <= 0) {
-			CharacterBehaviour.Health = 0;
-		}
-		fixHealthBar();
-		Debug.Log("You've been hurt");
-		Debug.Log("Player took " + amount + " damage. Heath: " + CharacterBehaviour.Health);
-	}
-
     public void TakeDamage() {
         startFlash = true;
-		if(CharacterBehaviour.Health >= 100) {
-			CharacterBehaviour.Health = 100;
-		} else if(CharacterBehaviour.Health <= 0) {
-			CharacterBehaviour.Health = 0;
-		}
         fixHealthBar();
-        float newHealth = maxHealth - currentHealth;
+        int newHealth = maxHealth - getHealth();
         Debug.Log("You've been hurt. You took " + newHealth + " damage.");
     }
-
-	public void TakeTestDamage(float amount) {
-		testHealth -= amount;
-		startFlash = true;
-		if(testHealth >= 100) {
-			testHealth = 100;
-		} else if(testHealth <= 0) {
-			testHealth = 0;
-			Destroy(player);
-		}
-		fixTestHealthBar();
-		Debug.Log("You've been hurt");
-		Debug.Log("Player took " + amount + " damage. Heath: " + testHealth);
-	}
 
 	public void SetTimer() {
 		if(!pauseTime) {
@@ -180,25 +136,14 @@ public class HUD : MonoBehaviour {
 
 	public void fixHealthBar() {
 		float newHealth = CalculateHealth();
-		healthBar.sizeDelta =new Vector3(newHealth, healthBar.sizeDelta.y);
-	}
-
-	public void fixTestHealthBar() {
-		float newHealth = CalculateTestHealth();
-		healthBar.sizeDelta =new Vector3(newHealth, healthBar.sizeDelta.y);
+		healthBar.sizeDelta = new Vector3(newHealth, healthBar.sizeDelta.y);
 	}
 
 	public float CalculateHealth() {
-		float percentHealth = (CharacterBehaviour.Health /  maxHealth) * 100;
-		Debug.Log(percentHealth);
-		healthText.text = percentHealth.ToString();
-		float width = (percentHealth / 100) * healthBarBg.sizeDelta.x;
-		Debug.Log(width);
-		return width;
-	}
-
-	public float CalculateTestHealth() {
-		float percentHealth = (testHealth /  maxHealth) * 100;
+        currentHealth = getHealth();
+        Debug.Log("Calc: " + currentHealth);
+        Debug.Log("maxHealth: " + maxHealth);
+		int percentHealth = (currentHealth / maxHealth) * 100;
 		Debug.Log(percentHealth);
 		healthText.text = percentHealth.ToString();
 		float width = (percentHealth / 100) * healthBarBg.sizeDelta.x;

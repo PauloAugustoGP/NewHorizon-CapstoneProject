@@ -373,7 +373,6 @@ GameObject:
   - component: {fileID: 101884937}
   - component: {fileID: 101884936}
   - component: {fileID: 101884935}
-  - component: {fileID: 101884934}
   - component: {fileID: 101884933}
   - component: {fileID: 101884932}
   - component: {fileID: 101884931}
@@ -453,30 +452,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 101884928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121284eba4aabea4e9bf61fde2a33456, type: 3}
+  m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &101884934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114666125604073784, guid: 0c98e38b312a68549b20fd22ec62b730,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 101884928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b32784a4c531d046829643af51442dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  JumpPower: 0
-  GravityMult: 0
-  TurnSpeed: 0
-  MoveSpeedMultiplier: 0
-  AnimSpeedMultiplier: 0
-  _health: 0
-  _mana: 0
-  playerState: 2
-  regSpeed: 0
+  isCrouching: 0
+  ValueDebuger: 0
 --- !u!54 &101884935
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2225,7 +2205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePower: 0
   speed: 0
-  target: {fileID: 101884934}
+  target: {fileID: 0}
   health: 100
   phealth: 0
 --- !u!1 &852116950
