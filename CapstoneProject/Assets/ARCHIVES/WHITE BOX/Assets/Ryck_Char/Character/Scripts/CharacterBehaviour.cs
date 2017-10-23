@@ -11,6 +11,7 @@ public class CharacterBehaviour : CharacterBase
     public bool isCrouching;
 
     Animator anim;
+    HUD pHud;
 
     /// <summary>
     /// Programmer Var
@@ -24,6 +25,7 @@ public class CharacterBehaviour : CharacterBase
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        pHud = GetComponent<HUD>();
 
         Health = 100;
         TeleportResource = 1;
@@ -57,7 +59,7 @@ public class CharacterBehaviour : CharacterBase
 
             if (!slowed)
             {
-                _MoveV = 180;
+                _MoveV = 380;
             }
 
             if (slowed)
@@ -100,7 +102,7 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //strafeRight
-            if ((Input.GetKey(KeyCode.E)))
+            /*if ((Input.GetKey(KeyCode.E)))
             {
                 anim.SetFloat("Speed", MoveV);
                 StrafeRight();
@@ -123,7 +125,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
-            }
+            }*/
 
             //Turning
             if (Input.GetKey(KeyCode.D))
@@ -176,4 +178,14 @@ public class CharacterBehaviour : CharacterBase
             //SceneManager.LoadScene(******);
         }     
     }
+
+    void OnCollisionEnter(Collision c)
+    {
+        //collision timer
+        if (c.gameObject.tag == "Enemy")
+        {
+            Damage(20);
+        }
+    }
+
 }

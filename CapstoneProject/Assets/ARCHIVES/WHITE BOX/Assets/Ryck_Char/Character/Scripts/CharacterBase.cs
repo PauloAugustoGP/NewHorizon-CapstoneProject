@@ -100,12 +100,12 @@ public class CharacterBase : MonoBehaviour
         set
         {
             _MoveV = value;
-    
         }//set
     }//MoveV
 
     public void Damage(int value)
     {
+        
         Health -= value;
     }
 
