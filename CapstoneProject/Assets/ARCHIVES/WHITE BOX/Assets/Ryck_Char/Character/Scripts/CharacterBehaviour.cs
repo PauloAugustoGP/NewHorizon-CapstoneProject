@@ -213,8 +213,9 @@ public class CharacterBehaviour : CharacterBase
         //collision timer
         if (c.gameObject.tag == "Enemy")
         {
-            Debug.LogWarning("Collision with en");
+            
             Damage(20);
+            
         }
     }
 

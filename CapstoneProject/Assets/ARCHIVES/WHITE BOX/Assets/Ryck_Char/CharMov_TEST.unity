@@ -323,24 +323,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1102959661889288, guid: 6f598a0779dca374c9c9cb24b2a9636c, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 54183671633454506, guid: 6f598a0779dca374c9c9cb24b2a9636c,
-        type: 2}
-      propertyPath: m_Mass
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 54183671633454506, guid: 6f598a0779dca374c9c9cb24b2a9636c,
-        type: 2}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 114043771825228928, guid: 6f598a0779dca374c9c9cb24b2a9636c,
         type: 2}
       propertyPath: ValueDebuger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f598a0779dca374c9c9cb24b2a9636c, type: 2}
@@ -611,6 +597,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114993479661290660, guid: d847106794fc5c144a1a66740d50e6e5,
+        type: 2}
+      propertyPath: disableLogging
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d847106794fc5c144a1a66740d50e6e5, type: 2}
   m_IsPrefabParent: 0
@@ -778,11 +769,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 25.4, y: 0, z: 0}
---- !u!4 &463767503 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4966061756546926, guid: 6f598a0779dca374c9c9cb24b2a9636c,
-    type: 2}
-  m_PrefabInternal: {fileID: 111231960}
 --- !u!1 &573674754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,12 +1970,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2bca32d5e00dc64bb97685a40b3f93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 1879554710}
-  target: {fileID: 463767503}
-  walkDist: 0
-  heightDist: 0
-  heightDamping: 0
-  rotationDamping: 0
+  _mainCam: {fileID: 1879554710}
+  _target: {fileID: 4966061756546926, guid: 6f598a0779dca374c9c9cb24b2a9636c, type: 2}
+  _walkDist: 0
+  _heightDist: 0
+  _heightDamping: 0
+  _rotationDamping: 0
   _yAngleMin: 0
   _yAngleMax: 0
   _rotSpeedX: 0
