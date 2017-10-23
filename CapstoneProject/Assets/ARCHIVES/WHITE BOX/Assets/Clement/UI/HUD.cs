@@ -53,7 +53,7 @@ public class HUD : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if(flashSpeed <= 0) {
-			flashSpeed = 3;
+			flashSpeed = 40;
 		}
 		if(startTime == 0) {
 			startTime = Time.time;
