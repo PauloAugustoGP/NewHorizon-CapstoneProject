@@ -84,7 +84,7 @@ public class Canvas_Manager : MonoBehaviour
 
     public void StartGame()
     {
-        Scene_Manager.instance.GoTo_LEVEL("Level");
+        Scene_Manager.instance.GoTo_LEVEL("Test");
     }
 
     public void Options()
