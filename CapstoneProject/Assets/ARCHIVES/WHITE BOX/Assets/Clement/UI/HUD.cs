@@ -63,7 +63,8 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        //currentHealth = CharacterBehaviour.Health;
+        // currentHealth = CharacterBehaviour.Health;
+        fixHealthBar();
 		SetTimer();
 		if(Time.timeScale == 0) {
 			pauseTime = true;
@@ -99,8 +100,7 @@ public class HUD : MonoBehaviour {
     public void TakeDamage() {
         startFlash = true;
         fixHealthBar();
-        int newHealth = maxHealth - getHealth();
-        Debug.Log("You've been hurt. You took " + newHealth + " damage.");
+        Debug.Log("You've been hurt.");
     }
 
 	public void SetTimer() {
@@ -140,10 +140,9 @@ public class HUD : MonoBehaviour {
 	}
 
 	public float CalculateHealth() {
-        currentHealth = getHealth();
         Debug.Log("Calc: " + currentHealth);
         Debug.Log("maxHealth: " + maxHealth);
-		int percentHealth = (currentHealth / maxHealth) * 100;
+		int percentHealth = (getHealth() / maxHealth) * 100;
 		Debug.Log(percentHealth);
 		healthText.text = percentHealth.ToString();
 		float width = (percentHealth / 100) * healthBarBg.sizeDelta.x;

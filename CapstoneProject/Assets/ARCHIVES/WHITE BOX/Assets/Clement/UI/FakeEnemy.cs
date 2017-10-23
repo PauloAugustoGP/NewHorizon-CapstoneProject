@@ -28,7 +28,7 @@ public class FakeEnemy : MonoBehaviour {
         if(collision.gameObject.CompareTag("Player") && phealth > 0f) {
             HUD h = GameObject.Find("HUD").GetComponent<HUD>();
             phealth -= 20;
-            h.TakeDamage();
+            // h.TakeDamage();
             //phealth -= 20;
             //h.startFlash = true;
             //h.fixHealthBar();
