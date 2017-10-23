@@ -56,25 +56,7 @@ public class CharacterBase : MonoBehaviour
         rb.velocity = -transform.right * Time.deltaTime * (MoveV / 2);
     }
 
-    public static int Health
-    {
-        get { return _health; }
-        set
-        {
-            _health = value;
-
-            if (_health > 100)
-            {
-                _health = 100;
-            }
-
-            if (_health < 0)
-            {
-                _health = 0;
-            }
-        }//set
-    }//health
-
+   
     public static int TeleportResource
     {
         get { return _mana; }
@@ -102,12 +84,6 @@ public class CharacterBase : MonoBehaviour
             _MoveV = value;
         }//set
     }//MoveV
-
-    public void Damage(int value)
-    {
-        
-        Health -= value;
-    }
 
     protected void RecoveryRate(int value)
     {

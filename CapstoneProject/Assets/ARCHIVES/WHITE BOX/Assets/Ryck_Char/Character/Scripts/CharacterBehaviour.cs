@@ -11,7 +11,9 @@ public class CharacterBehaviour : CharacterBase
     public bool isCrouching;
 
     Animator anim;
+
     HUD pHud;
+
 
     /// <summary>
     /// Programmer Var
@@ -155,13 +157,34 @@ public class CharacterBehaviour : CharacterBase
 
         if (ValueDebuger)
         {
-            Debug.Log(MoveV);
-            Debug.Log(slowed);
+            //Debug.Log(MoveV);
+            //Debug.Log(slowed);
+            //Debug.Log(Health);
+            //Debug.Log(TeleportResource);
             Debug.Log(Health);
-            Debug.Log(TeleportResource);
         }
 
     }//Update
+
+    public static int Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = value;
+
+            if (_health > 100)
+            {
+                _health = 100;
+            }
+
+            if (_health < 0)
+            {
+                _health = 0;
+            }
+        }//set
+    }//health
+
 
     //On Death call
     protected void Died()
@@ -179,11 +202,18 @@ public class CharacterBehaviour : CharacterBase
         }     
     }
 
+    protected void Damage(int value)
+    {
+
+        Health -= value;
+    }
+
     void OnCollisionEnter(Collision c)
     {
         //collision timer
         if (c.gameObject.tag == "Enemy")
         {
+            Debug.LogWarning("Collision with en");
             Damage(20);
         }
     }
