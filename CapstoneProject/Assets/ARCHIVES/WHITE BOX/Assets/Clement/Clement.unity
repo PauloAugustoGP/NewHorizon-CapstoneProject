@@ -1489,25 +1489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c251cadc4a5ac64185ec83f3b25f3f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  currentCam: {fileID: 0}
-  character: {fileID: 0}
-  allCameras: []
-  characterCamera: []
-  fpsCamNode: {x: 0, y: 0, z: 0}
-  tpsCamNode: {x: 0, y: 0, z: 0}
-  startPos: {x: 0, y: 0, z: 0}
-  sensitivity: {x: 15, y: 15}
-  autoFindMainCamera: 1
-  useMainCamera: 0
-  togglePanning: 0
-  xrayMode: 0
-  getCams: 1
-  maxZoomLimit: 120
-  minZoomLimit: 60
-  panSpeed: 0
-  rotateSpeed: 4
-  swoopSpeed: 5
 --- !u!81 &626432134
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2203,11 +2184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0de79a635c746c4db133d424fb4b468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePower: 0
-  speed: 0
-  target: {fileID: 0}
-  health: 100
-  phealth: 0
 --- !u!1 &852116950
 GameObject:
   m_ObjectHideFlags: 0
@@ -5444,6 +5420,16 @@ Prefab:
     - target: {fileID: 224952758638846488, guid: d847106794fc5c144a1a66740d50e6e5,
         type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114993479661290660, guid: d847106794fc5c144a1a66740d50e6e5,
+        type: 2}
+      propertyPath: startTime
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 114993479661290660, guid: d847106794fc5c144a1a66740d50e6e5,
+        type: 2}
+      propertyPath: disableLogging
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

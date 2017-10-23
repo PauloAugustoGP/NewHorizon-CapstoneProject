@@ -60,9 +60,8 @@ public class HUD : MonoBehaviour {
 			countDown = true;
 		}
 	}
-	
-	// Update is called once per frame
-	void LateUpdate () {
+    // Update is called once per frame
+    void Update () {
         // currentHealth = CharacterBehaviour.Health;
         fixHealthBar();
 		SetTimer();
@@ -89,12 +88,6 @@ public class HUD : MonoBehaviour {
 		yield return new WaitForSeconds(delay);
 		startFlash = false;
 		flashScreen.color = clearColor;
-    }
-
-    public void detectHealthChange() {
-        if(currentHealth < CharacterBehaviour.Health) {
-            TakeDamage();
-        }
     }
 
     public void TakeDamage() {
@@ -136,17 +129,20 @@ public class HUD : MonoBehaviour {
 
 	public void fixHealthBar() {
 		float newHealth = CalculateHealth();
-		healthBar.sizeDelta = new Vector3(newHealth, healthBar.sizeDelta.y);
-	}
+        Log("Newhealthbar width");
+        healthBar.sizeDelta = new Vector3(newHealth, healthBar.sizeDelta.y);
+        Log("HealthBar fixed");
+    }
 
 	public float CalculateHealth() {
         Log("Calc: " + currentHealth);
         Log("maxHealth: " + maxHealth);
-		int percentHealth = (getHealth() / maxHealth) * 100;
+		int percentHealth = (getHealth() * 100) / maxHealth;
 		Log(percentHealth);
 		healthText.text = percentHealth.ToString();
-		float width = (percentHealth / 100) * healthBarBg.sizeDelta.x;
+		float width = (percentHealth * healthBarBg.sizeDelta.x) / 100;
 		Log(width);
+        Log("Health calculated");
 		return width;
 	}
 
