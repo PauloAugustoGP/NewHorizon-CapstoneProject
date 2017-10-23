@@ -11,6 +11,7 @@ public class CharacterBehaviour : CharacterBase
     public bool isCrouching;
 
     Animator anim;
+    HUD pHud;
 
     /// <summary>
     /// Programmer Var
@@ -24,6 +25,7 @@ public class CharacterBehaviour : CharacterBase
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        pHud = GetComponent<HUD>();
 
         Health = 100;
         TeleportResource = 1;
@@ -176,4 +178,14 @@ public class CharacterBehaviour : CharacterBase
             //SceneManager.LoadScene(******);
         }     
     }
+
+    void OnCollisionEnter(Collision c)
+    {
+        //collision timer
+        if (c.gameObject.tag == "Enemy")
+        {
+            Damage(20);
+        }
+    }
+
 }
