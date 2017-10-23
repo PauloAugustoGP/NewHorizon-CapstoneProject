@@ -22,7 +22,7 @@ public class HUD : MonoBehaviour {
 	public int mval;
 
 	public Text score;
-
+    public bool disableLogging = false;
 	public Text broadcast;
 	public string bcMessage;
 	public Color bcColor = Color.white;
@@ -100,7 +100,7 @@ public class HUD : MonoBehaviour {
     public void TakeDamage() {
         startFlash = true;
         fixHealthBar();
-        Debug.Log("You've been hurt.");
+        Log("You've been hurt.");
     }
 
 	public void SetTimer() {
@@ -140,13 +140,29 @@ public class HUD : MonoBehaviour {
 	}
 
 	public float CalculateHealth() {
-        Debug.Log("Calc: " + currentHealth);
-        Debug.Log("maxHealth: " + maxHealth);
+        Log("Calc: " + currentHealth);
+        Log("maxHealth: " + maxHealth);
 		int percentHealth = (getHealth() / maxHealth) * 100;
-		Debug.Log(percentHealth);
+		Log(percentHealth);
 		healthText.text = percentHealth.ToString();
 		float width = (percentHealth / 100) * healthBarBg.sizeDelta.x;
-		Debug.Log(width);
+		Log(width);
 		return width;
 	}
+
+    public void Log(string value) {
+        if(!disableLogging) {
+            Debug.Log("Hud Log: " + value);
+        }
+    }
+    public void Log(int value) {
+        if(!disableLogging) {
+            Debug.Log("Hud Log: " + value);
+        }
+    }
+    public void Log(float value) {
+        if(!disableLogging) {
+            Debug.Log("Hud Log: " + value);
+        }
+    }
 }
