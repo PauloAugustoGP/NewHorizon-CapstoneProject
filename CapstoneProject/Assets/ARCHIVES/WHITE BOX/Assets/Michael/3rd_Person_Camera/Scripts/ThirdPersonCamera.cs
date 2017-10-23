@@ -1,29 +1,35 @@
 ﻿/// CAMERA CONTROL SCRIPT
 /// ---------------------
 /// 3rd person perspective
-/// Free View, right click to enter, user can rotate camera freely horizontally, clamped vertically
-/// 
-/// -Right click control can be changed
-/// -walkDist, heightDist, damping, vertical angle limits, and rotation speeds can all be changed
+/// Free View, right click to enter, user can rotate camera freely horizontally, angles clamped vertically (-10, 35)
+/// ---------------------
+/// Things which can be changed:
+/// -Right click control (SEE: Beginning of LateUpdate() )
+/// -walkDist (If changed, requires yAngleMin and yAngleMax to be tweaked)
+/// -heightDist (Currently, if changed, causes camera snapping behaviour)
+/// -heightDamping, rotationDamping, rotSpeedX, rotSpeedY
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour {
 
-    public Transform mainCam;
-    public Transform target;
-    // Camera mount positions
+    #region Initialization - Variable definitions and initial values
+    // Cachce main camera and target transforms
     [SerializeField]
-    private float walkDist;
+    private Transform _mainCam;
     [SerializeField]
-    private float heightDist;
+    private Transform _target;
+    // Camera mount distances from _target
+    // Using mainCam.LookAt(_target) command, so this also decides camera's natural angle towards player
+    [SerializeField]
+    private float _walkDist;
+    [SerializeField]
+    private float _heightDist;
     // Controls speed of camera transition after user exits Free View
     [SerializeField]
-    private float heightDamping;
+    private float _heightDamping;
     [SerializeField]
-    private float rotationDamping;
+    private float _rotationDamping;
     // Used for calculating camera position while in Free View
     private float _mouseX;
     private float _mouseY;
@@ -37,21 +43,33 @@ public class ThirdPersonCamera : MonoBehaviour {
     private float _rotSpeedX;
     [SerializeField]
     private float _rotSpeedY;
-    // True means user is in Free View, false otherwise
+    // True means user is in Free View camera, false otherwise
     private bool _cameraOn;
 
     private void Awake()
     {
-        walkDist = 4f;
-        heightDist = 1f;
+        if (_mainCam == null)
+        {
+            Debug.LogWarning("Main Camera Transform not found, finding component.");
+            _mainCam = GetComponent<Transform>();
+        }
 
-        heightDamping = 2f;
-        rotationDamping = 3f;
+        if (_target == null)
+        {
+            Debug.LogWarning("Target Transform not found, finding component.");
+            _target = GameObject.Find("Player").GetComponent<Transform>();
+        }
+
+        _walkDist = 4f;
+        _heightDist = 1f;
+
+        _heightDamping = 2f;
+        _rotationDamping = 3f;
 
         _mouseX = 0f;
         _mouseY = 0f;
 
-        _yAngleMin = -15;
+        _yAngleMin = -10;
         _yAngleMax = 35;
 
         _rotSpeedX = 250f;
@@ -59,101 +77,86 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         _cameraOn = false;
     }
+    #endregion
 
-    // Use this for initialization
     void Start () {
-
-        if (target == null)
-        {
-            Debug.LogWarning("Camera does not have a target");
-        }
-        else
-        {
-            CameraFollowPosition();
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            _cameraOn = true;
-        }
-
-        if (Input.GetMouseButtonUp(1))
-        {
-            _cameraOn = false;
-        }
+        CameraFollowPosition();
     }
 
     private void LateUpdate()
     {
-        if (target != null)
+        // Toggle Free View camera on
+        if (Input.GetMouseButtonDown(1))
         {
-            if (_cameraOn)
-            {
-                // Calculate the X and Y pos to transition the camera to,
-                // multiplied by rotation speed and standard value of Time.fixedDeltaTime
-                _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f;
-                _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * -0.02f; // Negative value inverts Y-axis control
-                // Clamp vertical rotation of camera
-                _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
+            _cameraOn = true;
+            // Prevents snapping behaviour in camera.
+            // There is a slight shift when entering Free View, unsure how to remove.
+            _mouseX = _mainCam.eulerAngles.y;
+            _mouseY = _mainCam.eulerAngles.x;
+        }
+        // Toggle Free View camera off
+        if (Input.GetMouseButtonUp(1))
+        {
+            _cameraOn = false;
+        }
 
-                // This version helps remove the snap-to movement of the camera upon first right-clicking
-                // It also drastically changes how fast the camera rotation movement occurs. NEEDS WORK!
-                //Quaternion rotation = Quaternion.Euler(_mouseY + mainCam.eulerAngles.x, _mouseX, 0);
+        if (_cameraOn)
+        {
+            // Calculate the X and Y pos to transition the camera to,
+            // multiplied by rotation speed and standard value of Time.fixedDeltaTime
+            _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f;
+            _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * -0.02f; // Negative value inverts Y-axis control
+            // Clamp vertical rotation of camera
+            _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
 
-                // Convert euler angles to Unity Quaternion
-                Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0);
-                // 
-                Vector3 position = rotation * new Vector3(0f, 0f, -walkDist) + target.position;
+            // Convert euler angles to Unity Quaternion
+            Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0);
+            // 
+            Vector3 position = rotation * new Vector3(0f, 0f, -_walkDist) + _target.position;
 
-                mainCam.rotation = rotation;
-                mainCam.position = position;
-            }
-            else
-            {
-                // This reset of X and Y pos prevents a snap-transition to the last position the previous time user entered Free View
-                // Also forces Free View to start at the camera mount position, even it is still in transition. NEEDS WORK!
-                _mouseX = 0f;
-                _mouseY = 0f;
-                // -----From SmoothFollow standard asset script-----
-                // This section will change once I better understand commands such as Mathf.Lerp
-                SmoothFollow();
-            }
+            _mainCam.rotation = rotation;
+            _mainCam.position = position;
+        }
+        else
+        {
+            // This reset of X and Y pos prevents a snap-transition to the last position the previous time user entered Free View
+            // Also forces Free View to start at the camera mount position, even it is still in transition. NEEDS WORK!
+            _mouseX = 0f;
+            _mouseY = 0f;
+            // -----From SmoothFollow standard asset script-----
+            // This section may change once I better understand commands such as Mathf.Lerp and Quaternions
+            SmoothFollow();
         }
     }
 
     private void CameraFollowPosition()
     {
-        // This section will change once the values for walkDist, heightDist, and the angle of the camera are decided
-
         // Set Camera position based on walkDist and heightDist
-        mainCam.position = new Vector3(0f, heightDist, -walkDist) + target.position;
+        _mainCam.position = new Vector3(0f, _heightDist, -_walkDist) + _target.position;
         // Rotates Camera to look at CamTarget
-        mainCam.LookAt(target);
+        _mainCam.LookAt(_target);
     }
 
     private void SmoothFollow()
     {
-        // Calculate the current rotation angles
-        float wantedRotationAngle = target.eulerAngles.y;
-        float wantedHeight = target.position.y + heightDist;
+        // Calculate the current and desired rotation and height of the camera
+        float wantedRotationAngle = _target.eulerAngles.y;
+        float wantedHeight = _target.position.y + _heightDist;
         float currentRotationAngle = transform.eulerAngles.y;
         float currentHeight = transform.position.y;
         // Damp the rotation around the y-axis
-        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
+        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, _rotationDamping * Time.deltaTime);
         // Damp the height
-        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
+        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, _heightDamping * Time.deltaTime);
         // Convert the angle into a rotation
         Quaternion currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
         // Set the position of the camera on the x-z plane to:
         // distance meters behind the target
-        mainCam.position = target.position;
-        mainCam.position -= currentRotation * new Vector3(0f, 0f, 1f) * walkDist;
+        _mainCam.position = _target.position;
+        _mainCam.position -= currentRotation * new Vector3(0f, 0f, 1f) * _walkDist;
         // Set the height of the camera
-        mainCam.position = new Vector3(mainCam.position.x, currentHeight, mainCam.position.z);
+        _mainCam.position = new Vector3(_mainCam.position.x, currentHeight, _mainCam.position.z);
         // Always look at the target
-        mainCam.LookAt(target);
+        _mainCam.LookAt(_target);
     }
 }
