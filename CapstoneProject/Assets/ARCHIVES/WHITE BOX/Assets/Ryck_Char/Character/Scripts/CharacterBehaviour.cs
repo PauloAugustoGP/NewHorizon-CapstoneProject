@@ -29,7 +29,9 @@ public class CharacterBehaviour : CharacterBase
         anim = GetComponent<Animator>();
         pHud = GetComponent<HUD>();
 
-        Health = 100;
+        _maxHealth = 100;
+        _health = _maxHealth;
+
         TeleportResource = 1;
 
         isAlive = true;
@@ -43,7 +45,7 @@ public class CharacterBehaviour : CharacterBase
 	void Update ()
     {
         //Upon 0 or Low Health
-        if (Health <= 0)
+        if (_health <= 0)
         {
             //SoundManager.instance.SoundCaller("Death", 0.2f);
             Died();
@@ -104,31 +106,32 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //strafeRight
-            /*if ((Input.GetKey(KeyCode.E)))
+            if ((Input.GetKey(KeyCode.D)))
             {
                 anim.SetFloat("Speed", MoveV);
                 StrafeRight();
             }
 
-            else if ((Input.GetKeyUp(KeyCode.E)))
+            else if ((Input.GetKeyUp(KeyCode.D)))
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
             }
 
             //strafeLeft
-            if ((Input.GetKey(KeyCode.Q)))
+            if ((Input.GetKey(KeyCode.A)))
             {
                 anim.SetFloat("Speed", -MoveV);
                 StrafeLeft();
             }
 
-            else if ((Input.GetKeyUp(KeyCode.Q)))
+            else if ((Input.GetKeyUp(KeyCode.A)))
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
-            }*/
+            }
 
+            /*
             //Turning
             if (Input.GetKey(KeyCode.D))
             {
@@ -137,7 +140,7 @@ public class CharacterBehaviour : CharacterBase
             else if (Input.GetKey(KeyCode.A))
             {
                 RotateLeft();
-            }
+            }*/
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -161,30 +164,10 @@ public class CharacterBehaviour : CharacterBase
             //Debug.Log(slowed);
             //Debug.Log(Health);
             //Debug.Log(TeleportResource);
-            Debug.Log(Health);
+            Debug.Log(_health);
         }
 
     }//Update
-
-    public static int Health
-    {
-        get { return _health; }
-        set
-        {
-            _health = value;
-
-            if (_health > 100)
-            {
-                _health = 100;
-            }
-
-            if (_health < 0)
-            {
-                _health = 0;
-            }
-        }//set
-    }//health
-
 
     //On Death call
     protected void Died()
@@ -205,7 +188,7 @@ public class CharacterBehaviour : CharacterBase
     protected void Damage(int value)
     {
 
-        Health -= value;
+        _health -= value;
     }
 
     void OnCollisionEnter(Collision c)

@@ -19,12 +19,12 @@ public class healthPack : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<charControlScript>())
+       /* if (other.GetComponent<charControlScript>())
         {
-            charControlScript c = other.GetComponent<charControlScript>();
+            //charControlScript c = other.GetComponent<charControlScript>();
             c.PlayerHealth += 3;
             Destroy(gameObject);
         }
-
+        */
     }
 }
