@@ -90,6 +90,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
+                rb.velocity = Vector3.zero;
             }
 
             //Back
@@ -103,6 +104,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
+                rb.velocity = Vector3.zero;
             }
 
             //strafeRight
@@ -116,6 +118,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
+                rb.velocity = Vector3.zero;
             }
 
             //strafeLeft
@@ -129,6 +132,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 moving = false;
                 anim.SetFloat("Speed", 0);
+                rb.velocity = Vector3.zero;
             }
 
             /*
