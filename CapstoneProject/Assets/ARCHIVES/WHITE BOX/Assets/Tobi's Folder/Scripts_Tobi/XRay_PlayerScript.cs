@@ -9,19 +9,8 @@ public class XRay_PlayerScript : MonoBehaviour
     public class Definitions
     {
         [SerializeField]
-        private string _XRayTag = "XRay";
-        [SerializeField]
         private float _touchDistance = 1.0f;
-
-        public string XRayTag
-        {
-            get { return _XRayTag; }
-            set
-            {
-                if (_XRayTag == "")
-                    _XRayTag = value;
-            }
-        }
+        
         public float touchDistance
         {
             get { return _touchDistance; }
@@ -98,11 +87,6 @@ public class XRay_PlayerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (definitions.XRayTag == "")
-        {
-            Debug.LogError("No XRay_Tag string defined in the Inspector. Defaulting to XRay.");
-            definitions.XRayTag = "XRay";
-        }
         if (definitions.touchDistance <= 0.0f)
         {
             Debug.LogError("No Touch Distance set in the Inspector. Defaulting to 1.0f");
@@ -155,7 +139,7 @@ public class XRay_PlayerScript : MonoBehaviour
 
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, definitions.touchDistance) && hit.collider.tag == definitions.XRayTag)
+			if (Physics.Raycast(ray, out hit, definitions.touchDistance) && hit.collider.gameObject.GetComponent<XRay_ObjectScript>())
             {
                 if (_useCoolDown)
                     StartCoroutine(TimeCounter());
