@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 999630286}
   - component: {fileID: 999630285}
   - component: {fileID: 999630290}
+  - component: {fileID: 999630289}
   m_Layer: 0
   m_Name: XRay_True
   m_TagString: Enemy
@@ -334,6 +335,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &999630289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 999630284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5df8a883f408403992e7158ef0f58ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &999630290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -514,8 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3473b4610fe8e44968a5370cefb098df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitBox: {fileID: 0}
   _stunTime: 15
+  _enemyTag: Enemy
 --- !u!54 &1332786512
 Rigidbody:
   m_ObjectHideFlags: 0
