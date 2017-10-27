@@ -490,9 +490,10 @@ GameObject:
   - component: {fileID: 304684973}
   - component: {fileID: 304684972}
   - component: {fileID: 304684976}
+  - component: {fileID: 304684977}
   m_Layer: 0
   m_Name: Wall_XRay (1)
-  m_TagString: XRay
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -576,6 +577,17 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &304684977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 304684971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5df8a883f408403992e7158ef0f58ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &446314633
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +823,7 @@ GameObject:
   - component: {fileID: 707497127}
   - component: {fileID: 707497126}
   - component: {fileID: 707497130}
+  - component: {fileID: 707497131}
   m_Layer: 0
   m_Name: Wall_XRay (3)
   m_TagString: XRay
@@ -897,6 +910,17 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &707497131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 707497125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5df8a883f408403992e7158ef0f58ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &755358982
 Prefab:
   m_ObjectHideFlags: 0
@@ -1333,6 +1357,7 @@ GameObject:
   - component: {fileID: 1118248721}
   - component: {fileID: 1118248720}
   - component: {fileID: 1118248724}
+  - component: {fileID: 1118248725}
   m_Layer: 0
   m_Name: Wall_XRay (5)
   m_TagString: XRay
@@ -1419,6 +1444,17 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1118248725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118248719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5df8a883f408403992e7158ef0f58ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1122618677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,6 +1551,7 @@ GameObject:
   - component: {fileID: 1186006425}
   - component: {fileID: 1186006424}
   - component: {fileID: 1186006428}
+  - component: {fileID: 1186006429}
   m_Layer: 0
   m_Name: Wall_XRay (2)
   m_TagString: XRay
@@ -1601,6 +1638,17 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1186006429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186006423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5df8a883f408403992e7158ef0f58ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1210272246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,9 +1718,45 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114142550815303548, guid: 42cea03f7218ef34295261866e749ed1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 42cea03f7218ef34295261866e749ed1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1241717997 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1724911310850826, guid: 42cea03f7218ef34295261866e749ed1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1241717996}
+--- !u!4 &1241717998 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4092397376687682, guid: 42cea03f7218ef34295261866e749ed1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1241717996}
+--- !u!114 &1241717999 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114190398030796814, guid: 42cea03f7218ef34295261866e749ed1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1241717996}
+  m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
+--- !u!114 &1241718000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241717997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1095471f410465c8e3422b16a06a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useCoolDown: 0
+  definitions:
+    _touchDistance: 1
+  dragAndDropVariables:
+    _rayOrigin: {fileID: 1241717998}
+    _transparent: {fileID: 4800000, guid: eab4b8bd340f74707b822cf34dcfd3dd, type: 3}
+  componentsToDisable:
+  - {fileID: 1241717999}
 --- !u!1001 &1476449008
 Prefab:
   m_ObjectHideFlags: 0
@@ -2108,6 +2192,7 @@ GameObject:
   - component: {fileID: 1971829804}
   - component: {fileID: 1971829803}
   - component: {fileID: 1971829807}
+  - component: {fileID: 1971829808}
   m_Layer: 0
   m_Name: Wall_XRay (4)
   m_TagString: XRay
@@ -2194,6 +2279,17 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1971829808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1971829802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5df8a883f408403992e7158ef0f58ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2000433484
 GameObject:
   m_ObjectHideFlags: 0
