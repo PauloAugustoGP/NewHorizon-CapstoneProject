@@ -5,27 +5,27 @@ using UnityEngine.UI;
 
 public class Canvas_Manager : MonoBehaviour
 {
-    [SerializeField] List<string> levelNames;
-    [SerializeField] GameObject[] Panels;
+    //[SerializeField] List<string> levelNames;
+    //[SerializeField] GameObject[] Panels;
 
     //public Canvas[] Canvi;
-    public int panelSwitch = 0;
-    private GameObject MainPanel;
-    private GameObject OptionsPanel;
-    private GameObject ControlsPanel;
-    private GameObject CreditsPanel;
+    //public int panelSwitch = 0;
+    [SerializeField] GameObject MainPanel;
+    [SerializeField] GameObject OptionsPanel;
+    [SerializeField] GameObject ControlsPanel;
+    [SerializeField] GameObject CreditsPanel;
 
-    Canvas main;
+    /*Canvas main;
     Canvas control;
     Canvas options;
-    Canvas credits;
+    Canvas credits;*/
 
 
-    public Button startBtn;
+    /*public Button startBtn;
     public Button optBtn;
     public Button credBtn;
     public Button quitBtn;
-    public Button menuBtn;
+    public Button menuBtn;*/
 
 
 
@@ -57,59 +57,66 @@ public class Canvas_Manager : MonoBehaviour
 
         // Canvi = GetComponentsInChildren<Canvas>();
 
-        panelScreen(panelSwitch);
+        // panelScreen(panelSwitch);
 
-    }
-
-    private void panelScreen(int panelSwitch)
-    {
-        foreach (GameObject panel in Panels)
-        {
-            panel.gameObject.SetActive(false);
-            /*if (panel.name == "Menu Canvas")
-                main = panel;
-            else if (panel.name == "Options Canvas")
-                options = panel;
-            else if (panel.name == "Controls Canvas")
-                control = can;
-            else if (panel.name == "Credits Canvas")
-                credits = can;*/
-        }
-
-        /*for (int i = 0; i < Panels.Length; i++)
-        {
-            Panels[i] = null;
-        }*/
-
-
-        switch (panelSwitch)
-        {
-            case 0:
-                MainPanel.gameObject.SetActive(true);
-                break;
-            case 1:
-                OptionsPanel.gameObject.SetActive(true);
-                break;
-            case 2:
-                CreditsPanel.gameObject.SetActive(true);
-                break;
-            case 3:
-                ControlsPanel.gameObject.SetActive(true);
-                break;
-                //mainMenuPanel.gameObject.SetActive(true);
-        }
-
-
-
-
-        if (menuBtn)
-        {
-            menuBtn.onClick.AddListener(Scene_Manager.instance.GoTo_MENU);
-        }
-
-        //BackToMenu();
         
+
     }
+
+    //private void panelScreen(int panelSwitch)
+    //{
+    /* foreach (GameObject panel in Panels)
+     {
+         panel.gameObject.SetActive(false);
+         Debug.Log(panel.name);
+
+         /*if (panel.name == "Menu Canvas")
+             main = panel;
+         else if (panel.name == "Options Canvas")
+             options = panel;
+         else if (panel.name == "Controls Canvas")
+             control = can;
+         else if (panel.name == "Credits Canvas")
+             credits = can;*/
+    //}
+    //OptionsPanel.gameObject.SetActive(false);
+    //CreditsPanel.gameObject.SetActive(false);
+    //ControlsPanel.gameObject.SetActive(false);
+    /*for (int i = 0; i < Panels.Length; i++)
+    {
+        Panels[i] = null;
+    }*/
+    //MainPanel.gameObject.SetActive(true);
+
+
+
+    /*switch (panelSwitch)
+    {
+        case 0:
+            MainPanel.gameObject.SetActive(true);
+            break;
+        case 1:
+            OptionsPanel.gameObject.SetActive(true);
+            break;
+        case 2:
+            CreditsPanel.gameObject.SetActive(true);
+            break;
+        case 3:
+            ControlsPanel.gameObject.SetActive(true);
+            break;
+            //mainMenuPanel.gameObject.SetActive(true);
+    }*/
+
+
+
+    /* if (menuBtn)
+     {
+         menuBtn.onClick.AddListener(Scene_Manager.instance.GoTo_MENU);
+     }*/
+
+    //BackToMenu();
+
+        //}
         
         //starBuilder.GetComponent<Button>().
     
@@ -119,6 +126,57 @@ public class Canvas_Manager : MonoBehaviour
         Scene_Manager.instance.GoTo_LEVEL("Test");
     }
 
+     // for if menu's are panels - unconfirmed to work 
+    public void Options()
+    {
+        MainPanel.gameObject.SetActive(false);
+        ControlsPanel.gameObject.SetActive(false);
+        OptionsPanel.gameObject.SetActive(true);
+        CreditsPanel.gameObject.SetActive(false);
+    }
+
+    public void BackToMenu()
+    {
+        MainPanel.gameObject.SetActive(true);
+        ControlsPanel.gameObject.SetActive(false);
+        OptionsPanel.gameObject.SetActive(false);
+        CreditsPanel.gameObject.SetActive(false);
+
+    }
+
+    public void BackToOptions()
+    {
+        MainPanel.gameObject.SetActive(false);
+        ControlsPanel.gameObject.SetActive(false);
+        OptionsPanel.gameObject.SetActive(true);
+        CreditsPanel.gameObject.SetActive(false);
+    }
+
+    public void controls()
+    {
+        MainPanel.gameObject.SetActive(false);
+        ControlsPanel.gameObject.SetActive(true);
+        OptionsPanel.gameObject.SetActive(false);
+        CreditsPanel.gameObject.SetActive(false);
+    }
+
+    public void Credits()
+    {
+        MainPanel.gameObject.SetActive(false);
+        ControlsPanel.gameObject.SetActive(false);
+        OptionsPanel.gameObject.SetActive(false);
+        CreditsPanel.gameObject.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("quit game");
+        Application.Quit();
+    }
+
+
+
+    /* //menu controls is menus are canvas
     public void Options()
     {
         main.enabled = false;
@@ -164,7 +222,7 @@ public class Canvas_Manager : MonoBehaviour
     {
         Debug.Log("quit game");
         Application.Quit();
-    }
+    }*/
     
     /*[SerializeField] List<string> levelNames;
 
@@ -180,15 +238,15 @@ public class Canvas_Manager : MonoBehaviour
     void Start()
     {
         */
-     //Menu Scene
-     /*if (startBtn)
-         startBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL(levelNames[0]); });
+    //Menu Scene
+    /*if (startBtn)
+        startBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL(levelNames[0]); });
 
-     if (optBtn)
-          optBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL(levelNames[1]); });
+    if (optBtn)
+         optBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL(levelNames[1]); });
 
-     if (credBtn)
-         credBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL(levelNames[2]); });*/
+    if (credBtn)
+        credBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL(levelNames[2]); });*/
 
     /*
     if (quitBtn)

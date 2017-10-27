@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 3179230}
   - component: {fileID: 3179229}
   m_Layer: 0
-  m_Name: Main Menu
+  m_Name: Main Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -987,7 +987,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNames: []
-  Canvi: []
+  Panels:
+  - {fileID: 3179227}
+  - {fileID: 356923264}
+  - {fileID: 1247008342}
+  - {fileID: 271142737}
+  panelSwitch: 0
   startBtn: {fileID: 0}
   optBtn: {fileID: 0}
   credBtn: {fileID: 0}
