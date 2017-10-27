@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class Canvas_Manager : MonoBehaviour
 {
-    [SerializeField]
-    List<string> levelNames;
+    [SerializeField] List<string> levelNames;
+    [SerializeField] GameObject[] Panels;
 
-    public Canvas[] Canvi;
+    //public Canvas[] Canvi;
+    public int panelSwitch = 0;
+    private GameObject MainPanel;
+    private GameObject OptionsPanel;
+    private GameObject ControlsPanel;
+    private GameObject CreditsPanel;
 
     Canvas main;
     Canvas control;
@@ -50,41 +55,68 @@ public class Canvas_Manager : MonoBehaviour
 
         //Winning Scene
 
-        Canvi = GetComponentsInChildren<Canvas>();
+        // Canvi = GetComponentsInChildren<Canvas>();
 
-        foreach (Canvas can in Canvi)
+        panelScreen(panelSwitch);
+
+    }
+
+    private void panelScreen(int panelSwitch)
+    {
+        foreach (GameObject panel in Panels)
         {
-            if (can.name == "Menu Canvas")
-                main = can;
-            else if (can.name == "Options Canvas")
-                options = can;
-            else if (can.name == "Controls Canvas")
+            panel.gameObject.SetActive(false);
+            /*if (panel.name == "Menu Canvas")
+                main = panel;
+            else if (panel.name == "Options Canvas")
+                options = panel;
+            else if (panel.name == "Controls Canvas")
                 control = can;
-            else if (can.name == "Credits Canvas")
-                credits = can;
+            else if (panel.name == "Credits Canvas")
+                credits = can;*/
         }
 
-        for (int i = 0; i < Canvi.Length; i++)
+        /*for (int i = 0; i < Panels.Length; i++)
         {
-            Canvi[i] = null;
+            Panels[i] = null;
+        }*/
+
+
+        switch (panelSwitch)
+        {
+            case 0:
+                MainPanel.gameObject.SetActive(true);
+                break;
+            case 1:
+                OptionsPanel.gameObject.SetActive(true);
+                break;
+            case 2:
+                CreditsPanel.gameObject.SetActive(true);
+                break;
+            case 3:
+                ControlsPanel.gameObject.SetActive(true);
+                break;
+                //mainMenuPanel.gameObject.SetActive(true);
         }
+
+
+
 
         if (menuBtn)
         {
             menuBtn.onClick.AddListener(Scene_Manager.instance.GoTo_MENU);
         }
 
-        BackToMenu();
-
-
-
-
-        //starBuilder.GetComponent<Button>().
+        //BackToMenu();
+        
     }
+        
+        //starBuilder.GetComponent<Button>().
+    
 
     public void StartGame()
     {
-        Scene_Manager.instance.GoTo_LEVEL("Level");
+        Scene_Manager.instance.GoTo_LEVEL("Test");
     }
 
     public void Options()

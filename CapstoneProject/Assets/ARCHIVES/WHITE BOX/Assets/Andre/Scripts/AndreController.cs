@@ -8,6 +8,10 @@ public class AndreController : MonoBehaviour
     Rigidbody rb;
     public Camera cam;
     public float rotateSpeed = 2f;
+    public RectTransform messageSpawnPoint;
+    public PlayerMessage spawn;
+    public PlayerUI accessUI;
+  
     // Use this for initialization
     void Start()
     {

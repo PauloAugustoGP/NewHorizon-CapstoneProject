@@ -97,12 +97,11 @@ GameObject:
   - component: {fileID: 4966061756546926}
   - component: {fileID: 95739642655974546}
   - component: {fileID: 54183671633454506}
-  - component: {fileID: 114769420275281816}
   - component: {fileID: 114043771825228928}
   - component: {fileID: 136659961419489792}
   m_Layer: 0
   m_Name: Aj_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2375,14 +2374,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102959661889288}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 50
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!95 &95739642655974546
 Animator:
   serializedVersion: 3
@@ -2412,18 +2411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
-  ValueDebuger: 0
---- !u!114 &114769420275281816
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102959661889288}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 170276d19cbd56f4dacb123467b6be6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  ValueDebuger: 1
 --- !u!136 &136659961419489792
 CapsuleCollider:
   m_ObjectHideFlags: 1

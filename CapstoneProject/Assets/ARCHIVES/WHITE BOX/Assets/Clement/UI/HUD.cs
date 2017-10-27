@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour {
-    public GameObject player;
-    public Color fColor = new Color(1f, 0f, 0f, 0.1f);
-    public float fSpeed;
-    public Image fScreen;
+    public CharacterBehaviour player;
+    [Tooltip("Colour to flash the screen with when the player takes damage.")]
+    public Color flashColor = new Color(1f, 0f, 0f, 0.3f);
+    [Tooltip("The speed at which the flash color flashes. Increase for faster flashes")]
+    public float flashSpeed;
+    public Image flashScreen;
+    Color clearColor = new Color(0, 0, 0, 0);
 
     public Text timer;
     public int minutes;
@@ -19,7 +22,7 @@ public class HUD : MonoBehaviour {
     public int mval;
 
     public Text score;
-
+    public bool disableLogging = false;
     public Text broadcast;
     public string bcMessage;
     public Color bcColor = Color.white;
@@ -27,18 +30,29 @@ public class HUD : MonoBehaviour {
 
     public RectTransform healthBar;
     public RectTransform healthBarBg;
-    public float phealth;
+    public Text healthText;
+
+    public static int maxHealth = 100;
+    public static int currentHealth;
+    public float testHealth = maxHealth;
+
+    public bool startFlash = false;
 
     void Awake() {
-        player = GameObject.FindGameObjectWithTag("Player");
+        if(!player) {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBehaviour>();
+        }
         timer = GameObject.Find("Timer").GetComponent<Text>();
         score = GameObject.Find("Score").GetComponent<Text>();
-        fScreen = GameObject.Find("DamageIndicator").GetComponent<Image>();
+        flashScreen = GameObject.Find("DamageIndicator").GetComponent<Image>();
+        healthText = GameObject.Find("healthText").GetComponent<Text>();
     }
 
     // Use this for initialization
     void Start () {
-        phealth = getHealth();
+        if(flashSpeed <= 0) {
+            flashSpeed = 40;
+        }
         if(startTime == 0) {
             startTime = Time.time;
             countDown = false;
@@ -46,40 +60,40 @@ public class HUD : MonoBehaviour {
             countDown = true;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
+        // currentHealth = CharacterBehaviour.Health;
+        fixHealthBar();
         SetTimer();
-		if(Time.timeScale == 0) {
+        if(Time.timeScale == 0) {
             pauseTime = true;
         } else {
             pauseTime = false;
         }
         currentTime = (minutes * 60) + seconds;
-        Debug.Log(currentTime);
-        fixHealthBar();
+
+        if(startFlash) {
+            flashScreen.color = Color.Lerp(flashColor, clearColor, Time.deltaTime * flashSpeed);
+            StartCoroutine(damageFlash(1f));
+        }
+
     }
     
-    public float getHealth() {
-        return player.GetComponent<charControlScript>().PlayerHealth;
+    public int getHealth() {
+        return CharacterBehaviour.Health;
     }
 
-    public void damageFlash() {
-        fColor = Color.red;
-        fScreen.color = Color.Lerp(fColor, Color.clear, fSpeed * Time.deltaTime);
+    IEnumerator damageFlash(float delay) {
+        // fScreen.color = Color.Lerp(fColor, clearColor, Mathf.PingPong(Time.time, fSpeed));
+        yield return new WaitForSeconds(delay);
+        startFlash = false;
+        flashScreen.color = clearColor;
     }
 
-    public void TakeDamage(float amount) {
-        phealth -= amount;
-        damageFlash();
-        if(phealth >= 100) {
-            phealth = 100;
-        } else if(phealth <= 0) {
-            phealth = 0;
-            Destroy(player);
-        }
+    public void TakeDamage() {
+        startFlash = true;
         fixHealthBar();
-        Debug.Log("Player took " + amount + " damage. Heath: " + phealth);
+        Log("You've been hurt.");
     }
 
     public void SetTimer() {
@@ -115,14 +129,36 @@ public class HUD : MonoBehaviour {
 
     public void fixHealthBar() {
         float newHealth = CalculateHealth();
-        healthBar.sizeDelta =new Vector3(newHealth, healthBar.sizeDelta.y);
+        Log("Newhealthbar width");
+        healthBar.sizeDelta = new Vector3(newHealth, healthBar.sizeDelta.y);
+        Log("HealthBar fixed");
     }
 
     public float CalculateHealth() {
-        float maxHealth = 100;
-        float percentHealth = (maxHealth - getHealth()) * 100;
-        float width = percentHealth / 100;
-        width = healthBarBg.sizeDelta.x - width;
+        Log("Calc: " + currentHealth);
+        Log("maxHealth: " + maxHealth);
+        int percentHealth = (getHealth() * 100) / maxHealth;
+        Log(percentHealth);
+        healthText.text = percentHealth.ToString();
+        float width = (percentHealth * healthBarBg.sizeDelta.x) / 100;
+        Log(width);
+        Log("Health calculated");
         return width;
+    }
+
+    public void Log(string value) {
+        if(!disableLogging) {
+            Debug.Log("Hud Log: " + value);
+        }
+    }
+    public void Log(int value) {
+        if(!disableLogging) {
+            Debug.Log("Hud Log: " + value);
+        }
+    }
+    public void Log(float value) {
+        if(!disableLogging) {
+            Debug.Log("Hud Log: " + value);
+        }
     }
 }
