@@ -8,7 +8,7 @@ using UnityEngine;
 public class Projectile_ObjectScript : MonoBehaviour {
 
 	private Rigidbody _rb;
-	private ParticleSystem _ps;
+	private Particle_VisualScript _pvs;
 
 	private float _stunTime;
 	private float _timeToDone;
@@ -30,6 +30,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	void Start()
 	{
 		_rb = GetComponent<Rigidbody>();
+		_pvs = GetComponentInChildren<Particle_VisualScript>();
 		_rb.useGravity = false;
 	}
 
@@ -72,14 +73,15 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		if(_timeToDone < _maxChargeTime)
 		{
 			_stunTime = _timeToDone += deltaC;
-
+			_pvs.UpdateSize(deltaC);
+			/*
 			Vector3 i = transform.localScale;
 			
 			i.x += (_deltaSize * deltaC);
 			i.y += (_deltaSize * deltaC);
 			i.z += (_deltaSize * deltaC);
 			transform.localScale = i;
-		
+		*/
 			StartCoroutine(Charge());
 		}
 		else
