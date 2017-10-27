@@ -14,9 +14,7 @@ using UnityEngine;
 public class ThirdPersonCamera : MonoBehaviour {
 
     #region Initialization - Variable definitions and initial values
-    // Cachce main camera and target transforms
-    [SerializeField]
-    private Transform _mainCam;
+    // Cachce target transform
     [SerializeField]
     private Transform _target;
     // Camera mount distances from _target
@@ -48,12 +46,6 @@ public class ThirdPersonCamera : MonoBehaviour {
 
     private void Awake()
     {
-        if (_mainCam == null)
-        {
-            Debug.LogWarning("Main Camera Transform not found, finding component.");
-            _mainCam = GetComponent<Transform>();
-        }
-
         if (_target == null)
         {
             Debug.LogWarning("Target Transform not found, finding component.");
@@ -90,9 +82,9 @@ public class ThirdPersonCamera : MonoBehaviour {
         {
             _cameraOn = true;
             // Prevents snapping behaviour in camera.
-            // There is a slight shift when entering Free View, unsure how to remove.
-            _mouseX = _mainCam.eulerAngles.y;
-            _mouseY = _mainCam.eulerAngles.x;
+            // There is a slight shift when entering Free View, unsure how to remove fully.
+            _mouseX = this.transform.eulerAngles.y;
+            _mouseY = this.transform.eulerAngles.x;
         }
         // Toggle Free View camera off
         if (Input.GetMouseButtonUp(1))
@@ -114,8 +106,8 @@ public class ThirdPersonCamera : MonoBehaviour {
             // 
             Vector3 position = rotation * new Vector3(0f, 0f, -_walkDist) + _target.position;
 
-            _mainCam.rotation = rotation;
-            _mainCam.position = position;
+            this.transform.rotation = rotation;
+            this.transform.position = position;
         }
         else
         {
@@ -132,9 +124,9 @@ public class ThirdPersonCamera : MonoBehaviour {
     private void CameraFollowPosition()
     {
         // Set Camera position based on walkDist and heightDist
-        _mainCam.position = new Vector3(0f, _heightDist, -_walkDist) + _target.position;
+        this.transform.position = new Vector3(0f, _heightDist, -_walkDist) + _target.position;
         // Rotates Camera to look at CamTarget
-        _mainCam.LookAt(_target);
+        this.transform.LookAt(_target);
     }
 
     private void SmoothFollow()
@@ -152,11 +144,11 @@ public class ThirdPersonCamera : MonoBehaviour {
         Quaternion currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
         // Set the position of the camera on the x-z plane to:
         // distance meters behind the target
-        _mainCam.position = _target.position;
-        _mainCam.position -= currentRotation * new Vector3(0f, 0f, 1f) * _walkDist;
+        this.transform.position = _target.position;
+        this.transform.position -= currentRotation * new Vector3(0f, 0f, 1f) * _walkDist;
         // Set the height of the camera
-        _mainCam.position = new Vector3(_mainCam.position.x, currentHeight, _mainCam.position.z);
+        this.transform.position = new Vector3(this.transform.position.x, currentHeight, this.transform.position.z);
         // Always look at the target
-        _mainCam.LookAt(_target);
+        this.transform.LookAt(_target);
     }
 }
