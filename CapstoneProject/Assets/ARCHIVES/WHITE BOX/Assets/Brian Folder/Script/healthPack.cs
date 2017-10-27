@@ -2,27 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class healthPack : MonoBehaviour
+public class HealthPack : MonoBehaviour
 {
+    public int Health;
 
-    // Use this for initialization
     void Start()
     {
-
+        Health = CharacterBehaviour.Health;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //I need to figure it out a Way to add health to the player's health without using the get component script within the player.
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<charControlScript>())
+        if (other.CompareTag("Player"))
         {
-            charControlScript c = other.GetComponent<charControlScript>();
-            c.PlayerHealth += 3;
+            Health += 3;
             Destroy(gameObject);
         }
 
