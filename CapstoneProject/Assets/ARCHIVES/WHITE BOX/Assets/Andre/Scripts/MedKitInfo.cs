@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class HeathBoxPickUpText : MonoBehaviour {
+public class MedKitInfo : MonoBehaviour {
 
     public GameObject HealthPackCanvas;
     public PlayerMessage spawn;
@@ -14,7 +12,7 @@ public class HeathBoxPickUpText : MonoBehaviour {
         HealthPackCanvas.gameObject.SetActive(true);
         if (c.gameObject.tag == "Player")
         {
-                    SpawnMessage("You picked up a med kit.");
+            SpawnMessage("You picked up a med kit.");
         }
     }
     private void OnTriggerExit(Collider c)
