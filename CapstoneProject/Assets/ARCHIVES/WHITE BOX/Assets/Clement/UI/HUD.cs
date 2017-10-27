@@ -32,8 +32,8 @@ public class HUD : MonoBehaviour {
     public RectTransform healthBarBg;
     public Text healthText;
 
-    public static int maxHealth = 100;
-    public static int currentHealth;
+    public static float maxHealth = 100;
+    public static float currentHealth;
     public float testHealth = maxHealth;
 
     public bool startFlash = false;
@@ -79,8 +79,8 @@ public class HUD : MonoBehaviour {
 
     }
     
-    public int getHealth() {
-        return CharacterBehaviour.Health;
+    public float getHealth() {
+        return player.GetHealth();
     }
 
     IEnumerator damageFlash(float delay) {
@@ -137,7 +137,7 @@ public class HUD : MonoBehaviour {
     public float CalculateHealth() {
         Log("Calc: " + currentHealth);
         Log("maxHealth: " + maxHealth);
-        int percentHealth = (getHealth() * 100) / maxHealth;
+        float percentHealth = (getHealth() * 100) / maxHealth;
         Log(percentHealth);
         healthText.text = percentHealth.ToString();
         float width = (percentHealth * healthBarBg.sizeDelta.x) / 100;
