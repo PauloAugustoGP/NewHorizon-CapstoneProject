@@ -28,6 +28,12 @@ public class TeleportScript : MonoBehaviour
             Debug.Log("No Teleport Point Prefab added to scene.");
         }
 
+        // make sure there is a Player Shadow in the scene
+        if(!fakePlayer)
+        {
+            Debug.Log("No player shadow prefab added to scene.");
+        }
+
         // initializing variables
         isCooled = true;
         isActive = false;
