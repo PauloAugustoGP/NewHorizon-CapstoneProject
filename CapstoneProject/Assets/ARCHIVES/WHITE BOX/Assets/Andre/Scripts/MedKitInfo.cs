@@ -6,10 +6,11 @@ public class MedKitInfo : MonoBehaviour {
 
     public GameObject HealthPackCanvas;
     public PlayerMessage spawn;
+    public GameObject textDel;
 
     private void OnTriggerEnter(Collider c)
     {
-        HealthPackCanvas.gameObject.SetActive(true);
+        textDel.gameObject.SetActive(true);
         if (c.gameObject.tag == "Player")
         {
             SpawnMessage("You picked up a med kit.");
@@ -17,7 +18,8 @@ public class MedKitInfo : MonoBehaviour {
     }
     private void OnTriggerExit(Collider c)
     {
-        Destroy(gameObject);
+        HealthPackCanvas.gameObject.SetActive(true);
+        //Destroy(gameObject);
     }
     public void SpawnMessage(string message)
     {
