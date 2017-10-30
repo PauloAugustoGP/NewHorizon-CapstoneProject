@@ -61,20 +61,21 @@ public class Projectile_ObjectScript : MonoBehaviour {
 
 	public void Fire()
 	{
+		Destroy(gameObject, 20.0f);
 		_charging = false;
 		_rb.velocity = transform.forward * _projectileSpeed;
 		StopAllCoroutines();
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider c)
 	{
-		if(collision.gameObject.tag == _enemyTag)
+		if(c.gameObject.tag == _enemyTag)
 		{
 			Debug.Log("Stunned the enemy for " + _stunTime + " seconds.");
 			Destroy(gameObject);
 			//collision.gameObject.GetComponent<Enemy>().StunFunction();
 		}
-		else if (collision.gameObject.tag != "Player")
+		else if (c.gameObject.tag != "Player")
 		{
 			Destroy(gameObject);
 		}
