@@ -2,6 +2,16 @@
 /// CAMERA CONTROLLER SCRIPT
 /// Michael Nardone
 /// ------------------------
+/// SETUP:
+/// 1) Add script to player
+/// 2) Add Main Camera to variable Main Cam (_mainCam) variable in Inspector
+/// 3) Make Main Camera a child of player
+/// ------------------------
+/// NOTES:
+/// -If you modify horDist or vertDist, must change bumperDistanceCheck as well (must be at least 0.5 larger)
+/// -To change sensitivity or inversion values, change in Inspector before running
+/// -damping and rotationDamping should be based off the player's movement speed (how fast the camera pushes away from collisions)
+/// ------------------------
 /// TO DO:
 /// -Wall behaviour
 /// ------------------------
@@ -9,6 +19,7 @@
 /// -Free View (does not rotate character while in use)
 /// -Dynamic inversion toggles
 /// -Dynamic sensitivity modifiers
+/// -Offset camera height when looking up/down
 /// ------------------------
 
 using UnityEngine;
@@ -34,6 +45,23 @@ public class CameraController : MonoBehaviour {
     private float _yAngleMin;
     [SerializeField]
     private float _yAngleMax;
+
+    // Represents whether the camera is interacting with a wall or not
+    private bool _wallBumperOn;
+
+    // Length of raycast checking for walls
+    [SerializeField]
+    private float bumperDistanceCheck;
+
+    // Height adjustment when wall detected with raycast
+    [SerializeField]
+    private float bumperCameraHeight;
+
+    // Speed of camera motion when avoiding wall collisions
+    [SerializeField]
+    private float damping;
+    [SerializeField]
+    private float rotationDamping;
 
     // Controls the speed of the camera rotation
     // Sensitivity must be set prior to runtime
@@ -69,6 +97,14 @@ public class CameraController : MonoBehaviour {
         _yAngleMax = 35f;
         _yAngleMin = -10f;
 
+        _wallBumperOn = false;
+
+        bumperDistanceCheck = 5.5f;
+        bumperCameraHeight = 2f;
+
+        damping = 5f;
+        rotationDamping = 10f;
+
         // Simple check to see if a value was input in the Inspector
         if (_sensitivityX == 0f)
         {
@@ -97,24 +133,54 @@ public class CameraController : MonoBehaviour {
         // Convert the angles to a Quaternion value
         Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0f);
 
-        // Insert wall behaviour fixes here
-
-        // Cache the desired location of the camera in world space
-        Vector3 followPosition = this.transform.TransformPoint(0f, _vertDist, -_horDist);
+        // If near a wall, cache the desired location of the camera in world space
+        Vector3 followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
         // Check if there is any object behind Player
         RaycastHit hit;
         Vector3 back = this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
 
-        // Raycast
-        // -need bumper variables
-        // -need buffer variables
+        // Check behind player, 
+        if (Physics.Raycast(this.transform.position, back, out hit, bumperDistanceCheck))
+        {
+            Debug.DrawLine(this.transform.position, hit.point, Color.red);
+            _wallBumperOn = true;
 
-        // End wall behaviour
+            float xBuffer = 1f;
+            float zBuffer = 1f;
 
+            if (this.transform.position.x - hit.point.x < 0)
+            {
+                xBuffer = -1f;
+            }
+
+            if (this.transform.position.z - hit.point.z < 0)
+            {
+                zBuffer = -1f;
+            }
+
+            followPosition.x = hit.point.x + xBuffer;
+            followPosition.z = hit.point.z + zBuffer;
+            followPosition.y = Mathf.Lerp(hit.point.y + bumperCameraHeight, followPosition.y, Time.deltaTime * damping);
+        }
+        else
+        {
+            _wallBumperOn = false;
+            followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
+        }
+
+        // Position the camera away from the wall, based on followPosition
+        _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, Time.deltaTime * damping);
+
+        if (_wallBumperOn)
+        {
+            // Find the correct rotation for the camera
+            Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
+            _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, Time.deltaTime * rotationDamping);
+        }
+       
         // Apply horizontal rotation to player
         this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
         // Apply horizontal and vertical rotation to camera
         _mainCam.rotation = rotation;
-
     }
 }

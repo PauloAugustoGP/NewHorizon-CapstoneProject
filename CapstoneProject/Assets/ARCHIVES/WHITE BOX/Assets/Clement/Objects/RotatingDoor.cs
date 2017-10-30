@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour {
+public class RotatingDoor : MonoBehaviour {
     [Tooltip("Door open angle.")]
-    public float openAngle = 90.0f;
+    public float openAngle = 45.0f;
     [Tooltip("Door close angle.")]
     public float closeAngle = 0.0f;
     [Tooltip("Door animation speed.")]
@@ -22,24 +22,26 @@ public class Door : MonoBehaviour {
 
     void Start() {
         status = false; // open
-        open = Quaternion.Euler(0, openAngle, 0);
-        close = Quaternion.Euler(0, closeAngle, 0);
+        //close = Quaternion.Euler(0, closeAngle, 0);
         //player = GameObject.Find("Player").transform;
     }
     void Update() {
         if (Input.GetKeyDown(KeyCode.F) && !doorGo) {
+            openAngle += 45;
+            open = Quaternion.Euler(0, openAngle, 0);
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
-                if (status) {
-                    StartCoroutine(moveDoor(close));
-                } else {
+                //if (status) {
+                //    StartCoroutine(moveDoor(close));
+                //} else {
                     StartCoroutine(moveDoor(open));
-                }
+                //}
             //}
         }
     }
     public IEnumerator moveDoor(Quaternion dest) {
         doorGo = true;
-        while (Quaternion.Angle(transform.localRotation, dest) > 4.0f) {
+        while (Quaternion.Angle(transform.localRotation, dest) > 10.0f) {
+        // while (Quaternion.Angle(transform.localRotation, dest) > 4.0f) {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, dest, Time.deltaTime * animSpeed);
             // yield return new WaitForSeconds(3);
             yield return null;
