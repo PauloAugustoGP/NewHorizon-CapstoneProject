@@ -1363,7 +1363,6 @@ GameObject:
   - component: {fileID: 92276697374703732}
   - component: {fileID: 124382546123554240}
   - component: {fileID: 81175042359574906}
-  - component: {fileID: 114854845759209982}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2900,26 +2899,6 @@ MonoBehaviour:
   _enemyTag: Enemy
   _stunTime: 5
   _meleeHitBox: {fileID: 0}
---- !u!114 &114854845759209982
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1974435643576220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2bca32d5e00dc64bb97685a40b3f93a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 4715508349324836}
-  _walkDist: 4
-  _heightDist: 1
-  _heightDamping: 2
-  _rotationDamping: 3
-  _yAngleMin: -10
-  _yAngleMax: 35
-  _rotSpeedX: 250
-  _rotSpeedY: 120
 --- !u!114 &114879915842322614
 MonoBehaviour:
   m_ObjectHideFlags: 1
