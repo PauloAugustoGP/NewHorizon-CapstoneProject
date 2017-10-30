@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 114438205672030842}
   - component: {fileID: 114652730426121386}
   - component: {fileID: 114642004555760492}
-  - component: {fileID: 114142550815303548}
+  - component: {fileID: 114145544928030488}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2293,7 +2293,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1724911310850826}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 6.87, y: 0.14, z: 0.59}
+  m_LocalPosition: {x: 2.7326572, y: -4.5256646e-17, z: 2.0381782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4632009816376380}
@@ -2784,7 +2784,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114142550815303548
+--- !u!114 &114145544928030488
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2792,18 +2792,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1724911310850826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d28dcc7e0ce6ce64ba8887d9b40bc51a, type: 3}
+  m_Script: {fileID: 11500000, guid: eb1095471f410465c8e3422b16a06a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _useCoolDown: 0
   definitions:
-    _XRayTag: XRay
     _touchDistance: 1
   dragAndDropVariables:
-    _rayOrigin: {fileID: 4723994115626010}
-    _transparent: {fileID: 4800000, guid: eab4b8bd340f74707b822cf34dcfd3dd, type: 3}
-  componentsToDisable:
-  - {fileID: 114190398030796814}
+    _rayOrigin: {fileID: 0}
+    _transparent: {fileID: 0}
+  componentsToDisable: []
 --- !u!114 &114190398030796814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2903,12 +2901,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2bca32d5e00dc64bb97685a40b3f93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 4588065231693306}
-  target: {fileID: 4715508349324836}
-  walkDist: 0
-  heightDist: 0
-  heightDamping: 0
-  rotationDamping: 0
+  _target: {fileID: 0}
+  _walkDist: 0
+  _heightDist: 0
+  _heightDamping: 0
+  _rotationDamping: 0
   _yAngleMin: 0
   _yAngleMax: 0
   _rotSpeedX: 0
