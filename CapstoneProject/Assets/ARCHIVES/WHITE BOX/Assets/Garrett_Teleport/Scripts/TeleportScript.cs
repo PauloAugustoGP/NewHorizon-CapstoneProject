@@ -52,12 +52,19 @@ public class TeleportScript : MonoBehaviour
         // if raycast hits something
         if (Physics.Raycast(ray, out hit))
         {
+            /*
             // check to see if the distance between hit and player is less than the max teleport distance
             if (Vector3.Distance(transform.position, hit.point) < maxTeleportDistance)
             {
                 // move the teleport point to the hit location of raycast
                 teleportPoint.transform.position = hit.point;
             }
+            // if the hit is greater than the max teleport distance
+           */
+
+            // set the transform position to a clamped value of where the hit is location
+            teleportPoint.transform.position = new Vector3(Mathf.Clamp(hit.point.x, transform.position.x - maxTeleportDistance, transform.position.x + maxTeleportDistance), 0, Mathf.Clamp(hit.point.z, transform.position.z - maxTeleportDistance, transform.position.z + maxTeleportDistance));
+
         }
         else Debug.Log("Raycast not working properly!");
 
@@ -79,6 +86,14 @@ public class TeleportScript : MonoBehaviour
                 //signal the teleport is active
                 isActive = true;
             }
+
+            if(Input.GetKeyDown(KeyCode.Mouse1) && isActive)
+            {
+                fakePlayer.SetActive(false);
+                radius.SetActive(false);
+                isCooled = true;
+                isActive = false;
+            }
             // finish teleport by letting go of shift, also make sure teleport was activated
             if (Input.GetKeyUp(KeyCode.LeftShift) && isActive)
             {
@@ -91,12 +106,13 @@ public class TeleportScript : MonoBehaviour
                 // teleport finished
                 isActive = false;
 
-                // check if the teleport point is within acceptable range (max teleport distance and min teleport distance)
+                // check if the fake player point is within acceptable range (max teleport distance and min teleport distance)
                 if (Vector3.Distance(transform.position, teleportPoint.transform.position) < maxTeleportDistance && Vector3.Distance(transform.position, teleportPoint.transform.position) > minTeleportDistance)
                 {
-                    // set this objects position to the location of the teleport point
-                    transform.SetPositionAndRotation(teleportPoint.transform.position, transform.rotation);
+                    // set this objects position to the location of the fake player point
+                    transform.SetPositionAndRotation(fakePlayer.transform.position, transform.rotation);
                 }
+                
             }
 
         }

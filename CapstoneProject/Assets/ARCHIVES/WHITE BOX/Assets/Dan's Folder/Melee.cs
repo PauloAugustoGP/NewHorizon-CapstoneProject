@@ -9,12 +9,12 @@ public class Melee : MonoBehaviour {
 	[SerializeField] protected float _stunTime = 5.0f;
 
 	[Header("Drag and Drop Variables")]
-	[SerializeField] protected GameObject _meleeHitBox;
+	[SerializeField] private GameObject _meleeHitBox;
 
 	void Start()
 	{
 		if(!_meleeHitBox)
-			Debug.LogError("Error: No Hit Box gameobject attached");
+			_meleeHitBox = null;
 		else
 			_meleeHitBox.SetActive(false);
 	}
@@ -24,7 +24,7 @@ public class Melee : MonoBehaviour {
     {
 		if(Input.GetKeyDown(KeyCode.M))
 		{
-			Attack();
+			StartCoroutine(Attack());
 		}
     }
 

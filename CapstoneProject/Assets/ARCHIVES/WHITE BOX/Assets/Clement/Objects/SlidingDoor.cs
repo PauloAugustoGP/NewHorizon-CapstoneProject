@@ -34,6 +34,19 @@ public class SlidingDoor : MonoBehaviour {
             //}
         }
     }
+
+    void OnTriggerEnter (Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            Vector3 moveTo = originalPosition + moveDistance;
+            StartCoroutine(moveDoor(moveTo));
+        }
+    }
+
+    void OnTriggerExit (Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            StartCoroutine(moveDoor(originalPosition));
+        }
+    }
     public IEnumerator moveDoor(Vector3 moveTo) {
         float t = 0f;
         Vector3 startPos = door.position;

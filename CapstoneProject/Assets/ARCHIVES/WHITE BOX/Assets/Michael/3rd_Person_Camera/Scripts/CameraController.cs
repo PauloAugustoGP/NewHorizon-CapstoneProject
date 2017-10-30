@@ -124,63 +124,67 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	void Update () {
-
-        // Finds the angle (in degrees) the new mouse position is making with original orientation
-        _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f * _invertX;
-        _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * 0.02f * _invertY;
-        // Clamp vertical rotation
-        _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
-        // Convert the angles to a Quaternion value
-        Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0f);
-
-        // If near a wall, cache the desired location of the camera in world space
-        Vector3 followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
-        // Check if there is any object behind Player
-        RaycastHit hit;
-        Vector3 back = this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
-
-        // Check behind player, 
-        if (Physics.Raycast(this.transform.position, back, out hit, bumperDistanceCheck))
+        if (!Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.DrawLine(this.transform.position, hit.point, Color.red);
-            _wallBumperOn = true;
+            // Finds the angle (in degrees) the new mouse position is making with original orientation
+            _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f * _invertX;
+            _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * 0.02f * _invertY;
+            // Clamp vertical rotation
+            _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
+            // Convert the angles to a Quaternion value
+            Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0f);
 
-            float xBuffer = 1f;
-            float zBuffer = 1f;
+            // If near a wall, cache the desired location of the camera in world space
+            Vector3 followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
+            // Check if there is any object behind Player
+            RaycastHit hit;
+            Vector3 back = this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
 
-            if (this.transform.position.x - hit.point.x < 0)
+            // Check behind player, 
+            if (Physics.Raycast(this.transform.position, back, out hit, bumperDistanceCheck))
             {
-                xBuffer = -1f;
+                Debug.DrawLine(this.transform.position, hit.point, Color.red);
+                _wallBumperOn = true;
+
+                float xBuffer = 1f;
+                float zBuffer = 1f;
+
+                if (this.transform.position.x - hit.point.x < 0)
+                {
+                    xBuffer = -1f;
+                }
+
+                if (this.transform.position.z - hit.point.z < 0)
+                {
+                    zBuffer = -1f;
+                }
+
+                followPosition.x = hit.point.x + xBuffer;
+                followPosition.z = hit.point.z + zBuffer;
+                followPosition.y = Mathf.Lerp(hit.point.y + bumperCameraHeight, followPosition.y, Time.deltaTime * damping);
+            }
+            else
+            {
+                _wallBumperOn = false;
+                followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
             }
 
-            if (this.transform.position.z - hit.point.z < 0)
+
+            // Position the camera away from the wall, based on followPosition
+            _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, Time.deltaTime * damping);
+
+            if (_wallBumperOn)
             {
-                zBuffer = -1f;
+                // Find the correct rotation for the camera
+                Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
+                _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, Time.deltaTime * rotationDamping);
             }
 
-            followPosition.x = hit.point.x + xBuffer;
-            followPosition.z = hit.point.z + zBuffer;
-            followPosition.y = Mathf.Lerp(hit.point.y + bumperCameraHeight, followPosition.y, Time.deltaTime * damping);
-        }
-        else
-        {
-            _wallBumperOn = false;
-            followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
+            // Apply horizontal rotation to player
+            this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
+            // Apply horizontal and vertical rotation to camera
+            _mainCam.rotation = rotation;
         }
 
-        // Position the camera away from the wall, based on followPosition
-        _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, Time.deltaTime * damping);
-
-        if (_wallBumperOn)
-        {
-            // Find the correct rotation for the camera
-            Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
-            _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, Time.deltaTime * rotationDamping);
-        }
-       
-        // Apply horizontal rotation to player
-        this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
-        // Apply horizontal and vertical rotation to camera
-        _mainCam.rotation = rotation;
     }
 }
