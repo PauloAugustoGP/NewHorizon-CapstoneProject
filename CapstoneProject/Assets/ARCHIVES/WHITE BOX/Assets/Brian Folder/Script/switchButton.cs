@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class switchButton : MonoBehaviour
+public class SwitchButton : MonoBehaviour
 {
-    //Audio
-    public AudioClip OpenedSFX;
 
-    public AudioSource audioSource;
+    [SerializeField]
+    private AudioClip OpenedSFX;
+    [SerializeField]
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start ()
@@ -16,30 +17,27 @@ public class switchButton : MonoBehaviour
         if (!audioSource)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.playOnAwake = false;
-            audioSource.loop = false;
-            audioSource.volume = 1.0f;
         }
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+    
 
-    void OnCollisionEnter(Collision c)
+    
+    
+    
+        void OnCollisionEnter(Collision c)
     {
-        if (c.other.CompareTag("Projectile"))
+        if (c.gameObject.GetComponent<Projectile_ObjectScript>())
         {
-            playSound(OpenedSFX);
+            //PlaySound(OpenedSFX);
             Debug.Log("Door Opened!");
         }
 
+            
     }
+    
 
-    // Function used to set clip to play through AudioSource attached to Character
-    void playSound(AudioClip clip, float volume = 1.0f)
+
+    void PlaySound(AudioClip clip, float volume = 1.0f)
     {
         //Assign volume to AudioSource volume
         audioSource.volume = volume;
