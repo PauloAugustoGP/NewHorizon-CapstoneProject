@@ -692,8 +692,9 @@ GameObject:
   - component: {fileID: 114309578470860636}
   - component: {fileID: 136985802479171984}
   - component: {fileID: 114584808769363116}
+  - component: {fileID: 114552608475640238}
   m_Layer: 0
-  m_Name: Player
+  m_Name: OldPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2392,8 +2393,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1562131446259454}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0443017, y: 0.1, z: -6.6956525}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.45, y: 0.1, z: -4.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4411665183977576}
@@ -2556,6 +2557,32 @@ MonoBehaviour:
   projectileSpawn: {fileID: 0}
   projectilePrefab: {fileID: 0}
   currentProjectile: {fileID: 0}
+--- !u!114 &114552608475640238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562131446259454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCam: {fileID: 4671330272072560}
+  _horDist: -1.43
+  _vertDist: 2
+  _yAngleMin: 0
+  _yAngleMax: 0
+  bumperDistanceCheck: 2
+  bumperCameraHeight: 0
+  damping: 0
+  rotationDamping: 0
+  _sensitivityX: 0
+  _sensitivityY: 0
+  _rotSpeedX: 0
+  _rotSpeedY: 0
+  _invertX: 0
+  _invertY: 0
 --- !u!114 &114584808769363116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2567,9 +2594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb94301b791e4c14992a9a9f3ffe532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleePrefab: {fileID: 1842801188311740, guid: 84761230fb0918d4aba5b7cd2db150f2,
-    type: 2}
-  meleeSpawn: {fileID: 4994572642263108}
+  _enemyTag: Enemy
+  _stunTime: 5
 --- !u!114 &114795481764728854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2592,9 +2618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43db619340c84045b9b72a586ec0a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useCoolDown: 1
+  _useCoolDown: 0
   definitions:
-    _XRayTag: XRay
     _touchDistance: 1
   dragAndDropVariables:
     _rayOrigin: {fileID: 4525927122612000}
@@ -2656,7 +2681,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300004, guid: 6797ba2f3891a4c4194ef44838e8e352, type: 3}
+  m_Mesh: {fileID: 4300004, guid: 89e3b8735983487498ff57220713feae, type: 3}
   m_Bones:
   - {fileID: 4295773330279962}
   - {fileID: 4378705171615256}
@@ -2773,7 +2798,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300006, guid: 6797ba2f3891a4c4194ef44838e8e352, type: 3}
+  m_Mesh: {fileID: 4300006, guid: e79027d019914314e82fb244debdc093, type: 3}
   m_Bones:
   - {fileID: 4295773330279962}
   - {fileID: 4378705171615256}
@@ -2890,7 +2915,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 6797ba2f3891a4c4194ef44838e8e352, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 89e3b8735983487498ff57220713feae, type: 3}
   m_Bones:
   - {fileID: 4295773330279962}
   - {fileID: 4378705171615256}
@@ -3007,7 +3032,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: 6797ba2f3891a4c4194ef44838e8e352, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 89e3b8735983487498ff57220713feae, type: 3}
   m_Bones:
   - {fileID: 4295773330279962}
   - {fileID: 4378705171615256}
