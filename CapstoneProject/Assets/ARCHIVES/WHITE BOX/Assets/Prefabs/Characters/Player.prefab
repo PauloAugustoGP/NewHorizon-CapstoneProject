@@ -692,6 +692,7 @@ GameObject:
   - component: {fileID: 114309578470860636}
   - component: {fileID: 136985802479171984}
   - component: {fileID: 114584808769363116}
+  - component: {fileID: 114552608475640238}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2556,6 +2557,32 @@ MonoBehaviour:
   projectileSpawn: {fileID: 0}
   projectilePrefab: {fileID: 0}
   currentProjectile: {fileID: 0}
+--- !u!114 &114552608475640238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562131446259454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCam: {fileID: 4671330272072560}
+  _horDist: -1.43
+  _vertDist: 2
+  _yAngleMin: 0
+  _yAngleMax: 0
+  bumperDistanceCheck: 2
+  bumperCameraHeight: 0
+  damping: 0
+  rotationDamping: 0
+  _sensitivityX: 0
+  _sensitivityY: 0
+  _rotSpeedX: 0
+  _rotSpeedY: 0
+  _invertX: 0
+  _invertY: 0
 --- !u!114 &114584808769363116
 MonoBehaviour:
   m_ObjectHideFlags: 1
