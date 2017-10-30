@@ -2295,7 +2295,7 @@ Transform:
   m_GameObject: {fileID: 1724911310850826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.7326572, y: -4.5256646e-17, z: 2.0381782}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.00001, y: 1, z: 1}
   m_Children:
   - {fileID: 4211616411916096}
   - {fileID: 4632009816376380}
@@ -2889,9 +2889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb94301b791e4c14992a9a9f3ffe532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleePrefab: {fileID: 1842801188311740, guid: 84761230fb0918d4aba5b7cd2db150f2,
-    type: 2}
-  meleeSpawn: {fileID: 4718854016234790}
+  _enemyTag: Enemy
+  _stunTime: 5
 --- !u!114 &114854845759209982
 MonoBehaviour:
   m_ObjectHideFlags: 1
