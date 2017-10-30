@@ -120,7 +120,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 					script.enabled = false;
 			}
 
-			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize, _enemyTag);
+			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize, _enemyTag, dragAndDropVariables.projectileSpawn);
 		}
 	}
 		
