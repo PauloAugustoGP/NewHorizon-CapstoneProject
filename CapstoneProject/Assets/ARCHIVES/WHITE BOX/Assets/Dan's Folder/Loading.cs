@@ -8,6 +8,7 @@ public class Loading : MonoBehaviour {
 
     public bool startPlay;
     public bool isLoading;
+    [SerializeField] Text loadingText;
 
 	// Use this for initialization
 	void Start ()
@@ -24,9 +25,15 @@ public class Loading : MonoBehaviour {
 
             StartCoroutine(LoadNextScene());
 
+            loadingText.text = "Loading...";
             //SceneManager.LoadSceneAsync("Loading Screen");
         }
         
+        if (isLoading == true)
+        {
+            loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
+        }
+
 	}
 
     public void starting()
