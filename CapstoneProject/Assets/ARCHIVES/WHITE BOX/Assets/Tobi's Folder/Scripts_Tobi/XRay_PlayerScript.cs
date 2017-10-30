@@ -95,7 +95,7 @@ public class XRay_PlayerScript : MonoBehaviour
 
         if (!dragAndDropVariables.rayOrigin)
         {
-            Debug.LogError("No Character Controller script attached.");
+            Debug.LogError("No ray origin attached.");
         }
         if (!dragAndDropVariables.transparent)
         {

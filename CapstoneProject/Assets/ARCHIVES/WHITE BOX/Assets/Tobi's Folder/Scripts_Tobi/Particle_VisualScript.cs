@@ -23,7 +23,7 @@ public class Particle_VisualScript : MonoBehaviour {
 	// Update is called once per frame
 	public void UpdateSize (float pDeltaC) 
 	{
-		_ps.startSize += (0.2f * pDeltaC);
+		_ps.startSize += (0.1f * pDeltaC);
 		_temp += (0.5f * pDeltaC);
 		_count = (int) _temp;
 	}
