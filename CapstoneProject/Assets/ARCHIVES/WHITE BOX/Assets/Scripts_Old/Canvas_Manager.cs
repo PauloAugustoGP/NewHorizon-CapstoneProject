@@ -14,6 +14,7 @@ public class Canvas_Manager : MonoBehaviour
     [SerializeField] GameObject OptionsPanel;
     [SerializeField] GameObject ControlsPanel;
     [SerializeField] GameObject CreditsPanel;
+    [SerializeField] GameObject TestPanel;
 
     /*Canvas main;
     Canvas control;
@@ -130,48 +131,121 @@ public class Canvas_Manager : MonoBehaviour
     public void Options()
     {
         MainPanel.gameObject.SetActive(false);
-        ControlsPanel.gameObject.SetActive(false);
+        //ControlsPanel.gameObject.SetActive(false);
         OptionsPanel.gameObject.SetActive(true);
-        CreditsPanel.gameObject.SetActive(false);
+        //CreditsPanel.gameObject.SetActive(false);
     }
 
     public void BackToMenu()
     {
         MainPanel.gameObject.SetActive(true);
-        ControlsPanel.gameObject.SetActive(false);
+        //ControlsPanel.gameObject.SetActive(false);
         OptionsPanel.gameObject.SetActive(false);
         CreditsPanel.gameObject.SetActive(false);
-
+        TestPanel.gameObject.SetActive(false);
     }
 
     public void BackToOptions()
     {
-        MainPanel.gameObject.SetActive(false);
+        //MainPanel.gameObject.SetActive(false);
         ControlsPanel.gameObject.SetActive(false);
         OptionsPanel.gameObject.SetActive(true);
-        CreditsPanel.gameObject.SetActive(false);
+        //CreditsPanel.gameObject.SetActive(false);
     }
 
     public void controls()
     {
-        MainPanel.gameObject.SetActive(false);
+        //MainPanel.gameObject.SetActive(false);
         ControlsPanel.gameObject.SetActive(true);
         OptionsPanel.gameObject.SetActive(false);
-        CreditsPanel.gameObject.SetActive(false);
+        //CreditsPanel.gameObject.SetActive(false);
     }
 
     public void Credits()
     {
         MainPanel.gameObject.SetActive(false);
-        ControlsPanel.gameObject.SetActive(false);
-        OptionsPanel.gameObject.SetActive(false);
+        //ControlsPanel.gameObject.SetActive(false);
+        //OptionsPanel.gameObject.SetActive(false);
         CreditsPanel.gameObject.SetActive(true);
+    }
+
+    public void Test()
+    {
+        MainPanel.gameObject.SetActive(false);
+        //ControlsPanel.gameObject.SetActive(false);
+        //OptionsPanel.gameObject.SetActive(false);
+        //CreditsPanel.gameObject.SetActive(false);
+        TestPanel.gameObject.SetActive(true);
     }
 
     public void QuitGame()
     {
         Debug.Log("quit game");
         Application.Quit();
+    }
+
+
+
+    // Hereafter is for the test levels and for testing purposes only
+
+    public void andre()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("Andre");
+    }
+
+    public void brian()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("Brian");
+    }
+
+    public void dan()
+    {
+        Scene_Manager.instance.GoTo_LEVEL("Dan's Test Zone");
+        Debug.Log("Dan");
+    }
+
+    public void clement()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("Clement");
+    }
+
+    public void garrett()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("Garrett");
+    }
+
+    public void Michael()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("Michael");
+    }
+
+    public void paulo()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("Paulo");
+    }
+
+    public void ryck()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("Ryck");
+    }
+
+    public void tobi()
+    {
+        Scene_Manager.instance.GoTo_LEVEL("Tobi_Test_Scene");
+        Debug.Log("Tobi");
+    }
+
+    public void tyler()
+    {
+        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Debug.Log("tyler");
     }
 
 
@@ -223,7 +297,7 @@ public class Canvas_Manager : MonoBehaviour
         Debug.Log("quit game");
         Application.Quit();
     }*/
-    
+
     /*[SerializeField] List<string> levelNames;
 
     

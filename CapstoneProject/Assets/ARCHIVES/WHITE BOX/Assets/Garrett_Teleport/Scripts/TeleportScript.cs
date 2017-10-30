@@ -9,6 +9,7 @@ public class TeleportScript : MonoBehaviour
     [SerializeField] private GameObject teleportPoint;
     [SerializeField] private GameObject radius;
 
+
     // minimum and maximum teleport distances
     [SerializeField] private float maxTeleportDistance = 5;
     [SerializeField] private float minTeleportDistance = 1;
@@ -22,6 +23,8 @@ public class TeleportScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+
         // make sure there is a teleport point in the scene
         if(!teleportPoint)
         {
@@ -71,8 +74,8 @@ public class TeleportScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 // activate the fake player and radius for visuals
-                fakePlayer.gameObject.SetActive(true);
-                radius.gameObject.SetActive(true);
+                fakePlayer.SetActive(true);
+                radius.SetActive(true);
                 //signal the teleport is active
                 isActive = true;
             }
@@ -80,8 +83,8 @@ public class TeleportScript : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.LeftShift) && isActive)
             {
                 // deactivate visuals
-                fakePlayer.gameObject.SetActive(false);
-                radius.gameObject.SetActive(false);
+                fakePlayer.SetActive(false);
+                radius.SetActive(false);
                 //start cool down 
                 StartCoroutine(Cooldown());
                 isCooled = false;

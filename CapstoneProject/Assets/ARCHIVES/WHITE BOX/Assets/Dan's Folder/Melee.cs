@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class Melee : MonoBehaviour {
 
-    public GameObject meleePrefab;
-    public Transform meleeSpawn;
-
-    //meleeScript goes on the character
-    //takedown script goes on the meleePrefab
+	[Header("Definitions")]
+	[SerializeField] private string _enemyTag = "Enemy";
+	[SerializeField] private float _stunTime = 5.0f;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.M) /*&& isCrouched*/)
-        {
-            Instantiate(meleePrefab, meleeSpawn.position, meleeSpawn.rotation);
-            //animation for grabbing for the enemy
-        }
+        
     }
 
 
