@@ -14,7 +14,7 @@ public class Melee : MonoBehaviour {
 	void Start()
 	{
 		if(!_meleeHitBox)
-			Debug.LogError("Error: No Hit Box gameobject attached");
+			_meleeHitBox = null;
 		else
 			_meleeHitBox.SetActive(false);
 	}
