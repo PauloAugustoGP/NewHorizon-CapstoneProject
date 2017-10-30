@@ -9,9 +9,12 @@ public class Projectile_ObjectScript : MonoBehaviour {
 
 	private Rigidbody _rb;
 	private Particle_VisualScript _pvs;
+	private Transform _parent;
 
 	private float _stunTime;
 	private float _timeToDone;
+
+	private bool _charging;
 
 	private float _projectileSpeed;
 	private float _maxChargeTime;
@@ -34,18 +37,31 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_rb.useGravity = false;
 	}
 
-	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag)
+	void Update()
+	{
+		if(_charging)
+		{
+			transform.position = _parent.position;
+			transform.rotation = _parent.rotation;
+		}
+	}
+
+	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, Transform pParent)
 	{
 		_projectileSpeed = pProjectileSpeed;
 		_maxChargeTime = pMaxChargeTime;
 		_deltaSize = pDeltaSize;
 		_enemyTag = pEnemyTag;
+		_parent = pParent;
+
+		_charging = true;
 
 		StartCoroutine(Charge());
 	}
 
 	public void Fire()
 	{
+		_charging = false;
 		_rb.velocity = transform.forward * _projectileSpeed;
 		StopAllCoroutines();
 	}
