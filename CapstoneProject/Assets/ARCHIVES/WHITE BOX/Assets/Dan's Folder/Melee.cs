@@ -9,7 +9,7 @@ public class Melee : MonoBehaviour {
 	[SerializeField] protected float _stunTime = 5.0f;
 
 	[Header("Drag and Drop Variables")]
-	[SerializeField] protected GameObject _meleeHitBox;
+	[SerializeField] private GameObject _meleeHitBox;
 
 	void Start()
 	{
@@ -24,7 +24,7 @@ public class Melee : MonoBehaviour {
     {
 		if(Input.GetKeyDown(KeyCode.M))
 		{
-			Attack();
+			StartCoroutine(Attack());
 		}
     }
 
