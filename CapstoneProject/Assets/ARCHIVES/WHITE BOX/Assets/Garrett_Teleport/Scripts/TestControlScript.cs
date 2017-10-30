@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TestControlScript : MonoBehaviour {
 
+    float rotationSpeed = 4.0f;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -21,13 +23,14 @@ public class TestControlScript : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(new Vector3(-10 * Time.deltaTime, 0, 0));
+            // transform.Translate(new Vector3(-10 * Time.deltaTime, 0, 0));
+            transform.Rotate(0, -rotationSpeed, 0);
             
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(new Vector3(10 * Time.deltaTime, 0, 0));
-           
+            // transform.Translate(new Vector3(10 * Time.deltaTime, 0, 0));
+            transform.Rotate(0, rotationSpeed, 0);
         }
     }
 }
