@@ -16,7 +16,6 @@
 /// -Wall behaviour
 /// ------------------------
 /// WISHLIST:
-/// -Free View (does not rotate character while in use)
 /// -Dynamic inversion toggles
 /// -Dynamic sensitivity modifiers
 /// -Offset camera height when looking up/down
@@ -32,9 +31,11 @@ public class CameraController : MonoBehaviour {
 
     // Camera follow distance, local position relative to Player position
     [SerializeField]
-    private float _horDist;
+    private float _zDist;   // Horizontal distance (on Z axis) camera is from player
     [SerializeField]
-    private float _vertDist;
+    private float _yDist;   // Vertical distance camera is from player
+    [SerializeField]
+    private float _xDist;    // Horizontal distance (on X axis) camera is from player
 
     // Used for calculating camera local position while rotating view
     private float _mouseX;
@@ -90,9 +91,10 @@ public class CameraController : MonoBehaviour {
             _mainCam = GameObject.Find("Main Camera").GetComponent<Transform>();
         }
 
-        _horDist = -5f;
-        _vertDist = 2f;
-        _mainCam.localPosition = new Vector3(0f, _vertDist, _horDist);
+        _zDist = -5f;
+        _yDist = 2f;
+        _xDist = 0f;
+        _mainCam.localPosition = new Vector3(_xDist, _yDist, _zDist);
 
         _yAngleMax = 35f;
         _yAngleMin = -10f;
@@ -135,7 +137,7 @@ public class CameraController : MonoBehaviour {
             Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0f);
 
             // If near a wall, cache the desired location of the camera in world space
-            Vector3 followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
+            Vector3 followPosition = this.transform.TransformPoint(_xDist, _yDist, _zDist);
             // Check if there is any object behind Player
             RaycastHit hit;
             Vector3 back = this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
@@ -166,7 +168,7 @@ public class CameraController : MonoBehaviour {
             else
             {
                 _wallBumperOn = false;
-                followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
+                followPosition = this.transform.TransformPoint(_xDist, _yDist, _zDist);
             }
 
 
