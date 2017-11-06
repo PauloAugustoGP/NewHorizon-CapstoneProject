@@ -9,7 +9,7 @@ public class AndreProjectile : MonoBehaviour
 {
 
     private Rigidbody _rb;
-    private Particle_VisualScript _pvs;
+    private AndrePSVisual _pvs;
     private Transform _parent;
 
     private float _stunTime;
@@ -34,7 +34,7 @@ public class AndreProjectile : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _pvs = GetComponentInChildren<Particle_VisualScript>();
+        _pvs = GetComponentInChildren<AndrePSVisual>();
         _rb.useGravity = false;
     }
 

@@ -46,7 +46,7 @@ public class AndreProjectilePlayer : MonoBehaviour
         }
     }
 
-    private Projectile_ObjectScript currentProjectile;
+    private AndreProjectile currentProjectile;
 
     private bool _projSpawned = false;
 
@@ -106,11 +106,11 @@ public class AndreProjectilePlayer : MonoBehaviour
         {
             if (_useCoolDown)
                 StartCoroutine(TimeCounter());
-
+            Debug.Log("Shooting");
             var projectile = (GameObject)Instantiate(dragAndDropVariables.projectilePrefab,
                 dragAndDropVariables.projectileSpawn.position,
                 dragAndDropVariables.projectileSpawn.rotation);
-            currentProjectile = projectile.GetComponent<Projectile_ObjectScript>();
+            currentProjectile = projectile.GetComponent<AndreProjectile>();
 
             _projSpawned = true;
 

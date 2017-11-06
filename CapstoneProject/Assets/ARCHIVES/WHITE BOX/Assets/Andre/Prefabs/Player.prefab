@@ -1017,7 +1017,6 @@ GameObject:
   - component: {fileID: 54844132138649246}
   - component: {fileID: 136141877787117838}
   - component: {fileID: 114255030765432400}
-  - component: {fileID: 114863098617520604}
   - component: {fileID: 114454852922902484}
   m_Layer: 0
   m_Name: Player
@@ -2396,24 +2395,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c3a24bceb790e4a8aba38bb49efc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1831922133935714}
-  playerTeleportPrefab: {fileID: 1621487310828520, guid: d8fed02c16527f14490fea5b39269dcb,
-    type: 2}
   fakePlayer: {fileID: 0}
---- !u!114 &114863098617520604
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1831922133935714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb94301b791e4c14992a9a9f3ffe532a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleePrefab: {fileID: 1842801188311740, guid: 84761230fb0918d4aba5b7cd2db150f2,
-    type: 2}
-  meleeSpawn: {fileID: 4578239346065610}
+  teleportPoint: {fileID: 0}
+  radius: {fileID: 0}
+  cam2: {fileID: 0}
+  mainCam: {fileID: 0}
+  maxTeleportDistance: 5
+  minTeleportDistance: 1
+  isCooled: 0
 --- !u!136 &136141877787117838
 CapsuleCollider:
   m_ObjectHideFlags: 1
