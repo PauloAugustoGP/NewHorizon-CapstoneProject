@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Canvas_Manager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class Canvas_Manager : MonoBehaviour
     [SerializeField] GameObject CreditsPanel;
     [SerializeField] GameObject TestPanel;
     [SerializeField] GameObject LoadingPanel;
+
+    [SerializeField] Text ButtonDisplay;
+    [SerializeField] Button[] MenuButtons;
 
     /*Canvas main;
     Canvas control;
@@ -34,6 +38,18 @@ public class Canvas_Manager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
+        /*foreach (Button buttons in MenuButtons)
+        {
+            this.ButtonDisplay.text = SceneManager.GetSceneByBuildIndex(0).name;
+            //this.ButtonDisplay.text = SceneUtility.GetScenePathByBuildIndex(2).ToString();
+            //this.ButtonDisplay.text = SceneManager.GetSceneAt(1).name;
+
+            //Debug.Log(SceneManager.GetSceneAt(2).name);
+            Debug.Log(SceneUtility.GetScenePathByBuildIndex(2).ToString());
+            //Debug.Log(SceneUtility.GetScenePathByBuildIndex(2).ToString());
+            
+        }*/
         //Menu Scene
         /*if (startBtn)
             startBtn.onClick.AddListener(delegate { Scene_Manager.instance.GoTo_LEVEL(levelNames[0]); });
@@ -181,6 +197,7 @@ public class Canvas_Manager : MonoBehaviour
     public void andre()
     {
         Scene_Manager.instance.GoTo_LEVEL("SmallTestScene");
+        
         Debug.Log("Andre");
     }
 
