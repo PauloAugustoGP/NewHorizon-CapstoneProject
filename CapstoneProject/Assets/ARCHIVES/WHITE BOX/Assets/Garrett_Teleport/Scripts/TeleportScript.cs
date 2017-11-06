@@ -62,8 +62,20 @@ public class TeleportScript : MonoBehaviour
             // if the hit is greater than the max teleport distance
            */
 
+            /*
             // set the transform position to a clamped value of where the hit is location
             teleportPoint.transform.position = new Vector3(Mathf.Clamp(hit.point.x, transform.position.x - maxTeleportDistance, transform.position.x + maxTeleportDistance), 0, Mathf.Clamp(hit.point.z, transform.position.z - maxTeleportDistance, transform.position.z + maxTeleportDistance));
+            */
+
+            // set the transform position to a local vector to the player with a magnitude of maxTeleportDistance
+            if (Vector3.Distance(transform.position, hit.point) < maxTeleportDistance)
+            {
+                // move the teleport point to the hit location of raycast
+                teleportPoint.transform.position = hit.point;
+            }
+            else teleportPoint.transform.localPosition = Vector3.Normalize(transform.position - hit.point) * -maxTeleportDistance;
+           
+
 
         }
         else Debug.Log("Raycast not working properly!");
