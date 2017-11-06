@@ -59,6 +59,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_charging = false;
 
 		Vector3 direction = Vector3.zero;
+		direction = transform.position;
 
 		_rb.velocity = transform.forward * _projectileSpeed;
 		_col.enabled = true;
