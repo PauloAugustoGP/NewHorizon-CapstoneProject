@@ -168,10 +168,14 @@ public class CharacterBehaviour : CharacterBase
         }     
     }
 
-    protected void Damage(int value)
+    public void Damage(int value)
     {
-
         _health -= value;
+    }
+
+    public void Heal(int value)
+    {
+        _health += value;
     }
 
     void OnCollisionEnter(Collision c)
