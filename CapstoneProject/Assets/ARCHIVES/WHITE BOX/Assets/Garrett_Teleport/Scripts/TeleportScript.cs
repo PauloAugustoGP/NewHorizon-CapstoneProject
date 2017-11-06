@@ -86,7 +86,6 @@ public class TeleportScript : MonoBehaviour
             fakePlayer.transform.position = teleportPoint.transform.position;
         else
         {
-            Debug.Log(Vector3.Normalize(teleportPoint.transform.localPosition));
             fakePlayer.transform.localPosition = Vector3.Normalize(teleportPoint.transform.localPosition) * maxTeleportDistance;
         }
 
