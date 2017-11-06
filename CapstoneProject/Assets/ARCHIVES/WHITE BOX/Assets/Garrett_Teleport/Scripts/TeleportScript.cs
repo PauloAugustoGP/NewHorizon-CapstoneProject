@@ -84,7 +84,11 @@ public class TeleportScript : MonoBehaviour
         // set position of fake player to the position of the teleport point
         if (Vector3.Distance(transform.position, teleportPoint.transform.position) < maxTeleportDistance)
             fakePlayer.transform.position = teleportPoint.transform.position;
-        else fakePlayer.transform.localPosition = Vector3.Normalize(teleportPoint.transform.position - transform.position) * maxTeleportDistance;
+        else
+        {
+            Debug.Log(Vector3.Normalize(teleportPoint.transform.localPosition));
+            fakePlayer.transform.localPosition = Vector3.Normalize(teleportPoint.transform.localPosition) * maxTeleportDistance;
+        }
 
         // draw ray so we can see in inspector
         Debug.DrawRay(ray.origin, ray.direction, Color.green);
