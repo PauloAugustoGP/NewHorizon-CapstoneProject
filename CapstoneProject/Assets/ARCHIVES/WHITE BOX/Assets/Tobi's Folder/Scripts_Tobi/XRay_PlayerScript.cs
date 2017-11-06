@@ -102,6 +102,10 @@ public class XRay_PlayerScript : MonoBehaviour
             Debug.LogError("No Transparent shader attached.");
         }
 
+
+
+
+
         currentObject = null;
         currentShader = null;
         _isTouched = false;
