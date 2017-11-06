@@ -68,12 +68,13 @@ public class TeleportScript : MonoBehaviour
             */
 
             // set the transform position to a local vector to the player with a magnitude of maxTeleportDistance
-            if (Vector3.Distance(transform.position, hit.point) < maxTeleportDistance)
-            {
+            /* if (Vector3.Distance(transform.position, hit.point) < maxTeleportDistance)
+            { */
                 // move the teleport point to the hit location of raycast
                 teleportPoint.transform.position = hit.point;
-            }
-            else teleportPoint.transform.localPosition = Vector3.Normalize(transform.position - hit.point) * -maxTeleportDistance;
+            /*}
+            else teleportPoint.transform.localPosition = Vector3.Normalize(hit.point - transform.position) * maxTeleportDistance;
+            */
            
 
 
@@ -81,7 +82,9 @@ public class TeleportScript : MonoBehaviour
         else Debug.Log("Raycast not working properly!");
 
         // set position of fake player to the position of the teleport point
-        fakePlayer.transform.position = teleportPoint.transform.position;
+        if (Vector3.Distance(transform.position, teleportPoint.transform.position) < maxTeleportDistance)
+            fakePlayer.transform.position = teleportPoint.transform.position;
+        else fakePlayer.transform.localPosition = Vector3.Normalize(teleportPoint.transform.position - transform.position) * maxTeleportDistance;
 
         // draw ray so we can see in inspector
         Debug.DrawRay(ray.origin, ray.direction, Color.green);
@@ -118,12 +121,17 @@ public class TeleportScript : MonoBehaviour
                 // teleport finished
                 isActive = false;
 
+
+
+                /*
                 // check if the fake player point is within acceptable range (max teleport distance and min teleport distance)
                 if (Vector3.Distance(transform.position, teleportPoint.transform.position) < maxTeleportDistance && Vector3.Distance(transform.position, teleportPoint.transform.position) > minTeleportDistance)
                 {
+                */
                     // set this objects position to the location of the fake player point
                     transform.SetPositionAndRotation(fakePlayer.transform.position, transform.rotation);
-                }
+
+               // }
                 
             }
 
