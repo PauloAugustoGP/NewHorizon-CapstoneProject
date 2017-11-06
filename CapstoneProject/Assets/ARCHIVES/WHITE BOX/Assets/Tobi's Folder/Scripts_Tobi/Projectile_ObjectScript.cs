@@ -8,6 +8,7 @@ using UnityEngine;
 public class Projectile_ObjectScript : MonoBehaviour {
 
 	private Rigidbody _rb;
+	private Collider _col;
 	private Particle_VisualScript _pvs;
 	private Transform _parent;
 
@@ -33,8 +34,10 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	void Start()
 	{
 		_rb = GetComponent<Rigidbody>();
+		_col = GetComponent<Collider>();
 		_pvs = GetComponentInChildren<Particle_VisualScript>();
 		_rb.useGravity = false;
+		_col.enabled = false;
 	}
 
 	void Update()
@@ -64,6 +67,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		Destroy(gameObject, 20.0f);
 		_charging = false;
 		_rb.velocity = transform.forward * _projectileSpeed;
+		_col.enabled = true;
 		StopAllCoroutines();
 	}
 
