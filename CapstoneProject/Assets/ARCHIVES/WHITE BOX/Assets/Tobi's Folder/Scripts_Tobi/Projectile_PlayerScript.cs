@@ -8,16 +8,16 @@ public class Projectile_PlayerScript : MonoBehaviour
 	public class DragDrop
 	{
 		[SerializeField] private Transform _projectileSpawn;
-		[SerializeField] private Transform _projectileParent;
+		[SerializeField] private CameraController _CamController;
 		[SerializeField] private GameObject _projectilePrefab;
 
 		public Transform projectileSpawn
 		{
 			get { return _projectileSpawn; }
 		}
-		public Transform projectileParent
+		public CameraController camController
 		{
-			get { return _projectileParent; }
+			get { return _CamController; }
 		}
 		public GameObject projectilePrefab
 		{
@@ -120,7 +120,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 				projectileSettings.maxChargeTime, 
 				projectileSettings.deltaSize, 
 				_enemyTag, 
-				dragAndDropVariables.projectileParent);
+				dragAndDropVariables.camController);
 		}
 	}
 		

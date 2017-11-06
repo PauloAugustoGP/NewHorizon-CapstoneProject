@@ -9274,48 +9274,6 @@ Transform:
   m_Father: {fileID: 1837359601}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1210518890
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.817
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917435118723186, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 120e33470e9ea4ee5a6bf483a48022e9, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1212177701
 GameObject:
   m_ObjectHideFlags: 0
@@ -9632,7 +9590,7 @@ MonoBehaviour:
   componentsToDisable: []
   dragAndDropVariables:
     _projectileSpawn: {fileID: 1278496938}
-    _projectileParent: {fileID: 0}
+    _CamController: {fileID: 0}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
   projectileSettings:
@@ -9829,8 +9787,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 380335431}
-  _horDist: 0
-  _vertDist: 0
+  _zDist: 0
+  _yDist: 0
+  _xDist: 0
   _yAngleMin: 0
   _yAngleMax: 0
   bumperDistanceCheck: 0
@@ -9860,7 +9819,7 @@ MonoBehaviour:
   componentsToDisable: []
   dragAndDropVariables:
     _projectileSpawn: {fileID: 627747639}
-    _projectileParent: {fileID: 0}
+    _CamController: {fileID: 0}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
   projectileSettings:
