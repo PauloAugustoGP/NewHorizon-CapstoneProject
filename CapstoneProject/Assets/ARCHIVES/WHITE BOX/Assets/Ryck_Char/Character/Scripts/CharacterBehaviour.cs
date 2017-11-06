@@ -79,72 +79,50 @@ public class CharacterBehaviour : CharacterBase
 
         if (isAlive)
         {
-            //Forward
-            if ((Input.GetKey(KeyCode.W)))
-            {
-                anim.SetFloat("Speed", MoveV); 
-                Forward();
-            }
+            float ft = 0;
+            float rt = 0;
 
-            else if ((Input.GetKeyUp(KeyCode.W)))
+            if (Input.GetKey(KeyCode.W))
             {
-                moving = false;
-                anim.SetFloat("Speed", 0);
-                rb.velocity = Vector3.zero;
-            }
-
-            //Back
-            if ((Input.GetKey(KeyCode.S)))
-            {
-                anim.SetFloat("Speed", -MoveV);
-                Backward();
-            }
-
-            else if ((Input.GetKeyUp(KeyCode.S)))
-            {
-                moving = false;
-                anim.SetFloat("Speed", 0);
-                rb.velocity = Vector3.zero;
-            }
-
-            //strafeRight
-            if ((Input.GetKey(KeyCode.D)))
-            {
+                //forward
+                moving = true;
+                ft = 1;
                 anim.SetFloat("Speed", MoveV);
-                StrafeRight();
             }
 
-            else if ((Input.GetKeyUp(KeyCode.D)))
+            if (Input.GetKey(KeyCode.S))
             {
-                moving = false;
-                anim.SetFloat("Speed", 0);
-                rb.velocity = Vector3.zero;
-            }
-
-            //strafeLeft
-            if ((Input.GetKey(KeyCode.A)))
-            {
+                //back
+                slowed = true;
+                moving = true;
+                ft = -1;
                 anim.SetFloat("Speed", -MoveV);
-                StrafeLeft();
             }
 
-            else if ((Input.GetKeyUp(KeyCode.A)))
-            {
-                moving = false;
-                anim.SetFloat("Speed", 0);
-                rb.velocity = Vector3.zero;
-            }
-
-            /*
-            //Turning
             if (Input.GetKey(KeyCode.D))
             {
-                RotateRight();
+                //right
+                moving = true;
+                rt = 1;
+                anim.SetFloat("Speed", MoveV);
             }
-            else if (Input.GetKey(KeyCode.A))
+
+            if (Input.GetKey(KeyCode.A))
             {
-                RotateLeft();
-            }*/
+                //left
+                moving = true;
+                rt = -1;
+                anim.SetFloat("Speed", MoveV);
+            }
+
+            if ((Input.GetKeyUp(KeyCode.A)) || (Input.GetKeyUp(KeyCode.W))
+                || (Input.GetKeyUp(KeyCode.S)) || (Input.GetKeyUp(KeyCode.D)))
+            {
+                moving = false;
+                anim.SetFloat("Speed", 0);
+            }
+
+            rb.velocity = (transform.forward * ft + transform.right * rt) * MoveV * Time.deltaTime;
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -168,7 +146,8 @@ public class CharacterBehaviour : CharacterBase
             //Debug.Log(slowed);
             //Debug.Log(Health);
             //Debug.Log(TeleportResource);
-            Debug.Log(_health);
+            //Debug.Log(_health);
+            //Debug.Log("Forward T : " + ft + " Right T : " + rt);
         }
 
     }//Update
