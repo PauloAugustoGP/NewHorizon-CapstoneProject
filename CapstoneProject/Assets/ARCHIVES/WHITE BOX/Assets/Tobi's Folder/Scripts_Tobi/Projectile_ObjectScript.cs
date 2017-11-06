@@ -10,6 +10,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	private Rigidbody _rb;
 	private Collider _col;
 	private Particle_VisualScript _pvs;
+	private Transform _parent;
 
 	private float _stunTime;
 	private float _timeToDone;
@@ -39,12 +40,21 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_col.enabled = false;
 	}
 
-	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag)
+	void Update()
+	{
+		if(_charging)
+		{
+			transform.rotation = _parent.rotation;
+		}
+	}
+
+	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, Transform pParent)
 	{
 		_projectileSpeed = pProjectileSpeed;
 		_maxChargeTime = pMaxChargeTime;
 		_deltaSize = pDeltaSize;
 		_enemyTag = pEnemyTag;
+		_parent = pParent;
 
 		_charging = true;
 
@@ -57,7 +67,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_charging = false;
 		_rb.velocity = transform.forward * _projectileSpeed;
 		_col.enabled = true;
-		transform.parent = null;
+		transform.parent = null;;
 		StopAllCoroutines();
 	}
 
