@@ -12,50 +12,14 @@ public class CharacterBase : MonoBehaviour
 
     protected static float _MoveV;
 
-    protected static bool moving;
-    protected static bool Rested;
-    protected static bool slowed;
+    public static bool moving;
+    public static bool Rested;
+    public static bool slowed;
 
     protected float Clockwise = 500.0f;
     protected float CounterClockwise = -500.0f;
 
     protected Rigidbody rb;
-
-    protected void Forward()
-    {
-        moving = true;
-        rb.velocity = transform.forward * Time.deltaTime * MoveV;
-    }
-
-    protected void Backward()
-    {
-        moving = true;
-        rb.velocity = -transform.forward * Time.deltaTime * MoveV;
-    }
-
-    protected void RotateRight()
-    {
-        moving = true;
-        transform.Rotate(0, Time.deltaTime * Clockwise, 0);
-    }
-
-    protected void RotateLeft()
-    {
-        moving = true;
-        transform.Rotate(0, Time.deltaTime * CounterClockwise, 0);
-    }
-
-    protected void StrafeRight()
-    {
-        moving = true;
-        rb.velocity = transform.right * Time.deltaTime * (MoveV / 2);
-    }
-
-    protected void StrafeLeft()
-    {
-        moving = true;
-        rb.velocity = -transform.right * Time.deltaTime * (MoveV / 2);
-    }
 
     //CharacterBehaviour.Health
 

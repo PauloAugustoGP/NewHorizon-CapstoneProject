@@ -180,7 +180,7 @@ public class Canvas_Manager : MonoBehaviour
 
     public void andre()
     {
-        //Scene_Manager.instance.GoTo_LEVEL("Test");
+        Scene_Manager.instance.GoTo_LEVEL("SmallTestScene");
         Debug.Log("Andre");
     }
 
@@ -234,7 +234,7 @@ public class Canvas_Manager : MonoBehaviour
 
     public void tyler()
     {
-        Scene_Manager.instance.GoTo_LEVEL("TestLevel 1");
+        Scene_Manager.instance.GoTo_LEVEL("TestScene2");
         Debug.Log("tyler");
     }
 

@@ -8,8 +8,9 @@ using UnityEngine;
 public class Projectile_ObjectScript : MonoBehaviour {
 
 	private Rigidbody _rb;
+	private Collider _col;
 	private Particle_VisualScript _pvs;
-	private Transform _parent;
+	private CameraController _cam;
 
 	private float _stunTime;
 	private float _timeToDone;
@@ -33,26 +34,19 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	void Start()
 	{
 		_rb = GetComponent<Rigidbody>();
+		_col = GetComponent<Collider>();
 		_pvs = GetComponentInChildren<Particle_VisualScript>();
 		_rb.useGravity = false;
+		_col.enabled = false;
 	}
 
-	void Update()
-	{
-		if(_charging)
-		{
-			transform.position = _parent.position;
-			transform.rotation = _parent.rotation;
-		}
-	}
-
-	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, Transform pParent)
+	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam)
 	{
 		_projectileSpeed = pProjectileSpeed;
 		_maxChargeTime = pMaxChargeTime;
 		_deltaSize = pDeltaSize;
 		_enemyTag = pEnemyTag;
-		_parent = pParent;
+		_cam = pCam;
 
 		_charging = true;
 
@@ -63,7 +57,13 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	{
 		Destroy(gameObject, 20.0f);
 		_charging = false;
+
+		Vector3 direction = Vector3.zero;
+		direction = transform.position;
+
 		_rb.velocity = transform.forward * _projectileSpeed;
+		_col.enabled = true;
+		transform.parent = null;;
 		StopAllCoroutines();
 	}
 

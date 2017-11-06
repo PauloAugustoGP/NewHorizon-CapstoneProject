@@ -7,14 +7,17 @@ public class Projectile_PlayerScript : MonoBehaviour
 	[System.Serializable]
 	public class DragDrop
 	{
-		[SerializeField]
-		private Transform _projectileSpawn;
-		[SerializeField]
-		private GameObject _projectilePrefab;
+		[SerializeField] private Transform _projectileSpawn;
+		[SerializeField] private CameraController _CamController;
+		[SerializeField] private GameObject _projectilePrefab;
 
 		public Transform projectileSpawn
 		{
 			get { return _projectileSpawn; }
+		}
+		public CameraController camController
+		{
+			get { return _CamController; }
 		}
 		public GameObject projectilePrefab
 		{
@@ -25,12 +28,9 @@ public class Projectile_PlayerScript : MonoBehaviour
 	[System.Serializable]
 	public class ProjSettings
 	{
-		[SerializeField]
-		protected float _deltaSize = 0.05f;
-		[SerializeField]
-		protected float _projectileSpeed = 10.0f;
-		[SerializeField]
-		protected float _maxChargeTime = 10.0f;
+		[SerializeField] protected float _deltaSize = 0.05f;
+		[SerializeField] protected float _projectileSpeed = 10.0f;
+		[SerializeField] protected float _maxChargeTime = 10.0f;
 
 		public float deltaSize
 		{
@@ -50,8 +50,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	private bool _projSpawned = false;
 
-	[SerializeField]
-	private bool _useCoolDown = true;
+	[SerializeField] private bool _useCoolDown = true;
 
 	private float _coolDownTime;
 
@@ -63,18 +62,14 @@ public class Projectile_PlayerScript : MonoBehaviour
 		get{ return _coolDownTime; }
 	}
 
-	[SerializeField]
-	private string _enemyTag = "Enemy";
+	[SerializeField] private string _enemyTag = "Enemy";
 
-	[SerializeField]
-	private MonoBehaviour[] componentsToDisable;
+	[SerializeField] private MonoBehaviour[] componentsToDisable;
 
 
 
-	[SerializeField]
-	private DragDrop dragAndDropVariables = new DragDrop ();
-	[SerializeField]
-	private ProjSettings projectileSettings = new ProjSettings ();
+	[SerializeField] private DragDrop dragAndDropVariables = new DragDrop ();
+	[SerializeField] private ProjSettings projectileSettings = new ProjSettings ();
 
 	void Start()
 	{
@@ -109,7 +104,8 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 			var projectile = (GameObject) Instantiate (dragAndDropVariables.projectilePrefab, 
 				dragAndDropVariables.projectileSpawn.position, 
-				dragAndDropVariables.projectileSpawn.rotation);
+				dragAndDropVariables.projectileSpawn.rotation,
+				dragAndDropVariables.projectileSpawn);
 			currentProjectile = projectile.GetComponent<Projectile_ObjectScript>();
 
 			_projSpawned = true;
@@ -120,7 +116,11 @@ public class Projectile_PlayerScript : MonoBehaviour
 					script.enabled = false;
 			}
 
-			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize, _enemyTag, dragAndDropVariables.projectileSpawn);
+			currentProjectile.StartCharge(projectileSettings.projectileSpeed, 
+				projectileSettings.maxChargeTime, 
+				projectileSettings.deltaSize, 
+				_enemyTag, 
+				dragAndDropVariables.camController);
 		}
 	}
 		
@@ -129,12 +129,6 @@ public class Projectile_PlayerScript : MonoBehaviour
 		if(currentProjectile)
 		{
 			currentProjectile.Fire();
-
-			foreach(MonoBehaviour script in componentsToDisable)
-			{
-				if(componentsToDisable.Length > 0)
-					script.enabled = true;
-			}	
 
 			if(_useCoolDown)
 			{
@@ -147,6 +141,12 @@ public class Projectile_PlayerScript : MonoBehaviour
 				_projSpawned = false;
 			}
 		}
+
+		foreach(MonoBehaviour script in componentsToDisable)
+		{
+			if(componentsToDisable.Length > 0)
+				script.enabled = true;
+		}	
 
 		currentProjectile = null;
 	}

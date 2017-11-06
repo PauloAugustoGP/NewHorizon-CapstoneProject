@@ -634,8 +634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e8eb3847de45d4585f7b6e56ec8bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 992576717}
-  speed: 0
+  _simpleMovement: 1
+  _basicSpeed: 0
 --- !u!114 &992576719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,16 +648,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 903270175}
-  _horDist: 0
-  _vertDist: 0
+  _zDist: 0
+  _yDist: 0
+  _xDist: 0
   _yAngleMin: 0
   _yAngleMax: 0
   bumperDistanceCheck: 0
   bumperCameraHeight: 0
   damping: 0
   rotationDamping: 0
-  _sensitivityX: 0
-  _sensitivityY: 0
+  _sensitivityX: 1
+  _sensitivityY: 1
   _rotSpeedX: 0
   _rotSpeedY: 0
   _invertX: 0

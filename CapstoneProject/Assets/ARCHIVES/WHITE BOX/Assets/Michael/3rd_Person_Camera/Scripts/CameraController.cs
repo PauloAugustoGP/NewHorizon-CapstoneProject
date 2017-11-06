@@ -3,43 +3,45 @@
 /// Michael Nardone
 /// ------------------------
 /// SETUP:
-/// 1) Add script to player
+/// 1) Add script to player object
 /// 2) Add Main Camera to variable Main Cam (_mainCam) variable in Inspector
-/// 3) Make Main Camera a child of player
+/// 3) Make Main Camera a child of player - This can be done with a short script if necessary
 /// ------------------------
 /// NOTES:
-/// -If you modify horDist or vertDist, must change bumperDistanceCheck as well (must be at least 0.5 larger)
+/// -If you modify zDist *while running*, must change bumperHorizontalCheck as well (must be 0.5 larger than absolute value of zDist)
 /// -To change sensitivity or inversion values, change in Inspector before running
 /// -damping and rotationDamping should be based off the player's movement speed (how fast the camera pushes away from collisions)
 /// ------------------------
-/// TO DO:
-/// -Wall behaviour
-/// ------------------------
 /// WISHLIST:
-/// -Free View (does not rotate character while in use)
 /// -Dynamic inversion toggles
 /// -Dynamic sensitivity modifiers
 /// -Offset camera height when looking up/down
+/// -Dynamic bumper check
 /// ------------------------
 
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    [Header("Camera")]
     // Reference to the Main Camera
     [SerializeField]
     private Transform _mainCam;
 
+    [Header("Camera Follow Position")]
     // Camera follow distance, local position relative to Player position
     [SerializeField]
-    private float _horDist;
+    private float _zDist;   // Horizontal distance (on Z axis) camera is from player
     [SerializeField]
-    private float _vertDist;
+    private float _yDist;   // Vertical distance camera is from player
+    [SerializeField]
+    private float _xDist;    // Horizontal distance (on X axis) camera is from player
 
     // Used for calculating camera local position while rotating view
     private float _mouseX;
     private float _mouseY;
 
+    [Header("Camera Vertical Angle Clamps")]
     // Vertical angle clamps while rotating camera
     [SerializeField]
     private float _yAngleMin;
@@ -49,20 +51,22 @@ public class CameraController : MonoBehaviour {
     // Represents whether the camera is interacting with a wall or not
     private bool _wallBumperOn;
 
+    [Header("Camera Bumper")]
     // Length of raycast checking for walls
     [SerializeField]
-    private float bumperDistanceCheck;
+    private float _bumperHorizontalCheck;
 
     // Height adjustment when wall detected with raycast
     [SerializeField]
-    private float bumperCameraHeight;
+    private float _bumperCameraHeight;
 
     // Speed of camera motion when avoiding wall collisions
     [SerializeField]
-    private float damping;
+    private float _damping;
     [SerializeField]
-    private float rotationDamping;
+    private float _rotationDamping;
 
+    [Header("Camera Sensitivity and Control")]
     // Controls the speed of the camera rotation
     // Sensitivity must be set prior to runtime
     [SerializeField]
@@ -71,9 +75,9 @@ public class CameraController : MonoBehaviour {
     [SerializeField]
     [Range(0.1f, 1f)]
     private float _sensitivityY;
-    [SerializeField]
+    //[SerializeField]
     private float _rotSpeedX;
-    [SerializeField]
+    //[SerializeField]
     private float _rotSpeedY;
 
     // Invert camera rotation (change values to -1 or 1 ONLY)
@@ -81,6 +85,10 @@ public class CameraController : MonoBehaviour {
     private float _invertX;
     [SerializeField]
     private float _invertY;
+
+    // Toggle camera movement/rotation on/off, intended for testing
+    [SerializeField]
+    private bool _freezeCamera;
 
     void Start () {
 
@@ -90,20 +98,21 @@ public class CameraController : MonoBehaviour {
             _mainCam = GameObject.Find("Main Camera").GetComponent<Transform>();
         }
 
-        _horDist = -5f;
-        _vertDist = 2f;
-        _mainCam.localPosition = new Vector3(0f, _vertDist, _horDist);
+        _zDist = 3f;
+        _yDist = 1f;
+        _xDist = 0f;
+        _mainCam.localPosition = new Vector3(_xDist, _yDist, -_zDist);
 
         _yAngleMax = 35f;
         _yAngleMin = -10f;
 
         _wallBumperOn = false;
 
-        bumperDistanceCheck = 5.5f;
-        bumperCameraHeight = 2f;
+        _bumperHorizontalCheck = _zDist + 0.5f;
+        _bumperCameraHeight = 1.5f;
 
-        damping = 5f;
-        rotationDamping = 10f;
+        _damping = 5f;
+        _rotationDamping = 10f;
 
         // Simple check to see if a value was input in the Inspector
         if (_sensitivityX == 0f)
@@ -121,10 +130,18 @@ public class CameraController : MonoBehaviour {
 
         _invertX = 1f;
         _invertY = -1f;
+
+        _freezeCamera = false;
 	}
 	
 	void Update () {
-        if (!Input.GetKey(KeyCode.LeftShift))
+
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            _freezeCamera = !_freezeCamera;
+        }
+
+        if (!Input.GetKey(KeyCode.LeftShift))   // Left Shift - Teleport control, freezes camera while held down
         {
             // Finds the angle (in degrees) the new mouse position is making with original orientation
             _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f * _invertX;
@@ -135,13 +152,13 @@ public class CameraController : MonoBehaviour {
             Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0f);
 
             // If near a wall, cache the desired location of the camera in world space
-            Vector3 followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
+            Vector3 followPosition = this.transform.TransformPoint(_xDist, _yDist, -_zDist);
             // Check if there is any object behind Player
             RaycastHit hit;
             Vector3 back = this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
 
             // Check behind player, 
-            if (Physics.Raycast(this.transform.position, back, out hit, bumperDistanceCheck))
+            if (Physics.Raycast(this.transform.position, back, out hit, _bumperHorizontalCheck))
             {
                 Debug.DrawLine(this.transform.position, hit.point, Color.red);
                 _wallBumperOn = true;
@@ -161,30 +178,32 @@ public class CameraController : MonoBehaviour {
 
                 followPosition.x = hit.point.x + xBuffer;
                 followPosition.z = hit.point.z + zBuffer;
-                followPosition.y = Mathf.Lerp(hit.point.y + bumperCameraHeight, followPosition.y, Time.deltaTime * damping);
+                followPosition.y = Mathf.Lerp(hit.point.y + _bumperCameraHeight, followPosition.y, Time.deltaTime * _damping);
             }
             else
             {
                 _wallBumperOn = false;
-                followPosition = this.transform.TransformPoint(0f, _vertDist, _horDist);
+                //followPosition = this.transform.TransformPoint(_xDist, _yDist, _zDist);
             }
 
 
             // Position the camera away from the wall, based on followPosition
-            _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, Time.deltaTime * damping);
+            _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, Time.deltaTime * _damping);
 
-            if (_wallBumperOn)
+            if (!_freezeCamera)
             {
-                // Find the correct rotation for the camera
-                Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
-                _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, Time.deltaTime * rotationDamping);
+                if (_wallBumperOn)
+                {
+                    // Find the correct rotation for the camera
+                    Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
+                    _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, Time.deltaTime * _rotationDamping);
+                }
+
+                // Apply horizontal rotation to player
+                this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
+                // Apply horizontal and vertical rotation to camera
+                _mainCam.rotation = rotation;
             }
-
-            // Apply horizontal rotation to player
-            this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
-            // Apply horizontal and vertical rotation to camera
-            _mainCam.rotation = rotation;
         }
-
     }
 }
