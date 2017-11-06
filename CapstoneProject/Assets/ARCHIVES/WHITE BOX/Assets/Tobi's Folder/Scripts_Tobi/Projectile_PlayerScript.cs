@@ -130,12 +130,6 @@ public class Projectile_PlayerScript : MonoBehaviour
 		{
 			currentProjectile.Fire();
 
-			foreach(MonoBehaviour script in componentsToDisable)
-			{
-				if(componentsToDisable.Length > 0)
-					script.enabled = true;
-			}	
-
 			if(_useCoolDown)
 			{
 				StopAllCoroutines();
@@ -147,6 +141,12 @@ public class Projectile_PlayerScript : MonoBehaviour
 				_projSpawned = false;
 			}
 		}
+
+		foreach(MonoBehaviour script in componentsToDisable)
+		{
+			if(componentsToDisable.Length > 0)
+				script.enabled = true;
+		}	
 
 		currentProjectile = null;
 	}
