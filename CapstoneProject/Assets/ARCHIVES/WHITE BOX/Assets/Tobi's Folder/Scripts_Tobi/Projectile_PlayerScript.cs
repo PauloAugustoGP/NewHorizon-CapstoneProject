@@ -109,7 +109,8 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 			var projectile = (GameObject) Instantiate (dragAndDropVariables.projectilePrefab, 
 				dragAndDropVariables.projectileSpawn.position, 
-				dragAndDropVariables.projectileSpawn.rotation);
+				dragAndDropVariables.projectileSpawn.rotation,
+				dragAndDropVariables.projectileSpawn);
 			currentProjectile = projectile.GetComponent<Projectile_ObjectScript>();
 
 			_projSpawned = true;
@@ -120,7 +121,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 					script.enabled = false;
 			}
 
-			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize, _enemyTag, dragAndDropVariables.projectileSpawn);
+			currentProjectile.StartCharge(projectileSettings.projectileSpeed, projectileSettings.maxChargeTime, projectileSettings.deltaSize, _enemyTag);
 		}
 	}
 		
