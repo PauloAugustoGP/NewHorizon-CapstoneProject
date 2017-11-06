@@ -16,9 +16,6 @@ public class CharacterBase : MonoBehaviour
     public static bool Rested;
     public static bool slowed;
 
-    protected float Clockwise = 500.0f;
-    protected float CounterClockwise = -500.0f;
-
     protected Rigidbody rb;
 
     //CharacterBehaviour.Health

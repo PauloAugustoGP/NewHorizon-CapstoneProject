@@ -144,7 +144,8 @@ public class CharacterBehaviour : CharacterBase
         {
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
-            //Debug.Log(Health);
+            //Debug.Log(_health);
+            //Debug.Log(_maxHealth);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
             //Debug.Log("Forward T : " + ft + " Right T : " + rt);
@@ -185,7 +186,7 @@ public class CharacterBehaviour : CharacterBase
         {
             
             Damage(20);
-            
+       
         }
     }
 
