@@ -63,7 +63,7 @@ public class CharacterBehaviour : CharacterBase
 
             if (!slowed)
             {
-                _MoveV = 380;
+                _MoveV = 400;
             }
 
             if (slowed)
@@ -182,7 +182,8 @@ public class CharacterBehaviour : CharacterBase
     void OnCollisionEnter(Collision c)
     {
         //collision timer
-        if (c.gameObject.tag == "Enemy")
+
+        if (c.gameObject.name == "Enemy")
         {
             
             Damage(20);
