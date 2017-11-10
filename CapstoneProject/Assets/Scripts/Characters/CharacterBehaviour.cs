@@ -14,7 +14,8 @@ public class CharacterBehaviour : CharacterBase
 
     HUD pHud;
 
-
+    [SerializeField]
+    DataTable DT;
     /// <summary>
     /// Programmer Var
     /// 
@@ -29,7 +30,9 @@ public class CharacterBehaviour : CharacterBase
         anim = GetComponent<Animator>();
         pHud = GetComponent<HUD>();
 
-        _maxHealth = 100;
+       
+
+        _maxHealth = DT.GetTableValue("MaxHealth");
         _health = _maxHealth;
 
         TeleportResource = 1;
@@ -144,7 +147,7 @@ public class CharacterBehaviour : CharacterBase
         {
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
-            //Debug.Log(_health);
+           Debug.Log(_health);
             //Debug.Log(_maxHealth);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);

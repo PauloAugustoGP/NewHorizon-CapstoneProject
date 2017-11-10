@@ -7169,6 +7169,7 @@ MonoBehaviour:
   componentsToDisable: []
   dragAndDropVariables:
     _projectileSpawn: {fileID: 503031351}
+    _CamController: {fileID: 0}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
   projectileSettings:
@@ -7199,9 +7200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb94301b791e4c14992a9a9f3ffe532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleePrefab: {fileID: 1842801188311740, guid: 84761230fb0918d4aba5b7cd2db150f2,
-    type: 2}
-  meleeSpawn: {fileID: 308930347}
+  _enemyTag: Enemy
+  _stunTime: 5
+  _meleeHitBox: {fileID: 0}
 --- !u!114 &1241718002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7234,6 +7235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
+  DT: {fileID: 1476449009}
   ValueDebuger: 0
 --- !u!136 &1241718004
 CapsuleCollider:
@@ -11094,6 +11096,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c9656192a088b643b068724901b6387, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1476449009 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114954593086190932, guid: 1c9656192a088b643b068724901b6387,
+    type: 2}
+  m_PrefabInternal: {fileID: 1476449008}
+  m_Script: {fileID: 11500000, guid: 63bb18a1b3f21824c9dfbf855a7b93e6, type: 3}
 --- !u!1 &1509725279
 GameObject:
   m_ObjectHideFlags: 0
