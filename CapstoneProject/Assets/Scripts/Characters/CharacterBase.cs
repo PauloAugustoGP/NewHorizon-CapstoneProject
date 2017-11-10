@@ -5,46 +5,33 @@ using UnityEngine;
 public class CharacterBase : MonoBehaviour
 {
     protected static bool isAlive;
-
+    protected static float _MoveV;
+    protected static int _mana;
     protected float _maxHealth;
     protected float _health;
-    protected static int _mana;
-
-    protected static float _MoveV;
-
+    
     public static bool moving;
     public static bool Rested;
     public static bool slowed;
 
     protected Rigidbody rb;
 
-    //CharacterBehaviour.Health
-
-    /*protected static int Health
-    {
-        get { return _health; }
-        set
-        {
-            _health = value;
-
-            if (_health > 100)
-            {
-                _health = 100;
-            }
-
-            if (_health < 0)
-            {
-                _health = 0;
-            }
-        }//set
-    }//health*/
-
     public float GetHealth()
     { return (_health / _maxHealth) * 100; }
 
     public void SetHealth(float newHealth)
-    { _health = newHealth; }
+    {
+        _health = newHealth;
 
+        if (_health > _maxHealth)
+        {
+            _health = _maxHealth;
+        }
+        if (_health < 0)
+        {
+            _health = 0;
+        }
+    }//SetHealth
 
     public static int TeleportResource
     {
@@ -57,7 +44,6 @@ public class CharacterBase : MonoBehaviour
             {
                 _mana = 100;
             }
-
             if (_mana < 0)
             {
                 _mana = 0;
@@ -80,10 +66,9 @@ public class CharacterBase : MonoBehaviour
         {
             TeleportResource += value * 4;
         }
-
         if (!Rested)
         {
             TeleportResource += value;
         }
-    }
+    }//RecoverRate
 }
