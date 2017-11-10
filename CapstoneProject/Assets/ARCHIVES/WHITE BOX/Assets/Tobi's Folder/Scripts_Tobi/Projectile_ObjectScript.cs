@@ -61,9 +61,9 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_charging = false;
 
 		Vector3 direction = Vector3.zero;
-		direction = transform.position;
+		direction = transform.position - _cam.GetCentreView();
 
-		_rb.velocity = Vector3.forward * -_projectileSpeed;
+		_rb.velocity = direction * -_projectileSpeed;
 		_col.enabled = true;
 		transform.parent = null;;
 		StopAllCoroutines();
