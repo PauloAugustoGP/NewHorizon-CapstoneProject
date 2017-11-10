@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
+    //Drag Pause Prefab from Dan's folder into the heirarchy
+    //create an Event System in the heirarchy
+    //make sure the scene being used is in the build settings
+    //quit and restart dont seem to work this way becuase its not through the menu's, will look into it
 
     public Button resumeBtn;
     public Button restartBtn;
