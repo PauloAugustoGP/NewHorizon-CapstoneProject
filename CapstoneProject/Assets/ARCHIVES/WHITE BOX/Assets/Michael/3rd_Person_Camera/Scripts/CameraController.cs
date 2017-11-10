@@ -27,6 +27,10 @@ public class CameraController : MonoBehaviour {
     // Reference to the Main Camera
     [SerializeField]
     private Transform _mainCam;
+    [SerializeField]
+    private Transform _rayTest;
+    [SerializeField]
+    private Transform _rayTest2;
 
     [Header("Camera Follow Position")]
     // Camera follow distance, local position relative to Player position
@@ -90,7 +94,8 @@ public class CameraController : MonoBehaviour {
     [SerializeField]
     private bool _freezeCamera;
 
-    void Start () {
+    void Start ()
+    {
 
         if (_mainCam == null)
         {
@@ -134,7 +139,9 @@ public class CameraController : MonoBehaviour {
         _freezeCamera = false;
 	}
 	
-	void Update () {
+	void Update ()
+    {
+        GetCentreView();
 
         if (Input.GetKeyUp(KeyCode.P))
         {
@@ -205,5 +212,42 @@ public class CameraController : MonoBehaviour {
                 _mainCam.rotation = rotation;
             }
         }
+    }
+
+    public Vector3 GetCentreView()
+    {
+        RaycastHit hit;
+
+        //if (Physics.Raycast(_mainCam.position, _mainCam.forward, out hit))
+        //{
+        //    Debug.DrawRay(hit.transform.position, hit.point, Color.red);
+        //    return hit.point;
+        //}
+
+        // USING CAMERA TRANSFORM
+
+        //float xPos = Screen.width / 2f;
+        //float yPos = Screen.height / 2f;
+
+        //Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
+
+        //Debug.DrawRay(rayScreen.origin, Camera.main.transform.forward * 100, Color.red);
+
+        //if (Physics.Raycast(rayScreen.origin, Camera.main.transform.forward, out hit))
+        //{
+        //    Debug.DrawRay(rayScreen.origin, hit.point, Color.blue);
+        //    return hit.point;
+        //}
+
+        // USING RAY TEST
+
+        Debug.DrawRay(_rayTest.position, _rayTest.forward * 100, Color.red);
+
+        if (Physics.Raycast(_rayTest2.position, _rayTest2.forward, out hit))
+        {
+            Debug.DrawRay(_rayTest2.position, hit.point, Color.blue);
+        }
+
+        return new Vector3(0f, 0f, 0f); // Default return value
     }
 }
