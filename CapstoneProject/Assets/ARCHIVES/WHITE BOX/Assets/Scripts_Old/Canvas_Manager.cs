@@ -142,6 +142,7 @@ public class Canvas_Manager : MonoBehaviour
     public void StartGame()
     {
         //Scene_Manager.instance.GoTo_LEVEL("Loading Screen");
+        MainPanel.gameObject.SetActive(false);
         LoadingPanel.gameObject.SetActive(true);
     }
 
