@@ -18,7 +18,7 @@ public class Door : MonoBehaviour {
     [Tooltip("Door status. Open = true, Closed = false")]
     public bool status = false; //false = close, true = open
     [Tooltip("Used with the coroutine.")]
-    private bool doorGo = false;
+    public bool doorGo = false;
 
     void Start() {
         status = false; // open
@@ -27,6 +27,7 @@ public class Door : MonoBehaviour {
         //player = GameObject.Find("Player").transform;
     }
     void Update() {
+        
         if (Input.GetKeyDown(KeyCode.F) && !doorGo) {
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
                 if (status) {
@@ -36,6 +37,7 @@ public class Door : MonoBehaviour {
                 }
             //}
         }
+        
     }
     public IEnumerator moveDoor(Quaternion dest) {
         doorGo = true;
@@ -48,5 +50,24 @@ public class Door : MonoBehaviour {
         doorGo = false;
         // yield return new WaitForSeconds(3);
         yield return null;
+    }
+    //Brian's code
+    public void toggleDoorState()
+    {
+        Debug.Log("doorGo" + doorGo);
+        if (!doorGo)
+        {
+            if (status)
+            {
+                StartCoroutine(moveDoor(close));
+                Debug.Log("DoorClosed");
+            }
+            else
+            {
+                StartCoroutine(moveDoor(open));
+                Debug.Log("DoorOpen");
+            }
+        }
+
     }
 }

@@ -4,10 +4,31 @@ using UnityEngine;
 
 public class SwitchButton : MonoBehaviour
 {
-        void OnCollisionEnter(Collision c)
+   // [SerializeField]
+    public GameObject door;
+    private Door actualDoor;
+
+    void Start()
     {
-        if (c.gameObject.GetComponent<Projectile_ObjectScript>())
+        actualDoor = door.GetComponentInChildren<Door>();
+        Debug.Log(actualDoor);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
         {
+            actualDoor.toggleDoorState();
+        }
+    }
+    
+        private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Is it working?");
+        
+        if (other.gameObject.tag == "Projectile")
+        {
+            actualDoor.toggleDoorState();
             Debug.Log("Door Opened!");
         }
             
