@@ -1,4 +1,21 @@
-﻿using System.Collections;
+﻿// Teleport Mechanic
+// Author: Garrett May
+
+// Instructions for Use:
+// Attach this script to the player
+// Attach Teleport Point Prefab (Garrett's Folder/Prefabs) into the scene as a child of the player
+// Attach Player Shadow Prefab (Garrett's Folder/Prefabs) into the scene as a child of the player
+// Attach Teleport Radius (Garrett's Folder/Prefabs) into the scene as a child of the player
+// Drag the newly added Teleport point prefab into the Serialized Field "Teleport Point" that appears on this script in the inspector
+// Drag the newly added Player Shadow prefab into the Serialized Field "Fake Player" that appears on this script in the inspector
+// Drag the newly added Teleport Radius prefab into the Serialized Field "Radius" that appears on this script in the inspector
+// Check each newly added prefabs transform positions and make sure they are all set to (0,0,0);
+// Check to make sure that the camera in the scene is tagged as "MainCamera"
+
+
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -100,11 +117,7 @@ public class TeleportScript : MonoBehaviour
                 // currently limiting movement in y to the players current y value
                 transform.SetPositionAndRotation(new Vector3(_fakePlayer.transform.position.x, transform.position.y, _fakePlayer.transform.position.z), transform.rotation);
             }
-
         }
-        
-
-
     }
 
     private IEnumerator Cooldown()
