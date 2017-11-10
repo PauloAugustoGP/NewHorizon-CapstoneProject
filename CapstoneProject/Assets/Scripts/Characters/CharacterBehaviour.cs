@@ -30,9 +30,11 @@ public class CharacterBehaviour : CharacterBase
         anim = GetComponent<Animator>();
         pHud = GetComponent<HUD>();
 
-       
+        //DT.GetTableValue("MaxHealth");
 
-        _maxHealth = DT.GetTableValue("MaxHealth");
+
+
+        _maxHealth = 100;
         _health = _maxHealth;
 
         TeleportResource = 1;
@@ -184,9 +186,7 @@ public class CharacterBehaviour : CharacterBase
 
     void OnCollisionEnter(Collision c)
     {
-        //collision timer
-
-        if (c.gameObject.name == "Enemy")
+        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
         {
             
             Damage(20);
@@ -194,4 +194,13 @@ public class CharacterBehaviour : CharacterBase
         }
     }
 
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
+        {
+
+            Damage(20);
+
+        }
+    }
 }
