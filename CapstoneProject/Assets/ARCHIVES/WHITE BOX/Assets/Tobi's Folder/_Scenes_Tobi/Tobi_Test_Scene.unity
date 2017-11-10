@@ -544,6 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
+  DT: {fileID: 0}
   ValueDebuger: 0
 --- !u!114 &152003821
 MonoBehaviour:
@@ -775,6 +776,28 @@ MonoBehaviour:
     _transparent: {fileID: 4800000, guid: eab4b8bd340f74707b822cf34dcfd3dd, type: 3}
   componentsToDisable:
   - {fileID: 257933285}
+--- !u!114 &257933284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 257933282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838b50d92fd2f4d78a95b3883acf1fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useCoolDown: 1
+  _enemyTag: Enemy
+  componentsToDisable: []
+  dragAndDropVariables:
+    _projectileSpawn: {fileID: 0}
+    _CamController: {fileID: 0}
+    _projectilePrefab: {fileID: 0}
+  projectileSettings:
+    _deltaSize: 0.05
+    _projectileSpeed: 10
+    _maxChargeTime: 10
 --- !u!114 &257933285 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114967429086687916, guid: df70b7416b91bd04ab255b3ff2d666d3,
@@ -10532,6 +10555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
+  DT: {fileID: 0}
   ValueDebuger: 0
 --- !u!136 &1483421511
 CapsuleCollider:
