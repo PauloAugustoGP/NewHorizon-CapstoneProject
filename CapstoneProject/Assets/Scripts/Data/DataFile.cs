@@ -6,13 +6,21 @@ using UnityEngine;
 
 public class DataFile : MonoBehaviour
 {
-    [SerializeField] string filePath;
+    [SerializeField] string folderName;
+    [SerializeField] string fileName;
 
-    List<string> entries;
+    public struct DataFileBT
+    {
+        public string className;
+        public int classID;
+        public int parentClassID;
+    }
+
+    List<DataFileBT> entries;
     
 	void Awake ()
     {
-        entries = new List<string>();
+        entries = new List<DataFileBT>();
 
         SetupEntries(); 
 	}
@@ -21,7 +29,7 @@ public class DataFile : MonoBehaviour
     {
         string line;
 
-        StreamReader theReader = new StreamReader(Application.streamingAssetsPath + filePath, Encoding.Default);
+        StreamReader theReader = new StreamReader(Application.streamingAssetsPath + "/" + folderName + "/" + fileName, Encoding.Default);
 
         do
         {
@@ -29,14 +37,21 @@ public class DataFile : MonoBehaviour
 
             if (line != null)
             {
-                entries.Add( line );
+                string[] data = line.Split(',');
+                DataFileBT newData;
+
+                newData.className = data[0];
+                newData.classID = int.Parse(data[1]);
+                newData.parentClassID = int.Parse(data[2]);
+
+                entries.Add( newData );
             }
         }
         while (line != null);
         theReader.Close();
     }
 
-    public string GetEntry( int index )
+    public DataFileBT GetEntry( int index )
     {
         return entries[index];
     }

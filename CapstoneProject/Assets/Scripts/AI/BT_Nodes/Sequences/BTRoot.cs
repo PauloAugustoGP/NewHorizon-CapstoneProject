@@ -7,7 +7,5 @@ public class BTRoot : BTSequence
 	public BTRoot() : base()
     {
         SetRunCondition( "fail" );
-
-        SetNodeID( 0, -1 );
     }
 }

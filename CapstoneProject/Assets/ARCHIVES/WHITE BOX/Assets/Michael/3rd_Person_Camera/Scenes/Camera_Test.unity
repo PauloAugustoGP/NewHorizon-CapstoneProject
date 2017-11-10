@@ -631,10 +631,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 992576713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e8eb3847de45d4585f7b6e56ec8bb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 37a3d01f12f344109a77f814437f99b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _simpleMovement: 1
+  _simpleMovement: 0
   _basicSpeed: 0
 --- !u!114 &992576719
 MonoBehaviour:
@@ -653,16 +653,15 @@ MonoBehaviour:
   _xDist: 0
   _yAngleMin: 0
   _yAngleMax: 0
-  bumperDistanceCheck: 0
-  bumperCameraHeight: 0
-  damping: 0
-  rotationDamping: 0
+  _bumperHorizontalCheck: 0
+  _bumperCameraHeight: 0
+  _damping: 0
+  _rotationDamping: 0
   _sensitivityX: 1
   _sensitivityY: 1
-  _rotSpeedX: 0
-  _rotSpeedY: 0
   _invertX: 0
   _invertY: 0
+  _freezeCamera: 0
 --- !u!1 &1361018819
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class CharacterBehaviour : CharacterBase
 {
     protected int Lives;
 
-    public bool isCrouching;
-
-    Animator anim;
-
-    HUD pHud;
-
+    [Header("Live Test")]//LIVE TEST VALUES
     [SerializeField]
-    DataTable DT;
-    /// <summary>
-    /// Programmer Var
-    /// 
-
+    protected bool isCrouching;
     public bool ValueDebuger;
 
-    /// </summary>
+    [Header("Drag and Drop")]//DRAG AND DROPS
+    [SerializeField] DataTable DT;
+    [SerializeField] Transform StartPosition;
+
+    Animator anim;
+    HUD pHud;
 
     void Start ()
     {
@@ -30,18 +27,14 @@ public class CharacterBehaviour : CharacterBase
         anim = GetComponent<Animator>();
         pHud = GetComponent<HUD>();
 
-        //DT.GetTableValue("MaxHealth");
-
-
+        //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
         _maxHealth = 100;
-        _health = _maxHealth;
+        SetHealth(_maxHealth);
 
         TeleportResource = 1;
 
         isAlive = true;
-
-        
 
         if (Lives == 0)
             Lives = 3;
@@ -52,10 +45,11 @@ public class CharacterBehaviour : CharacterBase
         //Upon 0 or Low Health
         if (_health <= 0)
         {
-            //SoundManager.instance.SoundCaller("Death", 0.2f);
+            //SoundManager.instance.SoundCaller("Death", 0.2f); //First Option Implementation
             Died();
         }
 
+        //NOT USED ANY WHERE CAN BE REFERENCED
         if (TeleportResource < 100)
         {
             RecoveryRate(1);
@@ -75,8 +69,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 _MoveV = 100;
             }
-        }
-
+        }//Moving : True
         else if (!moving)
         {
             _MoveV = 0;
@@ -94,7 +87,6 @@ public class CharacterBehaviour : CharacterBase
                 ft = 1;
                 anim.SetFloat("Speed", MoveV);
             }
-
             if (Input.GetKey(KeyCode.S))
             {
                 //back
@@ -103,7 +95,6 @@ public class CharacterBehaviour : CharacterBase
                 ft = -1;
                 anim.SetFloat("Speed", -MoveV);
             }
-
             if (Input.GetKey(KeyCode.D))
             {
                 //right
@@ -111,7 +102,6 @@ public class CharacterBehaviour : CharacterBase
                 rt = 1;
                 anim.SetFloat("Speed", MoveV);
             }
-
             if (Input.GetKey(KeyCode.A))
             {
                 //left
@@ -119,7 +109,6 @@ public class CharacterBehaviour : CharacterBase
                 rt = -1;
                 anim.SetFloat("Speed", MoveV);
             }
-
             if ((Input.GetKeyUp(KeyCode.A)) || (Input.GetKeyUp(KeyCode.W))
                 || (Input.GetKeyUp(KeyCode.S)) || (Input.GetKeyUp(KeyCode.D)))
             {
@@ -127,6 +116,7 @@ public class CharacterBehaviour : CharacterBase
                 anim.SetFloat("Speed", 0);
             }
 
+            //Movement
             rb.velocity = (transform.forward * ft + transform.right * rt) * MoveV * Time.deltaTime;
 
             //Crouching
@@ -142,43 +132,49 @@ public class CharacterBehaviour : CharacterBase
                 {
                     anim.SetBool("Crouching", isCrouching);
                 }
-            }
-        }
+            }//LeftControl
+        }//isAlive
 
+        //TEMP AREA check mark in INSPECTOR to view log
         if (ValueDebuger)
         {
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
-           Debug.Log(_health);
+            Debug.Log("Health: " + _health);
+            Debug.Log("Lives: " + Lives);
+            Debug.Log("Get Health Function: " + GetHealth());
             //Debug.Log(_maxHealth);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
             //Debug.Log("Forward T : " + ft + " Right T : " + rt);
-        }
-
+        }//Debuger
     }//Update
 
-    //On Death call
+    //On Death Call
     protected void Died()
     {
         Lives--;
 
         if (Lives == 0)
         {
-            SceneManager.LoadScene("lose");
+            //They do the same thing But when lives reach 0 this can do more
+            transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+            SetHealth(_maxHealth);
         }
         else
         {
-            //Load current level
-            //SceneManager.LoadScene(******);
+            transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+            SetHealth(_maxHealth);
         }     
-    }
+    }//Died
 
+    //Take Damage Function
     public void Damage(int value)
     {
         _health -= value;
     }
 
+    //Heal Function
     public void Heal(int value)
     {
         _health += value;
@@ -186,21 +182,31 @@ public class CharacterBehaviour : CharacterBase
 
     void OnCollisionEnter(Collision c)
     {
+        //Enemy Projectile Name!!!! SUBJECT TO CHANGE
         if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
         {
-            
             Damage(20);
-       
         }
-    }
+
+        //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
+        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        {
+            Heal(20);
+        }
+    }//ColENTER
 
     void OnTriggerEnter(Collider c)
     {
+        //Enemy Projectile Name!!!!!! SUBJECT TO CHANGE
         if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
         {
-
             Damage(20);
-
         }
-    }
+
+        //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
+        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        {
+            Heal(20);
+        }
+    }//ColTRIGGER
 }

@@ -460,12 +460,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072d3716317567a47a073805936a7305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fakePlayer: {fileID: 1138398442}
-  teleportPoint: {fileID: 291101880}
-  radius: {fileID: 420569380}
-  maxTeleportDistance: 5
-  minTeleportDistance: 1
-  isCooled: 0
+  _fakePlayer: {fileID: 0}
+  _teleportPoint: {fileID: 0}
+  _radius: {fileID: 0}
+  _maxTeleportDistance: 5
+  _minTeleportDistance: 1
+  _isCooled: 0
 --- !u!114 &152003817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,11 +480,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCoolDown: 1
   _enemyTag: Enemy
-  _target: {fileID: 0}
-  componentsToDisable:
-  - {fileID: 152003819}
-  - {fileID: 152003818}
-  - {fileID: 152003816}
   dragAndDropVariables:
     _projectileSpawn: {fileID: 1024887674}
     _CamController: {fileID: 0}
@@ -494,6 +489,10 @@ MonoBehaviour:
     _deltaSize: 0.05
     _projectileSpeed: 10
     _maxChargeTime: 10
+  componentsToDisable:
+  - {fileID: 152003819}
+  - {fileID: 152003818}
+  - {fileID: 152003816}
 --- !u!114 &152003818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,11 +789,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCoolDown: 1
   _enemyTag: Enemy
-  _target: {fileID: 647724601}
-  componentsToDisable:
-  - {fileID: 257933283}
-  - {fileID: 257933292}
-  - {fileID: 257933286}
   dragAndDropVariables:
     _projectileSpawn: {fileID: 1024887674}
     _CamController: {fileID: 257933291}
@@ -804,6 +798,10 @@ MonoBehaviour:
     _deltaSize: 0.05
     _projectileSpeed: 10
     _maxChargeTime: 10
+  componentsToDisable:
+  - {fileID: 257933283}
+  - {fileID: 257933292}
+  - {fileID: 257933286}
 --- !u!114 &257933285 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114967429086687916, guid: df70b7416b91bd04ab255b3ff2d666d3,
@@ -1292,9 +1290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985551ecaf1793f409ee70679793c5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTag: Enemy
-  _stunTime: 5
-  _meleeHitBox: {fileID: 0}
 --- !u!23 &507898452
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1860,9 +1855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985551ecaf1793f409ee70679793c5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTag: Enemy
-  _stunTime: 5
-  _meleeHitBox: {fileID: 0}
 --- !u!23 &721167863
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10316,8 +10308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCoolDown: 1
   _enemyTag: Enemy
-  _target: {fileID: 0}
-  componentsToDisable: []
   dragAndDropVariables:
     _projectileSpawn: {fileID: 1278496938}
     _CamController: {fileID: 0}
@@ -10327,6 +10317,7 @@ MonoBehaviour:
     _deltaSize: 0.05
     _projectileSpeed: 10
     _maxChargeTime: 10
+  componentsToDisable: []
 --- !u!114 &1397230130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10376,12 +10367,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072d3716317567a47a073805936a7305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fakePlayer: {fileID: 723116224}
-  teleportPoint: {fileID: 1984485243}
-  radius: {fileID: 1119126845}
-  maxTeleportDistance: 5
-  minTeleportDistance: 1
-  isCooled: 0
+  _fakePlayer: {fileID: 0}
+  _teleportPoint: {fileID: 0}
+  _radius: {fileID: 0}
+  _maxTeleportDistance: 5
+  _minTeleportDistance: 1
+  _isCooled: 0
 --- !u!4 &1397230134
 Transform:
   m_ObjectHideFlags: 0
@@ -10545,8 +10536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCoolDown: 1
   _enemyTag: Enemy
-  _target: {fileID: 0}
-  componentsToDisable: []
   dragAndDropVariables:
     _projectileSpawn: {fileID: 627747639}
     _CamController: {fileID: 0}
@@ -10556,6 +10545,7 @@ MonoBehaviour:
     _deltaSize: 0.05
     _projectileSpeed: 10
     _maxChargeTime: 10
+  componentsToDisable: []
 --- !u!114 &1483421508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10583,13 +10573,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072d3716317567a47a073805936a7305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fakePlayer: {fileID: 1225102666125806, guid: 3b1d799b07b85d84daaf2dfdf6006a24, type: 2}
-  teleportPoint: {fileID: 1523359848349652, guid: 4fe812aad2ee60247b7108d26d6a1579,
-    type: 2}
-  radius: {fileID: 1973905903476022, guid: f41fa0bcb67ac7945a7a69e932fc31fa, type: 2}
-  maxTeleportDistance: 5
-  minTeleportDistance: 1
-  isCooled: 1
+  _fakePlayer: {fileID: 0}
+  _teleportPoint: {fileID: 0}
+  _radius: {fileID: 0}
+  _maxTeleportDistance: 5
+  _minTeleportDistance: 1
+  _isCooled: 0
 --- !u!114 &1483421510
 MonoBehaviour:
   m_ObjectHideFlags: 0

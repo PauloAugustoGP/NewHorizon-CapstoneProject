@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Projectile_PlayerScript : MonoBehaviour
 {
+
+	/*
+	Instructions:
+	1: Add this script onto the player.
+	2: Add an empty gameobject onto the player that will the projectile spawn point. Drag and drop that gameobject into the Projectile Spawn field.
+	3: Drag and drop the camera into the Cam Controller field.
+	4: Place the prefab called Play_Projectile into the projectile prefab field. 
+	5: Default Projectile Settings are fine. If you want to change, deltasize is the change in size, projectile speed is how fast the projectile flies
+		max charge time is the maximum amount of time you can charge the projectile.
+	6: Enemy string is the tag the enemy will have.
+	7: Drag every componenet you want disabled into the componenets to disable array. These componenets will be deactivated while this skill is being used.
+	6: Finished :)
+	*/
+
 	[System.Serializable]
 	public class DragDrop
 	{
@@ -52,7 +66,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	[SerializeField] private bool _useCoolDown = true;
 
-	private float _coolDownTime;
+	private float _coolDownTime = 1.0f;
 
 	/// <summary>
 	/// Returns Cool Down Time (time until power can be used again)
@@ -63,14 +77,11 @@ public class Projectile_PlayerScript : MonoBehaviour
 	}
 
 	[SerializeField] private string _enemyTag = "Enemy";
-	[SerializeField] private Transform _target;
-
-	[SerializeField] private MonoBehaviour[] componentsToDisable;
-
-
 
 	[SerializeField] private DragDrop dragAndDropVariables = new DragDrop ();
 	[SerializeField] private ProjSettings projectileSettings = new ProjSettings ();
+
+	[SerializeField] private MonoBehaviour[] componentsToDisable;
 
 	void Start()
 	{
@@ -121,8 +132,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 				projectileSettings.maxChargeTime, 
 				projectileSettings.deltaSize, 
 				_enemyTag, 
-				dragAndDropVariables.camController,
-				_target);
+				dragAndDropVariables.camController);
 		}
 	}
 		
@@ -134,6 +144,9 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 			if(_useCoolDown)
 			{
+				if(_coolDownTime < 1.0f)
+					_coolDownTime = 1.0f;
+
 				StopAllCoroutines();
 				StartCoroutine(CoolDown());
 				//_coolDownTime = 0.0f;
@@ -155,14 +168,14 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	private IEnumerator CoolDown()
 	{
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.1f);
 		if(_coolDownTime <= 0.0f)
 		{
 			_projSpawned = false;
 		}
 		else
 		{
-			_coolDownTime -= 1.0f;
+			_coolDownTime -= 0.1f;
 			StartCoroutine(CoolDown());
 		}
 	}

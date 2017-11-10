@@ -7,7 +7,6 @@ public class BTHasPath : BTDecision
 {
     public BTHasPath() : base()
     {
-        SetNodeID( 410000, 400000 );
     }
 
     public override int Run( GameObject target )
