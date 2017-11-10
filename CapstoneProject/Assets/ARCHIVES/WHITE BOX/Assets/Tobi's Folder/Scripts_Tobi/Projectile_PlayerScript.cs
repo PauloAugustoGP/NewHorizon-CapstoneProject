@@ -63,6 +63,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 	}
 
 	[SerializeField] private string _enemyTag = "Enemy";
+	[SerializeField] private Transform _target;
 
 	[SerializeField] private MonoBehaviour[] componentsToDisable;
 
@@ -120,7 +121,8 @@ public class Projectile_PlayerScript : MonoBehaviour
 				projectileSettings.maxChargeTime, 
 				projectileSettings.deltaSize, 
 				_enemyTag, 
-				dragAndDropVariables.camController);
+				dragAndDropVariables.camController,
+				_target);
 		}
 	}
 		
