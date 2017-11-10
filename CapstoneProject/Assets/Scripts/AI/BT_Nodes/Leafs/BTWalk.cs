@@ -10,12 +10,11 @@ public class BTWalk : BTLeaf
     
     public BTWalk() : base()
     {
-        SetNodeID( 411200, 411000 );
     }
 
-    public override void Init(GameObject character)
+    public override void Init(GameObject character, int ID, int parentID)
     {
-        base.Init(character);
+        base.Init(character, ID, parentID);
 
         speed = agent.GetDataFromEnemyTable("Walk Speed");
         reachDistance = agent.GetDataFromEnemyTable("Reach Distance");

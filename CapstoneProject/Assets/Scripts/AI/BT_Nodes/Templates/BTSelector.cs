@@ -9,8 +9,10 @@ public class BTSelector : BTNode
         CreateChildsList();
     }
 
-    public override void Init(GameObject character)
+    public override void Init(GameObject character, int ID, int parentID)
     {
-        SetAgent(character.GetComponent<Enemy>());
+        SetAgentAndTransform(character.GetComponent<Enemy>(), character.transform);
+
+        SetNodeID(ID, parentID);
     }
 }

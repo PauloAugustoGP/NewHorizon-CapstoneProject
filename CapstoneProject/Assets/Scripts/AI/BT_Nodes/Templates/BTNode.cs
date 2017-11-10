@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/* NODE TEMPLATE */
+/* NODE BASE */
 
 public class BTNode : ScriptableObject
 {
@@ -27,7 +27,7 @@ public class BTNode : ScriptableObject
         agentTransform = null;
     }
 
-    public virtual void Init(GameObject character) { }
+    public virtual void Init(GameObject character, int ID, int parentID) { id = ID; parentid = parentID; }
     public virtual int Run( GameObject target ) { return 0; }
 
     public void SetNodeID(int newID, int newParentID) { id = newID; parentid = newParentID; }

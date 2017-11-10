@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BTMovement : BTSequence
+/* SEQUENCE NODE */
+
+public class BTCombat : BTSequence
 {
-    public BTMovement() : base()
+    public BTCombat() : base()
     {
         SetRunCondition("success");
     }

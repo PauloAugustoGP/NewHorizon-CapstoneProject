@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class BTHasPath : BTDecision
+public class BTIsSearching : BTDecision
 {
-    public BTHasPath() : base()
+    public BTIsSearching() : base()
     {
     }
 
-    public override int Run( GameObject target )
+    public override int Run(GameObject target)
     {
         int nodeResult = 0;
 
         // CONDITION TO STOP
-        if (!agent.GetHasPath())
+        if (!agent.GetIsSearching())
             return -1; // FAIL
 
-        for(int i = 0; i < childs.Count; i++)
+        for (int i = 0; i < childs.Count; i++)
             nodeResult = childs[i].Run(target);
 
         return nodeResult;

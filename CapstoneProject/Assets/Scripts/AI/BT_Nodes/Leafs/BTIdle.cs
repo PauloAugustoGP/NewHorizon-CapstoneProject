@@ -10,13 +10,11 @@ public class BTIdle : BTLeaf
     public BTIdle() : base()
     {
         timeRunning = 0.0f;
-
-        SetNodeID( 421000, 420000 );
     }
 
-    public override void Init(GameObject character)
+    public override void Init(GameObject character, int ID, int parentID)
     {
-        base.Init(character);
+        base.Init(character, ID, parentID);
 
         timeInState = agent.GetDataFromEnemyTable("Time In Idle");
     }
@@ -33,6 +31,7 @@ public class BTIdle : BTLeaf
 
             agent.SetNextDestination();
             agent.SetHasPath(true);
+            agent.SetCanTurn(true);
 
             return 0;
         }

@@ -7,7 +7,5 @@ public class BTPatrol : BTSequence
     public BTPatrol() : base()
     {
         SetRunCondition( "fail" );
-
-        SetNodeID( 400000, 0 );
     }
 }

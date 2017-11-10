@@ -11,8 +11,6 @@ public class BTIdleStates : BTSelector
     {
         state = 0;
         hasState = false;
-
-        SetNodeID( 420000, 400000 );
     }
 
     public override int Run( GameObject target )

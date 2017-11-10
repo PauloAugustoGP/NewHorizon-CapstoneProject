@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using UnityEngine;
 
 public class BTManager : MonoBehaviour
@@ -23,6 +21,7 @@ public class BTManager : MonoBehaviour
         target = GameObject.FindWithTag("Player");
 
         root = ScriptableObject.CreateInstance("BTRoot") as BTNode;
+        root.Init(gameObject, 0, -1);
 
         CreateBehaviorTree(file);
 
@@ -33,8 +32,9 @@ public class BTManager : MonoBehaviour
     {
         for (int i = 0; i < file.GetEntrySize(); i++)
         {
-            BTNode newNode = ScriptableObject.CreateInstance( file.GetEntry(i) ) as BTNode;
-            newNode.Init(gameObject);
+            DataFile.DataFileBT newClass = file.GetEntry(i);
+            BTNode newNode = ScriptableObject.CreateInstance( newClass.className ) as BTNode;
+            newNode.Init(gameObject, newClass.classID, newClass.parentClassID);
             root.AddChild(newNode);
         }
     }
