@@ -14,7 +14,8 @@ public class CharacterBehaviour : CharacterBase
 
     HUD pHud;
 
-
+    [SerializeField]
+    DataTable DT;
     /// <summary>
     /// Programmer Var
     /// 
@@ -28,6 +29,10 @@ public class CharacterBehaviour : CharacterBase
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         pHud = GetComponent<HUD>();
+
+        //DT.GetTableValue("MaxHealth");
+
+
 
         _maxHealth = 100;
         _health = _maxHealth;
@@ -144,7 +149,7 @@ public class CharacterBehaviour : CharacterBase
         {
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
-            //Debug.Log(_health);
+           Debug.Log(_health);
             //Debug.Log(_maxHealth);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
@@ -181,9 +186,7 @@ public class CharacterBehaviour : CharacterBase
 
     void OnCollisionEnter(Collision c)
     {
-        //collision timer
-
-        if (c.gameObject.name == "Enemy")
+        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
         {
             
             Damage(20);
@@ -191,4 +194,13 @@ public class CharacterBehaviour : CharacterBase
         }
     }
 
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
+        {
+
+            Damage(20);
+
+        }
+    }
 }
