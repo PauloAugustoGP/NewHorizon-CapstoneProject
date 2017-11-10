@@ -13,7 +13,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	private CameraController _cam;
 	private Transform _target;
 
-	private float _stunTime;
+	private float _stunTime = 1.0f;
 	private float _timeToDone;
 
 	private bool _charging;

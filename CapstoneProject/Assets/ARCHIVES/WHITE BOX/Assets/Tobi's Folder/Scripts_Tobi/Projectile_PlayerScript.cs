@@ -52,7 +52,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	[SerializeField] private bool _useCoolDown = true;
 
-	private float _coolDownTime;
+	private float _coolDownTime = 1.0f;
 
 	/// <summary>
 	/// Returns Cool Down Time (time until power can be used again)
@@ -134,6 +134,9 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 			if(_useCoolDown)
 			{
+				if(_coolDownTime < 1.0f)
+					_coolDownTime = 1.0f;
+
 				StopAllCoroutines();
 				StartCoroutine(CoolDown());
 				//_coolDownTime = 0.0f;
@@ -155,14 +158,14 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	private IEnumerator CoolDown()
 	{
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.1f);
 		if(_coolDownTime <= 0.0f)
 		{
 			_projSpawned = false;
 		}
 		else
 		{
-			_coolDownTime -= 1.0f;
+			_coolDownTime -= 0.1f;
 			StartCoroutine(CoolDown());
 		}
 	}
