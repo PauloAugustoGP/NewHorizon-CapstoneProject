@@ -197,7 +197,6 @@ public class Canvas_Manager : MonoBehaviour
     public void andre()
     {
         Scene_Manager.instance.GoTo_LEVEL("SmallTestScene");
-        
         Debug.Log("Andre");
     }
 
