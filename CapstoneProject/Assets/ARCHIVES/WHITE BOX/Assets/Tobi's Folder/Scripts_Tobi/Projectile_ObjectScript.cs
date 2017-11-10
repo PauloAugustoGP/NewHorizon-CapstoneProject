@@ -7,11 +7,12 @@ using UnityEngine;
 
 public class Projectile_ObjectScript : MonoBehaviour {
 
+	//this script should be on the projectile prefab
+
 	private Rigidbody _rb;
 	private Collider _col;
 	private Particle_VisualScript _pvs;
 	private CameraController _cam;
-	private Transform _target;
 
 	private float _stunTime = 1.0f;
 	private float _timeToDone;
@@ -41,14 +42,13 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_col.enabled = false;
 	}
 
-	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam, Transform pTarget)
+	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam)
 	{
 		_projectileSpeed = pProjectileSpeed;
 		_maxChargeTime = pMaxChargeTime;
 		_deltaSize = pDeltaSize;
 		_enemyTag = pEnemyTag;
 		_cam = pCam;
-		_target = pTarget;
 
 		_charging = true;
 
@@ -61,9 +61,9 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_charging = false;
 
 		Vector3 direction = Vector3.zero;
-		direction = transform.position - _target.position;
+		direction = transform.position;
 
-		_rb.velocity = direction.normalized * -_projectileSpeed;
+		_rb.velocity = Vector3.forward * -_projectileSpeed;
 		_col.enabled = true;
 		transform.parent = null;;
 		StopAllCoroutines();
