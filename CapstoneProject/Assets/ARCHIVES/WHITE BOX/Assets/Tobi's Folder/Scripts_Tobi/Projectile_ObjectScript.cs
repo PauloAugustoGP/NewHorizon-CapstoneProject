@@ -91,16 +91,9 @@ public class Projectile_ObjectScript : MonoBehaviour {
 
 		if(_timeToDone < _maxChargeTime)
 		{
-			_stunTime = _timeToDone += deltaC;
+			_stunTime += deltaC;
+			_timeToDone += deltaC;
 			_pvs.UpdateSize(deltaC);
-			/*
-			Vector3 i = transform.localScale;
-			
-			i.x += (_deltaSize * deltaC);
-			i.y += (_deltaSize * deltaC);
-			i.z += (_deltaSize * deltaC);
-			transform.localScale = i;
-		*/
 			StartCoroutine(Charge());
 		}
 		else
