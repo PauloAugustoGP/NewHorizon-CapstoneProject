@@ -5,137 +5,100 @@ using UnityEngine;
 public class TeleportScript : MonoBehaviour
 {
     // fake player, teleport point and radius objects assigned in the inspector
-    [SerializeField] private GameObject fakePlayer;
-    [SerializeField] private GameObject teleportPoint;
-    [SerializeField] private GameObject radius;
+    [SerializeField] private GameObject _fakePlayer;
+    [SerializeField] private GameObject _teleportPoint;
+    [SerializeField] private GameObject _radius;
 
 
     // minimum and maximum teleport distances
-    [SerializeField] private float maxTeleportDistance = 5;
-    [SerializeField] private float minTeleportDistance = 1;
+    [SerializeField] private float _maxTeleportDistance = 5;
+    [SerializeField] private float _minTeleportDistance = 1;
 
     // used for cooldown of teleport
-    [SerializeField] private bool isCooled;
+    [SerializeField] private bool _isCooled;
     // used for making sure player cannot hold down shift while cooling down then not be able to see radius
-    private bool isActive;
+    private bool _isActive;
 
 
     // Use this for initialization
     void Start()
     {
-
-
         // make sure there is a teleport point in the scene
-        if(!teleportPoint)
-        {
+        if(!_teleportPoint)
             Debug.Log("No Teleport Point Prefab added to scene.");
-        }
-
         // make sure there is a Player Shadow in the scene
-        if(!fakePlayer)
-        {
+        if(!_fakePlayer)
             Debug.Log("No player shadow prefab added to scene.");
-        }
+        // make sure there is a teleport radius in the scene
+        if(!_radius)
+            Debug.Log("No teleport radius added to scene");
 
         // initializing variables
-        isCooled = true;
-        isActive = false;
+        _isCooled = true;
+        _isActive = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         // raycast creation
-        RaycastHit hit;
+        RaycastHit tempHit;
         // raycast points to mouse location
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray tempRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         // if raycast hits something
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(tempRay, out tempHit))
         {
-            /*
-            // check to see if the distance between hit and player is less than the max teleport distance
-            if (Vector3.Distance(transform.position, hit.point) < maxTeleportDistance)
-            {
-                // move the teleport point to the hit location of raycast
-                teleportPoint.transform.position = hit.point;
-            }
-            // if the hit is greater than the max teleport distance
-           */
-
-            /*
-            // set the transform position to a clamped value of where the hit is location
-            teleportPoint.transform.position = new Vector3(Mathf.Clamp(hit.point.x, transform.position.x - maxTeleportDistance, transform.position.x + maxTeleportDistance), 0, Mathf.Clamp(hit.point.z, transform.position.z - maxTeleportDistance, transform.position.z + maxTeleportDistance));
-            */
-
-            // set the transform position to a local vector to the player with a magnitude of maxTeleportDistance
-            /* if (Vector3.Distance(transform.position, hit.point) < maxTeleportDistance)
-            { */
-                // move the teleport point to the hit location of raycast
-                teleportPoint.transform.position = hit.point;
-            /*}
-            else teleportPoint.transform.localPosition = Vector3.Normalize(hit.point - transform.position) * maxTeleportDistance;
-            */
-           
-
-
+            // set the teleport points position to the raycasts hit point    
+            _teleportPoint.transform.position = tempHit.point;
         }
         else Debug.Log("Raycast not working properly!");
 
         // set position of fake player to the position of the teleport point
-        if (Vector3.Distance(transform.position, teleportPoint.transform.position) < maxTeleportDistance)
-            fakePlayer.transform.position = teleportPoint.transform.position;
+        if (Vector3.Distance(transform.position, _teleportPoint.transform.position) < _maxTeleportDistance)
+            _fakePlayer.transform.position = _teleportPoint.transform.position;
         else
         {
-            fakePlayer.transform.localPosition = Vector3.Normalize(teleportPoint.transform.localPosition) * maxTeleportDistance;
+            _fakePlayer.transform.localPosition = Vector3.Normalize(_teleportPoint.transform.localPosition) * _maxTeleportDistance;
         }
 
         // draw ray so we can see in inspector
-        Debug.DrawRay(ray.origin, ray.direction, Color.green);
+        Debug.DrawRay(tempRay.origin, tempRay.direction, Color.green);
 
         // check to make sure cooldown is finished
-        if (isCooled)
+        if (_isCooled)
         {
             // initiate teleport with shift key
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 // activate the fake player and radius for visuals
-                fakePlayer.SetActive(true);
-                radius.SetActive(true);
+                _fakePlayer.SetActive(true);
+                _radius.SetActive(true);
                 //signal the teleport is active
-                isActive = true;
+                _isActive = true;
             }
 
-            if(Input.GetKeyDown(KeyCode.Mouse1) && isActive)
+            if(Input.GetKeyDown(KeyCode.Mouse1) && _isActive)
             {
-                fakePlayer.SetActive(false);
-                radius.SetActive(false);
-                isCooled = true;
-                isActive = false;
+                _fakePlayer.SetActive(false);
+                _radius.SetActive(false);
+                _isCooled = true;
+                _isActive = false;
             }
             // finish teleport by letting go of shift, also make sure teleport was activated
-            if (Input.GetKeyUp(KeyCode.LeftShift) && isActive)
+            if (Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
             {
                 // deactivate visuals
-                fakePlayer.SetActive(false);
-                radius.SetActive(false);
+                _fakePlayer.SetActive(false);
+                _radius.SetActive(false);
                 //start cool down 
                 StartCoroutine(Cooldown());
-                isCooled = false;
+                _isCooled = false;
                 // teleport finished
-                isActive = false;
+                _isActive = false;
 
-
-
-                /*
-                // check if the fake player point is within acceptable range (max teleport distance and min teleport distance)
-                if (Vector3.Distance(transform.position, teleportPoint.transform.position) < maxTeleportDistance && Vector3.Distance(transform.position, teleportPoint.transform.position) > minTeleportDistance)
-                {
-                */
-                    // set this objects position to the location of the fake player point
-                    transform.SetPositionAndRotation(fakePlayer.transform.position, transform.rotation);
-
-               // }
-                
+                // set this objects position to the fake player position
+                // currently limiting movement in y to the players current y value
+                transform.SetPositionAndRotation(new Vector3(_fakePlayer.transform.position.x, transform.position.y, _fakePlayer.transform.position.z), transform.rotation);
             }
 
         }
@@ -147,6 +110,6 @@ public class TeleportScript : MonoBehaviour
     private IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(2.0f);
-        isCooled = true;
+        _isCooled = true;
     }
 }

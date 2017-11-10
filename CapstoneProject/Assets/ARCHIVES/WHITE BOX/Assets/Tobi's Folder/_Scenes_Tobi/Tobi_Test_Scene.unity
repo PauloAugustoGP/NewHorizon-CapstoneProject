@@ -480,6 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCoolDown: 1
   _enemyTag: Enemy
+  _target: {fileID: 0}
   componentsToDisable:
   - {fileID: 152003819}
   - {fileID: 152003818}
@@ -544,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
+  DT: {fileID: 0}
   ValueDebuger: 0
 --- !u!114 &152003821
 MonoBehaviour:
@@ -775,12 +777,45 @@ MonoBehaviour:
     _transparent: {fileID: 4800000, guid: eab4b8bd340f74707b822cf34dcfd3dd, type: 3}
   componentsToDisable:
   - {fileID: 257933285}
+--- !u!114 &257933284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 257933282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838b50d92fd2f4d78a95b3883acf1fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useCoolDown: 1
+  _enemyTag: Enemy
+  _target: {fileID: 647724601}
+  componentsToDisable:
+  - {fileID: 257933283}
+  - {fileID: 257933292}
+  - {fileID: 257933286}
+  dragAndDropVariables:
+    _projectileSpawn: {fileID: 1024887674}
+    _CamController: {fileID: 257933291}
+    _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
+      type: 2}
+  projectileSettings:
+    _deltaSize: 0.05
+    _projectileSpeed: 10
+    _maxChargeTime: 10
 --- !u!114 &257933285 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114967429086687916, guid: df70b7416b91bd04ab255b3ff2d666d3,
     type: 2}
   m_PrefabInternal: {fileID: 1331697498}
   m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
+--- !u!114 &257933286 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114598285702939300, guid: df70b7416b91bd04ab255b3ff2d666d3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331697498}
+  m_Script: {fileID: 11500000, guid: cc9631bade4f37146b39c23ec33999a2, type: 3}
 --- !u!4 &257933290 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4610971477994924, guid: df70b7416b91bd04ab255b3ff2d666d3,
@@ -812,6 +847,12 @@ MonoBehaviour:
   _invertX: 0
   _invertY: 0
   _freezeCamera: 0
+--- !u!114 &257933292 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114701695018733330, guid: df70b7416b91bd04ab255b3ff2d666d3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331697498}
+  m_Script: {fileID: 11500000, guid: fb94301b791e4c14992a9a9f3ffe532a, type: 3}
 --- !u!1 &270706110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,6 +1646,34 @@ Transform:
   - {fileID: 615423500}
   m_Father: {fileID: 1312590730}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &647724600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 647724601}
+  m_Layer: 0
+  m_Name: ProjectileTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: -4087464717476244675, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &647724601
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 647724600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.82, y: 1.3220992, z: 9.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &650045621
 GameObject:
@@ -9302,7 +9371,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1024887673}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.86, y: 0.83, z: -0.000000029802322}
+  m_LocalPosition: {x: 0.523, y: 0.83, z: -0.000000029802322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1660237700}
@@ -10247,6 +10316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCoolDown: 1
   _enemyTag: Enemy
+  _target: {fileID: 0}
   componentsToDisable: []
   dragAndDropVariables:
     _projectileSpawn: {fileID: 1278496938}
@@ -10475,6 +10545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useCoolDown: 1
   _enemyTag: Enemy
+  _target: {fileID: 0}
   componentsToDisable: []
   dragAndDropVariables:
     _projectileSpawn: {fileID: 627747639}
@@ -10532,6 +10603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
+  DT: {fileID: 0}
   ValueDebuger: 0
 --- !u!136 &1483421511
 CapsuleCollider:

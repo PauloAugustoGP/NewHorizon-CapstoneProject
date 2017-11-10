@@ -2349,7 +2349,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 50
   m_Drag: 0
-  m_AngularDrag: 50
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -2398,9 +2398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb94301b791e4c14992a9a9f3ffe532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleePrefab: {fileID: 1842801188311740, guid: 84761230fb0918d4aba5b7cd2db150f2,
-    type: 2}
-  meleeSpawn: {fileID: 4700325149965416}
+  _enemyTag: Enemy
+  _stunTime: 5
+  _meleeHitBox: {fileID: 0}
 --- !u!114 &114967429086687916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2413,6 +2413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
+  DT: {fileID: 0}
   ValueDebuger: 0
 --- !u!136 &136675855675392522
 CapsuleCollider:

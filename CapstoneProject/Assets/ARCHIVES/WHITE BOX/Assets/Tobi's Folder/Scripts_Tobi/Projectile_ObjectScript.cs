@@ -11,8 +11,9 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	private Collider _col;
 	private Particle_VisualScript _pvs;
 	private CameraController _cam;
+	private Transform _target;
 
-	private float _stunTime;
+	private float _stunTime = 1.0f;
 	private float _timeToDone;
 
 	private bool _charging;
@@ -40,13 +41,14 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_col.enabled = false;
 	}
 
-	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam)
+	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam, Transform pTarget)
 	{
 		_projectileSpeed = pProjectileSpeed;
 		_maxChargeTime = pMaxChargeTime;
 		_deltaSize = pDeltaSize;
 		_enemyTag = pEnemyTag;
 		_cam = pCam;
+		_target = pTarget;
 
 		_charging = true;
 
@@ -59,9 +61,9 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_charging = false;
 
 		Vector3 direction = Vector3.zero;
-		direction = transform.position;
+		direction = transform.position - _target.position;
 
-		_rb.velocity = transform.forward * _projectileSpeed;
+		_rb.velocity = direction.normalized * -_projectileSpeed;
 		_col.enabled = true;
 		transform.parent = null;;
 		StopAllCoroutines();
@@ -89,16 +91,9 @@ public class Projectile_ObjectScript : MonoBehaviour {
 
 		if(_timeToDone < _maxChargeTime)
 		{
-			_stunTime = _timeToDone += deltaC;
+			_stunTime += deltaC;
+			_timeToDone += deltaC;
 			_pvs.UpdateSize(deltaC);
-			/*
-			Vector3 i = transform.localScale;
-			
-			i.x += (_deltaSize * deltaC);
-			i.y += (_deltaSize * deltaC);
-			i.z += (_deltaSize * deltaC);
-			transform.localScale = i;
-		*/
 			StartCoroutine(Charge());
 		}
 		else
