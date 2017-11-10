@@ -5,11 +5,12 @@
 /// SETUP:
 /// 1) Add script to player object
 /// 2) Add Main Camera to variable Main Cam (_mainCam) variable in Inspector
-/// 3) Make Main Camera a child of player - This can be done with a short script if necessary
+/// 3) Make Main Camera a child of player
 /// ------------------------
 /// NOTES:
-/// -If you modify zDist *while running*, must change bumperHorizontalCheck as well (must be 0.5 larger than absolute value of zDist)
+/// -If you modify zDist *while running*, must change bumperHorizontalCheck as well (must be 0.5 larger than zDist)
 /// -To change sensitivity or inversion values, change in Inspector before running
+///     -invertX and invertY can *only* be -1 or 1, I will change this to a boolean value later
 /// -damping and rotationDamping should be based off the player's movement speed (how fast the camera pushes away from collisions)
 /// ------------------------
 /// WISHLIST:
@@ -27,10 +28,6 @@ public class CameraController : MonoBehaviour {
     // Reference to the Main Camera
     [SerializeField]
     private Transform _mainCam;
-    [SerializeField]
-    private Transform _rayTest;
-    [SerializeField]
-    private Transform _rayTest2;
 
     [Header("Camera Follow Position")]
     // Camera follow distance, local position relative to Player position
@@ -39,7 +36,7 @@ public class CameraController : MonoBehaviour {
     [SerializeField]
     private float _yDist;   // Vertical distance camera is from player
     [SerializeField]
-    private float _xDist;    // Horizontal distance (on X axis) camera is from player
+    private float _xDist;   // Horizontal distance (on X axis) camera is from player
 
     // Used for calculating camera local position while rotating view
     private float _mouseX;
@@ -133,22 +130,30 @@ public class CameraController : MonoBehaviour {
         _rotSpeedX = 500f * _sensitivityX;
         _rotSpeedY = 500f * _sensitivityY;
 
-        _invertX = 1f;
-        _invertY = -1f;
+        // Simple check to see if a value was input in the Inspector
+        if (_invertX == 0)
+        {
+            _invertX = 1f;
+        }
+
+        if (_invertY == 0)
+        {
+            _invertY = -1f;
+        }
 
         _freezeCamera = false;
 	}
 	
 	void Update ()
     {
-        GetCentreView();
-
+        // This is primarily for testing purposes, and freezes camera controls
         if (Input.GetKeyUp(KeyCode.P))
         {
             _freezeCamera = !_freezeCamera;
         }
 
-        if (!Input.GetKey(KeyCode.LeftShift))   // Left Shift - Teleport control, freezes camera while held down
+        // Left Shift - Teleport control, freezes camera while held down
+        if (!Input.GetKey(KeyCode.LeftShift))
         {
             // Finds the angle (in degrees) the new mouse position is making with original orientation
             _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f * _invertX;
@@ -214,38 +219,24 @@ public class CameraController : MonoBehaviour {
         }
     }
 
+    // Raycasts from the camera's centre of view and returns the first point of collision
     public Vector3 GetCentreView()
     {
         RaycastHit hit;
 
-        //if (Physics.Raycast(_mainCam.position, _mainCam.forward, out hit))
-        //{
-        //    Debug.DrawRay(hit.transform.position, hit.point, Color.red);
-        //    return hit.point;
-        //}
+        float xPos = Screen.width / 2f;
+        float yPos = Screen.height / 2f;
 
-        // USING CAMERA TRANSFORM
+        Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
 
-        //float xPos = Screen.width / 2f;
-        //float yPos = Screen.height / 2f;
+        // This ray *should* represent where the the centre of the camera view is.
+        // Ignore the length of the ray in this Debug statement.
+        // hit.point represents the first collision from the centre of the camera.
+        Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
-        //Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
-
-        //Debug.DrawRay(rayScreen.origin, Camera.main.transform.forward * 100, Color.red);
-
-        //if (Physics.Raycast(rayScreen.origin, Camera.main.transform.forward, out hit))
-        //{
-        //    Debug.DrawRay(rayScreen.origin, hit.point, Color.blue);
-        //    return hit.point;
-        //}
-
-        // USING RAY TEST
-
-        Debug.DrawRay(_rayTest.position, _rayTest.forward * 100, Color.red);
-
-        if (Physics.Raycast(_rayTest2.position, _rayTest2.forward, out hit))
+        if (Physics.Raycast(rayScreen.origin, _mainCam.forward, out hit))
         {
-            Debug.DrawRay(_rayTest2.position, hit.point, Color.blue);
+            return hit.point;
         }
 
         return new Vector3(0f, 0f, 0f); // Default return value
