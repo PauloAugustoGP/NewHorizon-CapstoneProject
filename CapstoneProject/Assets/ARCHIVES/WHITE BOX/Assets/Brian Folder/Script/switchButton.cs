@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SwitchButton : MonoBehaviour
 {
-   // [SerializeField]
-    public GameObject door;
+    [SerializeField]
+    private GameObject door;
     private Door actualDoor;
+    private bool _switchTriggered;
 
     void Start()
     {
@@ -14,24 +15,20 @@ public class SwitchButton : MonoBehaviour
         Debug.Log(actualDoor);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            actualDoor.toggleDoorState();
-        }
-    }
-    
         private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Is it working?");
-        
+    {   
         if (other.gameObject.tag == "Projectile")
         {
+            switchTriggered = true;
             actualDoor.toggleDoorState();
-            Debug.Log("Door Opened!");
         }
             
+    }
+
+    public bool switchTriggered
+    {
+        get { return _switchTriggered; }
+        set { _switchTriggered = value; }
     }
    
 

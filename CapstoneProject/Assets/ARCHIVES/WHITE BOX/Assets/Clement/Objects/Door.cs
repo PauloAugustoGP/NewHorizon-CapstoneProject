@@ -57,12 +57,7 @@ public class Door : MonoBehaviour {
         Debug.Log("doorGo" + doorGo);
         if (!doorGo)
         {
-            if (status)
-            {
-                StartCoroutine(moveDoor(close));
-                Debug.Log("DoorClosed");
-            }
-            else
+            if (!status)
             {
                 StartCoroutine(moveDoor(open));
                 Debug.Log("DoorOpen");
