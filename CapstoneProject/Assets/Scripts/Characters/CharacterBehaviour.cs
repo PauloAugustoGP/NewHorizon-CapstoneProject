@@ -20,12 +20,14 @@ public class CharacterBehaviour : CharacterBase
 
     Animator anim;
     HUD pHud;
+    CapsuleCollider cc;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         pHud = GetComponent<HUD>();
+        cc = GetComponent<CapsuleCollider>();
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
@@ -127,10 +129,15 @@ public class CharacterBehaviour : CharacterBase
                 if (!isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
+                    cc.height = 2;
+                    cc.center = new Vector3(0, 1f ,0);
+
                 }
                 if (isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
+                    cc.height = 1;
+                    cc.center = new Vector3(0, 0.5f, 0);
                 }
             }//LeftControl
         }//isAlive
@@ -178,6 +185,24 @@ public class CharacterBehaviour : CharacterBase
     public void Heal(int value)
     {
         _health += value;
+    }
+
+    public void ChangeSpeed(string Speed)
+    {
+        switch (Speed)
+        {
+            case "Slow":
+                _MoveV = 100;
+                break;
+
+            case "Normal":
+                _MoveV = 400;
+                break;
+
+            case "Fast":
+                _MoveV = 450;
+                break;
+        }
     }
 
     void OnCollisionEnter(Collision c)

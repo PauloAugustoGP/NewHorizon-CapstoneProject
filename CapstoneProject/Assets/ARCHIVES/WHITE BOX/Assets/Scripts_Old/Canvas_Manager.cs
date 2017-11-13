@@ -12,10 +12,18 @@ public class Canvas_Manager : MonoBehaviour
     [SerializeField] GameObject CreditsPanel;
     [SerializeField] GameObject TestPanel;
     [SerializeField] GameObject LoadingPanel;
+    [SerializeField] GameObject AudioPanel;
 
     [SerializeField] Text ButtonDisplay;
     [SerializeField] Button[] MenuButtons;
 
+    [SerializeField] Slider MasterSlider;
+    [SerializeField] Slider MusicSlider;
+    [SerializeField] Slider SFXSlider;
+
+    [SerializeField] Toggle MasterMute;
+    [SerializeField] Toggle MusicMute;
+    [SerializeField] Toggle SFXMute;
 
     public void StartGame()
     {
@@ -41,6 +49,7 @@ public class Canvas_Manager : MonoBehaviour
     public void BackToOptions()
     {
         ControlsPanel.gameObject.SetActive(false);
+        AudioPanel.gameObject.SetActive(false);
         OptionsPanel.gameObject.SetActive(true);
     }
 
@@ -54,6 +63,12 @@ public class Canvas_Manager : MonoBehaviour
     {
         MainPanel.gameObject.SetActive(false);
         CreditsPanel.gameObject.SetActive(true);
+    }
+
+    public void Audio()
+    {
+        OptionsPanel.gameObject.SetActive(false);
+        AudioPanel.gameObject.SetActive(true);
     }
 
     public void Test()
