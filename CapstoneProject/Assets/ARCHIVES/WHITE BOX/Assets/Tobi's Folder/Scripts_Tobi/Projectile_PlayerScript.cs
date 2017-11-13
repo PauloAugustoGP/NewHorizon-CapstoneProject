@@ -24,6 +24,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 		[SerializeField] private Transform _projectileSpawn;
 		[SerializeField] private CameraController _CamController;
 		[SerializeField] private GameObject _projectilePrefab;
+		[SerializeField] private Transform _projectileRayOrigin;
 
 		public Transform projectileSpawn
 		{
@@ -36,6 +37,10 @@ public class Projectile_PlayerScript : MonoBehaviour
 		public GameObject projectilePrefab
 		{
 			get { return _projectilePrefab; } 
+		}
+		public Transform projectileRayOrigin
+		{
+			get { return _projectileRayOrigin; }
 		}
 	}
 
@@ -132,7 +137,8 @@ public class Projectile_PlayerScript : MonoBehaviour
 				projectileSettings.maxChargeTime, 
 				projectileSettings.deltaSize, 
 				_enemyTag, 
-				dragAndDropVariables.camController);
+				dragAndDropVariables.camController,
+				dragAndDropVariables.projectileRayOrigin.position);
 		}
 	}
 		

@@ -485,6 +485,7 @@ MonoBehaviour:
     _CamController: {fileID: 0}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
+    _projectileRayOrigin: {fileID: 0}
   projectileSettings:
     _deltaSize: 0.05
     _projectileSpeed: 10
@@ -795,6 +796,7 @@ MonoBehaviour:
     _CamController: {fileID: 257933291}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
+    _projectileRayOrigin: {fileID: 1953451683}
   projectileSettings:
     _deltaSize: 0.05
     _projectileSpeed: 10
@@ -833,8 +835,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 1953451683}
   _zDist: 0
-  _yDist: 0
-  _xDist: 0
+  _yDist: 1.5
+  _xDist: 0.5
   _yAngleMin: 0
   _yAngleMax: 0
   _bumperHorizontalCheck: 0
@@ -10656,6 +10658,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 137975571405702814, guid: df70b7416b91bd04ab255b3ff2d666d3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114701695018733330, guid: df70b7416b91bd04ab255b3ff2d666d3,
+        type: 2}
+      propertyPath: _meleeHitBox
+      value: 
+      objectReference: {fileID: 1895967822}
+    - target: {fileID: 136675855675392522, guid: df70b7416b91bd04ab255b3ff2d666d3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df70b7416b91bd04ab255b3ff2d666d3, type: 2}
   m_IsPrefabParent: 0
@@ -10760,6 +10777,7 @@ MonoBehaviour:
     _CamController: {fileID: 0}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
+    _projectileRayOrigin: {fileID: 0}
   projectileSettings:
     _deltaSize: 0.05
     _projectileSpeed: 10
@@ -10938,7 +10956,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1430691683
 MonoBehaviour:
@@ -11152,6 +11170,7 @@ MonoBehaviour:
     _CamController: {fileID: 0}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
+    _projectileRayOrigin: {fileID: 0}
   projectileSettings:
     _deltaSize: 0.05
     _projectileSpeed: 10
@@ -12230,6 +12249,11 @@ Transform:
   m_Father: {fileID: 1312590730}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1895967822 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1808182336798312, guid: df70b7416b91bd04ab255b3ff2d666d3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331697498}
 --- !u!1 &1904869165
 GameObject:
   m_ObjectHideFlags: 0
