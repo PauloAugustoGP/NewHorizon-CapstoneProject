@@ -19,25 +19,39 @@ public class Door : MonoBehaviour {
     public bool status = false; //false = close, true = open
     [Tooltip("Used with the coroutine.")]
     public bool doorGo = false;
+    public bool switchTriggered;
+    SwitchButton sb;
 
     void Start() {
         status = false; // open
         open = Quaternion.Euler(0, openAngle, 0);
         close = Quaternion.Euler(0, closeAngle, 0);
         //player = GameObject.Find("Player").transform;
+        sb = GameObject.FindObjectOfType<SwitchButton>();
     }
     void Update() {
-        
-        if (Input.GetKeyDown(KeyCode.F) && !doorGo) {
+        switchTriggered = sb.switchTriggered;
+        //if (Input.GetKeyDown(KeyCode.F) && !doorGo) {
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
-                if (status) {
-                    StartCoroutine(moveDoor(close));
-                } else {
-                    StartCoroutine(moveDoor(open));
-                }
+                //if (status) {
+                //    StartCoroutine(moveDoor(close));
+                //} else {
+                //    StartCoroutine(moveDoor(open));
+                //}
             //}
-        }
+        //}
         
+    }
+    void OnTriggerEnter (Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            StartCoroutine(moveDoor(open));
+        }
+    }
+
+    void OnTriggerExit (Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            StartCoroutine(moveDoor(close));
+        }
     }
     public IEnumerator moveDoor(Quaternion dest) {
         doorGo = true;
@@ -52,13 +66,10 @@ public class Door : MonoBehaviour {
         yield return null;
     }
     //Brian's code
-    public void toggleDoorState()
-    {
+    public void toggleDoorState() {
         Debug.Log("doorGo" + doorGo);
-        if (!doorGo)
-        {
-            if (!status)
-            {
+        if (!doorGo) {
+            if (!status) {
                 StartCoroutine(moveDoor(open));
                 Debug.Log("DoorOpen");
             }

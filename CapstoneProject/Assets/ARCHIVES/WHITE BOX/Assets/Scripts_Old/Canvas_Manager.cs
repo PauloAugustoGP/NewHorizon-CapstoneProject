@@ -84,6 +84,10 @@ public class Canvas_Manager : MonoBehaviour
         Debug.Log("test 2");
     }
 
-
+    public void test3()
+    {
+        Scene_Manager.instance.GoTo_LEVEL("ObjectBuilding");
+        Debug.Log("test 3");
+    }
     
 }

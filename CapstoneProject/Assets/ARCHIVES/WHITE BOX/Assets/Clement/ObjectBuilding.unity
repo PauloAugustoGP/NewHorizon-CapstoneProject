@@ -1293,6 +1293,11 @@ Prefab:
       propertyPath: m_Name
       value: Door Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 136835476477134400, guid: d9cd62f55d4158743bc63cf3e31b57fa,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9cd62f55d4158743bc63cf3e31b57fa, type: 2}
   m_IsPrefabParent: 0
@@ -2062,6 +2067,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrouching: 0
   ValueDebuger: 0
+  DT: {fileID: 0}
+  StartPosition: {fileID: 0}
 --- !u!114 &917156948
 MonoBehaviour:
   m_ObjectHideFlags: 0

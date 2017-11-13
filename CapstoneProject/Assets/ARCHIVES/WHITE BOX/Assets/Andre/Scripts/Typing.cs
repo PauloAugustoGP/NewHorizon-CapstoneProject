@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Typing : MonoBehaviour {
     public string msgs = "Replace";
     private Text textComponent;
-    public float starterDeley = 2f;
+    public float starterDeley = .2f;
     public float typerDeley = 0.01f;
     public AudioClip tap;
 

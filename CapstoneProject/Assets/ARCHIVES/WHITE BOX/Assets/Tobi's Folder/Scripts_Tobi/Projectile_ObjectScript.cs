@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-//[RequireComponent(typeof(ParticleSystem))]
-
 public class Projectile_ObjectScript : MonoBehaviour {
 
 	//this script should be on the projectile prefab
@@ -40,6 +37,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_pvs = GetComponentInChildren<Particle_VisualScript>();
 		_rb.useGravity = false;
 		_col.enabled = false;
+		_rb.isKinematic = true;
 	}
 
 	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam)
@@ -61,9 +59,10 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_charging = false;
 
 		Vector3 direction = Vector3.zero;
-		direction = transform.position - _cam.GetCentreView();
+		direction = _cam.GetCentreView(transform) - transform.position;
 
-		_rb.velocity = direction * -_projectileSpeed;
+		_rb.isKinematic = false;
+		_rb.velocity = direction.normalized * _projectileSpeed;
 		_col.enabled = true;
 		transform.parent = null;;
 		StopAllCoroutines();

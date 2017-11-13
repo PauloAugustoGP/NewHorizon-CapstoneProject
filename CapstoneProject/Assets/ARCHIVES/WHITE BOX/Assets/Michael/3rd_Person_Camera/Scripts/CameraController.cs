@@ -220,25 +220,30 @@ public class CameraController : MonoBehaviour {
     }
 
     // Raycasts from the camera's centre of view and returns the first point of collision
-    public Vector3 GetCentreView()
+	public Vector3 GetCentreView(Transform pRayOrigin)
     {
-        RaycastHit hit;
+        //float xPos = Screen.width / 2f;
+        //float yPos = Screen.height / 2f;
 
-        float xPos = Screen.width / 2f;
-        float yPos = Screen.height / 2f;
+		float maxDistance = 50.0f;
 
-        Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
+		//Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0.0f));
+		RaycastHit hit;
+
+        //Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
 
         // This ray *should* represent where the the centre of the camera view is.
         // Ignore the length of the ray in this Debug statement.
         // hit.point represents the first collision from the centre of the camera.
-        Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
+        //Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
-        if (Physics.Raycast(rayScreen.origin, _mainCam.forward, out hit))
+		if (Physics.Raycast(pRayOrigin.position, _mainCam.forward, out hit, maxDistance))
         {
-            return hit.point;
+			return hit.point;
         }
-
-        return new Vector3(0f, 0f, 0f); // Default return value
+		else
+		{
+			return pRayOrigin.position + (_mainCam.forward * maxDistance);
+		}
     }
 }

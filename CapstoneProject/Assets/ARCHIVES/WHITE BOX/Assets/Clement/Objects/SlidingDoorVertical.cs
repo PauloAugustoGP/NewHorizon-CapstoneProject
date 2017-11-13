@@ -21,18 +21,18 @@ public class SlidingDoorVertical : MonoBehaviour {
         }
     }
     void Update() {
-        if (Input.GetKeyDown(KeyCode.F)) {
+        //if (Input.GetKeyDown(KeyCode.F)) {
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
-                if (status) {
+                //if (status) {
                 // trigger exit
-                    StartCoroutine(moveDoor(originalPosition));
-                } else {
+                    //StartCoroutine(moveDoor(originalPosition));
+                //} else {
                 // trigger enter
-                    Vector3 moveTo = originalPosition + moveDistance;
-                    StartCoroutine(moveDoor(moveTo));
-                }
+                //    Vector3 moveTo = originalPosition + moveDistance;
+                 //   StartCoroutine(moveDoor(moveTo));
+                //}
             //}
-        }
+        //}
     }
 
     void OnTriggerEnter (Collider other) {
@@ -57,5 +57,12 @@ public class SlidingDoorVertical : MonoBehaviour {
         }
         status = !status;
         yield return null;
+    }
+
+    public void toggleDoorState() {
+        if (!status) {
+            Vector3 moveTo = originalPosition + moveDistance;
+            StartCoroutine(moveDoor(moveTo));
+        }
     }
 }
