@@ -13,6 +13,12 @@
 ///     -invertX and invertY can *only* be -1 or 1, I will change this to a boolean value later
 /// -damping and rotationDamping should be based off the player's movement speed (how fast the camera pushes away from collisions)
 /// ------------------------
+/// TODO:
+/// -Modify variables from SERIALIZED to PUBLIC
+/// -Pause check
+/// -FIX bumper behaviour with Player Prefab
+/// -Projectile and camera ==> appearance of looking straight when actually looking down, ADD crosshair
+/// ------------------------
 /// WISHLIST:
 /// -Inversion as boolean toggles
 /// -Dynamic inversion toggles
