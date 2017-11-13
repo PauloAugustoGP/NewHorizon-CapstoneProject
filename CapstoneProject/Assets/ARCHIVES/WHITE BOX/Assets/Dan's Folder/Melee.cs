@@ -20,15 +20,22 @@ public class Melee : MonoBehaviour {
 
 	[Header("Drag and Drop Variables")]
 	[SerializeField] private GameObject _meleeHitBox;
+    [SerializeField] private CharacterBehaviour _CB;
 
-	void Start()
+    private WaitForSeconds _meleeWait = new WaitForSeconds(0.1f);
+    private WaitForSeconds _zeroWait = new WaitForSeconds(0.0f);
+
+
+    void Start()
 	{
-		if(!_meleeHitBox)
+		/*if(!_meleeHitBox)
 			_meleeHitBox = null;
-		else
+		else*/
 			_meleeHitBox.SetActive(false);
 
 		_meleeHitBox.GetComponent<TakeDown>().SetUp(_enemyTag, _stunTime);
+
+        _CB.GetComponent<CharacterBehaviour>();
 	}
 
 	// Update is called once per frame
@@ -42,8 +49,13 @@ public class Melee : MonoBehaviour {
 
 	private IEnumerator Attack()
 	{
-		_meleeHitBox.SetActive(true);
-		yield return new WaitForSeconds(0.1f);
-		_meleeHitBox.SetActive(false);
+        if (_CB.IsCrouching)
+        {
+            _meleeHitBox.SetActive(true);
+            yield return _meleeWait;
+            _meleeHitBox.SetActive(false);
+        }
+        /*else
+            yield return _zeroWait;*/
 	}
 }

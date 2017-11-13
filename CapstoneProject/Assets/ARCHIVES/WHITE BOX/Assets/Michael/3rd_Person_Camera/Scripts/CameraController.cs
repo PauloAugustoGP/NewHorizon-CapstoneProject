@@ -203,7 +203,7 @@ public class CameraController : MonoBehaviour {
                 _mainCam.rotation = rotation;
 
                 //Apply horizontal rotation to player, if Xray is _not_ active
-                if (_xrayRef.xrayActive)
+                if (!_xrayRef.xrayActive)
                 {
                     this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
                 }
