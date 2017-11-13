@@ -5,33 +5,48 @@ using UnityEngine;
 
 
 public class WorldSpaceText : MonoBehaviour {
-    //Attach this worldSpaceText Prefab to any object you want to have a text above when you enter the trigger.
+    //Attach any object you want to have a text above when you enter the trigger to this worldSpaceText Prefab.
     //Drag the game object into "theGameObjecttheTextisAttachedTo" to make the trigger work.
-    //Drag in the player to "Target to rotate TO", to make the text rotate in world space to the player.
+    //Drag in the camera or player to "Target to rotate TO", to make the text rotate in world space to the camera or player.
     public GameObject worldSpaceText;
     public GameObject theGameObjecttheTextisAttachedTo;
-
+    [SerializeField] BoxCollider TheGameObjectBoxCollider;
     public GameObject targetToRotateTO;
+    private bool theGameObject = true;
+    public GameObject triggerToDestroy;
 
     void Update()
     {
-        if (!targetToRotateTO)
+        if (theGameObjecttheTextisAttachedTo)
         {
-            return;
+            if (!targetToRotateTO)
+            {
+                return;
+            }
+            var theCamOrPlayer = transform.position;
+            var theObject = targetToRotateTO.transform.position;
+            transform.rotation = Quaternion.LookRotation(theCamOrPlayer - theObject, Vector3.up);
         }
-        //might offset trigger
-        var theCamOrPlayer = transform.position;
-        var theObject = targetToRotateTO.transform.position;
-        transform.rotation = Quaternion.LookRotation(theCamOrPlayer - theObject, Vector3.up);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        theGameObjecttheTextisAttachedTo.gameObject.SetActive(false);
+        TheGameObjectBoxCollider.enabled = false;
+        theGameObject = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         worldSpaceText.gameObject.SetActive(true);
     }
+   
     private void OnTriggerExit(Collider other)
     {
-        Destroy(theGameObjecttheTextisAttachedTo);
-        //theGameObjecttheTextisAttachedTo.GetComponentInChildren <MeshRenderer>(false);
+        worldSpaceText.gameObject.SetActive(false);
+        if (theGameObject == false)
+        {
+            Destroy(triggerToDestroy);  
+        }  
     }
 }
