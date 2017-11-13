@@ -187,6 +187,24 @@ public class CharacterBehaviour : CharacterBase
         _health += value;
     }
 
+    public void ChangeSpeed(string Speed)
+    {
+        switch (Speed)
+        {
+            case "Slow":
+                _MoveV = 100;
+                break;
+
+            case "Normal":
+                _MoveV = 400;
+                break;
+
+            case "Fast":
+                _MoveV = 450;
+                break;
+        }
+    }
+
     void OnCollisionEnter(Collision c)
     {
         //Enemy Projectile Name!!!! SUBJECT TO CHANGE
