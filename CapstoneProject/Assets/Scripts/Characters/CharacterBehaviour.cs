@@ -8,11 +8,11 @@ using UnityEngine.SceneManagement;
 public class CharacterBehaviour : CharacterBase
 {
     protected int Lives;
-
-    [Header("Live Test")]//LIVE TEST VALUES
-    [SerializeField]
     protected bool isCrouching;
-    public bool ValueDebuger;
+
+    [Header("Test Bools")]//LIVE TEST VALUES
+    [SerializeField] protected bool ValueDebuger;
+    [SerializeField] protected bool Invincibility;
 
     [Header("Drag and Drop")]//DRAG AND DROPS
     [SerializeField] DataTable DT;
@@ -21,8 +21,6 @@ public class CharacterBehaviour : CharacterBase
     Animator anim;
     HUD pHud;
     CapsuleCollider cc;
-
-
 
     void Start ()
     {
@@ -49,8 +47,16 @@ public class CharacterBehaviour : CharacterBase
         //Upon 0 or Low Health
         if (_health <= 0)
         {
-            //SoundManager.instance.SoundCaller("Death", 0.2f); //First Option Implementation
-            Died();
+            if (!Invincibility)
+            {
+                //SoundManager.instance.SoundCaller("Death", 0.2f); //First Option Implementation
+                Died();
+            }
+            else if (Invincibility)
+            {
+                //SoundManager.instance.SoundCaller("Death", 0.2f); //First Option Implementationa
+                FakeDied();
+            }
         }
 
         //NOT USED ANY WHERE CAN BE REFERENCED
@@ -175,6 +181,21 @@ public class CharacterBehaviour : CharacterBase
             transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
             SetHealth(_maxHealth);
         }     
+    }//Died
+
+    protected void FakeDied()
+    {
+        Lives--;
+        if (Lives == 0)
+        {
+            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+            SetHealth(_maxHealth);
+        }
+        else
+        {
+            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+            SetHealth(_maxHealth);
+        }
     }//Died
 
     //Take Damage Function
