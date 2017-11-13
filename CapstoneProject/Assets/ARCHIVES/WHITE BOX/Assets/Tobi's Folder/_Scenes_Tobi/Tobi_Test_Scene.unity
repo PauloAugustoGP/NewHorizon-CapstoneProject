@@ -572,8 +572,8 @@ MonoBehaviour:
   _rotationDamping: 0
   _sensitivityX: 0
   _sensitivityY: 0
-  _invertX: 0
-  _invertY: 0
+  _invertX: 1
+  _invertY: -1
   _freezeCamera: 0
 --- !u!23 &152003822
 MeshRenderer:
@@ -834,19 +834,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 1953451683}
-  _zDist: 0
-  _yDist: 1.5
-  _xDist: 0.5
-  _yAngleMin: 0
-  _yAngleMax: 0
+  _zDist: 3
+  _yDist: 1
+  _xDist: 0
+  _yAngleMin: 35
+  _yAngleMax: -10
   _bumperHorizontalCheck: 0
   _bumperCameraHeight: 0
-  _damping: 0
-  _rotationDamping: 0
-  _sensitivityX: 0
-  _sensitivityY: 0
-  _invertX: 0
-  _invertY: 0
+  _damping: 5
+  _rotationDamping: 10
+  _sensitivityX: 0.5
+  _sensitivityY: 0.4
+  _invertX: 1
+  _invertY: -1
   _freezeCamera: 0
 --- !u!114 &257933292 stripped
 MonoBehaviour:
@@ -10673,6 +10673,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114701695018733330, guid: df70b7416b91bd04ab255b3ff2d666d3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df70b7416b91bd04ab255b3ff2d666d3, type: 2}
   m_IsPrefabParent: 0
@@ -11148,8 +11153,8 @@ MonoBehaviour:
   _rotationDamping: 0
   _sensitivityX: 0
   _sensitivityY: 0
-  _invertX: 0
-  _invertY: 0
+  _invertX: 1
+  _invertY: -1
   _freezeCamera: 0
 --- !u!114 &1483421507
 MonoBehaviour:

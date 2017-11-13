@@ -22,6 +22,8 @@ public class CharacterBehaviour : CharacterBase
     HUD pHud;
     CapsuleCollider cc;
 
+
+
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
@@ -203,6 +205,11 @@ public class CharacterBehaviour : CharacterBase
                 _MoveV = 450;
                 break;
         }
+    }
+
+    public bool IsCrouching
+    {
+        get { return isCrouching; }        
     }
 
     void OnCollisionEnter(Collision c)
