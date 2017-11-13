@@ -1736,8 +1736,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1898423425467770}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4012902686657136}
@@ -2400,7 +2400,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyTag: Enemy
   _stunTime: 5
-  _meleeHitBox: {fileID: 0}
+  _meleeHitBox: {fileID: 1388083345937772, guid: e4be6e91616912143a13763fd803d817,
+    type: 2}
 --- !u!114 &114967429086687916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2413,7 +2414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
-  ValueDebuger: 0
+  ValueDebuger: 1
   DT: {fileID: 0}
   StartPosition: {fileID: 0}
 --- !u!136 &136675855675392522
@@ -2426,9 +2427,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.8164699
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9623064, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137096627967971830
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -11,6 +11,8 @@ public class SlidingDoor : MonoBehaviour {
     public bool status;
     public float move = 3f;
     public Transform door;
+    public bool switchTriggered;
+    SwitchButton sb;
 
     void Start() {
         status = false;
@@ -19,26 +21,31 @@ public class SlidingDoor : MonoBehaviour {
         if (moveDistance == Vector3.zero) {
             moveDistance = new Vector3(move, transform.position.y, 0);
         }
+        sb = GameObject.FindObjectOfType<SwitchButton>();
     }
+
     void Update() {
-        if (Input.GetKeyDown(KeyCode.F)) {
+        switchTriggered = sb.switchTriggered;
+        //if (Input.GetKeyDown(KeyCode.F)) {
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
-                if (status) {
+                //if (status) {
                 // trigger exit
-                    StartCoroutine(moveDoor(originalPosition));
-                } else {
+                //    StartCoroutine(moveDoor(originalPosition));
+                //} else {
                 // trigger enter
-                    Vector3 moveTo = originalPosition + moveDistance;
-                    StartCoroutine(moveDoor(moveTo));
-                }
+                //    Vector3 moveTo = originalPosition + moveDistance;
+                //    StartCoroutine(moveDoor(moveTo));
+                //}
             //}
-        }
+        //}
     }
 
     void OnTriggerEnter (Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            Vector3 moveTo = originalPosition + moveDistance;
-            StartCoroutine(moveDoor(moveTo));
+            if (switchTriggered) {
+                Vector3 moveTo = originalPosition + moveDistance;
+                StartCoroutine(moveDoor(moveTo));
+            }
         }
     }
 
@@ -57,5 +64,12 @@ public class SlidingDoor : MonoBehaviour {
         }
         status = !status;
         yield return null;
+    }
+
+    public void toogleDoorState() {
+        if (!status) {
+            Vector3 moveTo = originalPosition + moveDistance;
+            StartCoroutine(moveDoor(moveTo));
+        }
     }
 }

@@ -26,17 +26,15 @@ public class RotatingDoor : MonoBehaviour {
         //player = GameObject.Find("Player").transform;
     }
     void Update() {
-        if (Input.GetKeyDown(KeyCode.F) && !doorGo) {
-            openAngle += 45;
-            open = Quaternion.Euler(0, openAngle, 0);
+        //if (Input.GetKeyDown(KeyCode.F) && !doorGo) {
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
                 //if (status) {
                 //    StartCoroutine(moveDoor(close));
                 //} else {
-                    StartCoroutine(moveDoor(open));
+       //             StartCoroutine(moveDoor(open));
                 //}
             //}
-        }
+        //}
     }
     public IEnumerator moveDoor(Quaternion dest) {
         doorGo = true;
@@ -50,5 +48,15 @@ public class RotatingDoor : MonoBehaviour {
         doorGo = false;
         // yield return new WaitForSeconds(3);
         yield return null;
+    }
+
+    public void toggleDoorState() {
+        openAngle += 45;
+        open = Quaternion.Euler(0, openAngle, 0);
+        if (!doorGo) {
+            if (!status) {
+                StartCoroutine(moveDoor(open));
+            }
+        }
     }
 }
