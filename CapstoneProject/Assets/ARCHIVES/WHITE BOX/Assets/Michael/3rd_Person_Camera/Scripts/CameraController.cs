@@ -33,11 +33,11 @@ public class CameraController : MonoBehaviour {
     [Header("Camera Follow Position")]
     // Camera follow distance, local position relative to Player position
     [SerializeField]
-    private float _zDist = 3f;   // Horizontal distance (on Z axis) camera is from player
+    private float _zDist;   // Horizontal distance (on Z axis) camera is from player
     [SerializeField]
-    private float _yDist = 1f;   // Vertical distance camera is from player
+    private float _yDist;   // Vertical distance camera is from player
     [SerializeField]
-    private float _xDist = 0f;   // Horizontal distance (on X axis) camera is from player
+    private float _xDist;   // Horizontal distance (on X axis) camera is from player
 
     // Used for calculating camera local position while rotating view
     private float _mouseX;
@@ -46,12 +46,12 @@ public class CameraController : MonoBehaviour {
     [Header("Camera Vertical Angle Clamps")]
     // Vertical angle clamps while rotating camera
     [SerializeField]
-    private float _yAngleMin = 35f;
+    private float _yAngleMin;
     [SerializeField]
-    private float _yAngleMax = -10f;
+    private float _yAngleMax;
 
     // Represents whether the camera is interacting with a wall or not
-    private bool _wallBumperOn = false;
+    private bool _wallBumperOn;
 
     [Header("Camera Bumper")]
     // Length of raycast checking for walls
@@ -64,19 +64,19 @@ public class CameraController : MonoBehaviour {
 
     // Speed of camera motion when avoiding wall collisions
     [SerializeField]
-    private float _damping = 5f;
+    private float _damping;
     [SerializeField]
-    private float _rotationDamping = 10f;
+    private float _rotationDamping;
 
     [Header("Camera Sensitivity and Control")]
     // Controls the speed of the camera rotation
     // Sensitivity must be set prior to runtime
     [SerializeField]
     [Range(0.1f, 1f)]
-    private float _sensitivityX = 0.5f;
+    private float _sensitivityX;
     [SerializeField]
     [Range(0.1f, 1f)]
-    private float _sensitivityY = 0.4f;
+    private float _sensitivityY;
     //[SerializeField]
     private float _rotSpeedX;
     //[SerializeField]
@@ -84,37 +84,56 @@ public class CameraController : MonoBehaviour {
 
     // Invert camera rotation (change values to -1 or 1 ONLY)
     [SerializeField]
-    private int _invertX = 1;
+    private int _invertX;
     [SerializeField]
-    private int _invertY = -1;
+    private int _invertY;
 
     // Toggle camera movement/rotation on/off, intended for testing
     [SerializeField]
-    private bool _freezeCamera = false;
+    private bool _freezeCamera;
 
-    private XRay_PlayerScript xrayRef;
+    private XRay_PlayerScript _xrayRef;
 
     void Start ()
     {
-
         if (_mainCam == null)
         {
             Debug.LogWarning("Main Camera transform not found. Finding component.");
             _mainCam = GameObject.Find("Main Camera").GetComponent<Transform>();
         }
 
+        _zDist = 3f;
+        _yDist = 1f;
+        _xDist = 0f;
+
+        _yAngleMin = -10f;
+        _yAngleMax = 35f;
+
         _mainCam.localPosition = new Vector3(_xDist, _yDist, -_zDist);
 
         _bumperHorizontalCheck = _zDist + 0.5f;
         _bumperCameraHeight = 1.5f;
 
+        _damping = 5f;
+        _rotationDamping = 10f;
+
+        _sensitivityX = 0.5f;
+        _sensitivityY = 0.4f;
+
         _rotSpeedX = 500f * _sensitivityX;
         _rotSpeedY = 500f * _sensitivityY;
 
-        xrayRef = GetComponent<XRay_PlayerScript>();
+        _invertX = 1;
+        _invertY = -1;
+
+        _xrayRef = GetComponent<XRay_PlayerScript>();
+        if (!_xrayRef)
+        {
+            Debug.LogWarning("Xray reference not found.");
+        }
 	}
 	
-	void Update ()
+	void LateUpdate ()
     {
         // This is primarily for testing purposes, and freezes camera controls
         if (Input.GetKeyUp(KeyCode.P))
@@ -128,8 +147,10 @@ public class CameraController : MonoBehaviour {
             // Finds the angle (in degrees) the new mouse position is making with original orientation
             _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f * _invertX;
             _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * 0.02f * _invertY;
+
             // Clamp vertical rotation
             _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
+
             // Convert the angles to a Quaternion value
             Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0f);
 
@@ -141,7 +162,7 @@ public class CameraController : MonoBehaviour {
 
             if (Physics.Raycast(this.transform.position, back, out hit, _bumperHorizontalCheck))
             {
-                Debug.DrawLine(this.transform.position, hit.point, Color.red);
+                //Debug.DrawLine(this.transform.position, hit.point, Color.red);
                 _wallBumperOn = true;
 
                 float xBuffer = 1f;
@@ -164,7 +185,6 @@ public class CameraController : MonoBehaviour {
             else
             {
                 _wallBumperOn = false;
-                //followPosition = this.transform.TransformPoint(_xDist, _yDist, -_zDist);
             }
 
 
@@ -179,14 +199,17 @@ public class CameraController : MonoBehaviour {
                     Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
                     _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, Time.deltaTime * _rotationDamping);
                 }
+                // Apply horizontal and vertical rotation to camera
+                _mainCam.rotation = rotation;
 
-                // Apply horizontal rotation to player, if Xray is _not_ active
-                if (xrayRef.xrayActive)
+                //Apply horizontal rotation to player, if Xray is _not_ active
+                if (_xrayRef.xrayActive)
                 {
                     this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
                 }
-                // Apply horizontal and vertical rotation to camera
-                _mainCam.rotation = rotation;
+
+                // If using a Player prefab WITHOUT Xray feature, use this line instead of above.
+                //this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
             }
         }
     }
