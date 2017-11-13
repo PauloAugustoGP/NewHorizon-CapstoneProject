@@ -167,4 +167,8 @@ public class HUD : MonoBehaviour {
             Debug.Log("Hud Log: " + value);
         }
     }
+
+    public void progressBar() {
+
+    }
 }
