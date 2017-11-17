@@ -23,7 +23,7 @@ public class Pause : MonoBehaviour
 	{
 
         isPaused = false;
-        if (resumeBtn)
+        /*if (resumeBtn)
         {
 
             resumeBtn.onClick.AddListener(delegate
@@ -31,7 +31,7 @@ public class Pause : MonoBehaviour
                 GetComponentInChildren<Canvas>().enabled = false;
                 Time.timeScale = 1.0f;
             });
-        }
+        }*/
 
         if (restartBtn)
         {
