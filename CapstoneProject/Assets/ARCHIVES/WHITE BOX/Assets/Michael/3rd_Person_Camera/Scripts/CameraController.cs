@@ -143,21 +143,21 @@ public class CameraController : MonoBehaviour {
 	
 	void FixedUpdate ()
     {
-        //if (_inGame)
-        //{
-        //    _freezeCamera = false;
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //}
-        //else if (!_inGame)
-        //{
-        //    _freezeCamera = true;
-        //    Cursor.lockState = CursorLockMode.None;
-        //}
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (_inGame)
         {
-            _freezeCamera = !_freezeCamera;
+            _freezeCamera = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
+        else if (!_inGame)
+        {
+            _freezeCamera = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    _freezeCamera = !_freezeCamera;
+        //}
 
         // Left Shift - Teleport control, freezes camera while held down
         if (!Input.GetKey(KeyCode.LeftShift))
