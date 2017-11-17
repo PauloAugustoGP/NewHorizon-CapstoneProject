@@ -84,11 +84,26 @@ public class CameraController : MonoBehaviour {
 
     private XRay_PlayerScript _xrayRef;
 
+    // Pause behaviour for Cursor
+    private bool _inGame = true;
+
+    public bool inGame
+    {
+        get
+        {
+            return _inGame;
+        }
+        set
+        {
+            _inGame = value;
+        }
+    }
+
     void Start ()
     {
         if (_mainCam == null)
         {
-            Debug.LogWarning("Main Camera transform not found. Finding component.");
+            //Debug.LogWarning("Main Camera transform not found. Finding component.");
             _mainCam = GameObject.Find("Main Camera").GetComponent<Transform>();
         }
 
@@ -119,7 +134,8 @@ public class CameraController : MonoBehaviour {
         _xrayRef = GetComponent<XRay_PlayerScript>();
         if (!_xrayRef)
         {
-            Debug.LogWarning("Xray reference not found.");
+            //Debug.LogWarning("Xray reference not found.");
+            _xrayRef = GetComponent<XRay_PlayerScript>();
         }
 
 		Cursor.lockState = CursorLockMode.Locked;
@@ -127,18 +143,19 @@ public class CameraController : MonoBehaviour {
 	
 	void FixedUpdate ()
     {
-        // This is primarily for testing purposes, and freezes camera controls
-        if (Input.GetKeyUp(KeyCode.P) && Time.timeScale == 0)
+        if (_inGame)
         {
-            _freezeCamera = !_freezeCamera;
-        }
-        else
-        {
+            _freezeCamera = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+        else if (!_inGame)
+        {
+            _freezeCamera = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         // Left Shift - Teleport control, freezes camera while held down
-        if (!Input.GetKey(KeyCode.LeftShift) )
+        if (!Input.GetKey(KeyCode.LeftShift))
         {
             // Finds the angle (in degrees) the new mouse position is making with original orientation
             _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * 0.02f;
@@ -192,12 +209,18 @@ public class CameraController : MonoBehaviour {
                 if (_wallBumperOn)
                 {
                     // Find the correct rotation for the camera
-                    Quaternion wantedRotation = Quaternion.LookRotation(followPosition, this.transform.up);
+                    Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
+                    //wantedRotation = Quaternion.Euler(0f, wantedRotation.eulerAngles.y, wantedRotation.eulerAngles.z);
+                    //Debug.Log("Wall Bumper Rotation: " + wantedRotation.eulerAngles);
                     _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, 0.02f * _rotationDamping);
                 }
-                // Apply horizontal and vertical rotation to camera
-                _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, rotation, 0.02f * _rotationDamping);
-                // _mainCam.rotation = rotation;
+                else
+                {
+                    //Debug.Log("Normal Rotation: " + rotation.eulerAngles);
+                    // Apply horizontal and vertical rotation to camera
+                    _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, rotation, 0.02f * _rotationDamping);
+                    // _mainCam.rotation = rotation;
+                }
 
                 //Apply horizontal rotation to player, if Xray is _not_ active
                 if (_xrayRef)
