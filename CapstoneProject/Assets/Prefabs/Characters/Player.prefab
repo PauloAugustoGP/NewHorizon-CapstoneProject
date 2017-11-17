@@ -1042,7 +1042,7 @@ GameObject:
   - component: {fileID: 114652730426121386}
   - component: {fileID: 114642004555760492}
   - component: {fileID: 114879915842322614}
-  - component: {fileID: 114592308344844798}
+  - component: {fileID: 114014675824411722}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2399,7 +2399,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1724911310850826}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 21.3, y: 0.1, z: 7.31}
+  m_LocalPosition: {x: -2.192854, y: -17.878138, z: 11.712502}
   m_LocalScale: {x: 1.00001, y: 1, z: 1}
   m_Children:
   - {fileID: 4588065231693306}
@@ -3056,6 +3056,27 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114014675824411722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724911310850826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCam: {fileID: 0}
+  _zDist: 3
+  _yDist: 1.5
+  _xDist: 0.5
+  _damping: 0
+  _rotationDamping: 0
+  _sensitivityX: 0
+  _sensitivityY: 0
+  _rotSpeedX: 0
+  _rotSpeedY: 0
 --- !u!114 &114190398030796814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3067,6 +3088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atFullHealth: 0
   ValueDebuger: 0
   Invincibility: 0
   DT: {fileID: 0}
@@ -3099,27 +3121,6 @@ MonoBehaviour:
   _maxTeleportDistance: 5
   _minTeleportDistance: 1
   _isCooled: 0
---- !u!114 &114592308344844798
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1724911310850826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainCam: {fileID: 4588065231693306}
-  _zDist: 3
-  _yDist: 1.5
-  _xDist: 0.5
-  _damping: 0
-  _rotationDamping: 0
-  _sensitivityX: 0
-  _sensitivityY: 0
-  _rotSpeedX: 0
-  _rotSpeedY: 0
 --- !u!114 &114642004555760492
 MonoBehaviour:
   m_ObjectHideFlags: 1

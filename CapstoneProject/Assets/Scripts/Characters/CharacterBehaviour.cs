@@ -41,7 +41,7 @@ public class CharacterBehaviour : CharacterBase
 
         if (Lives == 0)
             Lives = 3;
-	}
+    }
 	
 	void Update ()
     {
@@ -71,7 +71,6 @@ public class CharacterBehaviour : CharacterBase
         {
             slowed = isCrouching;
 
-            
             if (!slowed)
             {
                 _MoveV = 400;
@@ -136,39 +135,38 @@ public class CharacterBehaviour : CharacterBase
             {
                 isCrouching = !isCrouching;
 
-                Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
-
-                float length = (StandardHeight - CrouchedHeight);
-
-                //if (!Physics.Raycast Crouch (StandardHeight - ))
-
                 if (!isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
                     cc.height = StandardHeight;
                     cc.center = new Vector3(0, 1f, 0);
                 }
-              
+
                 if (isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
                     cc.height = CrouchedHeight;
                     cc.center = new Vector3(0, 0.5f, 0);
                 }
-
+                
             }//LeftControl
         }//isAlive
 
         //TEMP AREA check mark in INSPECTOR to view log
         if (ValueDebuger)
         {
+            //Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
+
+            //float length = (StandardHeight - CrouchedHeight);
+
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
-            Debug.Log("Health: " + _health);
-            Debug.Log("Lives: " + Lives);
-            Debug.Log("Get Health Function: " + GetHealth());
+            //Debug.Log("Health: " + _health);
+            //Debug.Log("Lives: " + Lives);
+           // Debug.Log("Get Health Function: " + GetHealth());
+            //Debug.Log("Vertical Raycast" +!Physics.Raycast(posUp, Vector3.up,length));
             //Debug.Log(_maxHealth);
-            Debug.Log(isCrouching);
+            //Debug.Log(isCrouching);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
             //Debug.Log("Forward T : " + ft + " Right T : " + rt);
@@ -243,33 +241,29 @@ public class CharacterBehaviour : CharacterBase
         get { return isCrouching; }        
     }
 
-    void OnCollisionEnter(Collision c)
+    void OnCollisionEnter(Collision H)
     {
-        //Enemy Projectile Name!!!! SUBJECT TO CHANGE
-        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
-        {
-            Damage(20);
-        }
-
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
-        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
             Heal(20);
         }
     }//ColENTER
 
-    void OnTriggerEnter(Collider c)
+    void OnTriggerEnter(Collider H)
     {
-        //Enemy Projectile Name!!!!!! SUBJECT TO CHANGE
-        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
-        {
-            Damage(20);
-        }
-
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
-        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
             Heal(20);
         }
     }//ColTRIGGER
+
+    private void OnParticleCollision(GameObject D)
+    {
+        if (D.name == "Enemy_Projectile")
+        {
+            Damage(5);
+        }
+    }
 }
