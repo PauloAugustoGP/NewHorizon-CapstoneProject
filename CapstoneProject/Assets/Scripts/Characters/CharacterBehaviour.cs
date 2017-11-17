@@ -41,7 +41,7 @@ public class CharacterBehaviour : CharacterBase
 
         if (Lives == 0)
             Lives = 3;
-	}
+    }
 	
 	void Update ()
     {
@@ -135,10 +135,6 @@ public class CharacterBehaviour : CharacterBase
             {
                 isCrouching = !isCrouching;
 
-                Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
-
-                float length = (StandardHeight - CrouchedHeight);
-
                 if (!isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
@@ -159,13 +155,18 @@ public class CharacterBehaviour : CharacterBase
         //TEMP AREA check mark in INSPECTOR to view log
         if (ValueDebuger)
         {
+            //Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
+
+            //float length = (StandardHeight - CrouchedHeight);
+
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
-            Debug.Log("Health: " + _health);
-            Debug.Log("Lives: " + Lives);
-            Debug.Log("Get Health Function: " + GetHealth());
+            //Debug.Log("Health: " + _health);
+            //Debug.Log("Lives: " + Lives);
+           // Debug.Log("Get Health Function: " + GetHealth());
+            //Debug.Log("Vertical Raycast" +!Physics.Raycast(posUp, Vector3.up,length));
             //Debug.Log(_maxHealth);
-            Debug.Log(isCrouching);
+            //Debug.Log(isCrouching);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
             //Debug.Log("Forward T : " + ft + " Right T : " + rt);
