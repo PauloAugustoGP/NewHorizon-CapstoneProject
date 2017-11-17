@@ -84,7 +84,7 @@ public class CameraController : MonoBehaviour {
 
     private XRay_PlayerScript _xrayRef;
 
-
+    // Pause behaviour for Cursor
     private bool _inGame = true;
 
     public bool inGame
