@@ -220,14 +220,12 @@ public class CharacterBehaviour : CharacterBase
     public void Damage(int value)
     {
         SetHealth(_health -= value);
-        //_health -= value;
     }
 
     //Heal Function
     public void Heal(int value)
     {
         SetHealth(_health += value);
-        //_health += value;
     }
 
     public void ChangeSpeed(string Speed)
