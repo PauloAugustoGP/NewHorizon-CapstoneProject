@@ -391,6 +391,12 @@ Transform:
   m_Father: {fileID: 2038394969}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812693969 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114331328618970746, guid: 467b119f15cffb54b8f07b9ad652dc43,
+    type: 2}
+  m_PrefabInternal: {fileID: 1534571221}
+  m_Script: {fileID: 11500000, guid: d4c870ef97953f5428b53772ba364b53, type: 3}
 --- !u!1 &1174046643
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,16 +627,39 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 812693969}
     - target: {fileID: 114289177792950918, guid: 467b119f15cffb54b8f07b9ad652dc43,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 812693969}
     - target: {fileID: 114446738771228992, guid: 467b119f15cffb54b8f07b9ad652dc43,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 812693969}
+    - target: {fileID: 114289177792950918, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: test2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013392104930514, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1073079517460546, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114446738771228992, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: test1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114748709295299254, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: test3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
