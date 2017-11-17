@@ -37,9 +37,9 @@ public class CameraController : MonoBehaviour {
     private Transform _mainCam;
 
     // Camera follow distance, local position relative to Player position
-    public float _zDist;   // Horizontal distance (on Z axis) camera is from player
-    public float _yDist;   // Vertical distance camera is from player
-    public float _xDist;   // Horizontal distance (on X axis) camera is from player
+    public float _zDist = 3f;   // Horizontal distance (on Z axis) camera is from player
+    public float _yDist = 1.5f;   // Vertical distance camera is from player
+    public float _xDist = 0.5f;   // Horizontal distance (on X axis) camera is from player
 
     // Used for calculating camera local position while rotating view
     private float _mouseX;
@@ -92,9 +92,9 @@ public class CameraController : MonoBehaviour {
             _mainCam = GameObject.Find("Main Camera").GetComponent<Transform>();
         }
 
-        _zDist = 3f;
-        _yDist = 2f;
-        _xDist = 0f;
+        //_zDist = 3f;
+        //_yDist = 1.5f;
+        //_xDist = 0.5f;
 
         _yAngleMin = -10f;
         _yAngleMax = 35f;
@@ -125,22 +125,24 @@ public class CameraController : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
-	void LateUpdate ()
+	void FixedUpdate ()
     {
-
-
         // This is primarily for testing purposes, and freezes camera controls
-        if (Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.P) && Time.timeScale == 0)
         {
             _freezeCamera = !_freezeCamera;
         }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
         // Left Shift - Teleport control, freezes camera while held down
-        if (!Input.GetKey(KeyCode.LeftShift))
+        if (!Input.GetKey(KeyCode.LeftShift) )
         {
             // Finds the angle (in degrees) the new mouse position is making with original orientation
-            _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * Time.deltaTime; // * 0.02f;
-            _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * Time.deltaTime; // * 0.02f;
+            _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * 0.02f;
+            _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * 0.02f;
 
             // Clamp vertical rotation
             _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
@@ -182,18 +184,20 @@ public class CameraController : MonoBehaviour {
             }
 
             // Move the camera to the desired position
-            _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, Time.deltaTime * _damping);
+            _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, 0.02f * _damping);
+            //_mainCam.position = followPosition;
 
             if (!_freezeCamera)
             {
                 if (_wallBumperOn)
                 {
                     // Find the correct rotation for the camera
-                    Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
-                    _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, Time.deltaTime * _rotationDamping);
+                    Quaternion wantedRotation = Quaternion.LookRotation(followPosition, this.transform.up);
+                    _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, 0.02f * _rotationDamping);
                 }
                 // Apply horizontal and vertical rotation to camera
-                _mainCam.rotation = rotation;
+                _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, rotation, 0.02f * _rotationDamping);
+                // _mainCam.rotation = rotation;
 
                 //Apply horizontal rotation to player, if Xray is _not_ active
                 if (_xrayRef)
