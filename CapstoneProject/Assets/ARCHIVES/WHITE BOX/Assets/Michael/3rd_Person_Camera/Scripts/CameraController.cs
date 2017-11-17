@@ -84,6 +84,8 @@ public class CameraController : MonoBehaviour {
 
     private XRay_PlayerScript _xrayRef;
 
+    private TeleportScript _tpRef;
+
     // Pause behaviour for Cursor
     private bool _inGame = true;
 
@@ -132,11 +134,8 @@ public class CameraController : MonoBehaviour {
         _invertY = -1;
 
         _xrayRef = GetComponent<XRay_PlayerScript>();
-        if (!_xrayRef)
-        {
-            //Debug.LogWarning("Xray reference not found.");
-            _xrayRef = GetComponent<XRay_PlayerScript>();
-        }
+
+        _tpRef = GetComponent<TeleportScript>();
 
 		Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -146,7 +145,15 @@ public class CameraController : MonoBehaviour {
         if (_inGame)
         {
             _freezeCamera = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            if (_tpRef.isActive)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
         else if (!_inGame)
         {
