@@ -36,66 +36,50 @@ public class CameraController : MonoBehaviour {
     [SerializeField]
     private Transform _mainCam;
 
-    [Header("Camera Follow Position")]
     // Camera follow distance, local position relative to Player position
-    [SerializeField]
-    private float _zDist;   // Horizontal distance (on Z axis) camera is from player
-    [SerializeField]
-    private float _yDist;   // Vertical distance camera is from player
-    [SerializeField]
-    private float _xDist;   // Horizontal distance (on X axis) camera is from player
+    public float _zDist;   // Horizontal distance (on Z axis) camera is from player
+    public float _yDist;   // Vertical distance camera is from player
+    public float _xDist;   // Horizontal distance (on X axis) camera is from player
 
     // Used for calculating camera local position while rotating view
     private float _mouseX;
     private float _mouseY;
 
-    [Header("Camera Vertical Angle Clamps")]
     // Vertical angle clamps while rotating camera
-    [SerializeField]
     private float _yAngleMin;
-    [SerializeField]
     private float _yAngleMax;
 
     // Represents whether the camera is interacting with a wall or not
     private bool _wallBumperOn;
 
-    [Header("Camera Bumper")]
     // Length of raycast checking for walls
-    [SerializeField]
     private float _bumperHorizontalCheck;
 
     // Height adjustment when wall detected with raycast
-    [SerializeField]
     private float _bumperCameraHeight;
 
     // Speed of camera motion when avoiding wall collisions
-    [SerializeField]
-    private float _damping;
-    [SerializeField]
-    private float _rotationDamping;
+    public float _damping;
+    public float _rotationDamping;
 
     [Header("Camera Sensitivity and Control")]
     // Controls the speed of the camera rotation
-    // Sensitivity must be set prior to runtime
+    // Sensitivity must be set prior to runtime (currently)
     [SerializeField]
     [Range(0.1f, 1f)]
     private float _sensitivityX;
     [SerializeField]
     [Range(0.1f, 1f)]
     private float _sensitivityY;
-    //[SerializeField]
-    private float _rotSpeedX;
-    //[SerializeField]
-    private float _rotSpeedY;
+
+    public float _rotSpeedX;
+    public float _rotSpeedY;
 
     // Invert camera rotation (change values to -1 or 1 ONLY)
-    [SerializeField]
     private int _invertX;
-    [SerializeField]
     private int _invertY;
 
-    // Toggle camera movement/rotation on/off, intended for testing
-    [SerializeField]
+    // Toggle camera movement/rotation on/off, intended for testing, CONTROL: [P]
     private bool _freezeCamera;
 
     private XRay_PlayerScript _xrayRef;
@@ -109,7 +93,7 @@ public class CameraController : MonoBehaviour {
         }
 
         _zDist = 3f;
-        _yDist = 1f;
+        _yDist = 2f;
         _xDist = 0f;
 
         _yAngleMin = -10f;
@@ -118,7 +102,7 @@ public class CameraController : MonoBehaviour {
         _mainCam.localPosition = new Vector3(_xDist, _yDist, -_zDist);
 
         _bumperHorizontalCheck = _zDist + 0.5f;
-        _bumperCameraHeight = 1.5f;
+        _bumperCameraHeight = _yDist + 0.5f;
 
         _damping = 5f;
         _rotationDamping = 10f;
@@ -151,8 +135,8 @@ public class CameraController : MonoBehaviour {
         if (!Input.GetKey(KeyCode.LeftShift))
         {
             // Finds the angle (in degrees) the new mouse position is making with original orientation
-            _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * 0.02f * _invertX;
-            _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * 0.02f * _invertY;
+            _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * Time.deltaTime; // * 0.02f;
+            _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * Time.deltaTime; // * 0.02f;
 
             // Clamp vertical rotation
             _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
@@ -160,11 +144,11 @@ public class CameraController : MonoBehaviour {
             // Convert the angles to a Quaternion value
             Quaternion rotation = Quaternion.Euler(_mouseY, _mouseX, 0f);
 
-            // If near a wall, cache the desired location of the camera in world space
+            // Cache the desired location of the camera in world space
             Vector3 followPosition = this.transform.TransformPoint(_xDist, _yDist, -_zDist);
             // Check if there is any object behind Player
             RaycastHit hit;
-            Vector3 back = this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
+            Vector3 back = -this.transform.forward; //this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
 
             if (Physics.Raycast(this.transform.position, back, out hit, _bumperHorizontalCheck))
             {
@@ -193,8 +177,7 @@ public class CameraController : MonoBehaviour {
                 _wallBumperOn = false;
             }
 
-
-            // Position the camera away from the wall, based on followPosition
+            // Move the camera to the desired position
             _mainCam.position = Vector3.Lerp(_mainCam.position, followPosition, Time.deltaTime * _damping);
 
             if (!_freezeCamera)
@@ -209,13 +192,18 @@ public class CameraController : MonoBehaviour {
                 _mainCam.rotation = rotation;
 
                 //Apply horizontal rotation to player, if Xray is _not_ active
-                if (!_xrayRef.xrayActive)
+                if (_xrayRef)
                 {
+                    if (!_xrayRef.xrayActive)
+                    {
+                        this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
+                    }
+                }
+                else
+                {
+                    // If using a Player prefab WITHOUT Xray feature, use this line instead of above.
                     this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
                 }
-
-                // If using a Player prefab WITHOUT Xray feature, use this line instead of above.
-                //this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
             }
         }
     }

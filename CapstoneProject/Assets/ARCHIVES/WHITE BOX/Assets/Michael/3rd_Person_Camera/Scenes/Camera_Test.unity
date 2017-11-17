@@ -648,19 +648,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 903270175}
-  _zDist: 0
-  _yDist: 0
+  _zDist: 3
+  _yDist: 1
   _xDist: 0
-  _yAngleMin: 0
-  _yAngleMax: 0
+  _yAngleMin: 35
+  _yAngleMax: -10
   _bumperHorizontalCheck: 0
   _bumperCameraHeight: 0
-  _damping: 0
-  _rotationDamping: 0
-  _sensitivityX: 0.54
-  _sensitivityY: 0.52
-  _invertX: 0
-  _invertY: 0
+  _damping: 5
+  _rotationDamping: 10
+  _sensitivityX: 0.5
+  _sensitivityY: 0.4
+  _invertX: 1
+  _invertY: -1
   _freezeCamera: 0
 --- !u!1 &1361018819
 GameObject:
