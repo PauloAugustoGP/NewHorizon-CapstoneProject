@@ -359,7 +359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1286451199371424
 GameObject:
   m_ObjectHideFlags: 1
@@ -2398,8 +2398,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1724911310850826}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -2.192854, y: -17.878138, z: 11.712502}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -57.3, y: 0, z: -26}
   m_LocalScale: {x: 1.00001, y: 1, z: 1}
   m_Children:
   - {fileID: 4588065231693306}
@@ -3030,7 +3030,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -3067,10 +3067,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCam: {fileID: 0}
-  _zDist: 3
-  _yDist: 1.5
-  _xDist: 0.5
+  _mainCam: {fileID: 4588065231693306}
+  _zDist: 1.5
+  _yDist: 2
+  _xDist: 0.25
   _damping: 0
   _rotationDamping: 0
   _sensitivityX: 0
@@ -3136,10 +3136,10 @@ MonoBehaviour:
   _enemyTag: Enemy
   dragAndDropVariables:
     _projectileSpawn: {fileID: 4217084831371122}
-    _CamController: {fileID: 0}
+    _CamController: {fileID: 114014675824411722}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
-    _projectileRayOrigin: {fileID: 0}
+    _projectileRayOrigin: {fileID: 4588065231693306}
   projectileSettings:
     _deltaSize: 0.05
     _projectileSpeed: 10
