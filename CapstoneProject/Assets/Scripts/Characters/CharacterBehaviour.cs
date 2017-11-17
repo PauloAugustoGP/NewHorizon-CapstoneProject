@@ -127,7 +127,7 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //Movement
-            rb.velocity = (transform.forward * ft + transform.right * rt) * MoveV * Time.deltaTime;
+            rb.velocity = ((transform.forward * ft + transform.right * rt).normalized * MoveV * Time.deltaTime);
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
