@@ -24,6 +24,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 		[SerializeField] private Transform _projectileSpawn;
 		[SerializeField] private CameraController _CamController;
 		[SerializeField] private GameObject _projectilePrefab;
+		[SerializeField] private Transform _projectileRayOrigin;
 
 		public Transform projectileSpawn
 		{
@@ -36,6 +37,10 @@ public class Projectile_PlayerScript : MonoBehaviour
 		public GameObject projectilePrefab
 		{
 			get { return _projectilePrefab; } 
+		}
+		public Transform projectileRayOrigin
+		{
+			get { return _projectileRayOrigin; }
 		}
 	}
 
@@ -61,10 +66,10 @@ public class Projectile_PlayerScript : MonoBehaviour
 	}
 
 	private Projectile_ObjectScript currentProjectile;
+	private WaitForSeconds _coolDownWait = new WaitForSeconds(0.01f);
+	private WaitForSeconds _timeCountWait = new WaitForSeconds(1.0f);
 
 	private bool _projSpawned = false;
-
-	[SerializeField] private bool _useCoolDown = true;
 
 	private float _coolDownTime = 1.0f;
 
@@ -76,6 +81,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 		get{ return _coolDownTime; }
 	}
 
+	[SerializeField] private bool _useCoolDown = true;
 	[SerializeField] private string _enemyTag = "Enemy";
 
 	[SerializeField] private DragDrop dragAndDropVariables = new DragDrop ();
@@ -132,7 +138,8 @@ public class Projectile_PlayerScript : MonoBehaviour
 				projectileSettings.maxChargeTime, 
 				projectileSettings.deltaSize, 
 				_enemyTag, 
-				dragAndDropVariables.camController);
+				dragAndDropVariables.camController,
+				dragAndDropVariables.projectileRayOrigin.position);
 		}
 	}
 		
@@ -168,14 +175,14 @@ public class Projectile_PlayerScript : MonoBehaviour
 
 	private IEnumerator CoolDown()
 	{
-		yield return new WaitForSeconds(0.1f);
+		yield return _coolDownWait;
 		if(_coolDownTime <= 0.0f)
 		{
 			_projSpawned = false;
 		}
 		else
 		{
-			_coolDownTime -= 0.1f;
+			_coolDownTime -= 0.01f;
 			StartCoroutine(CoolDown());
 		}
 	}
@@ -183,7 +190,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 	private IEnumerator TimeCounter()
 	{
 		_coolDownTime += 1.0f; 
-		yield return new WaitForSeconds(1.0f);
+		yield return _timeCountWait;
 		if(_coolDownTime < 10)
 		{
 			StartCoroutine(TimeCounter());

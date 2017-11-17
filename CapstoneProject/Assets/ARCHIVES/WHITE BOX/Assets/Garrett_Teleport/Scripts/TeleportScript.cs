@@ -120,6 +120,11 @@ public class TeleportScript : MonoBehaviour
         }
     }
 
+    public bool isActive
+    {
+        get { return _isActive; }
+    }
+
     private IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(2.0f);

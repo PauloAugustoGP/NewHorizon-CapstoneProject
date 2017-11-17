@@ -20,7 +20,7 @@ public class Projectile_ObjectScript : MonoBehaviour {
 	private float _maxChargeTime;
 	private float _deltaSize;
 	private string _enemyTag;
-
+	private Vector3 _projectileRayOrigin;
 	/// <summary>
 	/// Returns length of time to be stunned
 	/// </summary>
@@ -40,13 +40,14 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_rb.isKinematic = true;
 	}
 
-	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam)
+	public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam, Vector3 pProjectileRayOrigin)
 	{
 		_projectileSpeed = pProjectileSpeed;
 		_maxChargeTime = pMaxChargeTime;
 		_deltaSize = pDeltaSize;
 		_enemyTag = pEnemyTag;
 		_cam = pCam;
+		_projectileRayOrigin = pProjectileRayOrigin;
 
 		_charging = true;
 
@@ -59,9 +60,10 @@ public class Projectile_ObjectScript : MonoBehaviour {
 		_charging = false;
 
 		Vector3 direction = Vector3.zero;
-		direction = _cam.GetCentreView(transform) - transform.position;
+		direction = _cam.GetCentreView(_projectileRayOrigin) - transform.position;
 
 		_rb.isKinematic = false;
+
 		_rb.velocity = direction.normalized * _projectileSpeed;
 		_col.enabled = true;
 		transform.parent = null;;
@@ -70,6 +72,8 @@ public class Projectile_ObjectScript : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider c)
 	{
+		//Debug.Log(c.ClosestP
+
 		if(c.gameObject.tag == _enemyTag)
 		{
 			Debug.Log("Stunned the enemy for " + _stunTime + " seconds.");

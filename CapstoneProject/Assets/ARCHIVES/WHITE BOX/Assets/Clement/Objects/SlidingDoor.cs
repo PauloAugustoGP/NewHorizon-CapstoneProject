@@ -12,7 +12,7 @@ public class SlidingDoor : MonoBehaviour {
     public float move = 3f;
     public Transform door;
     public bool switchTriggered;
-    SwitchButton sb;
+    [SerializeField] SwitchButton sb;
 
     void Start() {
         status = false;
@@ -21,7 +21,9 @@ public class SlidingDoor : MonoBehaviour {
         if (moveDistance == Vector3.zero) {
             moveDistance = new Vector3(move, transform.position.y, 0);
         }
-        sb = GameObject.FindObjectOfType<SwitchButton>();
+        if(!sb) {
+            sb = GameObject.FindObjectOfType<SwitchButton>();
+        }
     }
 
     void Update() {

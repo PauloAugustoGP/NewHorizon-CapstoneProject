@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class CharacterBehaviour : CharacterBase
 {
     protected int Lives;
-
-    [Header("Live Test")]//LIVE TEST VALUES
-    [SerializeField]
     protected bool isCrouching;
-    public bool ValueDebuger;
+
+    [Header("Test Bools")]//LIVE TEST VALUES
+    [SerializeField] protected bool ValueDebuger;
+    [SerializeField] protected bool Invincibility;
 
     [Header("Drag and Drop")]//DRAG AND DROPS
     [SerializeField] DataTable DT;
@@ -20,12 +21,14 @@ public class CharacterBehaviour : CharacterBase
 
     Animator anim;
     HUD pHud;
+    CapsuleCollider cc;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         pHud = GetComponent<HUD>();
+        cc = GetComponent<CapsuleCollider>();
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
@@ -45,8 +48,16 @@ public class CharacterBehaviour : CharacterBase
         //Upon 0 or Low Health
         if (_health <= 0)
         {
-            //SoundManager.instance.SoundCaller("Death", 0.2f); //First Option Implementation
-            Died();
+            if (!Invincibility)
+            {
+                //SoundManager.instance.SoundCaller("Death", 0.2f); //First Option Implementation
+                Died();
+            }
+            else if (Invincibility)
+            {
+                //SoundManager.instance.SoundCaller("Death", 0.2f); //First Option Implementationa
+                FakeDied();
+            }
         }
 
         //NOT USED ANY WHERE CAN BE REFERENCED
@@ -55,11 +66,12 @@ public class CharacterBehaviour : CharacterBase
             RecoveryRate(1);
         }
 
-        ///Temp Spot //wanted to move to class
+        //Temp Spot //wanted to move to class
         if (moving)
         {
             slowed = isCrouching;
 
+            
             if (!slowed)
             {
                 _MoveV = 400;
@@ -117,21 +129,33 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //Movement
-            rb.velocity = (transform.forward * ft + transform.right * rt) * MoveV * Time.deltaTime;
+            rb.velocity = ((transform.forward * ft + transform.right * rt).normalized * MoveV * Time.deltaTime);
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 isCrouching = !isCrouching;
 
+                Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
+
+                float length = (StandardHeight - CrouchedHeight);
+
+                //if (!Physics.Raycast Crouch (StandardHeight - ))
+
                 if (!isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
+                    cc.height = StandardHeight;
+                    cc.center = new Vector3(0, 1f, 0);
                 }
+              
                 if (isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
+                    cc.height = CrouchedHeight;
+                    cc.center = new Vector3(0, 0.5f, 0);
                 }
+
             }//LeftControl
         }//isAlive
 
@@ -144,6 +168,7 @@ public class CharacterBehaviour : CharacterBase
             Debug.Log("Lives: " + Lives);
             Debug.Log("Get Health Function: " + GetHealth());
             //Debug.Log(_maxHealth);
+            Debug.Log(isCrouching);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
             //Debug.Log("Forward T : " + ft + " Right T : " + rt);
@@ -168,6 +193,21 @@ public class CharacterBehaviour : CharacterBase
         }     
     }//Died
 
+    protected void FakeDied()
+    {
+        Lives--;
+        if (Lives == 0)
+        {
+            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+            SetHealth(_maxHealth);
+        }
+        else
+        {
+            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+            SetHealth(_maxHealth);
+        }
+    }//Died
+
     //Take Damage Function
     public void Damage(int value)
     {
@@ -178,6 +218,29 @@ public class CharacterBehaviour : CharacterBase
     public void Heal(int value)
     {
         _health += value;
+    }
+
+    public void ChangeSpeed(string Speed)
+    {
+        switch (Speed)
+        {
+            case "Slow":
+                _MoveV = 100;
+                break;
+
+            case "Normal":
+                _MoveV = 400;
+                break;
+
+            case "Fast":
+                _MoveV = 450;
+                break;
+        }
+    }
+
+    public bool IsCrouching
+    {
+        get { return isCrouching; }        
     }
 
     void OnCollisionEnter(Collision c)
