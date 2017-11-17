@@ -2984,7 +2984,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1269256284295114}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.4902115}
@@ -3093,8 +3093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCrouching: 0
   ValueDebuger: 0
+  Invincibility: 0
   DT: {fileID: 0}
   StartPosition: {fileID: 0}
 --- !u!114 &114409264926358428
@@ -3143,6 +3143,7 @@ MonoBehaviour:
     _CamController: {fileID: 114145544928030488}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
+    _projectileRayOrigin: {fileID: 0}
   projectileSettings:
     _deltaSize: 0.05
     _projectileSpeed: 10
@@ -3165,6 +3166,7 @@ MonoBehaviour:
   _enemyTag: Enemy
   _stunTime: 5
   _meleeHitBox: {fileID: 1269256284295114}
+  _CB: {fileID: 114190398030796814}
 --- !u!114 &114879915842322614
 MonoBehaviour:
   m_ObjectHideFlags: 1
