@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class CharacterBehaviour : CharacterBase
 {
     protected int Lives;
@@ -65,11 +66,12 @@ public class CharacterBehaviour : CharacterBase
             RecoveryRate(1);
         }
 
-        ///Temp Spot //wanted to move to class
+        //Temp Spot //wanted to move to class
         if (moving)
         {
             slowed = isCrouching;
 
+            
             if (!slowed)
             {
                 _MoveV = 400;
@@ -134,19 +136,26 @@ public class CharacterBehaviour : CharacterBase
             {
                 isCrouching = !isCrouching;
 
+                Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
+
+                float length = (StandardHeight - CrouchedHeight);
+
+                //if (!Physics.Raycast Crouch (StandardHeight - ))
+
                 if (!isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
-                    cc.height = 2;
-                    cc.center = new Vector3(0, 1f ,0);
-
+                    cc.height = StandardHeight;
+                    cc.center = new Vector3(0, 1f, 0);
                 }
+              
                 if (isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
-                    cc.height = 1;
+                    cc.height = CrouchedHeight;
                     cc.center = new Vector3(0, 0.5f, 0);
                 }
+
             }//LeftControl
         }//isAlive
 
@@ -159,6 +168,7 @@ public class CharacterBehaviour : CharacterBase
             Debug.Log("Lives: " + Lives);
             Debug.Log("Get Health Function: " + GetHealth());
             //Debug.Log(_maxHealth);
+            Debug.Log(isCrouching);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
             //Debug.Log("Forward T : " + ft + " Right T : " + rt);

@@ -9,10 +9,14 @@ public class CharacterBase : MonoBehaviour
     protected static int _mana;
     protected float _maxHealth;
     protected float _health;
-    
+    protected static float StandardHeight = 2;
+    protected static float CrouchedHeight = 1;
+
     public static bool moving;
     public static bool Rested;
     public static bool slowed;
+
+    public bool atFullHealth;
 
     protected Rigidbody rb;
 
@@ -31,7 +35,17 @@ public class CharacterBase : MonoBehaviour
         {
             _health = 0;
         }
+
+        if (_health == _maxHealth)
+        {
+            atFullHealth = true;
+        }
+        else
+        {
+            atFullHealth = false;
+        }
     }//SetHealth
+
 
     public static int TeleportResource
     {
