@@ -44,7 +44,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1031902806471148
 GameObject:
   m_ObjectHideFlags: 1
@@ -991,8 +991,8 @@ GameObject:
   - component: {fileID: 223590652014411006}
   - component: {fileID: 114055539215120194}
   - component: {fileID: 114747738439394108}
-  - component: {fileID: 114281858659010408}
   - component: {fileID: 114130472564617334}
+  - component: {fileID: 114331328618970746}
   m_Layer: 5
   m_Name: Canvas_Manager
   m_TagString: Untagged
@@ -1252,7 +1252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1938147531454848
 GameObject:
   m_ObjectHideFlags: 1
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: BackToOptions
         m_Mode: 1
         m_Arguments:
@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: controls
         m_Mode: 1
         m_Arguments:
@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: BackToOptions
         m_Mode: 1
         m_Arguments:
@@ -2225,34 +2225,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114281858659010408
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1775931894008024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c870ef97953f5428b53772ba364b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainPanel: {fileID: 1013392104930514}
-  OptionsPanel: {fileID: 1285266029443834}
-  ControlsPanel: {fileID: 1224719608730248}
-  CreditsPanel: {fileID: 1049936876645960}
-  TestPanel: {fileID: 1073079517460546}
-  LoadingPanel: {fileID: 1629837368824580}
-  AudioPanel: {fileID: 1926948112754272}
-  ButtonDisplay: {fileID: 114767612897608250}
-  MenuButtons:
-  - {fileID: 114446738771228992}
-  - {fileID: 114289177792950918}
-  MasterSlider: {fileID: 114218127501351516}
-  MusicSlider: {fileID: 114835716271052316}
-  SFXSlider: {fileID: 114784959067877754}
-  MasterMute: {fileID: 114003250534734694}
-  MusicMute: {fileID: 114565371100539024}
-  SFXMute: {fileID: 114722719462390290}
 --- !u!114 &114289177792950918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2292,7 +2264,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 0}
         m_MethodName: test2
         m_Mode: 1
         m_Arguments:
@@ -2364,7 +2336,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TestScene2
+  m_Text: 'Tyler''s Level Design
+
+    TestScene2'
 --- !u!114 &114326716880209364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2392,6 +2366,32 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114331328618970746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775931894008024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c870ef97953f5428b53772ba364b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainPanel: {fileID: 1013392104930514}
+  OptionsPanel: {fileID: 1285266029443834}
+  ControlsPanel: {fileID: 1224719608730248}
+  CreditsPanel: {fileID: 1049936876645960}
+  TestPanel: {fileID: 1073079517460546}
+  LoadingPanel: {fileID: 1629837368824580}
+  AudioPanel: {fileID: 1926948112754272}
+  ButtonDisplay: {fileID: 0}
+  MenuButtons: []
+  MasterSlider: {fileID: 114218127501351516}
+  MusicSlider: {fileID: 114835716271052316}
+  SFXSlider: {fileID: 114784959067877754}
+  MasterMute: {fileID: 114003250534734694}
+  MusicMute: {fileID: 114565371100539024}
+  SFXMute: {fileID: 114722719462390290}
 --- !u!114 &114332617268507406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2524,7 +2524,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
@@ -2657,7 +2657,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: Credits
         m_Mode: 1
         m_Arguments:
@@ -2709,7 +2709,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 0}
         m_MethodName: test1
         m_Mode: 1
         m_Arguments:
@@ -2941,7 +2941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3133,7 +3133,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
@@ -3185,7 +3185,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -3324,7 +3324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -3447,7 +3447,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: Options
         m_Mode: 1
         m_Arguments:
@@ -3492,9 +3492,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ObjectBuilding
+  m_Text: 'Clement''s Object Testing
 
-'
+    ObjectBuilding'
 --- !u!114 &114715908725144766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3534,11 +3534,15 @@ MonoBehaviour:
 
     Xray: E
 
-    Teleport: shift
+    Teleport: Shift
 
     Projectile: Spacebar
 
-    Melee: M'
+    Crouch: Left CTRL
+
+    Melee: M
+
+'
 --- !u!114 &114718525147352186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3578,7 +3582,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
@@ -3718,7 +3722,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 0}
         m_MethodName: test3
         m_Mode: 1
         m_Arguments:
@@ -3823,7 +3827,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SmallTestScene
+  m_Text: 'Andre''s Canvas Text
+
+    SmallTestScene'
 --- !u!114 &114784959067877754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4079,7 +4085,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: Audio
         m_Mode: 1
         m_Arguments:
@@ -4293,7 +4299,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114281858659010408}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: Test
         m_Mode: 1
         m_Arguments:
@@ -5153,7 +5159,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5530,11 +5536,11 @@ RectTransform:
   m_Father: {fileID: 224208401380775374}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -95, y: 45}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!224 &224509718945329774
 RectTransform:
   m_ObjectHideFlags: 1
@@ -5549,7 +5555,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5725,7 +5731,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6013,7 +6019,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6031,7 +6037,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6085,7 +6091,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
