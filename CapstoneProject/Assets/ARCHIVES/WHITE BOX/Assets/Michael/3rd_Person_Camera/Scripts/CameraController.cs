@@ -87,7 +87,7 @@ public class CameraController : MonoBehaviour {
 
     private bool _inGame = true;
 
-    private bool inGame
+    public bool inGame
     {
         get
         {
