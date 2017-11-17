@@ -121,10 +121,14 @@ public class CameraController : MonoBehaviour {
         {
             Debug.LogWarning("Xray reference not found.");
         }
+
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	void LateUpdate ()
     {
+
+
         // This is primarily for testing purposes, and freezes camera controls
         if (Input.GetKeyUp(KeyCode.P))
         {
