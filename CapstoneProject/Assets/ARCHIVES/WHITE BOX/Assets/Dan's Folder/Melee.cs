@@ -20,7 +20,10 @@ public class Melee : MonoBehaviour {
 
 	[Header("Drag and Drop Variables")]
 	[SerializeField] private GameObject _meleeHitBox;
-    [SerializeField] private CharacterBehaviour _CB;
+    [SerializeField] private CharacterBehaviour _CB; // CharacterBehaviour Script from player
+    [SerializeField] private TeleportScript _TS; // TeleportScript from player
+
+
 
     private WaitForSeconds _meleeWait = new WaitForSeconds(0.1f);
     private WaitForSeconds _zeroWait = new WaitForSeconds(0.0f);
@@ -36,6 +39,8 @@ public class Melee : MonoBehaviour {
 		_meleeHitBox.GetComponent<TakeDown>().SetUp(_enemyTag, _stunTime);
 
         _CB.GetComponent<CharacterBehaviour>();
+
+        _TS.GetComponent<TeleportScript>();
 	}
 
 	// Update is called once per frame
@@ -49,8 +54,9 @@ public class Melee : MonoBehaviour {
 
 	private IEnumerator Attack()
 	{
-        if (_CB.IsCrouching)
+        if (_CB.IsCrouching && !_TS.isActive)
         {
+
             _meleeHitBox.SetActive(true);
             yield return _meleeWait;
             _meleeHitBox.SetActive(false);
