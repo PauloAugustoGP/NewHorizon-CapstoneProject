@@ -119,5 +119,7 @@ public class Enemy : CharacterBase
     {
         if (particle.name == "Player_Projectile")
             SetIsStunned(true);
+
+        //particle.GetComponent<ParticleSystem>().main.startSize
     }
 }
