@@ -143,15 +143,20 @@ public class CameraController : MonoBehaviour {
 	
 	void FixedUpdate ()
     {
-        if (_inGame)
+        //if (_inGame)
+        //{
+        //    _freezeCamera = false;
+        //    Cursor.lockState = CursorLockMode.Locked;
+        //}
+        //else if (!_inGame)
+        //{
+        //    _freezeCamera = true;
+        //    Cursor.lockState = CursorLockMode.None;
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _freezeCamera = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else if (!_inGame)
-        {
-            _freezeCamera = true;
-            Cursor.lockState = CursorLockMode.None;
+            _freezeCamera = !_freezeCamera;
         }
 
         // Left Shift - Teleport control, freezes camera while held down
@@ -173,9 +178,9 @@ public class CameraController : MonoBehaviour {
             RaycastHit hit;
             Vector3 back = -this.transform.forward; //this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
 
-            if (Physics.Raycast(this.transform.position, back, out hit, _bumperHorizontalCheck))
+            if (Physics.Raycast(this.transform.position + new Vector3(0f, 1f, 0f), back, out hit, _bumperHorizontalCheck))
             {
-                //Debug.DrawLine(this.transform.position, hit.point, Color.red);
+                //Debug.DrawLine(this.transform.position + new Vector3(0f, 1f, 0f), hit.point, Color.red);
                 _wallBumperOn = true;
 
                 float xBuffer = 1f;
@@ -193,7 +198,7 @@ public class CameraController : MonoBehaviour {
 
                 followPosition.x = hit.point.x + xBuffer;
                 followPosition.z = hit.point.z + zBuffer;
-                followPosition.y = Mathf.Lerp(hit.point.y + _bumperCameraHeight, followPosition.y, Time.deltaTime * _damping);
+                //followPosition.y = Mathf.Lerp(hit.point.y + _bumperCameraHeight, followPosition.y, Time.deltaTime * _damping);
             }
             else
             {
@@ -210,7 +215,7 @@ public class CameraController : MonoBehaviour {
                 {
                     // Find the correct rotation for the camera
                     Quaternion wantedRotation = Quaternion.LookRotation(this.transform.position - _mainCam.position, this.transform.up);
-                    //wantedRotation = Quaternion.Euler(0f, wantedRotation.eulerAngles.y, wantedRotation.eulerAngles.z);
+                    wantedRotation = Quaternion.Euler(0f, wantedRotation.eulerAngles.y, wantedRotation.eulerAngles.z);
                     //Debug.Log("Wall Bumper Rotation: " + wantedRotation.eulerAngles);
                     _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, 0.02f * _rotationDamping);
                 }
