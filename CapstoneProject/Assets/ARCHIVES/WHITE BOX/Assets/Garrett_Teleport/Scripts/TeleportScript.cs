@@ -42,13 +42,22 @@ public class TeleportScript : MonoBehaviour
     {
         // make sure there is a teleport point in the scene
         if(!_teleportPoint)
-            Debug.Log("No Teleport Point Prefab added to scene.");
+        {
+            Debug.Log("No Teleport Point Prefab added to Player.");
+            _teleportPoint = GameObject.Find("TeleportPoint");
+        }
         // make sure there is a Player Shadow in the scene
-        if(!_fakePlayer)
+        if (!_fakePlayer)
+        {
             Debug.Log("No player shadow prefab added to scene.");
+            _fakePlayer = GameObject.Find("PlayerShadow");
+        }
         // make sure there is a teleport radius in the scene
-        if(!_radius)
+        if (!_radius)
+        {
             Debug.Log("No teleport radius added to scene");
+            _radius = GameObject.Find("TeleportRadius");
+        }
 
         // initializing variables
         _isCooled = true;
