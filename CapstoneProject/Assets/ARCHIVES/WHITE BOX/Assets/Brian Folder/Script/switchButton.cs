@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SwitchButton : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject door;
+    [Tooltip("Assign the door you want to open")]
+    public GameObject door;
+    [Tooltip("Script inside of the assigned Door, calls the toggleDoorState function")]
     private Door actualDoor;
-    private bool _switchTriggered;
+    [Tooltip("Shows if the door is triggered or not")]
+    public bool _switchTriggered;
 
     void Start()
     {
         actualDoor = door.GetComponentInChildren<Door>();
-        Debug.Log(actualDoor);
     }
-
         private void OnTriggerEnter(Collider other)
     {   
         if (other.gameObject.tag == "Projectile")
@@ -24,7 +24,6 @@ public class SwitchButton : MonoBehaviour
         }
             
     }
-
     public bool switchTriggered
     {
         get { return _switchTriggered; }
