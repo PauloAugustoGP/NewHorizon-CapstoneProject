@@ -71,7 +71,6 @@ public class CharacterBehaviour : CharacterBase
         {
             slowed = isCrouching;
 
-            
             if (!slowed)
             {
                 _MoveV = 400;
@@ -140,22 +139,20 @@ public class CharacterBehaviour : CharacterBase
 
                 float length = (StandardHeight - CrouchedHeight);
 
-                //if (!Physics.Raycast Crouch (StandardHeight - ))
-
                 if (!isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
                     cc.height = StandardHeight;
                     cc.center = new Vector3(0, 1f, 0);
                 }
-              
+
                 if (isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
                     cc.height = CrouchedHeight;
                     cc.center = new Vector3(0, 0.5f, 0);
                 }
-
+                
             }//LeftControl
         }//isAlive
 
@@ -243,33 +240,29 @@ public class CharacterBehaviour : CharacterBase
         get { return isCrouching; }        
     }
 
-    void OnCollisionEnter(Collision c)
+    void OnCollisionEnter(Collision H)
     {
-        //Enemy Projectile Name!!!! SUBJECT TO CHANGE
-        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
-        {
-            Damage(20);
-        }
-
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
-        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
             Heal(20);
         }
     }//ColENTER
 
-    void OnTriggerEnter(Collider c)
+    void OnTriggerEnter(Collider H)
     {
-        //Enemy Projectile Name!!!!!! SUBJECT TO CHANGE
-        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
-        {
-            Damage(20);
-        }
-
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
-        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
             Heal(20);
         }
     }//ColTRIGGER
+
+    private void OnParticleCollision(GameObject D)
+    {
+        if (D.name == "Enemy_Projectile")
+        {
+            Damage(5);
+        }
+    }
 }
