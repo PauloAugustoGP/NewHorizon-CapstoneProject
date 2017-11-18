@@ -673,6 +673,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!4 &120593040 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4588065231693306, guid: 42cea03f7218ef34295261866e749ed1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1757510272}
 --- !u!1 &123318335 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1323520448978802, guid: 0d8fe6b6a6133ae419056be9f5492a50,
@@ -7917,7 +7922,12 @@ Prefab:
         type: 2}
       propertyPath: dragAndDropVariables._CamController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 896082360}
+    - target: {fileID: 114642004555760492, guid: 42cea03f7218ef34295261866e749ed1,
+        type: 2}
+      propertyPath: dragAndDropVariables._projectileRayOrigin
+      value: 
+      objectReference: {fileID: 120593040}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42cea03f7218ef34295261866e749ed1, type: 2}
   m_IsPrefabParent: 0
