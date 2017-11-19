@@ -542,7 +542,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: {fileID: 114188260084651708}
-  timeRemaining: 0
+  useScript: 0
+  waitTime: 30
+  isCoolingDown: 1
   projectilePlayerScript: {fileID: 0}
 --- !u!114 &114061569281005104
 MonoBehaviour:
@@ -750,7 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6691177, g: 0.2017193, b: 0.2017193, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1047,7 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6691177, g: 0.2017193, b: 0.2017193, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1264,7 +1266,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: {fileID: 114497810669589646}
-  timeRemaining: 0
+  useScript: 0
+  waitTime: 2
+  isCoolingDown: 1
   projectilePlayerScript: {fileID: 0}
 --- !u!114 &114672964819313222
 MonoBehaviour:
@@ -1305,7 +1309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: {fileID: 114806428876328210}
-  timeRemaining: 0
+  useScript: 0
+  waitTime: 30
+  isCoolingDown: 1
   projectilePlayerScript: {fileID: 0}
 --- !u!114 &114775684426561902
 MonoBehaviour:
@@ -1360,7 +1366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6691177, g: 0.2017193, b: 0.2017193, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
