@@ -16,11 +16,14 @@ public class Pause : MonoBehaviour
 
     public bool isPaused;
 
+	public CameraController _cameraController;
+
     // Use this for initialization
     void Start()
-    {
+	{
+
         isPaused = false;
-        if (resumeBtn)
+        /*if (resumeBtn)
         {
 
             resumeBtn.onClick.AddListener(delegate
@@ -28,7 +31,7 @@ public class Pause : MonoBehaviour
                 GetComponentInChildren<Canvas>().enabled = false;
                 Time.timeScale = 1.0f;
             });
-        }
+        }*/
 
         if (restartBtn)
         {
@@ -38,28 +41,24 @@ public class Pause : MonoBehaviour
             isPaused = false;
         }
           
-        if (quitBtn)
+        /*if (quitBtn)
         {
             quitBtn.onClick.AddListener (Scene_Manager.instance.GoTo_MENU); 
-        }  
+        }*/ 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)|| Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GetComponentInChildren<Canvas>().enabled == false)
+			if (!isPaused)
             {
-                GetComponentInChildren<Canvas>().enabled = true;
-                Time.timeScale = 0f;
-                isPaused = true;
+				PauseGame(true);
             }
-            else if (GetComponentInChildren<Canvas>().enabled == true)
+			else if (isPaused)
             {
-                GetComponentInChildren<Canvas>().enabled = false;
-                Time.timeScale = 1.0f;
-                isPaused = false;
+				PauseGame(false);
             }
 
             
@@ -80,4 +79,22 @@ public class Pause : MonoBehaviour
             Time.timeScale = 0f;
         }*/
     }
+
+	public void PauseGame(bool pPause)
+	{
+		if(pPause)
+		{
+			GetComponentInChildren<Canvas>().enabled = true;
+			Time.timeScale = 0f;
+			isPaused = true;
+			_cameraController.inGame = false;
+		}
+		else
+		{
+			GetComponentInChildren<Canvas>().enabled = false;
+			Time.timeScale = 1.0f;
+			isPaused = false;
+			_cameraController.inGame = true;
+		}
+	}
 }

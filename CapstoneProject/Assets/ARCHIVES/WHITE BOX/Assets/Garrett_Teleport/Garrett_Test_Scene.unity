@@ -198,9 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCrouching: 0
-  DT: {fileID: 0}
   ValueDebuger: 0
+  Invincibility: 0
+  DT: {fileID: 0}
+  StartPosition: {fileID: 0}
 --- !u!95 &72487857
 Animator:
   serializedVersion: 3
@@ -364,8 +365,7 @@ GameObject:
   m_PrefabInternal: {fileID: 169185948}
 --- !u!4 &169185950 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4469299573698010, guid: 3b1d799b07b85d84daaf2dfdf6006a24,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 169185948}
 --- !u!1 &196794476
 GameObject:
@@ -785,6 +785,7 @@ GameObject:
   - component: {fileID: 452375726}
   - component: {fileID: 452375725}
   - component: {fileID: 452375724}
+  - component: {fileID: 452375730}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -888,6 +889,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &452375730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 452375723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838b50d92fd2f4d78a95b3883acf1fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useCoolDown: 1
+  _enemyTag: Enemy
+  dragAndDropVariables:
+    _projectileSpawn: {fileID: 0}
+    _CamController: {fileID: 0}
+    _projectilePrefab: {fileID: 0}
+    _projectileRayOrigin: {fileID: 0}
+  projectileSettings:
+    _deltaSize: 0.05
+    _projectileSpeed: 10
+    _maxChargeTime: 10
+  componentsToDisable: []
 --- !u!1 &467561666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,8 +1755,7 @@ GameObject:
   m_PrefabInternal: {fileID: 782041814}
 --- !u!4 &782041816 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4152301168980358, guid: 4fe812aad2ee60247b7108d26d6a1579,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 782041814}
 --- !u!1 &995679336
 GameObject:

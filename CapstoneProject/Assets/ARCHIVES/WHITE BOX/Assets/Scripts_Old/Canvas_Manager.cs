@@ -6,24 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class Canvas_Manager : MonoBehaviour
 {
-    [SerializeField] GameObject MainPanel;
-    [SerializeField] GameObject OptionsPanel;
-    [SerializeField] GameObject ControlsPanel;
-    [SerializeField] GameObject CreditsPanel;
-    [SerializeField] GameObject TestPanel;
-    [SerializeField] GameObject LoadingPanel;
-    [SerializeField] GameObject AudioPanel;
+    public GameObject MainPanel;
+    public GameObject OptionsPanel;
+    public GameObject ControlsPanel;
+    public GameObject CreditsPanel;
+    public GameObject TestPanel;
+    public GameObject LoadingPanel;
+    public GameObject AudioPanel;
 
-    [SerializeField] Text ButtonDisplay;
-    [SerializeField] Button[] MenuButtons;
+    public Text ButtonDisplay;
+    public Button[] MenuButtons;
 
-    [SerializeField] Slider MasterSlider;
-    [SerializeField] Slider MusicSlider;
-    [SerializeField] Slider SFXSlider;
+    public Slider MasterSlider;
+    public Slider MusicSlider;
+    public Slider SFXSlider;
 
-    [SerializeField] Toggle MasterMute;
-    [SerializeField] Toggle MusicMute;
-    [SerializeField] Toggle SFXMute;
+    public Toggle MasterMute;
+    public Toggle MusicMute;
+    public Toggle SFXMute;
 
     public void StartGame()
     {

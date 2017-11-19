@@ -25,7 +25,7 @@ public class BTFoundPlayer : BTDecision
     {
         if (agent.GetIsStunned())
             return -1; // FAIL
-
+        
         if (Vector3.Distance(agentTransform.position, target.transform.position) <= lineOfSight)
         {
             Vector3 directionToTarget = (target.transform.position - agentTransform.position);
@@ -34,6 +34,7 @@ public class BTFoundPlayer : BTDecision
             {
                 if (LineCastToTarget(target.transform))
                 {
+                    Debug.Log("FOUND PLAYER");
                     agent.SetHasPath(false);
                     agent.SetIsAttacking(true);
                     agent.SetIsSearching(false);
@@ -54,10 +55,10 @@ public class BTFoundPlayer : BTDecision
     bool LineCastToTarget(Transform targetLocation)
     {
         RaycastHit hit;
-        
-        if (Physics.Linecast(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y+0.2f, targetLocation.position.z), out hit))
+        //Debug.DrawLine(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y + 1.0f, targetLocation.position.z));
+        if (Physics.Linecast(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y+1.0f, targetLocation.position.z), out hit))
         {
-            if (hit.transform.tag == "Player")
+            if (hit.transform.CompareTag("Player"))
                 return true;
         }
 

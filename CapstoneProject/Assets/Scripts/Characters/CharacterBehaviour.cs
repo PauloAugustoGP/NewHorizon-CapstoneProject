@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class CharacterBehaviour : CharacterBase
 {
     protected int Lives;
@@ -19,14 +20,14 @@ public class CharacterBehaviour : CharacterBase
     [SerializeField] Transform StartPosition;
 
     Animator anim;
-    HUD pHud;
+    //HUD pHud;
     CapsuleCollider cc;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        pHud = GetComponent<HUD>();
+        //pHud = GetComponent<HUD>();
         cc = GetComponent<CapsuleCollider>();
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
@@ -40,7 +41,7 @@ public class CharacterBehaviour : CharacterBase
 
         if (Lives == 0)
             Lives = 3;
-	}
+    }
 	
 	void Update ()
     {
@@ -65,7 +66,7 @@ public class CharacterBehaviour : CharacterBase
             RecoveryRate(1);
         }
 
-        ///Temp Spot //wanted to move to class
+        //Temp Spot //wanted to move to class
         if (moving)
         {
             slowed = isCrouching;
@@ -127,7 +128,7 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //Movement
-            rb.velocity = (transform.forward * ft + transform.right * rt) * MoveV * Time.deltaTime;
+            rb.velocity = ((transform.forward * ft + transform.right * rt).normalized * MoveV * Time.deltaTime);
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -137,28 +138,45 @@ public class CharacterBehaviour : CharacterBase
                 if (!isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
-                    cc.height = 2;
-                    cc.center = new Vector3(0, 1f ,0);
-
+                    cc.height = StandardHeight;
+                    cc.center = new Vector3(0, 1f, 0);
                 }
+
                 if (isCrouching)
                 {
                     anim.SetBool("Crouching", isCrouching);
-                    cc.height = 1;
+                    cc.height = CrouchedHeight;
                     cc.center = new Vector3(0, 0.5f, 0);
                 }
+                
             }//LeftControl
         }//isAlive
 
         //TEMP AREA check mark in INSPECTOR to view log
         if (ValueDebuger)
         {
+            //Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
+
+            //float length = (StandardHeight - CrouchedHeight);
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Heal(20);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Damage(5);
+            }
+
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
             Debug.Log("Health: " + _health);
-            Debug.Log("Lives: " + Lives);
-            Debug.Log("Get Health Function: " + GetHealth());
-            //Debug.Log(_maxHealth);
+            //Debug.Log("Lives: " + Lives);
+            // Debug.Log("Get Health Function: " + GetHealth());
+            //Debug.Log("Vertical Raycast" +!Physics.Raycast(posUp, Vector3.up,length));
+            Debug.Log(_maxHealth);
+            //Debug.Log(isCrouching);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);
             //Debug.Log("Forward T : " + ft + " Right T : " + rt);
@@ -201,13 +219,13 @@ public class CharacterBehaviour : CharacterBase
     //Take Damage Function
     public void Damage(int value)
     {
-        _health -= value;
+        SetHealth(_health -= value);
     }
 
     //Heal Function
     public void Heal(int value)
     {
-        _health += value;
+        SetHealth(_health += value);
     }
 
     public void ChangeSpeed(string Speed)
@@ -233,33 +251,29 @@ public class CharacterBehaviour : CharacterBase
         get { return isCrouching; }        
     }
 
-    void OnCollisionEnter(Collision c)
+    void OnCollisionEnter(Collision H)
     {
-        //Enemy Projectile Name!!!! SUBJECT TO CHANGE
-        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
-        {
-            Damage(20);
-        }
-
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
-        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
             Heal(20);
         }
     }//ColENTER
 
-    void OnTriggerEnter(Collider c)
+    void OnTriggerEnter(Collider H)
     {
-        //Enemy Projectile Name!!!!!! SUBJECT TO CHANGE
-        if (c.gameObject.name == "TempProjectile" || c.gameObject.name == "EnemyProjectile")
-        {
-            Damage(20);
-        }
-
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
-        if (c.gameObject.name == "HealthPack" || c.gameObject.name == "Health")
+        if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
             Heal(20);
         }
     }//ColTRIGGER
+
+    private void OnParticleCollision(GameObject D)
+    {
+        if (D.name == "Enemy_Projectile")
+        {
+            Damage(5);
+        }
+    }
 }
