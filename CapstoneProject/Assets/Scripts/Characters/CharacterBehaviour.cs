@@ -10,6 +10,7 @@ public class CharacterBehaviour : CharacterBase
 {
     protected int Lives;
     protected bool isCrouching;
+    protected bool encumbered;
 
     [Header("Test Bools")]//LIVE TEST VALUES
     [SerializeField] protected bool ValueDebuger;
@@ -18,6 +19,8 @@ public class CharacterBehaviour : CharacterBase
     [Header("Drag and Drop")]//DRAG AND DROPS
     [SerializeField] DataTable DT;
     [SerializeField] Transform StartPosition;
+
+    [SerializeField] LayerMask LM;
 
     Animator anim;
     //HUD pHud;
@@ -41,10 +44,22 @@ public class CharacterBehaviour : CharacterBase
 
         if (Lives == 0)
             Lives = 3;
+
     }
-	
-	void Update ()
+
+    void Update ()
     {
+        RaycastHit OverHeadHit;
+
+        if (Physics.Raycast(transform.position, transform.up, out OverHeadHit, (length + (length * 1.5f)), LM))
+        {
+            encumbered = true;
+        }
+        else
+        {
+            encumbered = false;
+        }
+
         //Upon 0 or Low Health
         if (_health <= 0)
         {
@@ -135,7 +150,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 isCrouching = !isCrouching;
 
-                if (!isCrouching)
+                if (!isCrouching && !encumbered)
                 {
                     anim.SetBool("Crouching", isCrouching);
                     cc.height = StandardHeight;
@@ -155,10 +170,6 @@ public class CharacterBehaviour : CharacterBase
         //TEMP AREA check mark in INSPECTOR to view log
         if (ValueDebuger)
         {
-            //Vector3 posUp = transform.position + new Vector3(0, CrouchedHeight - (StandardHeight * 0.5f), 0);
-
-            //float length = (StandardHeight - CrouchedHeight);
-
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Heal(20);
@@ -169,13 +180,14 @@ public class CharacterBehaviour : CharacterBase
                 Damage(5);
             }
 
+            //Debug.LogFormat("Encombered? {0}",encumbered);
             //Debug.Log(MoveV);
             //Debug.Log(slowed);
-            Debug.Log("Health: " + _health);
+            //Debug.Log("Health: " + _health);
             //Debug.Log("Lives: " + Lives);
-            // Debug.Log("Get Health Function: " + GetHealth());
+            //Debug.Log("Get Health Function: " + GetHealth());
             //Debug.Log("Vertical Raycast" +!Physics.Raycast(posUp, Vector3.up,length));
-            Debug.Log(_maxHealth);
+            //Debug.Log(_maxHealth);
             //Debug.Log(isCrouching);
             //Debug.Log(TeleportResource);
             //Debug.Log(_health);

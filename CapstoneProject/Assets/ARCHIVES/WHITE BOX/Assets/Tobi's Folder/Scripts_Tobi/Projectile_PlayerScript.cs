@@ -1,23 +1,22 @@
-﻿using System.Collections;
+﻿/*
+Instructions:
+1: Add this script onto the player.
+2: Add an empty gameobject onto the player that will the projectile spawn point. Drag and drop that gameobject into the Projectile Spawn field.
+3: Drag and drop the camera into the Cam Controller field.
+4: Place the prefab called Play_Projectile into the projectile prefab field. 
+5: Default Projectile Settings are fine. If you want to change, deltasize is the change in size, projectile speed is how fast the projectile flies
+	max charge time is the maximum amount of time you can charge the projectile.
+6: Enemy string is the tag the enemy will have.
+7: Drag every componenet you want disabled into the componenets to disable array. These componenets will be deactivated while this skill is being used.
+6: Finished :)
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile_PlayerScript : MonoBehaviour
 {
-
-	/*
-	Instructions:
-	1: Add this script onto the player.
-	2: Add an empty gameobject onto the player that will the projectile spawn point. Drag and drop that gameobject into the Projectile Spawn field.
-	3: Drag and drop the camera into the Cam Controller field.
-	4: Place the prefab called Play_Projectile into the projectile prefab field. 
-	5: Default Projectile Settings are fine. If you want to change, deltasize is the change in size, projectile speed is how fast the projectile flies
-		max charge time is the maximum amount of time you can charge the projectile.
-	6: Enemy string is the tag the enemy will have.
-	7: Drag every componenet you want disabled into the componenets to disable array. These componenets will be deactivated while this skill is being used.
-	6: Finished :)
-	*/
-
 	[System.Serializable]
 	public class DragDrop
 	{

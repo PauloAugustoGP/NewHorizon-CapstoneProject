@@ -11,8 +11,11 @@ public class HeathBoxPickUp : MonoBehaviour {
     {
         if (c.GetComponent<CharacterBehaviour>())
         {
-            c.GetComponent<CharacterBehaviour>().Heal(20);
-            Destroy(gameObject);
+            if (c.GetComponent<CharacterBehaviour>().atFullHealth == false)
+            {
+                c.GetComponent<CharacterBehaviour>().Heal(20);
+                Destroy(gameObject);
+            }
         }
     }
  
