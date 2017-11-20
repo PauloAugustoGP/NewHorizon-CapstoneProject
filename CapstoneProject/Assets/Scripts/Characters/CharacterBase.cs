@@ -20,6 +20,8 @@ public class CharacterBase : MonoBehaviour
 
     public bool atFullHealth;
 
+    protected float length = (StandardHeight - CrouchedHeight);
+
     protected Rigidbody rb;
 
     public float GetHealth()
