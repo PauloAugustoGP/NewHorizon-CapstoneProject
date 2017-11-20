@@ -18,9 +18,20 @@ public class Pause : MonoBehaviour
 
 	public CameraController _cameraController;
 
+	[SerializeField] private GameObject[] _objectsToDisable;
+	private LinkedList<MonoBehaviour> _componentsToDisable = new LinkedList<MonoBehaviour>();
+
+
     // Use this for initialization
     void Start()
 	{
+		foreach(GameObject go in _objectsToDisable)
+		{
+			foreach(MonoBehaviour mo in go.GetComponentsInChildren<MonoBehaviour>())
+			{
+				_componentsToDisable.AddLast(mo);
+			}
+		}
 
         isPaused = false;
         /*if (resumeBtn)
@@ -50,7 +61,7 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.L))
         {
 			if (!isPaused)
             {
@@ -84,17 +95,31 @@ public class Pause : MonoBehaviour
 	{
 		if(pPause)
 		{
+			SetGame(false);
+			_cameraController.inGame = false;
+			Cursor.lockState = CursorLockMode.Confined;
 			GetComponentInChildren<Canvas>().enabled = true;
 			Time.timeScale = 0f;
 			isPaused = true;
-			_cameraController.inGame = false;
 		}
 		else
 		{
+			SetGame(true);
+			_cameraController.inGame = true;
 			GetComponentInChildren<Canvas>().enabled = false;
 			Time.timeScale = 1.0f;
 			isPaused = false;
-			_cameraController.inGame = true;
+		}
+	}
+
+	private void SetGame(bool pState)
+	{
+		if(_componentsToDisable.Count > 0)
+		{
+			foreach (MonoBehaviour script in _componentsToDisable)
+			{
+				script.enabled = pState;
+			}
 		}
 	}
 }

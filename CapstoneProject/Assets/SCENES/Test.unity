@@ -6720,6 +6720,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4001984726238336, guid: 80d22814d15b84042964c04f77d2263d,
     type: 2}
   m_PrefabInternal: {fileID: 1493597264}
+--- !u!1 &1500741353 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1724911310850826, guid: 42cea03f7218ef34295261866e749ed1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1757510272}
 --- !u!1001 &1502010562
 Prefab:
   m_ObjectHideFlags: 0
@@ -10290,6 +10295,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: componentsToDisable.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
       propertyPath: m_LocalPosition.x
       value: 40.732834
@@ -10332,6 +10347,31 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 764963795}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: componentsToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 764963795}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: componentsToDisable.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1500741353}
+    - target: {fileID: 114226013747585616, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: disableLogging
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 1500741353}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
   m_IsPrefabParent: 0

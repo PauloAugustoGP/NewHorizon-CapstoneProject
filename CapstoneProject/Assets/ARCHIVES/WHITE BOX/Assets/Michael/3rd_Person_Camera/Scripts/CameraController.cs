@@ -86,6 +86,8 @@ public class CameraController : MonoBehaviour {
 
     private TeleportScript _tpRef;
 
+	private CursorLockMode wantedMode;
+
     // Pause behaviour for Cursor
     private bool _inGame = true;
 
@@ -145,10 +147,10 @@ public class CameraController : MonoBehaviour {
         if (_inGame)
         {
             _freezeCamera = false;
+
             if (_tpRef.isActive)
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = false;
+				Cursor.lockState = CursorLockMode.Confined;
             }
             else
             {
@@ -158,8 +160,8 @@ public class CameraController : MonoBehaviour {
         else if (!_inGame)
         {
             _freezeCamera = true;
-            Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
+
+
         }
 
         //if (Input.GetKeyDown(KeyCode.Escape))
@@ -251,6 +253,14 @@ public class CameraController : MonoBehaviour {
             }
         }
     }
+
+	// Apply requested cursor state
+	void SetCursorState()
+	{
+		Cursor.lockState = wantedMode;
+		// Hide cursor when locking
+		Cursor.visible = (CursorLockMode.Locked != wantedMode);
+	}
 
     // Raycasts from the camera's centre of view and returns the first point of collision
 	public Vector3 GetCentreView(Vector3 pRayOrigin)
