@@ -159,6 +159,7 @@ public class CameraController : MonoBehaviour {
         {
             _freezeCamera = true;
             Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
         }
 
         //if (Input.GetKeyDown(KeyCode.Escape))

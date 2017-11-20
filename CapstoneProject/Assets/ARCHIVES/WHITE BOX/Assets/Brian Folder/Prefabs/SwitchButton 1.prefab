@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33706925766440126}
   - component: {fileID: 23466755042777874}
   - component: {fileID: 65292369149129402}
-  - component: {fileID: 114375255742700712}
+  - component: {fileID: 114003599276378468}
   m_Layer: 0
   m_Name: SwitchButton 1
   m_TagString: Untagged
@@ -36,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264238128139270}
-  m_LocalRotation: {x: -0.7071068, y: -0.7071068, z: 0, w: 0}
-  m_LocalPosition: {x: 2.515771, y: 1.482, z: 24.38}
+  m_LocalRotation: {x: 0, y: 0.5, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: -14.71, y: 1.22, z: -26.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,8 +56,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6d9187bbc629d8346b7d43e2860f6ad8, type: 2}
-  - {fileID: 2100000, guid: 17d1d46ff281b9f49936a58fb807a93b, type: 2}
+  - {fileID: 2100000, guid: 4adf58a0b331f2e4093c69af0d8f0ba8, type: 2}
+  - {fileID: 2100000, guid: 65d63dfe8139b435c90c087eb9582982, type: 2}
   - {fileID: 2100000, guid: c282727299402384db7a322915d61087, type: 2}
   - {fileID: 2100000, guid: d4bca1836fc32bd4aa72d6076269b97b, type: 2}
   - {fileID: 2100000, guid: 51b55bcc07cf1d9448a1cfc2d7a464b8, type: 2}
@@ -100,7 +100,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.00000017762186, y: -0.00000021398068, z: -0.00059668394}
---- !u!114 &114375255742700712
+--- !u!114 &114003599276378468
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -111,4 +111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013555c35f8b47f4ca301a92aebf6f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
+  door: {fileID: 0}
+  _switchTriggered: 0

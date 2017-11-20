@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54366744277468188}
   - component: {fileID: 195642125187147732}
   - component: {fileID: 114857705484816104}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4536153480128652}
   - component: {fileID: 65293074222934964}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Punch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 33078802545898210}
   - component: {fileID: 65400409052928614}
   - component: {fileID: 23782425026448780}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 4379739052892388}
   - component: {fileID: 198583168644915204}
   - component: {fileID: 199295832127620328}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba71ee7791e779940bd0fab577c7c6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atFullHealth: 0
   enemyData: {fileID: 0}
   btData: {fileID: 0}
   milestones: []

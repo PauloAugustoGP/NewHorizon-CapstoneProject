@@ -8,6 +8,8 @@ public class CharacterBase : MonoBehaviour
     protected static float _MoveV;
     protected static int _mana;
     protected float _maxHealth;
+
+    [SerializeField]
     protected float _health;
     protected static float StandardHeight = 2;
     protected static float CrouchedHeight = 1;

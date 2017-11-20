@@ -5,20 +5,26 @@ using UnityEngine;
 public class SwitchButton : MonoBehaviour
 {
     [Tooltip("Assign the door you want to open")]
-    public GameObject door;
+    [SerializeField]
+    private GameObject door;
     [Tooltip("Script inside of the assigned Door, calls the toggleDoorState function")]
     private Door actualDoor;
     [Tooltip("Shows if the door is triggered or not")]
-    public bool _switchTriggered;
+    [SerializeField]
+    private bool _switchTriggered;
+
+    MeshRenderer buttonMesh;
 
     void Start()
     {
+        buttonMesh = GetComponent<MeshRenderer>();
         actualDoor = door.GetComponentInChildren<Door>();
     }
-        private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {   
         if (other.gameObject.tag == "Projectile")
         {
+            buttonMesh.material.SetColor("_Color", Color.green);
             switchTriggered = true;
             actualDoor.toggleDoorState();
         }
