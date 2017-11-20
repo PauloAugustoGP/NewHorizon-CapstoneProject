@@ -153,6 +153,8 @@ public class CameraController : MonoBehaviour {
 
             if (_tpRef.isActive)
             {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
 				Cursor.lockState = CursorLockMode.Confined;
             }
             else
@@ -163,8 +165,6 @@ public class CameraController : MonoBehaviour {
         else if (!_inGame)
         {
             _freezeCamera = true;
-
-
         }
 
         //if (Input.GetKeyDown(KeyCode.Escape))
