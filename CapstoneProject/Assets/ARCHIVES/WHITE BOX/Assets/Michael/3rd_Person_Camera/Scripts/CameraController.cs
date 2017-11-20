@@ -233,12 +233,12 @@ public class CameraController : MonoBehaviour {
                     //Debug.Log("Wall Bumper Rotation: " + wantedRotation.eulerAngles);
                     _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, 0.02f * _rotationDamping);
                 }
-                else
-                {
+                //else
+                //{
                     //Debug.Log("Normal Rotation: " + rotation.eulerAngles);
                     // Apply horizontal and vertical rotation to camera
                     _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, rotation, 0.02f * _rotationDamping);
-                }
+                //}
 
                 //Apply horizontal rotation to player, if Xray is _not_ active
                 if (_xrayRef)

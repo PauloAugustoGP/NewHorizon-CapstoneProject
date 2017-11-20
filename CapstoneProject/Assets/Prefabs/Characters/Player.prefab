@@ -3077,6 +3077,9 @@ MonoBehaviour:
   _sensitivityY: 0
   _rotSpeedX: 0
   _rotSpeedY: 0
+  _playerIgnoreLM:
+    serializedVersion: 2
+    m_Bits: 4294966783
 --- !u!114 &114190398030796814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3088,6 +3091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 0
   atFullHealth: 0
   ValueDebuger: 0
   Invincibility: 0
@@ -3121,6 +3125,9 @@ MonoBehaviour:
   _maxTeleportDistance: 5
   _minTeleportDistance: 1
   _isCooled: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114642004555760492
 MonoBehaviour:
   m_ObjectHideFlags: 1
