@@ -8143,6 +8143,11 @@ Prefab:
       propertyPath: dragAndDropVariables._projectileRayOrigin
       value: 
       objectReference: {fileID: 120593040}
+    - target: {fileID: 114014675824411722, guid: 42cea03f7218ef34295261866e749ed1,
+        type: 2}
+      propertyPath: _playerIgnoreLM.m_Bits
+      value: 4294966783
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42cea03f7218ef34295261866e749ed1, type: 2}
   m_IsPrefabParent: 0
@@ -10288,93 +10293,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!1001 &2081296631
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: _objectsToDisable.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: componentsToDisable.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 40.732834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 91.444984
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 11.053957
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4564936550300250, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: _cameraController
-      value: 
-      objectReference: {fileID: 896082360}
-    - target: {fileID: 114226013747585616, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 764963795}
-    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: componentsToDisable.Array.data[0]
-      value: 
-      objectReference: {fileID: 764963795}
-    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: componentsToDisable.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1500741353}
-    - target: {fileID: 114226013747585616, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: disableLogging
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
-        type: 2}
-      propertyPath: _objectsToDisable.Array.data[0]
-      value: 
-      objectReference: {fileID: 1500741353}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &2090299428
 Prefab:
   m_ObjectHideFlags: 0
@@ -10521,3 +10439,64 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1001 &2144912357
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114605896287538778, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 40.732834
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 91.444984
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 11.053957
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653038464249336, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_Name
+      value: UI_Setup 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114605896287538778, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: _cameraController
+      value: 
+      objectReference: {fileID: 896082360}
+    - target: {fileID: 114605896287538778, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 1500741353}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+  m_IsPrefabParent: 0
