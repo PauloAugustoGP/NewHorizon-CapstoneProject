@@ -36,6 +36,9 @@ public class TeleportScript : MonoBehaviour
     // used for making sure player cannot hold down shift while cooling down then not be able to see radius
     private bool _isActive;
 
+    // layermask for Raycast Collision
+    [SerializeField]
+    LayerMask _layerMask;
 
     // Use this for initialization
     void Start()
@@ -72,7 +75,7 @@ public class TeleportScript : MonoBehaviour
         // raycast points to mouse location
         Ray tempRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         // if raycast hits something
-        if (Physics.Raycast(tempRay, out tempHit))
+        if (Physics.Raycast(tempRay, out tempHit, _layerMask))
         {
             // set the teleport points position to the raycasts hit point    
             _teleportPoint.transform.position = tempHit.point;
