@@ -2724,6 +2724,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 497064303}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &508866123 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1046757454951584, guid: 9f35a3ed0b5724d42a2f1243c3931c2d,
+    type: 2}
+  m_PrefabInternal: {fileID: 2125398971}
+--- !u!114 &508866124 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114747387096022546, guid: 9f35a3ed0b5724d42a2f1243c3931c2d,
+    type: 2}
+  m_PrefabInternal: {fileID: 2125398971}
+  m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
 --- !u!1 &518355255
 GameObject:
   m_ObjectHideFlags: 0
@@ -7564,6 +7575,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4292549099352838, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
       propertyPath: m_LocalPosition.x
       value: 40.732834
@@ -7605,6 +7621,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: _cameraController
+      value: 
+      objectReference: {fileID: 508866124}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 508866123}
+    - target: {fileID: 114605896287538778, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.data[1]
+      value: 
+      objectReference: {fileID: 871091616}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11d0d3ff6c6244b95bb1f7ecbc3e96d6, type: 2}
   m_IsPrefabParent: 0
@@ -12088,6 +12119,11 @@ Prefab:
       propertyPath: StartPosition
       value: 
       objectReference: {fileID: 1479441930}
+    - target: {fileID: 114747387096022546, guid: 9f35a3ed0b5724d42a2f1243c3931c2d,
+        type: 2}
+      propertyPath: _playerIgnoreLM.m_Bits
+      value: 4294966783
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f35a3ed0b5724d42a2f1243c3931c2d, type: 2}
   m_IsPrefabParent: 0
