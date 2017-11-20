@@ -46,16 +46,19 @@ public class Pause : MonoBehaviour
 
         if (restartBtn)
         {
-            restartBtn.onClick.AddListener(delegate { Scene_Manager.instance.Reload_LEVEL(); });
+            restartBtn.onClick.AddListener( Scene_Manager.instance.Reload_LEVEL);
             GetComponentInChildren<Canvas>().enabled = false;
             Time.timeScale = 1.0f;
             isPaused = false;
         }
-          
-        /*if (quitBtn)
+
+        if (quitBtn)
         {
-            quitBtn.onClick.AddListener (Scene_Manager.instance.GoTo_MENU); 
-        }*/ 
+            Debug.Log("quitting");
+            quitBtn.onClick.AddListener( Scene_Manager.instance.GoTo_MENU);
+            Debug.Log("quitting2");
+
+        } 
     }
 
     // Update is called once per frame
@@ -65,11 +68,17 @@ public class Pause : MonoBehaviour
         {
 			if (!isPaused)
             {
-				PauseGame(true);
+				//PauseGame(true);
+                GetComponentInChildren<Canvas>().enabled = true;
+                Time.timeScale = 0f;
+                isPaused = true;
             }
 			else if (isPaused)
             {
-				PauseGame(false);
+                //PauseGame(false);
+                GetComponentInChildren<Canvas>().enabled = false;
+                Time.timeScale = 1.0f;
+                isPaused = false;
             }
 
             
@@ -122,4 +131,12 @@ public class Pause : MonoBehaviour
 			}
 		}
 	}
+
+    /*public void quit()
+    {
+        Debug.Log("quit54dafsdfhg34");
+
+    }*/
+
+
 }
