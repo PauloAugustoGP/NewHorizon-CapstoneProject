@@ -75,7 +75,7 @@ public class TeleportScript : MonoBehaviour
         // raycast points to mouse location
         Ray tempRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         // if raycast hits something
-        if (Physics.Raycast(tempRay, out tempHit, _layerMask))
+        if (Physics.Raycast(tempRay, out tempHit, 1000, _layerMask))
         {
             // set the teleport points position to the raycasts hit point    
             _teleportPoint.transform.position = tempHit.point;
