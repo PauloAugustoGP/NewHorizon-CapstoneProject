@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 222965051382080440}
   - component: {fileID: 114864566425447686}
   - component: {fileID: 65802754604400298}
-  - component: {fileID: 114623932378980582}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -143,6 +142,8 @@ GameObject:
   - component: {fileID: 224643125783075520}
   - component: {fileID: 222157216963445272}
   - component: {fileID: 114047194942660028}
+  - component: {fileID: 65255966733702536}
+  - component: {fileID: 114504832871771884}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -189,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1441605410964478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.73, y: 0.098, z: -7.56}
   m_LocalScale: {x: 0.08335586, y: 0.083355844, z: 0.083355844}
   m_Children:
   - {fileID: 4869022503999310}
@@ -220,6 +221,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 120.15275, y: 17.919243, z: 102.68524}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65255966733702536
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881609904189144}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 162.89189, y: 138.6676, z: 159.7469}
+  m_Center: {x: 12.892218, y: -219.7928, z: 32.10924}
 --- !u!65 &65341049657239864
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -242,8 +255,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.195022, y: 6.5103188, z: 9.124173}
-  m_Center: {x: -2.219817, y: 2.7551315, z: -1.5615422}
+  m_Size: {x: 9.195023, y: 7.4854927, z: 9.124173}
+  m_Center: {x: -2.2198172, y: 3.2427187, z: -1.5615419}
 --- !u!65 &65802754604400298
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -254,8 +267,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 158.8008, y: 174.12782, z: 160.55785}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 158.8008, y: 166.05939, z: 138.61174}
+  m_Center: {x: 0.00000017201738, y: -132.93433, z: -46.619083}
 --- !u!114 &114047194942660028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +372,7 @@ MonoBehaviour:
   theGameObjecttheTextisAttachedTo: {fileID: 0}
   TheGameObjectBoxCollider: {fileID: 65439766476728932}
   targetToRotateTO: {fileID: 0}
+  theGameObject: 1
   triggerToDestroy: {fileID: 1441605410964478}
 --- !u!114 &114343353142991042
 MonoBehaviour:
@@ -442,21 +456,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114623932378980582
+--- !u!114 &114504832871771884
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1852151255713796}
+  m_GameObject: {fileID: 1881609904189144}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daf4397f06194f9419e0f2285870d244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextToDelete: {fileID: 1852151255713796}
+  TextFirstDiscription: {fileID: 1852151255713796}
   TextToSetActive: {fileID: 1108950171342668}
   TextToSetActiveIfTrue: {fileID: 1689964483012216}
-  PlayerThatMightBeTrue: {fileID: 0}
 --- !u!114 &114864566425447686
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class ObjectTriggerDel : MonoBehaviour {
 
-    public GameObject TextToDelete;
+    public GameObject TextFirstDiscription;
     public GameObject TextToSetActive;
     public GameObject TextToSetActiveIfTrue;
-    public GameObject PlayerThatMightBeTrue;
 
     private void OnTriggerEnter(Collider c)
     {
-        if (PlayerThatMightBeTrue == true)//add in get component to Player the might be true to get the bool that is or is not true
-        { 
-            TextToDelete.gameObject.SetActive(false);
+        //change get component to get the bool that is or is not true for what ever object you might want to implement.
+        if (c.GetComponent<CharacterBehaviour>().atFullHealth == true)
+        {
+            TextFirstDiscription.gameObject.SetActive(false);
             TextToSetActiveIfTrue.gameObject.SetActive(true);
         }
         else
         {
-            Destroy(TextToDelete);
+            TextFirstDiscription.gameObject.SetActive(false);
             TextToSetActive.gameObject.SetActive(true);
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        TextToSetActive.gameObject.SetActive(false);
+        TextFirstDiscription.gameObject.SetActive(true);
+        TextToSetActiveIfTrue.gameObject.SetActive(false);
+        //if (other.GetComponent<WorldSpaceText>().theGameObject == false)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }
