@@ -86,6 +86,9 @@ public class CameraController : MonoBehaviour {
 
     private TeleportScript _tpRef;
 
+    [SerializeField]
+    private LayerMask _cameraLayerMask;
+
     // Pause behaviour for Cursor
     private bool _inGame = true;
 
@@ -142,6 +145,11 @@ public class CameraController : MonoBehaviour {
 	
 	void FixedUpdate ()
     {
+        // Testing
+        //Vector3 temp = GetCentreView(this.transform.position + new Vector3(0f, 1f, 0f));
+
+
+        // Modify Cursor lock/visibility state
         if (_inGame)
         {
             _freezeCamera = false;
@@ -184,28 +192,28 @@ public class CameraController : MonoBehaviour {
             Vector3 followPosition = this.transform.TransformPoint(_xDist, _yDist, -_zDist);
             // Check if there is any object behind Player
             RaycastHit hit;
-            Vector3 back = -this.transform.forward; //this.transform.TransformDirection(new Vector3(0f, 0f, -1f));
+            Vector3 back = -this.transform.forward;
+            Ray ray = new Ray(this.transform.position + new Vector3(0f, 1f, 0f), back);
 
-            if (Physics.Raycast(this.transform.position + new Vector3(0f, 1f, 0f), back, out hit, _bumperHorizontalCheck))
+            if (Physics.Raycast(ray, out hit, _bumperHorizontalCheck, _cameraLayerMask, QueryTriggerInteraction.Ignore))
             {
-                //Debug.DrawLine(this.transform.position + new Vector3(0f, 1f, 0f), hit.point, Color.red);
                 _wallBumperOn = true;
 
-                float xBuffer = 1f;
-                float zBuffer = 1f;
+                //float xBuffer = 1f;
+                //float zBuffer = 1f;
 
-                if (this.transform.position.x - hit.point.x < 0)
-                {
-                    xBuffer = -1f;
-                }
+                //if (this.transform.position.x - hit.point.x < 0)
+                //{
+                //    xBuffer = -1f;
+                //}
 
-                if (this.transform.position.z - hit.point.z < 0)
-                {
-                    zBuffer = -1f;
-                }
+                //if (this.transform.position.z - hit.point.z < 0)
+                //{
+                //    zBuffer = -1f;
+                //}
 
-                followPosition.x = hit.point.x + xBuffer;
-                followPosition.z = hit.point.z + zBuffer;
+                followPosition.x = hit.point.x;// + xBuffer;
+                followPosition.z = hit.point.z;// + zBuffer;
                 //followPosition.y = Mathf.Lerp(hit.point.y + _bumperCameraHeight, followPosition.y, Time.deltaTime * _damping);
             }
             else
@@ -227,13 +235,13 @@ public class CameraController : MonoBehaviour {
                     //Debug.Log("Wall Bumper Rotation: " + wantedRotation.eulerAngles);
                     _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, wantedRotation, 0.02f * _rotationDamping);
                 }
-                else
-                {
+                //else
+                //{
                     //Debug.Log("Normal Rotation: " + rotation.eulerAngles);
                     // Apply horizontal and vertical rotation to camera
                     _mainCam.rotation = Quaternion.Slerp(_mainCam.rotation, rotation, 0.02f * _rotationDamping);
                     // _mainCam.rotation = rotation;
-                }
+                //}
 
                 //Apply horizontal rotation to player, if Xray is _not_ active
                 if (_xrayRef)
@@ -263,12 +271,12 @@ public class CameraController : MonoBehaviour {
 		//Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(xPos, yPos, _mainCam.position.z));
 		RaycastHit hit;
 
-		//Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
+        //Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
 
-		// This ray *should* represent where the the centre of the camera view is.
-		// Ignore the length of the ray in this Debug statement.
-		// hit.point represents the first collision from the centre of the camera.
-		//Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
+        // This ray *should* represent where the the centre of the camera view is.
+        // Ignore the length of the ray in this Debug statement.
+        // hit.point represents the first collision from the centre of the camera.
+        //Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
 		if (Physics.Raycast(pRayOrigin, _mainCam.forward, out hit, maxDistance))
 		{ 
