@@ -86,6 +86,11 @@ public class CameraController : MonoBehaviour {
 
     private TeleportScript _tpRef;
 
+	private CursorLockMode wantedMode;
+
+	[Header("Projectile")]
+	[SerializeField] private LayerMask _playerIgnoreLM;
+
     // Pause behaviour for Cursor
     private bool _inGame = true;
 
@@ -145,10 +150,10 @@ public class CameraController : MonoBehaviour {
         if (_inGame)
         {
             _freezeCamera = false;
+
             if (_tpRef.isActive)
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = false;
+				Cursor.lockState = CursorLockMode.Confined;
             }
             else
             {
@@ -158,8 +163,8 @@ public class CameraController : MonoBehaviour {
         else if (!_inGame)
         {
             _freezeCamera = true;
-            Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
+
+
         }
 
         //if (Input.GetKeyDown(KeyCode.Escape))
@@ -252,6 +257,14 @@ public class CameraController : MonoBehaviour {
         }
     }
 
+	// Apply requested cursor state
+	void SetCursorState()
+	{
+		Cursor.lockState = wantedMode;
+		// Hide cursor when locking
+		Cursor.visible = (CursorLockMode.Locked != wantedMode);
+	}
+
     // Raycasts from the camera's centre of view and returns the first point of collision
 	public Vector3 GetCentreView(Vector3 pRayOrigin)
 	{
@@ -263,14 +276,14 @@ public class CameraController : MonoBehaviour {
 		//Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(xPos, yPos, _mainCam.position.z));
 		RaycastHit hit;
 
-		//Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
+		Ray ray = new Ray(pRayOrigin, _mainCam.forward);
 
 		// This ray *should* represent where the the centre of the camera view is.
 		// Ignore the length of the ray in this Debug statement.
 		// hit.point represents the first collision from the centre of the camera.
 		//Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
-		if (Physics.Raycast(pRayOrigin, _mainCam.forward, out hit, maxDistance))
+		if (Physics.Raycast(ray, out hit, maxDistance, _playerIgnoreLM))
 		{ 
 			return hit.point;
 		}
