@@ -88,6 +88,9 @@ public class CameraController : MonoBehaviour {
 
 	private CursorLockMode wantedMode;
 
+	[Header("Projectile")]
+	[SerializeField] private LayerMask _playerIgnoreLM;
+
     // Pause behaviour for Cursor
     private bool _inGame = true;
 
@@ -273,14 +276,14 @@ public class CameraController : MonoBehaviour {
 		//Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(xPos, yPos, _mainCam.position.z));
 		RaycastHit hit;
 
-		//Ray rayScreen = Camera.main.ScreenPointToRay(new Vector3(xPos, yPos));
+		Ray ray = new Ray(pRayOrigin, _mainCam.forward);
 
 		// This ray *should* represent where the the centre of the camera view is.
 		// Ignore the length of the ray in this Debug statement.
 		// hit.point represents the first collision from the centre of the camera.
 		//Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
-		if (Physics.Raycast(pRayOrigin, _mainCam.forward, out hit, maxDistance))
+		if (Physics.Raycast(ray, out hit, maxDistance, _playerIgnoreLM))
 		{ 
 			return hit.point;
 		}
