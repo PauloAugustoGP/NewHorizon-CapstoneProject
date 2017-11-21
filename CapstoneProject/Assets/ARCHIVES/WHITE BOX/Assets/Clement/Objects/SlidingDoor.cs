@@ -16,18 +16,18 @@ public class SlidingDoor : MonoBehaviour {
 
     void Start() {
         status = false;
-        originalPosition = transform.position;
+        originalPosition = transform.localPosition;
         //player = GameObject.Find("Player").transform;
         if (moveDistance == Vector3.zero) {
-            moveDistance = new Vector3(move, transform.position.y, 0);
+            moveDistance = new Vector3(move, transform.localPosition.y, 0);
         }
         if(!sb) {
-            sb = GameObject.FindObjectOfType<SwitchButton>();
+            //sb = GameObject.FindObjectOfType<SwitchButton>();
         }
     }
 
     void Update() {
-        switchTriggered = sb.switchTriggered;
+        //switchTriggered = sb.switchTriggered;
         //if (Input.GetKeyDown(KeyCode.F)) {
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
                 //if (status) {

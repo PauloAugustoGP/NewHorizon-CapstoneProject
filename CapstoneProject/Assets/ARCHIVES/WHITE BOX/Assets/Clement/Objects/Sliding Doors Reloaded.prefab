@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4687698603771740}
-  - component: {fileID: 114614142890972926}
   - component: {fileID: 65671585626460012}
+  - component: {fileID: 114614142890972926}
   m_Layer: 0
   m_Name: Sliding Doors Reloaded
   m_TagString: Untagged
@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4237947986367046}
   - component: {fileID: 33231630463223712}
-  - component: {fileID: 65601066648688478}
   - component: {fileID: 23401390540894682}
   m_Layer: 0
   m_Name: RightDoor
@@ -55,7 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4882268265114854}
   - component: {fileID: 33326694614508184}
-  - component: {fileID: 65363334736742400}
   - component: {fileID: 23159122164646790}
   m_Layer: 0
   m_Name: LeftDoor
@@ -84,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1438584572586526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.44, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_Children:
   - {fileID: 4882268265114854}
@@ -183,30 +181,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903209116977622}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65363334736742400
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1903209116977622}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65601066648688478
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1738935472805468}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65671585626460012
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -233,8 +207,10 @@ MonoBehaviour:
   player: {fileID: 0}
   leftDoor: {fileID: 4882268265114854}
   rightDoor: {fileID: 4237947986367046}
-  moveDistance: {x: 0, y: 0, z: 0}
+  moveDistanceL: {x: 0, y: 0, z: 0}
+  moveDistanceR: {x: 0, y: 0, z: 0}
   move: 0
-  moveSpeed: 3
+  moveSpeed: 10
+  leftOrigin: {x: 0, y: 0, z: 0}
+  rightOrigin: {x: 0, y: 0, z: 0}
   status: 0
-  dEnabled: 0

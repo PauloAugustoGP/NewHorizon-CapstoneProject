@@ -3,68 +3,132 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SlidingDoors : MonoBehaviour {
-
-	// Use this for initialization
+    
 	public Transform player;
 	public Transform leftDoor;
 	public Transform rightDoor;
-	public Vector3 moveDistance;
+    [Tooltip("Change the x,y,z variables for direction.")]
+	public Vector3 moveDistanceL;
+	public Vector3 moveDistanceR;
+    [Tooltip("The distance to move.")]
 	public float move;
 	public float moveSpeed = 3.0f;
-	private Vector3 leftOriginal;
-	private Vector3 rightOriginal;
+    [Tooltip("Start position of the left door.")]
+	public Vector3 leftOrigin;
+    [Tooltip("Start position of the right door.")]
+	public Vector3 rightOrigin;
+    [Tooltip("False for closed, true for open")]
 	public bool status;
-	public bool dEnabled;
-	void Start() {
+    [Tooltip("Call from switch file.")]
+    public bool triggered;
+
+    void Start() {
 		status = false;
-		//player = GameObject.Find("Player").transform;
-		if (move <= 0) {
-			move = 3f;
-		}
-		leftOriginal = leftDoor.position;
-		rightOriginal = rightDoor.position;
-		if (moveDistance == Vector3.zero) {
-			moveDistance = new Vector3(move, transform.position.y, 0);
-		}
-		if (!leftDoor) {
-			leftDoor = GameObject.Find("LeftDoor").transform;
-		}
-		if (!rightDoor) {
-			rightDoor = GameObject.Find("RightDoor").transform;
-		}
-		Debug.Log (leftDoor);
-		Debug.Log (rightDoor);
-	}
-	public IEnumerator moveDoor(Vector3 doorPos, Vector3 moveTo) {
-		float t = 0f;
-		Vector3 startPos = doorPos;
-		while (t < 1f) {
-			t += Time.deltaTime * moveSpeed;
-			doorPos = Vector3.Lerp(startPos, moveTo, t);
-			Debug.Log (doorPos);
-			yield return null;
-		}
-		status = !status;
-		yield return null;
-	}
+        player = GameObject.Find("Player").transform;
+        if (!leftDoor) {
+            leftDoor = GameObject.Find("LeftDoor").GetComponent<Transform>();
+            leftOrigin = leftDoor.position;
+            Debug.Log(leftOrigin);
+        }
+        if(!rightDoor) {
+            rightDoor = GameObject.Find("RightDoor").GetComponent<Transform>();
+            rightOrigin = rightDoor.position;
+            Debug.Log(rightOrigin);
+        }
+
+        if(move <= 0) {
+            move = 1f;
+        }
+
+        if(moveDistanceL == Vector3.zero) {
+            moveDistanceL = new Vector3(-move, leftDoor.localPosition.y, 0);
+        }
+        if(moveDistanceR == Vector3.zero) {
+            moveDistanceR = new Vector3(move, rightDoor.localPosition.y, 0);
+        }
+    }
+
+    public IEnumerator LMoveDoor(Vector3 moveTo) {
+        Debug.Log("LmoveDoor Starting");
+        float t = 0f;
+        Vector3 startPos = leftDoor.localPosition;
+        while (t < 1f) {
+            t += Time.deltaTime * moveSpeed;
+            //startPos = Vector3.Lerp(startPos, moveTo, t);
+            leftDoor.localPosition += moveTo * Time.deltaTime * moveSpeed;
+            yield return null;
+        }
+        yield return null;
+        Debug.Log("LmoveDoor Finishing");
+    }
+    public IEnumerator RMoveDoor(Vector3 moveTo) {
+        Debug.Log("RmoveDoor Starting");
+        float t = 0f;
+        Vector3 startPos = rightDoor.localPosition;
+        while (t < 1f) {
+            t += Time.deltaTime * moveSpeed;
+            //startPos = Vector3.Lerp(startPos, moveTo, t);
+            //startPos += moveTo;
+            rightDoor.localPosition += moveTo * Time.deltaTime * moveSpeed;
+            yield return null;
+        }
+        yield return null;
+        Debug.Log("RmoveDoor Finishing");
+    }
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.CompareTag("Player")) {
-			//if (dEnabled) {
-				Vector3 moveToLeft = leftOriginal + moveDistance;
-				Vector3 moveToRight = rightOriginal+ moveDistance;
-				StartCoroutine(moveDoor(leftOriginal, moveToLeft));
-				StartCoroutine(moveDoor(rightOriginal, moveToRight));
-			//}
+            if(triggered) {
+                if(!status) {
+                    StartCoroutine(Open());
+                }
+            }
 		}
+	}
+
+    void OnTriggerExit (Collider other) {
+		if (other.gameObject.CompareTag("Player")) {
+            StartCoroutine(Close());
+        }
 	}
 
 	public void toogleDoorState() {
 		if (!status) {
-			Vector3 moveToLeft = leftOriginal + moveDistance;
-			Vector3 moveToRight = rightOriginal+ moveDistance;
-			StartCoroutine(moveDoor(leftOriginal, moveToLeft));
-			StartCoroutine(moveDoor(rightOriginal, moveToRight));
+            StartCoroutine(Open());
 		}
 	}
+
+    public void LeftDoorMove(bool nega = false) {
+        if(nega) {
+            moveDistanceL = -moveDistanceL;
+        } else {
+            moveDistanceL = new Vector3(-move, moveDistanceL.y);
+        }
+        Vector3 moveTo = leftOrigin + moveDistanceL;
+        StartCoroutine(LMoveDoor(moveTo));
+    }
+
+    public IEnumerator Open() {
+        LeftDoorMove();
+        RightDoorMove();
+        status = !status;
+        yield return null;
+    }
+
+    public IEnumerator Close() {
+        LeftDoorMove(true);
+        RightDoorMove(true);
+        status = !status;
+        yield return null;
+    }
+
+    public void RightDoorMove(bool nega = false) {
+        if(nega) {
+            moveDistanceR = -moveDistanceR;
+        } else {
+            moveDistanceR = new Vector3(Mathf.Abs(moveDistanceR.x), moveDistanceR.y);
+        }
+        Vector3 moveTo = rightOrigin + moveDistanceR;
+        StartCoroutine(RMoveDoor(moveTo));
+    }
 }
