@@ -12,7 +12,7 @@ public class WorldSpaceText : MonoBehaviour {
     public GameObject theGameObjecttheTextisAttachedTo;
     [SerializeField] BoxCollider TheGameObjectBoxCollider;
     public GameObject targetToRotateTO;
-    private bool theGameObject = true;
+    public bool theGameObject = true;
     public GameObject triggerToDestroy;
 
     void Update()
@@ -30,23 +30,28 @@ public class WorldSpaceText : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
-        theGameObjecttheTextisAttachedTo.gameObject.SetActive(false);
-        TheGameObjectBoxCollider.enabled = false;
-        theGameObject = false;
+    {  
+            TheGameObjectBoxCollider.enabled = false;
+            
     }
 
     private void OnTriggerEnter(Collider other)
     {
         worldSpaceText.gameObject.SetActive(true);
+        if (other.GetComponent<CharacterBehaviour>().atFullHealth == false)
+        {
+            theGameObject = false;
+        }
     }
    
     private void OnTriggerExit(Collider other)
     {
         worldSpaceText.gameObject.SetActive(false);
-        if (theGameObject == false)
-        {
-            Destroy(triggerToDestroy);  
-        }  
+       
+            if (theGameObject == false)
+            {
+                Destroy(triggerToDestroy);
+            }
+        
     }
 }
