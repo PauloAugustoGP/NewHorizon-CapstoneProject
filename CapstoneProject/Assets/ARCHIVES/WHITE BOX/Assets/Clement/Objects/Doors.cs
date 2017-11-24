@@ -13,12 +13,16 @@ public abstract class Doors : MonoBehaviour {
     public bool doorEnabled;
     public bool inTrigger;
     public float move = 3f;
-    public float moveDistance;
+    public Vector3 moveDistance;
     public float moveSpeed = 3f;
+    public bool enableLogging;
 
     void Start() {
         status = false;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        if(move <= 0) {
+            move = 1f;
+        }
     }
 
     public virtual IEnumerator moveDoor(Quaternion dest) {
@@ -31,5 +35,11 @@ public abstract class Doors : MonoBehaviour {
     }
     public virtual IEnumerator Close() {
         yield return null;
+    }
+
+    public virtual void Log (string value) {
+        if(enableLogging) {
+            Debug.Log(value);
+        }
     }
 }

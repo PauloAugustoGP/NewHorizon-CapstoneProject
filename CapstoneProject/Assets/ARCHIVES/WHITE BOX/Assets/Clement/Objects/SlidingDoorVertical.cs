@@ -5,11 +5,9 @@ using UnityEngine;
 public class SlidingDoorVertical : Doors {
     [Tooltip("Door animation speed.")]
     private Vector3 originalPosition;
-    public new Vector3 moveDistance;
     public Transform door;
 
     void Start() {
-        status = false;
         originalPosition = transform.localPosition;
         if (moveDistance == Vector3.zero) {
             moveDistance = new Vector3(transform.localPosition.x, move, 0);

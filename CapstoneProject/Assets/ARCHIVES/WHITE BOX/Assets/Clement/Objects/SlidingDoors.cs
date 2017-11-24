@@ -22,23 +22,16 @@ public class SlidingDoors : Doors {
     }
 
     void Start() {
-		status = false;
-        player = GameObject.Find("Player").transform;
         if (!leftDoor) {
-            leftDoor = GameObject.Find("LeftDoor").GetComponent<Transform>();
-            leftOrigin = leftDoor.position;
+            leftDoor = GameObject.Find("LeftDoor").transform;
+            leftOrigin = leftDoor.localPosition;
             Debug.Log(leftOrigin);
         }
         if(!rightDoor) {
-            rightDoor = GameObject.Find("RightDoor").GetComponent<Transform>();
-            rightOrigin = rightDoor.position;
+            rightDoor = GameObject.Find("RightDoor").transform;
+            rightOrigin = rightDoor.localPosition;
             Debug.Log(rightOrigin);
         }
-
-        if(move <= 0) {
-            move = 1f;
-        }
-
         if(moveDistanceL == Vector3.zero) {
             moveDistanceL = new Vector3(-move, leftDoor.localPosition.y, 0);
         }
@@ -48,31 +41,31 @@ public class SlidingDoors : Doors {
     }
 
     public IEnumerator LMoveDoor(Vector3 moveTo) {
-        Debug.Log("LmoveDoor Starting");
+        Log("LmoveDoor Starting");
         float t = 0f;
         Vector3 startPos = leftDoor.localPosition;
         while (t < 1f) {
             t += Time.deltaTime * moveSpeed;
-            //startPos = Vector3.Lerp(startPos, moveTo, t);
-            leftDoor.localPosition += moveTo * Time.deltaTime * moveSpeed;
+            leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, moveTo, t);
+            //leftDoor.localPosition += moveTo * Time.deltaTime * moveSpeed;
             yield return null;
         }
         yield return null;
-        Debug.Log("LmoveDoor Finishing");
+        Log("LmoveDoor Finishing");
     }
     public IEnumerator RMoveDoor(Vector3 moveTo) {
-        Debug.Log("RmoveDoor Starting");
+        Log("RmoveDoor Starting");
         float t = 0f;
         Vector3 startPos = rightDoor.localPosition;
         while (t < 1f) {
             t += Time.deltaTime * moveSpeed;
-            //startPos = Vector3.Lerp(startPos, moveTo, t);
+            rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, moveTo, t);
             //startPos += moveTo;
-            rightDoor.localPosition += moveTo * Time.deltaTime * moveSpeed;
+            //rightDoor.localPosition += moveTo * Time.deltaTime * moveSpeed;
             yield return null;
         }
         yield return null;
-        Debug.Log("RmoveDoor Finishing");
+        Log("RmoveDoor Finishing");
     }
 
 	void OnTriggerEnter (Collider other) {
@@ -98,7 +91,7 @@ public class SlidingDoors : Doors {
 	}
 
 	public override void toggleDoorState() {
-		if (!status) {
+		if (!status && doorEnabled) {
             StartCoroutine(Open());
 		}
 	}
