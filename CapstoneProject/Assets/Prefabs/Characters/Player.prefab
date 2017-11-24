@@ -1514,7 +1514,7 @@ Transform:
   m_GameObject: {fileID: 1865634543347562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2, y: 1, z: 2.2}
+  m_LocalScale: {x: 4.4, y: 1, z: 4.4}
   m_Children:
   - {fileID: 4276811101900940}
   m_Father: {fileID: 4848820069507318}
@@ -1931,7 +1931,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920816339443276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.800098, y: 0, z: -27.61}
+  m_LocalPosition: {x: 5.4961877, y: 0.0000023471327, z: -17.010826}
   m_LocalScale: {x: 1.00001, y: 1, z: 1}
   m_Children:
   - {fileID: 4903128247564056}
@@ -3110,7 +3110,6 @@ MonoBehaviour:
   _fakePlayer: {fileID: 1574735407569964}
   _teleportPoint: {fileID: 1061223663076592}
   _radius: {fileID: 1865634543347562}
-  _maxTeleportDistance: 5
   _minTeleportDistance: 1
   _isCooled: 0
   _layerMask:
@@ -3179,6 +3178,9 @@ MonoBehaviour:
   Invincibility: 0
   DT: {fileID: 0}
   StartPosition: {fileID: 4346536813284070}
+  LM:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114823477221264704
 MonoBehaviour:
   m_ObjectHideFlags: 1

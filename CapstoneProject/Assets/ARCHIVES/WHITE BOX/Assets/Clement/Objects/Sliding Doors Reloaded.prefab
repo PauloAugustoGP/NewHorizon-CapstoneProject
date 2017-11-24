@@ -81,7 +81,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1438584572586526}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.5, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_Children:
@@ -89,7 +89,7 @@ Transform:
   - {fileID: 4237947986367046}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
 --- !u!4 &4882268265114854
 Transform:
   m_ObjectHideFlags: 1
@@ -205,12 +205,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  status: 0
+  doorGo: 0
+  doorEnabled: 0
+  inTrigger: 0
+  move: 0
+  moveDistance: 0
+  moveSpeed: 10
   leftDoor: {fileID: 4882268265114854}
   rightDoor: {fileID: 4237947986367046}
   moveDistanceL: {x: 0, y: 0, z: 0}
   moveDistanceR: {x: 0, y: 0, z: 0}
-  move: 0
-  moveSpeed: 10
   leftOrigin: {x: 0, y: 0, z: 0}
   rightOrigin: {x: 0, y: 0, z: 0}
-  status: 0

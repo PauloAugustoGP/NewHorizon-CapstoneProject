@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65833988393327678}
   - component: {fileID: 23171977566555182}
   - component: {fileID: 65352041830177828}
-  - component: {fileID: 114788163230920542}
+  - component: {fileID: 114471336867642484}
   m_Layer: 0
   m_Name: Up
   m_TagString: Untagged
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1486545861652852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 3, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4446088381794780}
@@ -65,8 +65,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700202407563916}
-  m_LocalRotation: {x: -0, y: 0.5, z: -0, w: 0.8660254}
-  m_LocalPosition: {x: 34.769653, y: -0.69, z: -0.6099987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 5.75}
   m_LocalScale: {x: 1.1255527, y: 1, z: 1}
   m_Children:
   - {fileID: 4352765348123420}
@@ -136,7 +136,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114788163230920542
+--- !u!114 &114471336867642484
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,14 +144,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1486545861652852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55fab3d6b1879ef4f8631fbdef01ad1d, type: 3}
+  m_Script: {fileID: 11500000, guid: 81479ce924abed14187e75d5ebab82d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  moveDistance: {x: 0, y: 3, z: 0}
   player: {fileID: 0}
   status: 0
+  doorGo: 0
+  doorEnabled: 0
+  inTrigger: 0
   move: 3
-  door: {fileID: 4352765348123420}
-  switchTriggered: 0
-  sb: {fileID: 0}
+  moveDistance: 0
+  moveSpeed: 3
+  moveDistance: {x: 0, y: 0, z: 0}
+  door: {fileID: 4446088381794780}

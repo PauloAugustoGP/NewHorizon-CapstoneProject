@@ -28,7 +28,7 @@ public class TeleportScript : MonoBehaviour
 
 
     // minimum and maximum teleport distances
-    [SerializeField] private float _maxTeleportDistance = 5;
+    /*[SerializeField]*/ private float _maxTeleportDistance = 10;
     [SerializeField] private float _minTeleportDistance = 1;
 
     // used for cooldown of teleport
@@ -39,6 +39,8 @@ public class TeleportScript : MonoBehaviour
     // layermask for Raycast Collision
     [SerializeField]
     LayerMask _layerMask;
+
+    private Transform _playerShadowPosition;
 
     // Use this for initialization
     void Start()
@@ -127,7 +129,11 @@ public class TeleportScript : MonoBehaviour
 
                 // set this objects position to the fake player position
                 // currently limiting movement in y to the players current y value
-                transform.SetPositionAndRotation(new Vector3(_fakePlayer.transform.position.x, transform.position.y, _fakePlayer.transform.position.z), transform.rotation);
+                // transform.SetPositionAndRotation(new Vector3(_fakePlayer.transform.position.x, transform.position.y, _fakePlayer.transform.position.z), transform.rotation);
+
+                // delayed teleport testing
+                _playerShadowPosition = _fakePlayer.transform;
+                StartCoroutine(DelayedTeleport(_playerShadowPosition));
             }
         }
     }
@@ -141,5 +147,11 @@ public class TeleportScript : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         _isCooled = true;
+    }
+
+    private IEnumerator DelayedTeleport(Transform tempTeleportPosition)
+    {
+        yield return new WaitForSeconds(0.2f);
+        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.position.x, transform.position.y, tempTeleportPosition.position.z), transform.rotation);
     }
 }
