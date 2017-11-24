@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// IK system ?
+/// Ridgidbody moves character 
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -11,10 +14,15 @@ public class CharacterBehaviour : CharacterBase
     protected int Lives;
     protected bool isCrouching;
     protected bool encumbered;
+   
+
+
 
     [Header("Test Bools")]//LIVE TEST VALUES
     [SerializeField] protected bool ValueDebuger;
     [SerializeField] protected bool Invincibility;
+    [SerializeField] protected bool UseRagdoll;
+
 
     [Header("Drag and Drop")]//DRAG AND DROPS
     [SerializeField] DataTable DT;
@@ -25,6 +33,7 @@ public class CharacterBehaviour : CharacterBase
     Animator anim;
     //HUD pHud;
     CapsuleCollider cc;
+    Ragdoll _ragdoll;
 
     void Start ()
     {
@@ -32,6 +41,15 @@ public class CharacterBehaviour : CharacterBase
         anim = GetComponent<Animator>();
         //pHud = GetComponent<HUD>();
         cc = GetComponent<CapsuleCollider>();
+        _ragdoll = GetComponentInChildren<Ragdoll>();
+
+        if (!UseRagdoll)
+        {
+            foreach (Rigidbody rb in _ragdoll.Bodies)
+            {
+                Physics.IgnoreCollision(cc, rb.GetComponent<Collider>());
+            }
+        }
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
@@ -195,6 +213,25 @@ public class CharacterBehaviour : CharacterBase
         }//Debuger
     }//Update
 
+    public void EnableRagdoll()
+    {
+        anim.enabled = false;
+        rb.isKinematic = true;
+        cc.enabled = false;
+    }
+
+    public void DisableRagdoll()
+    {
+        anim.enabled = true;
+        rb.isKinematic = false;
+        cc.enabled = true;
+    }
+
+    public Ragdoll PlayerRagdoll
+    {
+        get { return _ragdoll; }
+    }
+
     //On Death Call
     protected void Died()
     {
@@ -203,28 +240,40 @@ public class CharacterBehaviour : CharacterBase
         if (Lives == 0)
         {
             //They do the same thing But when lives reach 0 this can do more
-            transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            StartCoroutine(DeathTime(1.5f));
+            EnableRagdoll();
         }
         else
         {
-            transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            StartCoroutine(DeathTime(1.5f));
+            EnableRagdoll();
         }     
     }//Died
+
+
+    IEnumerator DeathTime(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ResetPos();
+    }
+
+    protected void ResetPos()
+    {
+        SetHealth(_maxHealth);
+        transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+        DisableRagdoll();
+    }
 
     protected void FakeDied()
     {
         Lives--;
         if (Lives == 0)
         {
-            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            ResetPos();
         }
         else
         {
-            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            ResetPos();
         }
     }//Died
 
