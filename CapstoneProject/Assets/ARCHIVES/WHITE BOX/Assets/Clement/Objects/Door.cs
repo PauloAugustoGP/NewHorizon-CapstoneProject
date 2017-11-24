@@ -13,8 +13,8 @@ public class Door : MonoBehaviour {
     private Quaternion open = Quaternion.identity;
     [Tooltip("Door close.")]
     private Quaternion close = Quaternion.identity;
-    [Tooltip("Player.")]
-    private Transform player = null;
+    //[Tooltip("Player.")]
+    //private Transform player;
     [Tooltip("Door status. Open = true, Closed = false")]
     public bool status = false; //false = close, true = open
     [Tooltip("Used with the coroutine.")]
@@ -27,10 +27,10 @@ public class Door : MonoBehaviour {
         open = Quaternion.Euler(0, openAngle, 0);
         close = Quaternion.Euler(0, closeAngle, 0);
         //player = GameObject.Find("Player").transform;
-        sb = GameObject.FindObjectOfType<SwitchButton>();
+        //sb = GameObject.FindObjectOfType<SwitchButton>();
     }
     void Update() {
-        switchTriggered = sb.switchTriggered;
+        //switchTriggered = sb.switchTriggered;
         //if (Input.GetKeyDown(KeyCode.F) && !doorGo) {
             //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
                 //if (status) {

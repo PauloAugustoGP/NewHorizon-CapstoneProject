@@ -95,8 +95,8 @@ public class Canvas_Manager : MonoBehaviour
     
     public void test2 ()
     {
-        Scene_Manager.instance.GoTo_LEVEL("TestScene2");
-        Debug.Log("test 2");
+        Scene_Manager.instance.GoTo_LEVEL("Level_1_Tyler");
+        Debug.Log("Level_1_Tyler");
     }
 
     public void test3()
