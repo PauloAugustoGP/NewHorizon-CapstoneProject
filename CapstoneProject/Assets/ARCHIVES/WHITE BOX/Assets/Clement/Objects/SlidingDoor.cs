@@ -11,8 +11,7 @@ public class SlidingDoor : MonoBehaviour {
     public bool status;
     public float move = 3f;
     public Transform door;
-    public bool switchTriggered;
-    [SerializeField] SwitchButton sb;
+    public bool dEnabled;
 
     void Start() {
         status = false;
@@ -20,9 +19,6 @@ public class SlidingDoor : MonoBehaviour {
         //player = GameObject.Find("Player").transform;
         if (moveDistance == Vector3.zero) {
             moveDistance = new Vector3(move, transform.localPosition.y, 0);
-        }
-        if(!sb) {
-            //sb = GameObject.FindObjectOfType<SwitchButton>();
         }
     }
 
@@ -44,7 +40,7 @@ public class SlidingDoor : MonoBehaviour {
 
     void OnTriggerEnter (Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            if (switchTriggered) {
+            if (dEnabled) {
                 Vector3 moveTo = originalPosition + moveDistance;
                 StartCoroutine(moveDoor(moveTo));
             }
@@ -58,17 +54,17 @@ public class SlidingDoor : MonoBehaviour {
     }
     public IEnumerator moveDoor(Vector3 moveTo) {
         float t = 0f;
-        Vector3 startPos = door.position;
+        Vector3 startPos = door.localPosition;
         while (t < 1f) {
             t += Time.deltaTime * moveSpeed;
-            door.position = Vector3.Lerp(startPos, moveTo, t);
+            door.localPosition = Vector3.Lerp(startPos, moveTo, t);
             yield return null;
         }
         status = !status;
         yield return null;
     }
 
-    public void toogleDoorState() {
+    public void toggleDoorState() {
         if (!status) {
             Vector3 moveTo = originalPosition + moveDistance;
             StartCoroutine(moveDoor(moveTo));

@@ -19,8 +19,7 @@ public class Door : MonoBehaviour {
     public bool status = false; //false = close, true = open
     [Tooltip("Used with the coroutine.")]
     public bool doorGo = false;
-    public bool switchTriggered;
-    SwitchButton sb;
+    public bool dEnabled;
 
     void Start() {
         status = false; // open
@@ -44,7 +43,9 @@ public class Door : MonoBehaviour {
     }
     void OnTriggerEnter (Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            StartCoroutine(moveDoor(open));
+            if(dEnabled) {
+                StartCoroutine(moveDoor(open));
+            }
         }
     }
 

@@ -2,67 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlidingDoorVertical : MonoBehaviour {
+public class SlidingDoorVertical : Doors {
     [Tooltip("Door animation speed.")]
-    public float moveSpeed = 3.0f;
     private Vector3 originalPosition;
-    public Vector3 moveDistance;
-    public Transform player;
-    public bool status;
-    public float move = 3f;
+    public new Vector3 moveDistance;
     public Transform door;
 
     void Start() {
         status = false;
-        originalPosition = transform.position;
-        //player = GameObject.Find("Player").transform;
+        originalPosition = transform.localPosition;
         if (moveDistance == Vector3.zero) {
-            moveDistance = new Vector3(move, transform.position.y, 0);
+            moveDistance = new Vector3(transform.localPosition.x, move, 0);
         }
-    }
-    void Update() {
-        //if (Input.GetKeyDown(KeyCode.F)) {
-            //if (Vector3.Distance(player.position, this.transform.position) < 5f) {
-                //if (status) {
-                // trigger exit
-                    //StartCoroutine(moveDoor(originalPosition));
-                //} else {
-                // trigger enter
-                //    Vector3 moveTo = originalPosition + moveDistance;
-                 //   StartCoroutine(moveDoor(moveTo));
-                //}
-            //}
-        //}
     }
 
     void OnTriggerEnter (Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            Vector3 moveTo = originalPosition + moveDistance;
-            StartCoroutine(moveDoor(moveTo));
+            StartCoroutine(Open());
         }
     }
 
     void OnTriggerExit (Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            StartCoroutine(moveDoor(originalPosition));
+            StartCoroutine(Close());
         }
     }
     public IEnumerator moveDoor(Vector3 moveTo) {
         float t = 0f;
-        Vector3 startPos = door.position;
+        Vector3 startPos = transform.localPosition;
         while (t < 1f) {
             t += Time.deltaTime * moveSpeed;
-            door.position = Vector3.Slerp(startPos, moveTo, t);
+            transform.localPosition = Vector3.Slerp(startPos, moveTo, t);
             yield return null;
         }
         status = !status;
         yield return null;
     }
 
-    public void toggleDoorState() {
+    public override IEnumerator Open() {
+        Vector3 moveTo = originalPosition + moveDistance;
+        StartCoroutine(moveDoor(moveTo));
+        yield return null;
+    }
+
+    public override IEnumerator Close() {
+        StartCoroutine(moveDoor(originalPosition));
+        yield return null;
+    }
+
+    public override void toggleDoorState() {
         if (!status) {
-            Vector3 moveTo = originalPosition + moveDistance;
-            StartCoroutine(moveDoor(moveTo));
+            StartCoroutine(Open());
         }
     }
 }

@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlidingDoors : MonoBehaviour {
+public class SlidingDoors : Doors {
     
-	public Transform player;
 	public Transform leftDoor;
 	public Transform rightDoor;
     [Tooltip("Change the x,y,z variables for direction.")]
 	public Vector3 moveDistanceL;
 	public Vector3 moveDistanceR;
-    [Tooltip("The distance to move.")]
-	public float move;
-	public float moveSpeed = 3.0f;
     [Tooltip("Start position of the left door.")]
 	public Vector3 leftOrigin;
     [Tooltip("Start position of the right door.")]
 	public Vector3 rightOrigin;
     [Tooltip("False for closed, true for open")]
-	public bool status;
-    [Tooltip("Call from switch file.")]
-    public bool triggered;
+    private type _slidingNormal;
+
+    public type SlidingNormal {
+        get { return _slidingNormal; }
+        set { _slidingNormal = value; }
+    }
 
     void Start() {
 		status = false;
@@ -78,13 +77,19 @@ public class SlidingDoors : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.CompareTag("Player")) {
-            if(triggered) {
+            //if(doorEnabled) {
                 if(!status) {
                     StartCoroutine(Open());
                 }
-            }
+            //}
 		}
 	}
+
+    void OnTriggerStay(Collider other) {
+        if(other.gameObject.CompareTag("Player")) {
+            inTrigger = true;
+        }
+    }
 
     void OnTriggerExit (Collider other) {
 		if (other.gameObject.CompareTag("Player")) {
@@ -92,7 +97,7 @@ public class SlidingDoors : MonoBehaviour {
         }
 	}
 
-	public void toogleDoorState() {
+	public override void toggleDoorState() {
 		if (!status) {
             StartCoroutine(Open());
 		}
@@ -108,14 +113,14 @@ public class SlidingDoors : MonoBehaviour {
         StartCoroutine(LMoveDoor(moveTo));
     }
 
-    public IEnumerator Open() {
+    public override IEnumerator Open() {
         LeftDoorMove();
         RightDoorMove();
         status = !status;
         yield return null;
     }
 
-    public IEnumerator Close() {
+    public override IEnumerator Close() {
         LeftDoorMove(true);
         RightDoorMove(true);
         status = !status;
