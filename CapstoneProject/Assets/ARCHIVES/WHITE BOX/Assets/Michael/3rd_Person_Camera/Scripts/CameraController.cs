@@ -211,6 +211,16 @@ public class CameraController : MonoBehaviour
         Vector3 back = -_target.forward;
         Ray ray = new Ray(_target.position + new Vector3(0f, 1f, 0f), back);
 
+        //Debug.DrawRay(_mainCam.position, _mainCam.forward, Color.red);
+        //Debug.DrawRay(_mainCam.position, _mainCam.right, Color.red);
+        //Debug.DrawRay(_mainCam.position, -_mainCam.forward, Color.red);
+        //Debug.DrawRay(_mainCam.position, -_mainCam.right, Color.red);
+
+        //if (Physics.SphereCast(_mainCam.position, 1f, -_mainCam.forward, out hit, 1f, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+        //{
+        //    Debug.DrawLine(_mainCam.position, hit.point, Color.blue);
+        //}
+
         if (Physics.Raycast(ray, out hit, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
             _wallBumperOn = true;
