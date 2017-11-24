@@ -42,6 +42,9 @@ public class TeleportScript : MonoBehaviour
 
     private Transform _playerShadowPosition;
 
+    // scripts to disable while teleport is active
+    [SerializeField] private MonoBehaviour[] _scriptsToDisable;
+
     // Use this for initialization
     void Start()
     {
@@ -106,17 +109,23 @@ public class TeleportScript : MonoBehaviour
                 _radius.SetActive(true);
                 //signal the teleport is active
                 _isActive = true;
+
+                // disable other scripts
+                OtherScriptsActive(false);
             }
 
-            if(Input.GetKeyDown(KeyCode.Mouse1) && _isActive)
+            if(Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
             {
                 _fakePlayer.SetActive(false);
                 _radius.SetActive(false);
                 _isCooled = true;
                 _isActive = false;
+
+                // re-enable other scripts
+                OtherScriptsActive(true);
             }
             // finish teleport by letting go of shift, also make sure teleport was activated
-            if (Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && _isActive)
             {
                 // deactivate visuals
                 _fakePlayer.SetActive(false);
@@ -134,6 +143,7 @@ public class TeleportScript : MonoBehaviour
                 // delayed teleport testing
                 _playerShadowPosition = _fakePlayer.transform;
                 StartCoroutine(DelayedTeleport(_playerShadowPosition));
+
             }
         }
     }
@@ -149,9 +159,19 @@ public class TeleportScript : MonoBehaviour
         _isCooled = true;
     }
 
-    private IEnumerator DelayedTeleport(Transform tempTeleportPosition)
+    private IEnumerator DelayedTeleport(Transform pTeleportPosition)
     {
         yield return new WaitForSeconds(0.2f);
-        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.position.x, transform.position.y, tempTeleportPosition.position.z), transform.rotation);
+        transform.SetPositionAndRotation(new Vector3(pTeleportPosition.position.x, transform.position.y, pTeleportPosition.position.z), transform.rotation);
+        // re-enable other scripts
+        OtherScriptsActive(true);
+    }
+
+    private void OtherScriptsActive(bool pIsActive)
+    {
+        foreach (MonoBehaviour script in _scriptsToDisable)
+        {
+            script.enabled = pIsActive;
+        }
     }
 }
