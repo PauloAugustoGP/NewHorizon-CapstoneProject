@@ -14,7 +14,7 @@ public class SlidingDoorVertical : MonoBehaviour {
 
     void Start() {
         status = false;
-        originalPosition = transform.position;
+        originalPosition = transform.localPosition;
         //player = GameObject.Find("Player").transform;
         if (moveDistance == Vector3.zero) {
             moveDistance = new Vector3(move, transform.position.y, 0);
@@ -49,10 +49,10 @@ public class SlidingDoorVertical : MonoBehaviour {
     }
     public IEnumerator moveDoor(Vector3 moveTo) {
         float t = 0f;
-        Vector3 startPos = door.position;
+        Vector3 startPos = door.localPosition;
         while (t < 1f) {
             t += Time.deltaTime * moveSpeed;
-            door.position = Vector3.Slerp(startPos, moveTo, t);
+            door.localPosition = Vector3.Slerp(startPos, moveTo, t);
             yield return null;
         }
         status = !status;

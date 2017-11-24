@@ -58,10 +58,10 @@ public class SlidingDoor : MonoBehaviour {
     }
     public IEnumerator moveDoor(Vector3 moveTo) {
         float t = 0f;
-        Vector3 startPos = door.position;
+        Vector3 startPos = door.localPosition;
         while (t < 1f) {
             t += Time.deltaTime * moveSpeed;
-            door.position = Vector3.Lerp(startPos, moveTo, t);
+            door.localPosition = Vector3.Lerp(startPos, moveTo, t);
             yield return null;
         }
         status = !status;
