@@ -1904,7 +1904,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4356726930645046}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4355692309845544
 Transform:
@@ -1931,14 +1931,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920816339443276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.4961877, y: 0.0000023471327, z: -17.010826}
+  m_LocalPosition: {x: -9.800098, y: 0, z: -3.6}
   m_LocalScale: {x: 1.00001, y: 1, z: 1}
   m_Children:
-  - {fileID: 4903128247564056}
   - {fileID: 4404472268078576}
   - {fileID: 4978133864604174}
   - {fileID: 4935697672849112}
   - {fileID: 4346536813284070}
+  - {fileID: 4903128247564056}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -1985,7 +1985,7 @@ Transform:
   - {fileID: 4414429761550140}
   - {fileID: 4821367293368044}
   m_Father: {fileID: 4356726930645046}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4409442852587846
 Transform:
@@ -2727,7 +2727,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4356726930645046}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 14.26, y: 0, z: 0}
 --- !u!4 &4905659653884664
 Transform:
@@ -2795,7 +2795,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4356726930645046}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4949033605061032
 Transform:
@@ -2841,7 +2841,7 @@ Transform:
   - {fileID: 4848820069507318}
   - {fileID: 4842233981138886}
   m_Father: {fileID: 4356726930645046}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4989539628040222
 Transform:
@@ -3127,15 +3127,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 4903128247564056}
-  _zDist: 1.5
-  _yDist: 2
+  _target: {fileID: 4356726930645046}
   _xDist: 0.25
+  _yDist: 2
+  _zDist: 1.5
   _damping: 0
   _rotationDamping: 0
   _sensitivityX: 0
   _sensitivityY: 0
-  _rotSpeedX: 0
-  _rotSpeedY: 0
   _playerIgnoreLM:
     serializedVersion: 2
     m_Bits: 4294966783
