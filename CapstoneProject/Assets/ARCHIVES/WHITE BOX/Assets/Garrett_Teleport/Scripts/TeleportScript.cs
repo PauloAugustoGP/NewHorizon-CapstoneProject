@@ -28,7 +28,7 @@ public class TeleportScript : MonoBehaviour
 
 
     // minimum and maximum teleport distances
-    [SerializeField] private float _maxTeleportDistance = 5;
+    /*[SerializeField]*/ private float _maxTeleportDistance = 10;
     [SerializeField] private float _minTeleportDistance = 1;
 
     // used for cooldown of teleport
