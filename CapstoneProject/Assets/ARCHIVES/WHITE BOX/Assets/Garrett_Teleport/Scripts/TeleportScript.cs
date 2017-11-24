@@ -140,7 +140,7 @@ public class TeleportScript : MonoBehaviour
                 // currently limiting movement in y to the players current y value
                 // transform.SetPositionAndRotation(new Vector3(_fakePlayer.transform.position.x, transform.position.y, _fakePlayer.transform.position.z), transform.rotation);
 
-                // delayed teleport testing
+                // delayed teleport
                 _playerShadowPosition = _fakePlayer.transform.position;
                 StartCoroutine(DelayedTeleport(_playerShadowPosition));
 
