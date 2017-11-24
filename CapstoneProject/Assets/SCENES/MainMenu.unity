@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 971221316}
   - component: {fileID: 971221315}
   - component: {fileID: 971221318}
+  - component: {fileID: 971221319}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -247,6 +248,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e44cd27eeea44f75a644eebf03de597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &971221319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 971221314}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6c4197a9c3af148a33e9fb25fef6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _masterMixer: {fileID: 24100000, guid: d8696e186d005b549b722b01e23ebfc2, type: 2}
+  MusicSource: {fileID: 0}
+  VoiceSource: {fileID: 0}
+  SoundSource: {fileID: 0}
+  MenuMusic: {fileID: 0}
+  LevelMusic: {fileID: 0}
+  GameOverMusic: {fileID: 0}
+  WinningMusic: {fileID: 0}
+  ProjectileCharging: {fileID: 0}
+  ProjectileFire: {fileID: 0}
+  ProjectileHit: {fileID: 0}
+  Teleport: {fileID: 0}
+  Melee: {fileID: 0}
+  GuardsBanter1: {fileID: 0}
+  GuardsBanter2: {fileID: 0}
+  GuardsBanter3: {fileID: 0}
+  GuardsBanter4: {fileID: 0}
+  GuardsBanter5: {fileID: 0}
+  VanishTalk1: {fileID: 0}
+  VanishTalk2: {fileID: 0}
+  VanishTalk3: {fileID: 0}
+  VanishTalk4: {fileID: 0}
+  VanishTalk5: {fileID: 0}
+  AuraTalk1: {fileID: 0}
+  AuraTalk2: {fileID: 0}
+  AuraTalk3: {fileID: 0}
+  AuraTalk4: {fileID: 0}
+  AuraTalk5: {fileID: 0}
+  QuantiusTalk1: {fileID: 0}
+  QuantiusTalk2: {fileID: 0}
+  QuantiusTalk3: {fileID: 0}
+  QuantiusTalk4: {fileID: 0}
+  QuantiusTalk5: {fileID: 0}
 --- !u!114 &1433406570 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114331328618970746, guid: 467b119f15cffb54b8f07b9ad652dc43,
@@ -452,7 +497,7 @@ Prefab:
     - target: {fileID: 114055539215120194, guid: 467b119f15cffb54b8f07b9ad652dc43,
         type: 2}
       propertyPath: m_MatchWidthOrHeight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114289177792950918, guid: 467b119f15cffb54b8f07b9ad652dc43,
         type: 2}
@@ -483,6 +528,128 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: test3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013392104930514, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285266029443834, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049936876645960, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224719608730248, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715908725144766, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_Text
+      value: 'These are the controls:
+
+
+        Pause: Esc
+
+
+        Xray: E
+
+
+        Teleport: Hold Left Shift to activate, Left click to teleport. Let go of Shift
+        to cancel.
+
+
+        Projectile: press Left Click to fire, hold Left Click to charge your shot
+        and release to fire.
+
+
+        Crouch: Left CTRL
+
+
+        Melee: Space while crouching
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926948112754272, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224736801281768878, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224607768711990618, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224107218642250494, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224607768711990618, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224107218642250494, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224736801281768878, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224607768711990618, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224107218642250494, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224736801281768878, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224223960644632904, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224509718945329774, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224598086200656522, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224813752452107560, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224841425336334354, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224865879381197394, guid: 467b119f15cffb54b8f07b9ad652dc43,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
