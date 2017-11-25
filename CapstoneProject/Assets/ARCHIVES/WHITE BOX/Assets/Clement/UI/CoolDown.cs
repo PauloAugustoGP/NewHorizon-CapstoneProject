@@ -12,7 +12,7 @@ public class CoolDown : MonoBehaviour {
     public Projectile_PlayerScript projectilePlayerScript;
     // Use this for initialization
     void Start () {
-        if (!projectilePlayerScript) {
+        if (!projectilePlayerScript && useScript) {
             // first gameobject with this script will be used.
             projectilePlayerScript = GameObject.FindObjectOfType<Projectile_PlayerScript>();
             // uses the gameobject that this script is on.
