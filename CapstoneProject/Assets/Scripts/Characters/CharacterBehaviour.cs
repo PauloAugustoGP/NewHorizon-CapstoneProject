@@ -14,15 +14,11 @@ public class CharacterBehaviour : CharacterBase
     protected int Lives;
     protected bool isCrouching;
     protected bool encumbered;
-   
-
-
 
     [Header("Test Bools")]//LIVE TEST VALUES
     [SerializeField] protected bool ValueDebuger;
     [SerializeField] protected bool Invincibility;
     [SerializeField] protected bool UseRagdoll;
-
 
     [Header("Drag and Drop")]//DRAG AND DROPS
     [SerializeField] DataTable DT;
@@ -33,7 +29,7 @@ public class CharacterBehaviour : CharacterBase
     Animator anim;
     //HUD pHud;
     CapsuleCollider cc;
-    Ragdoll _ragdoll;
+   
 
     void Start ()
     {
@@ -41,15 +37,7 @@ public class CharacterBehaviour : CharacterBase
         anim = GetComponent<Animator>();
         //pHud = GetComponent<HUD>();
         cc = GetComponent<CapsuleCollider>();
-        _ragdoll = GetComponentInChildren<Ragdoll>();
-
-        if (!UseRagdoll)
-        {
-            foreach (Rigidbody rb in _ragdoll.Bodies)
-            {
-                Physics.IgnoreCollision(cc, rb.GetComponent<Collider>());
-            }
-        }
+       
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
@@ -195,7 +183,7 @@ public class CharacterBehaviour : CharacterBase
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Damage(5);
+                Damage(50);
             }
 
             //Debug.LogFormat("Encombered? {0}",encumbered);
@@ -213,40 +201,23 @@ public class CharacterBehaviour : CharacterBase
         }//Debuger
     }//Update
 
-    public void EnableRagdoll()
-    {
-        anim.enabled = false;
-        rb.isKinematic = true;
-        cc.enabled = false;
-    }
-
-    public void DisableRagdoll()
-    {
-        anim.enabled = true;
-        rb.isKinematic = false;
-        cc.enabled = true;
-    }
-
-    public Ragdoll PlayerRagdoll
-    {
-        get { return _ragdoll; }
-    }
-
+  
     //On Death Call
     protected void Died()
     {
+        isAlive = false;
         Lives--;
 
         if (Lives == 0)
         {
             //They do the same thing But when lives reach 0 this can do more
-            StartCoroutine(DeathTime(1.5f));
-            EnableRagdoll();
+            StartCoroutine(GameOver(1.5f));
+           
         }
         else
         {
             StartCoroutine(DeathTime(1.5f));
-            EnableRagdoll();
+            
         }     
     }//Died
 
@@ -257,11 +228,16 @@ public class CharacterBehaviour : CharacterBase
         ResetPos();
     }
 
+    IEnumerator GameOver(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ResetPos();
+    }
+
     protected void ResetPos()
     {
         SetHealth(_maxHealth);
         transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-        DisableRagdoll();
     }
 
     protected void FakeDied()
