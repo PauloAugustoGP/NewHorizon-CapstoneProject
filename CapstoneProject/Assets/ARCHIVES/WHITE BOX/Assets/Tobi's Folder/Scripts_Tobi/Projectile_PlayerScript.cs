@@ -112,12 +112,6 @@ public class Projectile_PlayerScript : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        Debug.Log(Time.fixedDeltaTime);
-        Debug.Log(coolDownTime);
-    }
-
     private void ProjSpawn()
     {
         if (!_projSpawned)
