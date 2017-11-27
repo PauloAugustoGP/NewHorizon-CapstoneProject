@@ -99,7 +99,7 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.W))
             {
                 //forward
-                if (isCrouching)
+                if (isCrouching && !encumbered)
                     slowed = true;
 
                 moving = true;
@@ -118,7 +118,7 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.D))
             {
                 //right
-                if (isCrouching)
+                if (isCrouching && !encumbered)
                     slowed = true;
 
                 moving = true;
@@ -128,7 +128,7 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.A))
             {
                 //left
-                if (isCrouching)
+                if (isCrouching && !encumbered)
                     slowed = true;
 
                 moving = true;
@@ -138,7 +138,6 @@ public class CharacterBehaviour : CharacterBase
             if ((Input.GetKeyUp(KeyCode.A)) || (Input.GetKeyUp(KeyCode.W))
                 || (Input.GetKeyUp(KeyCode.S)) || (Input.GetKeyUp(KeyCode.D)))
             {
-                slowed = false;
                 moving = false;
                 anim.SetFloat("Speed", 0);
             }
