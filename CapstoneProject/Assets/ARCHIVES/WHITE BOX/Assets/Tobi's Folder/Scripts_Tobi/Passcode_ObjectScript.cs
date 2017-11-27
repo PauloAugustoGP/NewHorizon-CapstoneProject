@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Passcode_ObjectScript : MonoBehaviour
 {
-    public Text codeText;
+    [SerializeField] private Text _codeText;
+    [SerializeField] private Text _worldCodeText;
 
-    public int[] playerCode = new int[4];
     public int[] passCode = new int[4];
 
-    public int playerCodeIndex = 0;
+    private int _playerCodeIndex = 0;
+    private int[] _playerCode = new int[4];
 
     private bool _canInput = true;
+
+    [SerializeField] private UnityEvent onPasscodeAccept;
 
     // Use this for initialization
     void Start()
     {
         GenerateCode();
         UpdateText();
+        _worldCodeText.text = string.Format("{0}\t{1}\t{2}\t{3}", passCode[0], passCode[1], passCode[2], passCode[3]);
     }
     void Update()
     {
@@ -62,11 +67,11 @@ public class Passcode_ObjectScript : MonoBehaviour
 
     public void OnNumberAdd(int pEntry)
     {
-        if (!_canInput || playerCodeIndex >= 4)
+        if (!_canInput || _playerCodeIndex >= 4)
             return;
 
-        playerCode[playerCodeIndex] = pEntry;
-        ++playerCodeIndex;
+        _playerCode[_playerCodeIndex] = pEntry;
+        ++_playerCodeIndex;
 
         UpdateText();
     }
@@ -77,7 +82,7 @@ public class Passcode_ObjectScript : MonoBehaviour
 
         for (int i = 0; i < passCode.Length; ++i)
         {
-            if (passCode[i] == playerCode[i])
+            if (passCode[i] == _playerCode[i])
             {
                 equal++;
             }
@@ -94,44 +99,43 @@ public class Passcode_ObjectScript : MonoBehaviour
         if (pass)
         {
             Debug.Log("Codes are the same");
-            codeText.color = Color.green;
-            GenerateCode();
+            _codeText.color = Color.green;
+            onPasscodeAccept.Invoke();
         }
         else
         {
             Debug.Log("Codes do not match");
-            codeText.color = Color.red;
+            _codeText.color = Color.red;
+            StartCoroutine(Reset_playerCode());
         }
-
-        StartCoroutine(ResetPlayerCode());
     }
 
     public void OnBackButton()
     {
-        if (playerCodeIndex > 0)
+        if (_playerCodeIndex > 0)
         {
-            playerCodeIndex--;
-            playerCode[playerCodeIndex] = 0;
+            _playerCodeIndex--;
+            _playerCode[_playerCodeIndex] = 0;
             UpdateText();
         }
     }
 
     void UpdateText()
     {
-        codeText.text = string.Format("{0}\t{1}\t{2}\t{3}", playerCode[0], playerCode[1], playerCode[2], playerCode[3]);
+        _codeText.text = string.Format("{0}\t{1}\t{2}\t{3}", _playerCode[0], _playerCode[1], _playerCode[2], _playerCode[3]);
     }
 
-    IEnumerator ResetPlayerCode()
+    IEnumerator Reset_playerCode()
     {
         yield return new WaitForSeconds(1.0f);
 
-        for (int i = 0; i < playerCode.Length; ++i)
+        for (int i = 0; i < _playerCode.Length; ++i)
         {
-            playerCode[i] = 0;
+            _playerCode[i] = 0;
         }
 
-        playerCodeIndex = 0;
-        codeText.color = Color.black;
+        _playerCodeIndex = 0;
+        _codeText.color = Color.black;
         UpdateText();
         _canInput = true;
     }
