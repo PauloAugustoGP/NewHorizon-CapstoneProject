@@ -144,5 +144,6 @@ public class TextAbovePlayer : MonoBehaviour
         m_floatingText_Transform.position = start_pos;
 
         StartCoroutine(DisplayTextMeshFloatingText());
+
     }
 }
