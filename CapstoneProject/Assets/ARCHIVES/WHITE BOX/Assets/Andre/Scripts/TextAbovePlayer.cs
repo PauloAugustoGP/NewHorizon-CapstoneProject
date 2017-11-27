@@ -15,7 +15,7 @@ public class TextAbovePlayer : MonoBehaviour {
     {
         GameObject temp = Instantiate(PlayerTextCanvasText) as GameObject;
         RectTransform tempRect = temp.GetComponent<RectTransform>();
-        temp.transform.SetParent(transform.FindChild("PlayerTextCanvas"));
+        temp.transform.SetParent(transform.Find("PlayerTextCanvas"));
         tempRect.transform.localPosition = PlayerTextCanvasText.transform.localPosition;
         tempRect.transform.localScale = PlayerTextCanvasText.transform.localScale;
         temp.transform.localRotation = PlayerTextCanvasText.transform.localRotation;
