@@ -91,14 +91,6 @@ public class TextAbovePlayer : MonoBehaviour
 
     public IEnumerator DisplayTextMeshFloatingText()
     {
-<<<<<<< HEAD
-        GameObject temp = Instantiate(PlayerTextCanvasText) as GameObject;
-        RectTransform tempRect = temp.GetComponent<RectTransform>();
-        temp.transform.SetParent(transform.Find("PlayerTextCanvas"));
-        tempRect.transform.localPosition = PlayerTextCanvasText.transform.localPosition;
-        tempRect.transform.localScale = PlayerTextCanvasText.transform.localScale;
-        temp.transform.localRotation = PlayerTextCanvasText.transform.localRotation;
-=======
         float CountDuration = 2.0f; // How long is the countdown alive.    
         float starting_Count = 20f; // At what number is the counter starting at.
         float current_Count = starting_Count;
@@ -152,6 +144,6 @@ public class TextAbovePlayer : MonoBehaviour
         m_floatingText_Transform.position = start_pos;
 
         StartCoroutine(DisplayTextMeshFloatingText());
->>>>>>> ddb62a95bb3d71fbc5e61a03cee7c9951636f715
+
     }
 }
