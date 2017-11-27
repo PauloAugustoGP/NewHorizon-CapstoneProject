@@ -57,10 +57,7 @@ public class Pause : MonoBehaviour
 
         if (quitBtn)
         {
-            Debug.Log("quitting");
             quitBtn.onClick.AddListener(Scene_Manager.instance.GoTo_MENU);
-            Debug.Log("quitting2");
-
         }
     }
 
