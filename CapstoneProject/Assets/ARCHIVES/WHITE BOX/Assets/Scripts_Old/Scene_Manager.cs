@@ -30,7 +30,7 @@ public class Scene_Manager : MonoBehaviour {
 		if (SceneManager.GetActiveScene ().name != "MainMenu") 
 		{
 			SceneManager.LoadScene ("MainMenu");
-			SoundManger.instance.MusicCaller("Theme");
+			Sound_Manager.instance.MusicCaller("MenuMusic");
 		} 
 		else 
 		{
@@ -49,7 +49,7 @@ public class Scene_Manager : MonoBehaviour {
 		if (SceneManager.GetActiveScene ().name != lvlName) 
 		{
 			SceneManager.LoadScene (lvlName);
-			SoundManger.instance.MusicCaller("LevelMusic");
+			//Sound_Manager.instance.MusicCaller("LevelMusic");
 		} 
 		else 
 		{
@@ -65,7 +65,7 @@ public class Scene_Manager : MonoBehaviour {
 			Debug.LogError ("Error: No reload access to scene:" + SceneManager.GetActiveScene().name);
 			return;
 		}
-		SoundManger.instance.MusicCaller("LevelMusic");
+        Sound_Manager.instance.MusicCaller("LevelMusic", 0.5f);
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 

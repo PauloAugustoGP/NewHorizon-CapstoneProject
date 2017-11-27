@@ -7,15 +7,15 @@ public class Sound_Manager : MonoBehaviour {
 
     static Sound_Manager _instance = null;
 
-    [SerializeField] private AudioMixer _masterMixer;
+    /*[SerializeField] private AudioMixer _masterMixer;
 
     private const string MUSIC_VOL = "MusicVol";
     private const string VOICE_VOL = "VoiceVol";
     private const string SOUND_VOL = "SoundVol";
-
+    */
 
     [SerializeField] private AudioSource MusicSource;
-    [SerializeField] private AudioSource VoiceSource;
+    //[SerializeField] private AudioSource VoiceSource;
     [SerializeField] private AudioSource SoundSource;
 
     [Header("Music")]
@@ -24,14 +24,14 @@ public class Sound_Manager : MonoBehaviour {
     [SerializeField] private AudioClip GameOverMusic;
     [SerializeField] private AudioClip WinningMusic;
     
-    [Header("Powers")]
+    /*[Header("Powers")]
     [SerializeField] private AudioClip ProjectileCharging;
     [SerializeField] private AudioClip ProjectileFire;
     [SerializeField] private AudioClip ProjectileHit;
     [SerializeField] private AudioClip Teleport;
-    [SerializeField] private AudioClip Melee;
+    [SerializeField] private AudioClip Melee;*/
 
-    [Header("Guards")]
+    /*[Header("Guards")]
     [SerializeField] private AudioClip GuardsBanter1;
     [SerializeField] private AudioClip GuardsBanter2;
     [SerializeField] private AudioClip GuardsBanter3;
@@ -57,7 +57,7 @@ public class Sound_Manager : MonoBehaviour {
     [SerializeField] private AudioClip QuantiusTalk2;
     [SerializeField] private AudioClip QuantiusTalk3;
     [SerializeField] private AudioClip QuantiusTalk4;
-    [SerializeField] private AudioClip QuantiusTalk5;
+    [SerializeField] private AudioClip QuantiusTalk5;*/
 
 
     // Use this for initialization
@@ -79,7 +79,7 @@ void Update ()
 		
 	}
 
-    public void SetMusicVolume(float pMusicVol)
+    /*public void SetMusicVolume(float pMusicVol)
     {
 
         _masterMixer.SetFloat(MUSIC_VOL, pMusicVol);
@@ -95,6 +95,53 @@ void Update ()
     {
 
         _masterMixer.SetFloat(SOUND_VOL, pSoundVol);
+    }*/
+
+    public void MusicCaller(string clipName, float volume = 1.0f)
+    {
+        switch (clipName)
+        {
+            case "MenuMusic":
+                playMusic(MenuMusic, volume);
+
+                break;
+            case "LevelMusic":
+                playMusic(LevelMusic, volume);
+
+                break;
+            case "WinningMusic":
+                playMusic(WinningMusic, volume);
+
+                break;
+            case "gameOverMusic":
+                playMusic(GameOverMusic, volume);
+
+                break;
+        }
+    }
+
+    private void playSound(AudioClip clip, float volume = 1.0f)
+    {
+        // Assign volume to AudioSource volume
+        SoundSource.volume = volume;
+
+        // Assign AudioClip to AudioSource clip
+        SoundSource.clip = clip;
+
+        // Play assigned AudioClip through AudioSource on SoundManager
+        SoundSource.Play();
+    }
+
+    private void playMusic(AudioClip clip, float volume = 1.0f)
+    {
+        // Assign volume to AudioSource volume
+        MusicSource.volume = volume;
+
+        // Assign AudioClip to AudioSource clip
+        MusicSource.clip = clip;
+
+        // Play assigned AudioClip through AudioSource on SoundManager
+        MusicSource.Play();
     }
 
     public static Sound_Manager instance
