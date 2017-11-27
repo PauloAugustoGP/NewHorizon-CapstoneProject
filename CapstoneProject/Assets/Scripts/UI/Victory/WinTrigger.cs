@@ -20,6 +20,7 @@ public class WinTrigger : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+            Sound_Manager.instance.MusicCaller("WinningMusic");
             Scene_Manager.instance.GoTo_LEVEL("Winning");
         }
     }
