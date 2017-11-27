@@ -14,6 +14,7 @@ public class WorldSpaceText : MonoBehaviour {
     public GameObject targetToRotateTO;
     public bool theGameObject = true;
     public GameObject triggerToDestroy;
+    
 
     void Update()
     {
@@ -41,6 +42,7 @@ public class WorldSpaceText : MonoBehaviour {
         if (other.GetComponent<CharacterBehaviour>().atFullHealth == false)
         {
             theGameObject = false;
+            
         }
     }
    
