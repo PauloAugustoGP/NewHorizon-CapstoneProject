@@ -40,10 +40,7 @@ public class TeleportScript : MonoBehaviour
     [SerializeField]
     LayerMask _layerMask;
 
-    private Vector3 _playerShadowPosition;
-
-    // scripts to disable while teleport is active
-    [SerializeField] private MonoBehaviour[] _scriptsToDisable;
+    private Transform _playerShadowPosition;
 
     // Use this for initialization
     void Start()
@@ -109,23 +106,17 @@ public class TeleportScript : MonoBehaviour
                 _radius.SetActive(true);
                 //signal the teleport is active
                 _isActive = true;
-
-                // disable other scripts
-                OtherScriptsActive(false);
             }
 
-            if(Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
+            if(Input.GetKeyDown(KeyCode.Mouse1) && _isActive)
             {
                 _fakePlayer.SetActive(false);
                 _radius.SetActive(false);
                 _isCooled = true;
                 _isActive = false;
-
-                // re-enable other scripts
-                OtherScriptsActive(true);
             }
             // finish teleport by letting go of shift, also make sure teleport was activated
-            if (Input.GetKeyDown(KeyCode.Mouse0) && _isActive)
+            if (Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
             {
                 // deactivate visuals
                 _fakePlayer.SetActive(false);
@@ -141,9 +132,8 @@ public class TeleportScript : MonoBehaviour
                 // transform.SetPositionAndRotation(new Vector3(_fakePlayer.transform.position.x, transform.position.y, _fakePlayer.transform.position.z), transform.rotation);
 
                 // delayed teleport testing
-                _playerShadowPosition = _fakePlayer.transform.position;
+                _playerShadowPosition = _fakePlayer.transform;
                 StartCoroutine(DelayedTeleport(_playerShadowPosition));
-
             }
         }
     }
@@ -159,19 +149,9 @@ public class TeleportScript : MonoBehaviour
         _isCooled = true;
     }
 
-    private IEnumerator DelayedTeleport(Vector3 pTeleportPosition)
+    private IEnumerator DelayedTeleport(Transform tempTeleportPosition)
     {
         yield return new WaitForSeconds(0.2f);
-        transform.SetPositionAndRotation(new Vector3(pTeleportPosition.x, transform.position.y, pTeleportPosition.z), transform.rotation);
-        // re-enable other scripts
-        OtherScriptsActive(true);
-    }
-
-    private void OtherScriptsActive(bool pIsActive)
-    {
-        foreach (MonoBehaviour script in _scriptsToDisable)
-        {
-            script.enabled = pIsActive;
-        }
+        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.position.x, transform.position.y, tempTeleportPosition.position.z), transform.rotation);
     }
 }
