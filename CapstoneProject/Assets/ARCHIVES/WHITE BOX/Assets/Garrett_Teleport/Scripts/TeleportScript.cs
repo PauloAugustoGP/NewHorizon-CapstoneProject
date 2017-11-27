@@ -40,7 +40,10 @@ public class TeleportScript : MonoBehaviour
     [SerializeField]
     LayerMask _layerMask;
 
-    private Transform _playerShadowPosition;
+    private Vector3 _playerShadowPosition;
+
+    [SerializeField]
+    private MonoBehaviour[] componentsToDisable;
 
     // Use this for initialization
     void Start()
@@ -106,17 +109,27 @@ public class TeleportScript : MonoBehaviour
                 _radius.SetActive(true);
                 //signal the teleport is active
                 _isActive = true;
+
+                foreach (MonoBehaviour script in componentsToDisable)
+                {
+                    script.enabled = false;
+                }
             }
 
-            if(Input.GetKeyDown(KeyCode.Mouse1) && _isActive)
+            if(Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
             {
                 _fakePlayer.SetActive(false);
                 _radius.SetActive(false);
                 _isCooled = true;
                 _isActive = false;
+
+                foreach (MonoBehaviour script in componentsToDisable)
+                {
+                    script.enabled = true;
+                }
             }
             // finish teleport by letting go of shift, also make sure teleport was activated
-            if (Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && _isActive)
             {
                 // deactivate visuals
                 _fakePlayer.SetActive(false);
@@ -132,8 +145,13 @@ public class TeleportScript : MonoBehaviour
                 // transform.SetPositionAndRotation(new Vector3(_fakePlayer.transform.position.x, transform.position.y, _fakePlayer.transform.position.z), transform.rotation);
 
                 // delayed teleport testing
-                _playerShadowPosition = _fakePlayer.transform;
+                _playerShadowPosition = _fakePlayer.transform.position;
                 StartCoroutine(DelayedTeleport(_playerShadowPosition));
+
+                foreach (MonoBehaviour script in componentsToDisable)
+                {
+                    script.enabled = true;
+                }
             }
         }
     }
@@ -149,9 +167,9 @@ public class TeleportScript : MonoBehaviour
         _isCooled = true;
     }
 
-    private IEnumerator DelayedTeleport(Transform tempTeleportPosition)
+    private IEnumerator DelayedTeleport(Vector3 tempTeleportPosition)
     {
         yield return new WaitForSeconds(0.2f);
-        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.position.x, transform.position.y, tempTeleportPosition.position.z), transform.rotation);
+        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.x, transform.position.y, tempTeleportPosition.z), transform.rotation);
     }
 }
