@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 public class HeathBoxPickUp : MonoBehaviour {
-
+    public GameObject textAbovePlayer;
 
     private void OnTriggerEnter(Collider c)
     {
@@ -15,6 +15,7 @@ public class HeathBoxPickUp : MonoBehaviour {
             {
                 c.GetComponent<CharacterBehaviour>().Heal(20);
                 Destroy(gameObject);
+                textAbovePlayer.gameObject.SetActive(true);
             }
         }
     }
