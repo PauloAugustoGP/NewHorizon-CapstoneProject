@@ -13,6 +13,7 @@ public class CharacterBase : MonoBehaviour
     protected float _health;
     protected static float StandardHeight = 2;
     protected static float CrouchedHeight = 1;
+    protected static Vector3 CharGravity = new Vector3(0,-9.18f,0); 
 
     public static bool moving;
     public static bool Rested;
