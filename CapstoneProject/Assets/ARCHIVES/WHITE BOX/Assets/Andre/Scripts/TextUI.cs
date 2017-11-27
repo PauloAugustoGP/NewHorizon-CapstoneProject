@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlayerUI : MonoBehaviour
+public class TextUI : MonoBehaviour
 {
     public AndreController FindController;
     public RectTransform messageSpawnPoint;

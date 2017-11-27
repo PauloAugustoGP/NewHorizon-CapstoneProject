@@ -10,7 +10,7 @@ public class AndreController : MonoBehaviour
     public float rotateSpeed = 2f;
     public RectTransform messageSpawnPoint;
     public PlayerMessage spawn;
-    public PlayerUI accessUI;
+    public TextUI accessUI;
   
     // Use this for initialization
     void Start()

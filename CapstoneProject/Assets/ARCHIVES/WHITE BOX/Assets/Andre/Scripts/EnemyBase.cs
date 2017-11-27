@@ -227,7 +227,7 @@ public class EnemyBase : MonoBehaviour
 
         if (camera)
         {
-            PlayerUI player = camera.GetComponent<PlayerUI>();
+            TextUI player = camera.GetComponent<TextUI>();
             if (player)
             {
                // player.ShowEnemyBar(EnemyHealth / EnemyMaxHealth);

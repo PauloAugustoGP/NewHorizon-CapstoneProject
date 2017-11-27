@@ -12,7 +12,7 @@ public class MoveInstructions : MonoBehaviour {
             GameObject gm = GameObject.FindGameObjectWithTag("MainCamera");
             if (gm)
             {
-                PlayerUI pm = gm.GetComponent<PlayerUI>();
+                TextUI pm = gm.GetComponent<TextUI>();
                 if (pm)
                 {
                     pm.SpawnMessage("Press W to move forward A to move left D to move right and S to move back.");
