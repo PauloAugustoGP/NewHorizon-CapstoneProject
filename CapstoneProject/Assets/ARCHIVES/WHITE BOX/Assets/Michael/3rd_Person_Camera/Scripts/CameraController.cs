@@ -131,7 +131,7 @@ public class CameraController : MonoBehaviour
         _yAngleMin = -10f;
         _yAngleMax = 35f;
 
-        _bumperHorizontalCheck = _zDist + 0.5f;
+        _bumperHorizontalCheck = _zDist + 1f;
         _bumperCameraHeight = _yDist + 0.5f;
 
         _damping = 5f;
@@ -172,7 +172,7 @@ public class CameraController : MonoBehaviour
                 // This adds a slight lag behind for the player's rotation
                 _target.rotation = Quaternion.Lerp(_target.rotation, Quaternion.Euler(0f, _mouseX, 0f), 0.02f * _rotationDamping);
 
-                // This will remove the slight lag and the player's rotation is hard-set
+                // This will remove the slight lag and the player's rotation is hard-set, might cause jittery rotations
                 //this.transform.rotation = Quaternion.Euler(0f, _mouseX, 0f);
             }
         }
@@ -210,16 +210,6 @@ public class CameraController : MonoBehaviour
         RaycastHit hit;
         Vector3 back = -_target.forward;
         Ray ray = new Ray(_target.position + new Vector3(0f, 1f, 0f), back);
-
-        //Debug.DrawRay(_mainCam.position, _mainCam.forward, Color.red);
-        //Debug.DrawRay(_mainCam.position, _mainCam.right, Color.red);
-        //Debug.DrawRay(_mainCam.position, -_mainCam.forward, Color.red);
-        //Debug.DrawRay(_mainCam.position, -_mainCam.right, Color.red);
-
-        //if (Physics.SphereCast(_mainCam.position, 1f, -_mainCam.forward, out hit, 1f, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
-        //{
-        //    Debug.DrawLine(_mainCam.position, hit.point, Color.blue);
-        //}
 
         if (Physics.Raycast(ray, out hit, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
