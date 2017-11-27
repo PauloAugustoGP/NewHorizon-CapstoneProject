@@ -15,7 +15,7 @@ public class Level4 : MonoBehaviour
             GameObject gm = GameObject.FindGameObjectWithTag("MainCamera");
             if (gm)
             {
-                PlayerUI pm = gm.GetComponent<PlayerUI>();
+                TextUI pm = gm.GetComponent<TextUI>();
                 if (pm)
                 {
                     pm.SpawnMessage("Pass all the guards and Exit the building!");

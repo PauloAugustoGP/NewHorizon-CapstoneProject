@@ -16,22 +16,25 @@ public class Pause : MonoBehaviour
 
     public bool isPaused;
 
-	public CameraController _cameraController;
+    public CameraController _cameraController;
 
-	[SerializeField] private GameObject[] _objectsToDisable;
-	private LinkedList<MonoBehaviour> _componentsToDisable = new LinkedList<MonoBehaviour>();
+    [SerializeField] private GameObject[] _objectsToDisable;
+    private LinkedList<MonoBehaviour> _componentsToDisable = new LinkedList<MonoBehaviour>();
 
 
     // Use this for initialization
     void Start()
-	{
-		foreach(GameObject go in _objectsToDisable)
-		{
-			foreach(MonoBehaviour mo in go.GetComponentsInChildren<MonoBehaviour>())
-			{
-				_componentsToDisable.AddLast(mo);
-			}
-		}
+    {
+        if (_objectsToDisable.Length > 0)
+        {
+            foreach (GameObject go in _objectsToDisable)
+            {
+                foreach (MonoBehaviour mo in go.GetComponentsInChildren<MonoBehaviour>())
+                {
+                    _componentsToDisable.AddLast(mo);
+                }
+            }
+        }
 
         isPaused = false;
         /*if (resumeBtn)
@@ -46,7 +49,7 @@ public class Pause : MonoBehaviour
 
         if (restartBtn)
         {
-            restartBtn.onClick.AddListener( Scene_Manager.instance.Reload_LEVEL);
+            restartBtn.onClick.AddListener(Scene_Manager.instance.Reload_LEVEL);
             GetComponentInChildren<Canvas>().enabled = false;
             Time.timeScale = 1.0f;
             isPaused = false;
@@ -55,25 +58,25 @@ public class Pause : MonoBehaviour
         if (quitBtn)
         {
             Debug.Log("quitting");
-            quitBtn.onClick.AddListener( Scene_Manager.instance.GoTo_MENU);
+            quitBtn.onClick.AddListener(Scene_Manager.instance.GoTo_MENU);
             Debug.Log("quitting2");
 
-        } 
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-			if (!isPaused)
+            if (!isPaused)
             {
-				//PauseGame(true);
+                //PauseGame(true);
                 GetComponentInChildren<Canvas>().enabled = true;
                 Time.timeScale = 0f;
                 isPaused = true;
             }
-			else if (isPaused)
+            else if (isPaused)
             {
                 //PauseGame(false);
                 GetComponentInChildren<Canvas>().enabled = false;
@@ -81,10 +84,10 @@ public class Pause : MonoBehaviour
                 isPaused = false;
             }
 
-            
+
         }
 
-                     
+
 
 
         /*
@@ -100,37 +103,37 @@ public class Pause : MonoBehaviour
         }*/
     }
 
-	public void PauseGame(bool pPause)
-	{
-		if(pPause)
-		{
-			SetGame(false);
-			_cameraController.inGame = false;
-			Cursor.lockState = CursorLockMode.Confined;
-			GetComponentInChildren<Canvas>().enabled = true;
-			Time.timeScale = 0f;
-			isPaused = true;
-		}
-		else
-		{
-			SetGame(true);
-			_cameraController.inGame = true;
-			GetComponentInChildren<Canvas>().enabled = false;
-			Time.timeScale = 1.0f;
-			isPaused = false;
-		}
-	}
+    public void PauseGame(bool pPause)
+    {
+        if (pPause)
+        {
+            SetGame(false);
+            _cameraController.inGame = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            GetComponentInChildren<Canvas>().enabled = true;
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+        else
+        {
+            SetGame(true);
+            _cameraController.inGame = true;
+            GetComponentInChildren<Canvas>().enabled = false;
+            Time.timeScale = 1.0f;
+            isPaused = false;
+        }
+    }
 
-	private void SetGame(bool pState)
-	{
-		if(_componentsToDisable.Count > 0)
-		{
-			foreach (MonoBehaviour script in _componentsToDisable)
-			{
-				script.enabled = pState;
-			}
-		}
-	}
+    private void SetGame(bool pState)
+    {
+        if (_componentsToDisable.Count > 0)
+        {
+            foreach (MonoBehaviour script in _componentsToDisable)
+            {
+                script.enabled = pState;
+            }
+        }
+    }
 
     /*public void quit()
     {

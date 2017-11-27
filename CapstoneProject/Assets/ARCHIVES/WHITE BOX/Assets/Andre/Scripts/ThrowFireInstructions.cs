@@ -12,7 +12,7 @@ public class ThrowFireInstructions : MonoBehaviour {
             GameObject gm = GameObject.FindGameObjectWithTag("MainCamera");
             if (gm)
             {
-                PlayerUI pm = gm.GetComponent<PlayerUI>();
+                TextUI pm = gm.GetComponent<TextUI>();
                 if (pm)
                 {
                     pm.SpawnMessage("Press the space bar and hold to charge fire ball, let go to throw.");

@@ -2783,7 +2783,7 @@ MonoBehaviour:
   _stunTime: 5
   _meleeHitBox: {fileID: 1022515572505404}
   _CB: {fileID: 114967429086687916}
-  _TS: {fileID: 0}
+  _TS: {fileID: 114868481966429110}
 --- !u!114 &114840795816133432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2805,6 +2805,9 @@ MonoBehaviour:
   _sensitivityY: 0
   _rotSpeedX: 0
   _rotSpeedY: 0
+  _playerIgnoreLM:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &114868481966429110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2819,9 +2822,12 @@ MonoBehaviour:
   _fakePlayer: {fileID: 1739104106861118}
   _teleportPoint: {fileID: 1419783351735020}
   _radius: {fileID: 1117557315715588}
-  _maxTeleportDistance: 5
   _minTeleportDistance: 1
   _isCooled: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  componentsToDisable: []
 --- !u!114 &114967429086687916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2837,8 +2843,12 @@ MonoBehaviour:
   atFullHealth: 0
   ValueDebuger: 1
   Invincibility: 0
+  UseRagdoll: 0
   DT: {fileID: 0}
   StartPosition: {fileID: 0}
+  LM:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &114984431585824796
 MonoBehaviour:
   m_ObjectHideFlags: 1

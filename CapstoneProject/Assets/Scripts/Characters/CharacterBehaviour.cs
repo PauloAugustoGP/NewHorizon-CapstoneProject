@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// IK system ?
+/// Ridgidbody moves character 
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -15,6 +18,7 @@ public class CharacterBehaviour : CharacterBase
     [Header("Test Bools")]//LIVE TEST VALUES
     [SerializeField] protected bool ValueDebuger;
     [SerializeField] protected bool Invincibility;
+    [SerializeField] protected bool UseRagdoll;
 
     [Header("Drag and Drop")]//DRAG AND DROPS
     [SerializeField] DataTable DT;
@@ -25,6 +29,7 @@ public class CharacterBehaviour : CharacterBase
     Animator anim;
     //HUD pHud;
     CapsuleCollider cc;
+   
 
     void Start ()
     {
@@ -32,6 +37,7 @@ public class CharacterBehaviour : CharacterBase
         anim = GetComponent<Animator>();
         //pHud = GetComponent<HUD>();
         cc = GetComponent<CapsuleCollider>();
+       
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
@@ -177,7 +183,7 @@ public class CharacterBehaviour : CharacterBase
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Damage(5);
+                Damage(50);
             }
 
             //Debug.LogFormat("Encombered? {0}",encumbered);
@@ -195,36 +201,55 @@ public class CharacterBehaviour : CharacterBase
         }//Debuger
     }//Update
 
+  
     //On Death Call
     protected void Died()
     {
+        isAlive = false;
         Lives--;
 
         if (Lives == 0)
         {
             //They do the same thing But when lives reach 0 this can do more
-            transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            StartCoroutine(GameOver(1.5f));
+           
         }
         else
         {
-            transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            StartCoroutine(DeathTime(1.5f));
+            
         }     
     }//Died
+
+
+    IEnumerator DeathTime(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ResetPos();
+    }
+
+    IEnumerator GameOver(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ResetPos();
+    }
+
+    protected void ResetPos()
+    {
+        SetHealth(_maxHealth);
+        transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+    }
 
     protected void FakeDied()
     {
         Lives--;
         if (Lives == 0)
         {
-            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            ResetPos();
         }
         else
         {
-            //transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
-            SetHealth(_maxHealth);
+            ResetPos();
         }
     }//Died
 

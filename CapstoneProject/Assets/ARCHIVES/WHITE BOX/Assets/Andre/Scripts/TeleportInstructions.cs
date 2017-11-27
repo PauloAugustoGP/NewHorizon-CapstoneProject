@@ -12,7 +12,7 @@ public class TeleportInstructions : MonoBehaviour {
             GameObject gm = GameObject.FindGameObjectWithTag("MainCamera");
             if (gm)
             {
-                PlayerUI pm = gm.GetComponent<PlayerUI>();
+                TextUI pm = gm.GetComponent<TextUI>();
                 if (pm)
                 {
                     pm.SpawnMessage("Press and hold down tab, point with your mouse to the area you want to teleport to, then let go of tab.");
