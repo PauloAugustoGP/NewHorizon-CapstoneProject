@@ -8,7 +8,7 @@ public class SwitchButton : MonoBehaviour
     [SerializeField]
     private GameObject Interactable;
     [Tooltip("Script inside of the assigned Door, calls the toggleDoorState function")]
-    private Door actualDoor;
+    private Doors actualDoor;
     private Elevator actualElevator;
     [Tooltip("Shows if the door is triggered or not")]
     [SerializeField]
@@ -19,7 +19,7 @@ public class SwitchButton : MonoBehaviour
     void Start()
     {
         buttonMesh = GetComponent<MeshRenderer>();
-        actualDoor = Interactable.GetComponentInChildren<Door>();
+        actualDoor = Interactable.GetComponentInChildren<Doors>();
         actualElevator = Interactable.GetComponent<Elevator>();
     }
     private void OnTriggerEnter(Collider other)
