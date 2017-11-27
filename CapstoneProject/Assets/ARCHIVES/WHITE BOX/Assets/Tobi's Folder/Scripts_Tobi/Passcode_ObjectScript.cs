@@ -12,6 +12,8 @@ public class Passcode_ObjectScript : MonoBehaviour
 
     public int playerCodeIndex = 0;
 
+    private bool _canInput = true;
+
     // Use this for initialization
     void Start()
     {
@@ -31,7 +33,6 @@ public class Passcode_ObjectScript : MonoBehaviour
 
         for (int i = 0; i < passCode.Length; ++i)
         {
-            passCode[i] = 10;
             usedNum[i] = 10;
         }
 
@@ -61,19 +62,16 @@ public class Passcode_ObjectScript : MonoBehaviour
 
     public void OnNumberAdd(int pEntry)
     {
+        if (!_canInput || playerCodeIndex >= 4)
+            return;
+
         playerCode[playerCodeIndex] = pEntry;
         ++playerCodeIndex;
 
         UpdateText();
-
-        if (playerCodeIndex >= 4)
-        {
-            playerCodeIndex = 0;
-            PasscodeCompaire();
-        }
     }
 
-    void PasscodeCompaire()
+    public void OnPasscodeCompaire()
     {
         int equal = 0;
 
@@ -85,22 +83,15 @@ public class Passcode_ObjectScript : MonoBehaviour
             }
         }
 
-        if (playerCode[0] == 7 && playerCode[1] == 6 && playerCode[2] == 7 && playerCode[3] == 6)
-            Result(true, "Popo");
-        else if (equal >= 4)
+        if (equal >= 4)
             Result(true);
         else
             Result(false);
     }
 
-    void Result(bool pass, string popo = "")
+    void Result(bool pass)
     {
-        if (popo == "Popo")
-        {
-            Debug.Log("POPO!!!");
-            codeText.color = Color.black;
-        }
-        else if (pass)
+        if (pass)
         {
             Debug.Log("Codes are the same");
             codeText.color = Color.green;
@@ -137,10 +128,11 @@ public class Passcode_ObjectScript : MonoBehaviour
         for (int i = 0; i < playerCode.Length; ++i)
         {
             playerCode[i] = 0;
-            playerCodeIndex = 0;
         }
 
+        playerCodeIndex = 0;
         codeText.color = Color.black;
         UpdateText();
+        _canInput = true;
     }
 }
