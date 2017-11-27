@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Projectile_ObjectScript : MonoBehaviour
 {
-
     //this script should be on the projectile prefab
 
     private Rigidbody _rb;

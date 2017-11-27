@@ -37,11 +37,14 @@ public class CameraController : MonoBehaviour
     private Transform _target;
 
     // Camera follow distance, local position relative to Player position
-    [SerializeField] [Tooltip("Shoulder offset value. Value of 0 centres camera behind player.")]
+    [SerializeField]
+    [Tooltip("Shoulder offset value. Value of 0 centres camera behind player.")]
     private float _xDist;
-    [SerializeField] [Tooltip("Height above target's pivot.")]
+    [SerializeField]
+    [Tooltip("Height above target's pivot.")]
     private float _yDist;   // Height above the floor (Player pivot point) camera will be
-    [SerializeField] [Tooltip("Distance behind target's pivot.")]
+    [SerializeField]
+    [Tooltip("Distance behind target's pivot.")]
     private float _zDist;   // Distance between camera and player (pivot point)
 
     // Used for calculating camera local position while rotating view
@@ -70,9 +73,11 @@ public class CameraController : MonoBehaviour
     [Header("Camera Sensitivity and Control")]
     // Controls the speed of the camera rotation
     // Sensitivity must be set prior to runtime (currently)
-    [SerializeField] [Range(0.1f, 1f)]
+    [SerializeField]
+    [Range(0.1f, 1f)]
     private float _sensitivityX;
-    [SerializeField] [Range(0.1f, 1f)]
+    [SerializeField]
+    [Range(0.1f, 1f)]
     private float _sensitivityY;
 
     private float _rotSpeedX;
@@ -89,10 +94,11 @@ public class CameraController : MonoBehaviour
 
     private TeleportScript _tpRef;
 
-	private CursorLockMode wantedMode;
+    private CursorLockMode wantedMode;
 
-	[Header("Layer Mask - Projectile")]
-	[SerializeField] private LayerMask _playerIgnoreLM;
+    [Header("Layer Mask - Projectile")]
+    [SerializeField]
+    private LayerMask _playerIgnoreLM;
 
     // Pause behaviour for Cursor
     private bool _inGame = true;
@@ -109,7 +115,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void Start ()
+    void Start()
     {
         if (!_mainCam)
         {
@@ -150,10 +156,10 @@ public class CameraController : MonoBehaviour
 
         _tpRef = GameObject.Find("Player").GetComponent<TeleportScript>();
 
-		Cursor.lockState = CursorLockMode.Locked;
-	}
-	
-	void FixedUpdate ()
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void FixedUpdate()
     {
         // Sets Cursor state (locked/visible/not) and Camera state (freeze/not)
         CheckGameState();
@@ -240,30 +246,30 @@ public class CameraController : MonoBehaviour
     }
 
     // Raycasts from the camera's centre of view and returns the first point of collision
-	public Vector3 GetCentreView(Vector3 pRayOrigin)
-	{
-		float xPos = Screen.width / 2f;
-		float yPos = Screen.height / 2f;
+    public Vector3 GetCentreView(Vector3 pRayOrigin)
+    {
+        float xPos = Screen.width / 2f;
+        float yPos = Screen.height / 2f;
 
-		float maxDistance = 50.0f;
+        float maxDistance = 50.0f;
 
-		//Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(xPos, yPos, _mainCam.position.z));
-		RaycastHit hit;
+        //Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(xPos, yPos, _mainCam.position.z));
+        RaycastHit hit;
 
-		Ray ray = new Ray(pRayOrigin, _mainCam.forward);
+        Ray ray = new Ray(pRayOrigin, _mainCam.forward);
 
-		// This ray *should* represent where the the centre of the camera view is.
-		// Ignore the length of the ray in this Debug statement.
-		// hit.point represents the first collision from the centre of the camera.
-		//Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
+        // This ray *should* represent where the the centre of the camera view is.
+        // Ignore the length of the ray in this Debug statement.
+        // hit.point represents the first collision from the centre of the camera.
+        //Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
-		if (Physics.Raycast(ray, out hit, maxDistance, _playerIgnoreLM))
-		{ 
-			return hit.point;
-		}
-		else
-		{
-			return pRayOrigin + (_mainCam.forward * maxDistance);
-		}
-	}
+        if (Physics.Raycast(ray, out hit, maxDistance, _playerIgnoreLM))
+        {
+            return hit.point;
+        }
+        else
+        {
+            return pRayOrigin + (_mainCam.forward * maxDistance);
+        }
+    }
 }
