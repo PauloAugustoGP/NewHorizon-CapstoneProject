@@ -3115,6 +3115,9 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 256
+  componentsToDisable:
+  - {fileID: 114935318517167448}
+  - {fileID: 114823477221264704}
 --- !u!114 &114327480159995246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3175,6 +3178,7 @@ MonoBehaviour:
   atFullHealth: 0
   ValueDebuger: 1
   Invincibility: 0
+  UseRagdoll: 0
   DT: {fileID: 0}
   StartPosition: {fileID: 4346536813284070}
   LM:
