@@ -112,6 +112,12 @@ public class Projectile_PlayerScript : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        Debug.Log(Time.fixedDeltaTime);
+        Debug.Log(coolDownTime);
+    }
+
     private void ProjSpawn()
     {
         if (!_projSpawned)
@@ -174,14 +180,15 @@ public class Projectile_PlayerScript : MonoBehaviour
 
     private IEnumerator CoolDown()
     {
-        yield return _coolDownWait;
+        yield return new WaitForEndOfFrame();
         if (_coolDownTime <= 0.0f)
         {
+            _coolDownTime = 0.0f;
             _projSpawned = false;
         }
         else
         {
-            _coolDownTime -= 0.01f;
+            _coolDownTime -= Time.fixedDeltaTime;
             StartCoroutine(CoolDown());
         }
     }
