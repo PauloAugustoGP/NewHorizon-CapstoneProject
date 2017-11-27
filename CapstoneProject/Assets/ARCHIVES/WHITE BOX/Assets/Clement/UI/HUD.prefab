@@ -829,9 +829,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: {fileID: 114618912402205966}
-  useScript: 0
-  waitTime: 0
+  stop: 0
+  paused: 0
+  coolDownTime: 0
   isCoolingDown: 0
+  useScriptValue: 0
+  cooledDownColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  coolingDownColor: {r: 1, g: 0, b: 0, a: 1}
   projectilePlayerScript: {fileID: 0}
 --- !u!114 &114260227518856506
 MonoBehaviour:
@@ -1370,9 +1374,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: {fileID: 114711112312335524}
-  useScript: 0
-  waitTime: 0
+  stop: 0
+  paused: 0
+  coolDownTime: 0
   isCoolingDown: 0
+  useScriptValue: 0
+  cooledDownColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  coolingDownColor: {r: 1, g: 0, b: 0, a: 1}
   projectilePlayerScript: {fileID: 0}
 --- !u!114 &114764001396828458
 MonoBehaviour:
@@ -1460,9 +1468,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: {fileID: 114399574414986776}
-  useScript: 0
-  waitTime: 0
+  stop: 0
+  paused: 0
+  coolDownTime: 0
   isCoolingDown: 0
+  useScriptValue: 0
+  cooledDownColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  coolingDownColor: {r: 1, g: 0, b: 0, a: 1}
   projectilePlayerScript: {fileID: 0}
 --- !u!114 &114891882303040766
 MonoBehaviour:
