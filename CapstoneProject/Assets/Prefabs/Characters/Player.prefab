@@ -3126,11 +3126,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920816339443276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264a04b2ae001ff4d8a73d9381f4b38a, type: 3}
+  m_Script: {fileID: 11500000, guid: aabc1d57d02fc44719dc6fb70f9f5766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 4903128247564056}
-  _target: {fileID: 4356726930645046}
+  _target: {fileID: 0}
   _xDist: 0
   _yDist: 2
   _zDist: 1.5
@@ -3142,7 +3142,7 @@ MonoBehaviour:
   _sensitivityY: 0.4
   _playerIgnoreLM:
     serializedVersion: 2
-    m_Bits: 4294966783
+    m_Bits: 0
 --- !u!114 &114611029317906916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3229,6 +3229,7 @@ MonoBehaviour:
   - {fileID: 114611029317906916}
   - {fileID: 114823477221264704}
   - {fileID: 114203428090279906}
+  coolDown: {fileID: 0}
 --- !u!124 &124958553143039992
 Behaviour:
   m_ObjectHideFlags: 1
