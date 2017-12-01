@@ -29,9 +29,12 @@ public class Pause : MonoBehaviour
         {
             foreach (GameObject go in _objectsToDisable)
             {
-                foreach (MonoBehaviour mo in go.GetComponentsInChildren<MonoBehaviour>())
+                if (go.GetComponent<MonoBehaviour>() != null)
                 {
-                    _componentsToDisable.AddLast(mo);
+                    foreach (MonoBehaviour mo in go.GetComponentsInChildren<MonoBehaviour>())
+                    {
+                        _componentsToDisable.AddLast(mo);
+                    }
                 }
             }
         }
