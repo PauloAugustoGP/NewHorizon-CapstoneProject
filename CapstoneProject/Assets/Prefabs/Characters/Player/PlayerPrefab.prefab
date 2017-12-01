@@ -928,7 +928,6 @@ GameObject:
   - component: {fileID: 124629065369964398}
   - component: {fileID: 92219755823780472}
   - component: {fileID: 81078621349069224}
-  - component: {fileID: 114474751861245438}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -2914,26 +2913,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   componentsToDisable: []
---- !u!114 &114474751861245438
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1716361743041178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2bca32d5e00dc64bb97685a40b3f93a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 4032238368074618}
-  _walkDist: 0
-  _heightDist: 0
-  _heightDamping: 0
-  _rotationDamping: 0
-  _yAngleMin: 0
-  _yAngleMax: 0
-  _rotSpeedX: 0
-  _rotSpeedY: 0
 --- !u!114 &114824296216054126
 MonoBehaviour:
   m_ObjectHideFlags: 1
