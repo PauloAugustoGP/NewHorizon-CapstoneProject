@@ -44,7 +44,7 @@ public class TextAbovePlayer : MonoBehaviour
     {
 
         m_floatingText_Transform = m_floatingText.transform;
-        m_floatingText_Transform.position = m_transform.position + new Vector3(0, 9f, 0);
+        m_floatingText_Transform.position = m_transform.position + new Vector3(0, 1f, 0);
 
         m_textMesh = m_floatingText.AddComponent<TextMesh>();
         m_textMesh.font = Resources.Load("Fonts/ARIAL", typeof(Font)) as Font;
@@ -53,7 +53,7 @@ public class TextAbovePlayer : MonoBehaviour
         m_textMesh.anchor = TextAnchor.LowerCenter;
         m_textMesh.fontSize = 8;
 
-        StartCoroutine(DisplayFloatingText("+20"));
+        StartCoroutine(DisplayFloatingText("+40"));
     }
 
     public IEnumerator DisplayFloatingText(string text = "Default")

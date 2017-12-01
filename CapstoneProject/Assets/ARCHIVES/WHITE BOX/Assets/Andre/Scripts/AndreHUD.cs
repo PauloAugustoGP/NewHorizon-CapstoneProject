@@ -155,36 +155,9 @@ public class AndreHUD : MonoBehaviour
 
     public float CalculateHealth()
     {
-        Log("Calc: " + currentHealth);
-        Log("maxHealth: " + maxHealth);
         float percentHealth = (getHealth() * 100) / maxHealth;
-        Log(percentHealth);
         healthText.text = percentHealth.ToString();
         float width = (percentHealth * healthBarBg.sizeDelta.x) / 100;
-        Log(width);
-        Log("Health calculated");
         return width;
-    }
-
-    public void Log(string value)
-    {
-        if (!disableLogging)
-        {
-           // Debug.Log("Hud Log: " + value);
-        }
-    }
-    public void Log(int value)
-    {
-        if (!disableLogging)
-        {
-           // Debug.Log("Hud Log: " + value);
-        }
-    }
-    public void Log(float value)
-    {
-        if (!disableLogging)
-        {
-            //Debug.Log("Hud Log: " + value);
-        }
     }
 }

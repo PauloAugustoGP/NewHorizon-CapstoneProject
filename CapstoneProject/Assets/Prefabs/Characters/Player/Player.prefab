@@ -1361,8 +1361,13 @@ GameObject:
   - component: {fileID: 114203428090279906}
   - component: {fileID: 114823477221264704}
   - component: {fileID: 114935318517167448}
+<<<<<<< HEAD:CapstoneProject/Assets/Prefabs/Characters/Player/Player.prefab
   - component: {fileID: 114327480159995246}
   - component: {fileID: 114094824592883438}
+=======
+  - component: {fileID: 114611029317906916}
+  - component: {fileID: 114560449500862050}
+>>>>>>> 426961993576acf07827cc35ac74c1501d9a4ca6:CapstoneProject/Assets/Prefabs/Characters/Player.prefab
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1857,7 +1862,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920816339443276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD:CapstoneProject/Assets/Prefabs/Characters/Player/Player.prefab
   m_LocalPosition: {x: 0, y: 0, z: 0}
+=======
+  m_LocalPosition: {x: -10.45, y: 0.147, z: -2.46}
+>>>>>>> 426961993576acf07827cc35ac74c1501d9a4ca6:CapstoneProject/Assets/Prefabs/Characters/Player.prefab
   m_LocalScale: {x: 1.00001, y: 1, z: 1}
   m_Children:
   - {fileID: 4404472268078576}
@@ -3016,8 +3025,15 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 256
+<<<<<<< HEAD:CapstoneProject/Assets/Prefabs/Characters/Player/Player.prefab
   componentsToDisable: []
 --- !u!114 &114327480159995246
+=======
+  componentsToDisable:
+  - {fileID: 114935318517167448}
+  - {fileID: 114823477221264704}
+--- !u!114 &114560449500862050
+>>>>>>> 426961993576acf07827cc35ac74c1501d9a4ca6:CapstoneProject/Assets/Prefabs/Characters/Player.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3025,21 +3041,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920816339443276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
+  m_Script: {fileID: 11500000, guid: aabc1d57d02fc44719dc6fb70f9f5766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 4903128247564056}
-  _target: {fileID: 4356726930645046}
-  _xDist: 0.25
+  _target: {fileID: 0}
+  _xDist: 0
   _yDist: 2
   _zDist: 1.5
-  _damping: 0
-  _rotationDamping: 0
-  _sensitivityX: 0
-  _sensitivityY: 0
+  _yAngleMin: -10
+  _yAngleMax: 35
+  _damping: 5
+  _rotationDamping: 10
+  _sensitivityX: 0.5
+  _sensitivityY: 0.4
   _playerIgnoreLM:
     serializedVersion: 2
+<<<<<<< HEAD:CapstoneProject/Assets/Prefabs/Characters/Player/Player.prefab
     m_Bits: 4294966783
+=======
+    m_Bits: 0
+--- !u!114 &114611029317906916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1920816339443276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9458832f55e884f6cbd89ccd619d65a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useCoolDown: 0
+  definitions:
+    _touchDistance: 1
+  dragAndDropVariables:
+    _rayOrigin: {fileID: 4455520124050168}
+    _transparent: {fileID: 4800000, guid: eab4b8bd340f74707b822cf34dcfd3dd, type: 3}
+  componentsToDisable:
+  - {fileID: 114652078837350892}
+  - {fileID: 114935318517167448}
+  - {fileID: 114823477221264704}
+  - {fileID: 114203428090279906}
+>>>>>>> 426961993576acf07827cc35ac74c1501d9a4ca6:CapstoneProject/Assets/Prefabs/Characters/Player.prefab
 --- !u!114 &114652078837350892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3092,7 +3136,7 @@ MonoBehaviour:
   _enemyTag: Enemy
   dragAndDropVariables:
     _projectileSpawn: {fileID: 4279920630197606}
-    _CamController: {fileID: 114327480159995246}
+    _CamController: {fileID: 0}
     _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
       type: 2}
     _projectileRayOrigin: {fileID: 4903128247564056}
@@ -3104,6 +3148,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 114823477221264704}
   - {fileID: 114203428090279906}
+  coolDown: {fileID: 0}
 --- !u!124 &124958553143039992
 Behaviour:
   m_ObjectHideFlags: 1

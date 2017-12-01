@@ -20,12 +20,14 @@ public class WinCanvas : MonoBehaviour {
 
     public void BackToMenu()
     {
+        Sound_Manager.instance.MusicCaller("MenuMusic");
         SceneManager.LoadScene("MainMenu");
     }
 
     public void ReplayLevel()
     {
-        SceneManager.LoadScene("Test");
+        Sound_Manager.instance.MusicCaller("LevelMusic");
+        SceneManager.LoadScene("Level_1_Tyler");
     }
 
     public void QuitGame()

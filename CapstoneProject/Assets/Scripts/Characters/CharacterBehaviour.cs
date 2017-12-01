@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-/// <summary>
-/// IK system ?
-/// Ridgidbody moves character 
-/// </summary>
+
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -27,17 +24,13 @@ public class CharacterBehaviour : CharacterBase
     [SerializeField] LayerMask LM;
 
     Animator anim;
-    //HUD pHud;
     CapsuleCollider cc;
    
-
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        //pHud = GetComponent<HUD>();
         cc = GetComponent<CapsuleCollider>();
-       
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
@@ -50,7 +43,6 @@ public class CharacterBehaviour : CharacterBase
 
         if (Lives == 0)
             Lives = 3;
-
     }
 
     void Update ()
@@ -89,18 +81,10 @@ public class CharacterBehaviour : CharacterBase
 
         //Temp Spot //wanted to move to class
         if (moving)
-        {
-            slowed = isCrouching;
-
-            if (!slowed)
-            {
-                _MoveV = 400;
-            }
-
-            if (slowed)
-            {
-                _MoveV = 100;
-            }
+        {   if (slowed == false)
+                _MoveV = 800;
+            else if (slowed == true)
+                _MoveV = 500;
         }//Moving : True
         else if (!moving)
         {
@@ -115,6 +99,9 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.W))
             {
                 //forward
+                if (isCrouching && !encumbered)
+                    slowed = true;
+
                 moving = true;
                 ft = 1;
                 anim.SetFloat("Speed", MoveV);
@@ -123,6 +110,7 @@ public class CharacterBehaviour : CharacterBase
             {
                 //back
                 slowed = true;
+
                 moving = true;
                 ft = -1;
                 anim.SetFloat("Speed", -MoveV);
@@ -130,6 +118,9 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.D))
             {
                 //right
+                if (isCrouching && !encumbered)
+                    slowed = true;
+
                 moving = true;
                 rt = 1;
                 anim.SetFloat("Speed", MoveV);
@@ -137,6 +128,9 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.A))
             {
                 //left
+                if (isCrouching && !encumbered)
+                    slowed = true;
+
                 moving = true;
                 rt = -1;
                 anim.SetFloat("Speed", MoveV);
@@ -149,7 +143,7 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //Movement
-            rb.velocity = ((transform.forward * ft + transform.right * rt).normalized * MoveV * Time.deltaTime);
+            rb.velocity = (CharGravity + (transform.forward * ft + transform.right * rt).normalized * MoveV * Time.deltaTime);
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -168,8 +162,7 @@ public class CharacterBehaviour : CharacterBase
                     anim.SetBool("Crouching", isCrouching);
                     cc.height = CrouchedHeight;
                     cc.center = new Vector3(0, 0.5f, 0);
-                }
-                
+                } 
             }//LeftControl
         }//isAlive
 
@@ -185,23 +178,10 @@ public class CharacterBehaviour : CharacterBase
             {
                 Damage(50);
             }
-
-            //Debug.LogFormat("Encombered? {0}",encumbered);
-            //Debug.Log(MoveV);
-            //Debug.Log(slowed);
-            //Debug.Log("Health: " + _health);
-            //Debug.Log("Lives: " + Lives);
-            //Debug.Log("Get Health Function: " + GetHealth());
-            //Debug.Log("Vertical Raycast" +!Physics.Raycast(posUp, Vector3.up,length));
-            //Debug.Log(_maxHealth);
-            //Debug.Log(isCrouching);
-            //Debug.Log(TeleportResource);
-            //Debug.Log(_health);
-            //Debug.Log("Forward T : " + ft + " Right T : " + rt);
+            Debug.Log(rb.velocity);
         }//Debuger
     }//Update
 
-  
     //On Death Call
     protected void Died()
     {
@@ -210,17 +190,13 @@ public class CharacterBehaviour : CharacterBase
 
         if (Lives == 0)
         {
-            //They do the same thing But when lives reach 0 this can do more
             StartCoroutine(GameOver(1.5f));
-           
         }
         else
         {
             StartCoroutine(DeathTime(1.5f));
-            
         }     
     }//Died
-
 
     IEnumerator DeathTime(float waitTime)
     {
@@ -228,7 +204,7 @@ public class CharacterBehaviour : CharacterBase
         ResetPos();
     }
 
-    IEnumerator GameOver(float waitTime)
+    IEnumerator GameOver(float waitTime)///will hold the death condition
     {
         yield return new WaitForSeconds(waitTime);
         ResetPos();
@@ -236,6 +212,7 @@ public class CharacterBehaviour : CharacterBase
 
     protected void ResetPos()
     {
+        isAlive = true;
         SetHealth(_maxHealth);
         transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
     }

@@ -88,8 +88,13 @@ public class Projectile_PlayerScript : MonoBehaviour
 
     [SerializeField] private MonoBehaviour[] componentsToDisable;
 
+
+    public CoolDown coolDown;
+
     void Start()
     {
+        coolDown = GetComponent<CoolDown>();
+
         _projSpawned = false;
 
         if (!dragAndDropVariables.projectilePrefab)
@@ -155,7 +160,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 
                 StopAllCoroutines();
                 StartCoroutine(CoolDown());
-                //_coolDownTime = 0.0f;
+                coolDown.StartCoolDown(coolDownTime);
             }
             else
             {
@@ -174,17 +179,10 @@ public class Projectile_PlayerScript : MonoBehaviour
 
     private IEnumerator CoolDown()
     {
-        yield return new WaitForEndOfFrame();
-        if (_coolDownTime <= 0.0f)
-        {
-            _coolDownTime = 0.0f;
-            _projSpawned = false;
-        }
-        else
-        {
-            _coolDownTime -= Time.fixedDeltaTime;
-            StartCoroutine(CoolDown());
-        }
+        yield return new WaitForSeconds(_coolDownTime);
+
+        _coolDownTime = 0.0f;
+        _projSpawned = false;
     }
 
     private IEnumerator TimeCounter()
