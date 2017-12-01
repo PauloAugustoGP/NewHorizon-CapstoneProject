@@ -16,11 +16,17 @@ public class Switch : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                door.EnableDoor();
-                GetComponent<Renderer>().material = on;
-                GetComponent<BoxCollider>().enabled = false;
+                RunSwitch();
             }
         }
+    }
+
+    void RunSwitch()
+    {
+        door.EnableDoor();
+        if(on)
+            GetComponent<Renderer>().material = on;
+        GetComponent<BoxCollider>().enabled = false;
     }
 
     void OnTriggerEnter(Collider c)
@@ -32,9 +38,7 @@ public class Switch : MonoBehaviour
 
         if(c.gameObject.CompareTag("Projectile"))
         {
-            door.EnableDoor();
-            GetComponent<Renderer>().material = on;
-            GetComponent<BoxCollider>().enabled = false;
+            RunSwitch();
         }
     }
 
@@ -51,9 +55,7 @@ public class Switch : MonoBehaviour
         Debug.Log("AAA");
         if (particle.CompareTag("Projectile"))
         {
-            door.EnableDoor();
-            GetComponent<Renderer>().material = on;
-            GetComponent<BoxCollider>().enabled = false;
+            RunSwitch();
         }
     }
 }
