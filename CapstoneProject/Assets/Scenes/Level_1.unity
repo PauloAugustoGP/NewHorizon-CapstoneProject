@@ -4811,6 +4811,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114605896287538778, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4564936550300250, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
       propertyPath: m_LocalPosition.x
       value: 40.732834
@@ -4881,6 +4886,11 @@ Prefab:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 114605896287538778, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: _objectsToDisable.Array.data[2]
+      value: 
+      objectReference: {fileID: 2071083718}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
   m_IsPrefabParent: 0
@@ -17922,6 +17932,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4501011425466802, guid: 178087fb429cf034da8732caec8b6ccb,
     type: 2}
   m_PrefabInternal: {fileID: 2069658955}
+--- !u!1 &2071083718 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1307949593399106, guid: 967315f16a45aff4ea9319a35ab5a7c2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1184213003}
 --- !u!1001 &2074878472
 Prefab:
   m_ObjectHideFlags: 0
