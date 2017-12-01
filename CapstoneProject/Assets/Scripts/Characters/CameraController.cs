@@ -151,14 +151,11 @@ public class CameraController : MonoBehaviour
         _invertX = 1;
         _invertY = -1;
 
-<<<<<<< HEAD:CapstoneProject/Assets/ARCHIVES/WHITE BOX/Assets/Michael/3rd_Person_Camera/Scripts/CameraController.cs
         _xrayRef = GameObject.Find("Player").GetComponent<XRay_Ability>();
-=======
         if (!_xrayRef)
         {
             _xrayRef = GetComponent<XRay_PlayerScript>();
         }
->>>>>>> 426961993576acf07827cc35ac74c1501d9a4ca6:CapstoneProject/Assets/Scripts/Characters/CameraController.cs
 
         if (!_tpRef)
         {
