@@ -1519,7 +1519,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307949593399106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.7372589, y: -0.00000024616435, z: 1.9350251}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555802104216872}
@@ -2870,7 +2870,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 50
   m_Drag: 0
-  m_AngularDrag: 100
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -2932,7 +2932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 4479663114870690}
   _target: {fileID: 4032238368074618}
-  _xDist: 0
+  _xDist: 0.5
   _yDist: 2
   _zDist: 1.5
   _yAngleMin: -10
@@ -3043,7 +3043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32932ac0aa0844b41ae5577a973813b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 10
+  cooldown: 0
   components:
   - {fileID: 114251546739806420}
   - {fileID: 114137388532282866}
@@ -3073,7 +3073,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307949593399106}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 001f691cb5def78498ee287be928c36d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
