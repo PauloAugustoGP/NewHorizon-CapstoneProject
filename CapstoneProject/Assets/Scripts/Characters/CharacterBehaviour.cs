@@ -259,11 +259,11 @@ public class CharacterBehaviour : CharacterBase
         switch (Speed)
         {
             case "Slow":
-                _MoveV = 500;
+                _MoveV = 200;
                 break;
 
             case "Normal":
-                _MoveV = 800;
+                _MoveV = 400;
                 break;
         }
     }
