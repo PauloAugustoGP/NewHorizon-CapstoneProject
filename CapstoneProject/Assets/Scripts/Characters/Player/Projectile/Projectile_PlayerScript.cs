@@ -91,11 +91,7 @@ public class Projectile_PlayerScript : MonoBehaviour
 
             _projSpawned = true;
 
-            foreach (MonoBehaviour script in componentsToDisable)
-            {
-                if (componentsToDisable.Length > 0)
-                    script.enabled = false;
-            }
+            SetComponentsActive(false);
 
             _currentProjectile.StartCharge(_projectileSpeed,
                 _maxChargeTime,
@@ -127,16 +123,12 @@ public class Projectile_PlayerScript : MonoBehaviour
             }
         }
 
-        foreach (MonoBehaviour script in componentsToDisable)
-        {
-            if (componentsToDisable.Length > 0)
-                script.enabled = true;
-        }
+        SetComponentsActive(true);
 
         _currentProjectile = null;
     }
 
-    private void SetComponents(bool pState)
+    private void SetComponentsActive(bool pState)
     {
         if (componentsToDisable.Length <= 0)
             return;
