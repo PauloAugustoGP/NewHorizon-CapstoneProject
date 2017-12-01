@@ -109,7 +109,7 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.S))
             {
                 //back
-                slowed = true;
+                slowed = false;
 
                 moving = true;
                 ft = -1;
