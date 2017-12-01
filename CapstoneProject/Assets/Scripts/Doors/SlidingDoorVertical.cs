@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SlidingDoorVertical : Doors {
-    [Tooltip("Door animation speed.")]
     private Vector3 originalPosition;
     public new Vector3 moveDistance;
     public Transform door;

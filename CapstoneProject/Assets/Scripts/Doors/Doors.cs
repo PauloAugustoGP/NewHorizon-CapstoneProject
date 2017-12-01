@@ -4,17 +4,20 @@ using UnityEngine;
 
 public abstract class Doors : MonoBehaviour {
     public enum type { SlidingVertical, SlidingNormnal }
-    public Transform player;
+    [SerializeField] private Transform player;
     [Tooltip("Door status. Open = true, Closed = false")]
-    public bool status = false;
+    [SerializeField] protected bool status = false;
     [Tooltip("Used with the coroutine.")]
-    public bool doorGo = false;
+    [SerializeField] protected bool doorGo = false;
     [Tooltip("If switch is enabled. Will be changed from the switchButton script")]
     public bool doorEnabled;
-    public bool inTrigger;
-    public float move = 3f;
-    public float moveDistance;
-    public float moveSpeed = 3f;
+    [SerializeField] protected bool inTrigger;
+    [Tooltip("Force to move.")]
+    [SerializeField] protected float move = 3f;
+    [Tooltip("Handles direction.")]
+    [SerializeField] protected float moveDistance;
+    [Tooltip("Move speed.")]
+    [SerializeField] protected float moveSpeed = 3f;
 
     void Start() {
         status = false;

@@ -7,12 +7,13 @@ public class SlidingDoors : Doors {
 	public Transform leftDoor;
 	public Transform rightDoor;
     [Tooltip("Change the x,y,z variables for direction.")]
-	public Vector3 moveDistanceL;
-	public Vector3 moveDistanceR;
+	[SerializeField] protected Vector3 moveDistanceL;
+    [Tooltip("Change the x,y,z variables for direction.")]
+    [SerializeField] protected Vector3 moveDistanceR;
     [Tooltip("Start position of the left door.")]
-	public Vector3 leftOrigin;
+	[SerializeField] protected Vector3 leftOrigin;
     [Tooltip("Start position of the right door.")]
-	public Vector3 rightOrigin;
+	[SerializeField] protected Vector3 rightOrigin;
     [Tooltip("False for closed, true for open")]
     private type _slidingNormal;
 
@@ -23,7 +24,6 @@ public class SlidingDoors : Doors {
 
     void Start() {
 		status = false;
-        player = GameObject.Find("Player").transform;
         if (!leftDoor) {
             leftDoor = GameObject.Find("LeftDoor").GetComponent<Transform>();
             leftOrigin = leftDoor.position;

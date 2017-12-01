@@ -488,7 +488,6 @@ GameObject:
   - component: {fileID: 224568330481907998}
   - component: {fileID: 222256802356964000}
   - component: {fileID: 114445270438566882}
-  - component: {fileID: 114891879357644400}
   m_Layer: 5
   m_Name: CoolDown
   m_TagString: Untagged
@@ -1056,7 +1055,7 @@ MonoBehaviour:
   countDown: 0
   mval: 0
   score: {fileID: 114604418446222834}
-  disableLogging: 0
+  disableLogging: 1
   broadcast: {fileID: 114045042130858210}
   bcMessage: 
   bcColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1882,27 +1881,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114891879357644400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1688032453051466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b8e2cac2726e9b4d9e5a5d75d097362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coolDown: {fileID: 114445270438566882}
-  stop: 0
-  paused: 0
-  coolDownTime: 0
-  isCoolingDown: 0
-  useScriptValue: 1
-  cooledDownColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  coolingDownColor: {r: 1, g: 0, b: 0, a: 1}
-  projectilePlayerScript: {fileID: 0}
-  disableLogging: 0
 --- !u!114 &114912257913415754
 MonoBehaviour:
   m_ObjectHideFlags: 1
