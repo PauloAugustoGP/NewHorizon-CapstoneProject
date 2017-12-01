@@ -19,8 +19,12 @@ public class SwitchButton : MonoBehaviour
     void Start()
     {
         buttonMesh = GetComponent<MeshRenderer>();
-        actualDoor = Interactable.GetComponentInChildren<Doors>();
-        actualElevator = Interactable.GetComponent<Elevator>();
+        if(Interactable != null)
+            {
+            actualDoor = Interactable.GetComponentInChildren<Doors>();
+            actualElevator = Interactable.GetComponent<Elevator>();
+            }
+        
     }
     private void OnTriggerEnter(Collider other)
     {   
