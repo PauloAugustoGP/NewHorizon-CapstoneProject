@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 33394752933412206}
   - component: {fileID: 23916953411302704}
   - component: {fileID: 65613935268687816}
-  - component: {fileID: 114633786034012550}
+  - component: {fileID: 114931131225224004}
   m_Layer: 8
   m_Name: SwitchButton 1
   m_TagString: Untagged
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 33174964862864702}
   - component: {fileID: 23255677488871390}
   - component: {fileID: 65150161965774980}
-  - component: {fileID: 114622778436432818}
+  - component: {fileID: 114860607087189558}
   m_Layer: 8
   m_Name: SwitchButton 1 (1)
   m_TagString: Untagged
@@ -119,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1992550445626410}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4524627876484542}
@@ -219,7 +219,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4283a36cac30c364eb744bc838071691, type: 2}
+  - {fileID: 2100000, guid: 00f482e20366e49b1bd8dc92a0292f5e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -345,7 +345,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114622778436432818
+--- !u!114 &114860607087189558
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -353,12 +353,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1706171455984834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013555c35f8b47f4ca301a92aebf6f19, type: 3}
+  m_Script: {fileID: 11500000, guid: 65612bf667206c04cb41cd531bb7b642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 1097628778774910}
-  _switchTriggered: 0
---- !u!114 &114633786034012550
+  door: {fileID: 0}
+  on: {fileID: 0}
+--- !u!114 &114931131225224004
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -366,11 +366,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1517968030676464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013555c35f8b47f4ca301a92aebf6f19, type: 3}
+  m_Script: {fileID: 11500000, guid: 65612bf667206c04cb41cd531bb7b642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 1097628778774910}
-  _switchTriggered: 0
+  door: {fileID: 0}
+  on: {fileID: 0}
 --- !u!114 &114971396774829568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -388,5 +388,4 @@ MonoBehaviour:
   status: 0
   move: 3
   door: {fileID: 4978928001913070}
-  switchTriggered: 0
-  sb: {fileID: 114633786034012550}
+  dEnabled: 0

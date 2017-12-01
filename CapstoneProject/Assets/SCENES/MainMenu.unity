@@ -145,10 +145,10 @@ MonoBehaviour:
   GameOverMusic: {fileID: 8300000, guid: 821b34f646aceee4489cde9c239f6752, type: 3}
   WinningMusic: {fileID: 8300000, guid: 5139184e2276e0f4f9e2788411e87fef, type: 3}
   Powers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 5dabec6f98e4a90418acf6a45cadd98b, type: 3}
+  - {fileID: 8300000, guid: b1f1a723693082646bd8102a21fced1c, type: 3}
+  - {fileID: 8300000, guid: 26e555610d375fd4fbc12385022cf995, type: 3}
+  - {fileID: 8300000, guid: fc8e26231aef44443a426ba0356d5f3a, type: 3}
   Guards: []
   Vanish: []
   Aura: []
@@ -545,12 +545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e44cd27eeea44f75a644eebf03de597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1433406570 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114331328618970746, guid: 467b119f15cffb54b8f07b9ad652dc43,
-    type: 2}
-  m_PrefabInternal: {fileID: 2122627092}
-  m_Script: {fileID: 11500000, guid: d4c870ef97953f5428b53772ba364b53, type: 3}
 --- !u!1 &1437724302
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,12 +634,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1828532827 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114130472564617334, guid: 467b119f15cffb54b8f07b9ad652dc43,
-    type: 2}
-  m_PrefabInternal: {fileID: 2122627092}
-  m_Script: {fileID: 11500000, guid: 9a9901ce71bfc420f87b775888967dad, type: 3}
 --- !u!1001 &2122627092
 Prefab:
   m_ObjectHideFlags: 0
@@ -743,200 +731,35 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114055539215120194, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 114055539215120194, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 114055539215120194, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_MatchWidthOrHeight
+    - target: {fileID: 1224719608730248, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
+      propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114289177792950918, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114289177792950918, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: test2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114446738771228992, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114446738771228992, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: test1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114748709295299254, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114748709295299254, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: test3
       objectReference: {fileID: 0}
     - target: {fileID: 1013392104930514, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1073079517460546, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1924503334595592, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1751299470930462, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629837368824580, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114643475777171234, guid: 467b119f15cffb54b8f07b9ad652dc43,
+    - target: {fileID: 114715908725144766, guid: 467b119f15cffb54b8f07b9ad652dc43,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114643475777171234, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 114679802922469326, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114679802922469326, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Options
-      objectReference: {fileID: 0}
-    - target: {fileID: 114427842431047190, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114427842431047190, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Credits
-      objectReference: {fileID: 0}
-    - target: {fileID: 114592371986213742, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114592371986213742, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 114942920821670080, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114942920821670080, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 114184089984553188, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114184089984553188, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: controls
-      objectReference: {fileID: 0}
-    - target: {fileID: 114580997187858620, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114580997187858620, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackToMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 114880416566147124, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114880416566147124, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Audio
-      objectReference: {fileID: 0}
-    - target: {fileID: 114361006394164314, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114361006394164314, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackToMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 114076463533830728, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114076463533830728, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackToOptions
-      objectReference: {fileID: 0}
-    - target: {fileID: 114718525147352186, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114718525147352186, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackToMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 114278677495256448, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1433406570}
-    - target: {fileID: 114278677495256448, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackToOptions
-      objectReference: {fileID: 0}
-    - target: {fileID: 114643475777171234, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1828532827}
-    - target: {fileID: 114643475777171234, guid: 467b119f15cffb54b8f07b9ad652dc43,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: starting
+      propertyPath: m_Text
+      value: 'These are the controls:
+
+
+        Pause: Esc
+
+        Interact with Objects: F
+
+        Xray: E
+
+        Teleport: Shift
+
+        Projectile: Left Click
+
+        Crouch: Left CTRL
+
+        Melee: Right Click (While Crouched)
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 467b119f15cffb54b8f07b9ad652dc43, type: 2}
