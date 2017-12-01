@@ -889,6 +889,8 @@ MonoBehaviour:
   _xDist: 0
   _yDist: 0
   _zDist: 0
+  _yAngleMin: 0
+  _yAngleMax: 0
   _damping: 0
   _rotationDamping: 0
   _sensitivityX: 0
@@ -1199,7 +1201,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1421429439777262, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
