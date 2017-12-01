@@ -85,7 +85,7 @@ public class CameraController : MonoBehaviour
     // Toggle camera movement/rotation on/off, intended for testing, CONTROL: [P]
     private bool _freezeCamera;
 
-    private XRay_PlayerScript _xrayRef;
+    private XRay_Ability _xrayRef;
 
     private TeleportScript _tpRef;
 
@@ -146,7 +146,7 @@ public class CameraController : MonoBehaviour
         _invertX = 1;
         _invertY = -1;
 
-        _xrayRef = GameObject.Find("Player").GetComponent<XRay_PlayerScript>();
+        _xrayRef = GameObject.Find("Player").GetComponent<XRay_Ability>();
 
         _tpRef = GameObject.Find("Player").GetComponent<TeleportScript>();
 
@@ -167,7 +167,7 @@ public class CameraController : MonoBehaviour
             _mainCam.rotation = Quaternion.Lerp(_mainCam.rotation, FindRotation(), 0.02f * _rotationDamping);
 
             //Apply horizontal rotation to player, if Xray is _not_ active
-            if (!_xrayRef.xrayActive)
+            if (!_xrayRef.GetIsInXRay())
             {
                 // This adds a slight lag behind for the player's rotation
                 _target.rotation = Quaternion.Lerp(_target.rotation, Quaternion.Euler(0f, _mouseX, 0f), 0.02f * _rotationDamping);
