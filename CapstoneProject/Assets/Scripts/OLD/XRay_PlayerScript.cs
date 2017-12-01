@@ -16,58 +16,26 @@ public class XRay_PlayerScript : MonoBehaviour
 	7: Finished :)
 	*/
 
-    [System.Serializable]
-    public class Definitions
-    {
-        [SerializeField]
-        private float _touchDistance = 1.0f;
+    [Header("Definitions")]
+    [SerializeField]
+    private float _touchDistance = 1.0f;
 
-        public float touchDistance
-        {
-            get { return _touchDistance; }
-            set
-            {
-                if (value >= 0.0f)
-                    _touchDistance = value;
-            }
-        }
-    }
+    [Header("Drag and Drop")]
+    [SerializeField]
+    private Transform _rayOrigin;
+    [SerializeField]
+    private Shader _transparent;
 
-    [System.Serializable]
-    public class DragDrop
-    {
-        [SerializeField]
-        private Transform _rayOrigin;
-        [SerializeField]
-        private Shader _transparent;
-
-        public Transform rayOrigin
-        {
-            get { return _rayOrigin; }
-            set
-            {
-                if (!_rayOrigin)
-                    _rayOrigin = value;
-            }
-        }
-        public Shader transparent
-        {
-            get { return _transparent; }
-            set
-            {
-                if (!_transparent)
-                    _transparent = value;
-            }
-        }
-    }
+    [Header("Disable")]
+    [SerializeField]
+    private MonoBehaviour[] componentsToDisable;
 
     private bool _isTouched;
     private bool _xrayActive;
     private bool _canXray;
-    [SerializeField]
-    private bool _useCoolDown = false;
 
-    private float _coolDownTime;
+    private Renderer _currentObject;
+    private Shader _currentShader;
 
     /// <summary>
     /// Returns if _xrayActive is true or false
@@ -77,52 +45,29 @@ public class XRay_PlayerScript : MonoBehaviour
         get { return _xrayActive; }
     }
 
-    /// <summary>
-    /// Returns Cool Down Time (time until power can be used again)
-    /// </summary>
-    public float coolDownTime
-    {
-        get { return _coolDownTime; }
-    }
-
-    private Renderer currentObject;
-    private Shader currentShader;
-
-    [SerializeField]
-    private Definitions definitions = new Definitions();
-    [SerializeField]
-    private DragDrop dragAndDropVariables = new DragDrop();
-    [SerializeField]
-    private MonoBehaviour[] componentsToDisable;
-
     // Use this for initialization
     void Start()
     {
-        if (definitions.touchDistance <= 0.0f)
+        if (_touchDistance <= 0.0f)
         {
             Debug.LogError("No Touch Distance set in the Inspector. Defaulting to 1.0f");
-            definitions.touchDistance = 1.0f;
+            _touchDistance = 1.0f;
         }
 
-        if (!dragAndDropVariables.rayOrigin)
+        if (!_rayOrigin)
         {
             Debug.LogError("No ray origin attached.");
         }
-        if (!dragAndDropVariables.transparent)
+        if (!_transparent)
         {
             Debug.LogError("No Transparent shader attached.");
         }
 
-
-
-
-
-        currentObject = null;
-        currentShader = null;
+        _currentObject = null;
+        _currentShader = null;
         _isTouched = false;
         _xrayActive = false;
         _canXray = true;
-        _coolDownTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -142,35 +87,25 @@ public class XRay_PlayerScript : MonoBehaviour
     /// <summary>
     /// Use this to turn xray-able objects transparent when in range of that object.
     /// </summary>
-    public void EnableXray(float touchDistance = -1.0f)
+    public void EnableXray()
     {
         if (_canXray)
         {
-            if (touchDistance >= 0.0f)
-                definitions.touchDistance = touchDistance;
-
-            Ray ray = new Ray(dragAndDropVariables.rayOrigin.position, transform.forward);
-            Debug.DrawRay(ray.origin, ray.direction, Color.black);
-
+            Ray ray = new Ray(_rayOrigin.position, transform.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, definitions.touchDistance) && hit.collider.gameObject.GetComponent<XRay_ObjectScript>())
+            if (Physics.Raycast(ray, out hit, _touchDistance) && hit.collider.gameObject.GetComponent<XRay_ObjectScript>())
             {
-                if (_useCoolDown)
-                    StartCoroutine(TimeCounter());
+                SetComponents(false);
 
-                foreach (MonoBehaviour script in componentsToDisable)
-                {
-                    script.enabled = false;
-                }
+                _currentObject = hit.collider.GetComponent<Renderer>();
 
-                currentObject = hit.collider.GetComponent<Renderer>();
                 if (!_isTouched)
                 {
-                    currentShader = currentObject.material.shader;
+                    _currentShader = _currentObject.material.shader;
                     _isTouched = true;
                 }
-                currentObject.material.shader = dragAndDropVariables.transparent;
+                _currentObject.material.shader = _transparent;
                 _xrayActive = true;
             }
         }
@@ -181,52 +116,26 @@ public class XRay_PlayerScript : MonoBehaviour
     /// </summary>
     public void DisableXray()
     {
-        if (currentObject && _canXray)
+        if (_currentObject && _canXray)
         {
-            if (_useCoolDown)
-                _canXray = false;
-
-            foreach (MonoBehaviour script in componentsToDisable)
-            {
-                script.enabled = true;
-            }
+            SetComponents(true);
 
             _xrayActive = false;
-            currentObject.material.shader = currentShader;
+            _currentObject.material.shader = _currentShader;
             _isTouched = false;
-            currentObject = null;
-            currentShader = null;
-
-            if (_useCoolDown)
-            {
-                StopAllCoroutines();
-                StartCoroutine(CoolDown());
-                //_coolDownTime = 0.0f;
-            }
+            _currentObject = null;
+            _currentShader = null;
         }
     }
 
-    private IEnumerator CoolDown()
+    private void SetComponents(bool pState)
     {
-        yield return new WaitForSeconds(1.0f);
-        if (_coolDownTime <= 0.0f)
-        {
-            _canXray = true;
-        }
-        else
-        {
-            _coolDownTime -= 1.0f;
-            StartCoroutine(CoolDown());
-        }
-    }
+        if (componentsToDisable.Length <= 0)
+            return;
 
-    private IEnumerator TimeCounter()
-    {
-        _coolDownTime += 1.0f;
-        yield return new WaitForSeconds(1.0f);
-        if (_coolDownTime < 10)
+        foreach (MonoBehaviour script in componentsToDisable)
         {
-            StartCoroutine(TimeCounter());
+            script.enabled = pState;
         }
     }
 }
