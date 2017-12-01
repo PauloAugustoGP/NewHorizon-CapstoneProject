@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Doors : MonoBehaviour {
+public abstract class Doors_Old : MonoBehaviour {
     public enum type { SlidingVertical, SlidingNormnal }
     [SerializeField] private Transform player;
     [Tooltip("Door status. Open = true, Closed = false")]
