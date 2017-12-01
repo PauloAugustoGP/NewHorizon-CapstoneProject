@@ -29,6 +29,13 @@ public class Switch : MonoBehaviour
         {
             hasTarget = true;
         }
+
+        if(c.gameObject.CompareTag("Projectile"))
+        {
+            door.EnableDoor();
+            GetComponent<Renderer>().material = on;
+            GetComponent<BoxCollider>().enabled = false;
+        }
     }
 
     void OnTriggerExit(Collider c)
