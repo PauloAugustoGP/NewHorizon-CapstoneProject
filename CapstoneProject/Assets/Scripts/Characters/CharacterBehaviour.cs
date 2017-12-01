@@ -108,8 +108,8 @@ public class CharacterBehaviour : CharacterBase
             }
             if (Input.GetKey(KeyCode.S))
             {
-                //back
-                slowed = true;
+                if (isCrouching && !encumbered)
+                    slowed = true;
 
                 moving = true;
                 ft = -1;

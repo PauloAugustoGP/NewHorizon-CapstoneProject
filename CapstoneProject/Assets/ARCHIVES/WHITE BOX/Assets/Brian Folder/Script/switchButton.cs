@@ -34,7 +34,7 @@ public class SwitchButton : MonoBehaviour
             if (actualDoor)
             {
                 switchTriggered = true;
-                actualDoor.toggleDoorState();
+                // actualDoor.toggleDoorState();
             }
             else if (actualElevator)
             {
