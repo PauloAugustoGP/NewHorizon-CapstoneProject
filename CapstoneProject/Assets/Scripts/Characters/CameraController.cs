@@ -154,7 +154,7 @@ public class CameraController : MonoBehaviour
         _xrayRef = GameObject.Find("Player").GetComponent<XRay_Ability>();
         if (!_xrayRef)
         {
-            _xrayRef = GetComponent<XRay_PlayerScript>();
+            _xrayRef = GetComponent<XRay_Ability>();
         }
 
         if (!_tpRef)
