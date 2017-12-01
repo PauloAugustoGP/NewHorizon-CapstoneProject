@@ -128,7 +128,7 @@ void Update ()
 
     public void PowerSound()
     {
-        
+        playSound(Powers[0], 1.0f);    
     }
 
     private void playSound(AudioClip clip, float volume = 1.0f)

@@ -44,7 +44,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1031902806471148
 GameObject:
   m_ObjectHideFlags: 1
@@ -350,7 +350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1232427291975660
 GameObject:
   m_ObjectHideFlags: 1
@@ -1218,7 +1218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1926443128494836
 GameObject:
   m_ObjectHideFlags: 1
@@ -1406,9 +1406,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1024, y: 768}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2264,7 +2264,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: test2
         m_Mode: 1
         m_Arguments:
@@ -2384,8 +2384,6 @@ MonoBehaviour:
   TestPanel: {fileID: 1073079517460546}
   LoadingPanel: {fileID: 1629837368824580}
   AudioPanel: {fileID: 1926948112754272}
-  ButtonDisplay: {fileID: 0}
-  MenuButtons: []
   MasterSlider: {fileID: 114218127501351516}
   MusicSlider: {fileID: 114835716271052316}
   SFXSlider: {fileID: 114784959067877754}
@@ -2709,7 +2707,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: test1
         m_Mode: 1
         m_Arguments:
@@ -3532,15 +3530,17 @@ MonoBehaviour:
 
     Pause: P
 
+    Interact with Objects: F
+
     Xray: E
 
     Teleport: Shift
 
-    Projectile: Spacebar
+    Projectile: Left Click
 
     Crouch: Left CTRL
 
-    Melee: M
+    Melee: M (While Crouched)
 
 '
 --- !u!114 &114718525147352186
@@ -3722,7 +3722,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114331328618970746}
         m_MethodName: test3
         m_Mode: 1
         m_Arguments:

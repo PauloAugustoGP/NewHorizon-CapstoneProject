@@ -108,6 +108,7 @@ public class Projectile_PlayerScript : MonoBehaviour
         if (_currentProjectile)
         {
             _currentProjectile.Fire();
+            Sound_Manager.instance.PowerSound();
 
             if (_useCoolDown)
             {
