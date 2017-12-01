@@ -64,21 +64,21 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.K))
         {
             if (!isPaused)
             {
-                //PauseGame(true);
-                GetComponentInChildren<Canvas>().enabled = true;
+                PauseGame(true);
+                /*GetComponentInChildren<Canvas>().enabled = true;
                 Time.timeScale = 0f;
-                isPaused = true;
+                isPaused = true;*/
             }
             else if (isPaused)
             {
-                //PauseGame(false);
-                GetComponentInChildren<Canvas>().enabled = false;
+                PauseGame(false);
+                /*GetComponentInChildren<Canvas>().enabled = false;
                 Time.timeScale = 1.0f;
-                isPaused = false;
+                isPaused = false;*/
             }
 
 

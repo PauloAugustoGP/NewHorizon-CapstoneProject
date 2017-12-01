@@ -27,7 +27,7 @@ public class WinCanvas : MonoBehaviour {
     public void ReplayLevel()
     {
         Sound_Manager.instance.MusicCaller("LevelMusic");
-        SceneManager.LoadScene("Level_1_Tyler");
+        SceneManager.LoadScene("Level_1");
     }
 
     public void QuitGame()

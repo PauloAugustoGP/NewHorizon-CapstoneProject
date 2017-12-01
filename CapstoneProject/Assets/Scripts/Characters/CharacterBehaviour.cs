@@ -82,9 +82,10 @@ public class CharacterBehaviour : CharacterBase
         //Temp Spot //wanted to move to class
         if (moving)
         {   if (slowed == false)
-                _MoveV = 800;
+                ChangeSpeed("Normal");
             else if (slowed == true)
-                _MoveV = 500;
+                ChangeSpeed("Slow");
+
         }//Moving : True
         else if (!moving)
         {
@@ -101,6 +102,9 @@ public class CharacterBehaviour : CharacterBase
                 //forward
                 if (isCrouching && !encumbered)
                     slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
+
 
                 moving = true;
                 ft = 1;
@@ -110,6 +114,8 @@ public class CharacterBehaviour : CharacterBase
             {
                 if (isCrouching && !encumbered)
                     slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
 
                 moving = true;
                 ft = -1;
@@ -120,6 +126,8 @@ public class CharacterBehaviour : CharacterBase
                 //right
                 if (isCrouching && !encumbered)
                     slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
 
                 moving = true;
                 rt = 1;
@@ -130,6 +138,8 @@ public class CharacterBehaviour : CharacterBase
                 //left
                 if (isCrouching && !encumbered)
                     slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
 
                 moving = true;
                 rt = -1;
@@ -143,12 +153,13 @@ public class CharacterBehaviour : CharacterBase
             }
 
             //Movement
-            rb.velocity = (CharGravity + (transform.forward * ft + transform.right * rt).normalized * MoveV * Time.deltaTime);
+            rb.velocity = (CharGravity + (transform.forward * ft + transform.right * rt).normalized * MoveV * Time.fixedDeltaTime);
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                isCrouching = !isCrouching;
+                if (!encumbered)
+                    isCrouching = !isCrouching;
 
                 if (!isCrouching && !encumbered)
                 {
@@ -178,7 +189,8 @@ public class CharacterBehaviour : CharacterBase
             {
                 Damage(50);
             }
-            Debug.Log(rb.velocity);
+            //Debug.Log(rb.velocity);
+            Debug.Log(isCrouching);
         }//Debuger
     }//Update
 
@@ -247,15 +259,11 @@ public class CharacterBehaviour : CharacterBase
         switch (Speed)
         {
             case "Slow":
-                _MoveV = 100;
+                _MoveV = 500;
                 break;
 
             case "Normal":
-                _MoveV = 400;
-                break;
-
-            case "Fast":
-                _MoveV = 450;
+                _MoveV = 800;
                 break;
         }
     }
