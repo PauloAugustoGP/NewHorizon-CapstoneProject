@@ -698,8 +698,8 @@ GameObject:
   - component: {fileID: 136675855675392522}
   - component: {fileID: 114967429086687916}
   - component: {fileID: 114701695018733330}
-  - component: {fileID: 114840795816133432}
   - component: {fileID: 114868481966429110}
+  - component: {fileID: 114588641840499190}
   m_Layer: 0
   m_Name: PlayerOne
   m_TagString: Player
@@ -1062,6 +1062,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4316334411086758}
+  - component: {fileID: 54602140005628802}
   m_Layer: 0
   m_Name: Hips
   m_TagString: Untagged
@@ -2699,6 +2700,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1209880247232026}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54602140005628802
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1722209633620614}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &54965768764993726
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2757,6 +2773,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114588641840499190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1486568256127480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114670125889052172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2784,30 +2811,6 @@ MonoBehaviour:
   _meleeHitBox: {fileID: 1022515572505404}
   _CB: {fileID: 114967429086687916}
   _TS: {fileID: 114868481966429110}
---- !u!114 &114840795816133432
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1486568256127480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fffab0d6dd3374b718498ac8b90cd1ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainCam: {fileID: 4820744430368214}
-  _zDist: 0
-  _yDist: 0
-  _xDist: 0
-  _damping: 0
-  _rotationDamping: 0
-  _sensitivityX: 0
-  _sensitivityY: 0
-  _rotSpeedX: 0
-  _rotSpeedY: 0
-  _playerIgnoreLM:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &114868481966429110
 MonoBehaviour:
   m_ObjectHideFlags: 1
