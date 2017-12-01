@@ -6,24 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class Canvas_Manager : MonoBehaviour
 {
-    public GameObject MainPanel;
-    public GameObject OptionsPanel;
-    public GameObject ControlsPanel;
-    public GameObject CreditsPanel;
-    public GameObject TestPanel;
-    public GameObject LoadingPanel;
-    public GameObject AudioPanel;
+    [SerializeField] private GameObject MainPanel;
+    [SerializeField] private GameObject OptionsPanel;
+    [SerializeField] private GameObject ControlsPanel;
+    [SerializeField] private GameObject CreditsPanel;
+    [SerializeField] private GameObject TestPanel;
+    [SerializeField] private GameObject LoadingPanel;
+    [SerializeField] private GameObject AudioPanel;
 
-    public Text ButtonDisplay;
-    public Button[] MenuButtons;
+    //[SerializeField] private Text ButtonDisplay;
+    //[SerializeField] private Button[] MenuButtons;
 
-    public Slider MasterSlider;
-    public Slider MusicSlider;
-    public Slider SFXSlider;
+    [SerializeField] private Slider MasterSlider;
+    [SerializeField] private Slider MusicSlider;
+    [SerializeField] private Slider SFXSlider;
 
-    public Toggle MasterMute;
-    public Toggle MusicMute;
-    public Toggle SFXMute;
+    [SerializeField] private Toggle MasterMute;
+    [SerializeField] private Toggle MusicMute;
+    [SerializeField] private Toggle SFXMute;
 
     public void StartGame()
     {
@@ -90,19 +90,19 @@ public class Canvas_Manager : MonoBehaviour
     public void test1()
     {
         Scene_Manager.instance.GoTo_LEVEL("SmallTestScene");
-        Debug.Log("test 1");
+        Debug.Log("Andre");
     }
     
     public void test2 ()
     {
-        Scene_Manager.instance.GoTo_LEVEL("Level_1_Tyler");
-        Debug.Log("Level_1_Tyler");
+        Scene_Manager.instance.GoTo_LEVEL("Level_2_temp");
+        Debug.Log("Tyler");
     }
 
     public void test3()
     {
         Scene_Manager.instance.GoTo_LEVEL("ObjectBuilding");
-        Debug.Log("test 3");
+        Debug.Log("Clement");
     }
     
 }

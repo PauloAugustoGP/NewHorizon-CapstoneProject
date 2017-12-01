@@ -24,6 +24,12 @@ public class Sound_Manager : MonoBehaviour {
     [SerializeField] private AudioClip GameOverMusic;
     [SerializeField] private AudioClip WinningMusic;
     
+    [SerializeField] private AudioClip[] Powers;
+    [SerializeField] private AudioClip[] Guards;
+    [SerializeField] private AudioClip[] Vanish;
+    [SerializeField] private AudioClip[] Aura;
+    [SerializeField] private AudioClip[] Quantius;
+
     /*[Header("Powers")]
     [SerializeField] private AudioClip ProjectileCharging;
     [SerializeField] private AudioClip ProjectileFire;
@@ -118,6 +124,11 @@ void Update ()
 
                 break;
         }
+    }
+
+    public void PowerSound()
+    {
+        
     }
 
     private void playSound(AudioClip clip, float volume = 1.0f)
