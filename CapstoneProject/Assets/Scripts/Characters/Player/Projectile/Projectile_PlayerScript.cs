@@ -82,19 +82,15 @@ public class Projectile_PlayerScript : MonoBehaviour
 
     [SerializeField] private bool _useCoolDown = true;
     [SerializeField] private string _enemyTag = "Enemy";
+    [SerializeField] private LayerMask _ignorePlayer;
 
     [SerializeField] private DragDrop dragAndDropVariables = new DragDrop();
     [SerializeField] private ProjSettings projectileSettings = new ProjSettings();
 
     [SerializeField] private MonoBehaviour[] componentsToDisable;
 
-
-    public CoolDown coolDown;
-
     void Start()
     {
-        coolDown = GetComponent<CoolDown>();
-
         _projSpawned = false;
 
         if (!dragAndDropVariables.projectilePrefab)
@@ -143,7 +139,8 @@ public class Projectile_PlayerScript : MonoBehaviour
                 projectileSettings.deltaSize,
                 _enemyTag,
                 dragAndDropVariables.camController,
-                dragAndDropVariables.projectileRayOrigin.position);
+                dragAndDropVariables.projectileRayOrigin.position,
+                _ignorePlayer);
         }
     }
 
@@ -160,7 +157,6 @@ public class Projectile_PlayerScript : MonoBehaviour
 
                 StopAllCoroutines();
                 StartCoroutine(CoolDown());
-                coolDown.StartCoolDown(coolDownTime);
             }
             else
             {
