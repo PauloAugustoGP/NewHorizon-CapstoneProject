@@ -21,6 +21,7 @@ public class Projectile_ObjectScript : MonoBehaviour
     private float _deltaSize;
     private string _enemyTag;
     private Vector3 _projectileRayOrigin;
+    private LayerMask _ignorePlayer;
     /// <summary>
     /// Returns length of time to be stunned
     /// </summary>
@@ -40,7 +41,7 @@ public class Projectile_ObjectScript : MonoBehaviour
         _rb.isKinematic = true;
     }
 
-    public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam, Vector3 pProjectileRayOrigin)
+    public void StartCharge(float pProjectileSpeed, float pMaxChargeTime, float pDeltaSize, string pEnemyTag, CameraController pCam, Vector3 pProjectileRayOrigin, LayerMask pIgnorePlayer)
     {
         _projectileSpeed = pProjectileSpeed;
         _maxChargeTime = pMaxChargeTime;
@@ -48,6 +49,7 @@ public class Projectile_ObjectScript : MonoBehaviour
         _enemyTag = pEnemyTag;
         _cam = pCam;
         _projectileRayOrigin = pProjectileRayOrigin;
+        _ignorePlayer = pIgnorePlayer;
 
         _charging = true;
 
@@ -60,7 +62,7 @@ public class Projectile_ObjectScript : MonoBehaviour
         _charging = false;
 
         Vector3 direction = Vector3.zero;
-        direction = _cam.GetCentreView(_projectileRayOrigin) - transform.position;
+        direction = _cam.GetCentreView(_projectileRayOrigin, _ignorePlayer) - transform.position;
 
         _rb.isKinematic = false;
 
