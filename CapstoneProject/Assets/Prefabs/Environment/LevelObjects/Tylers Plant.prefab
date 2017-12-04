@@ -25,6 +25,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 460804}
+  - component: {fileID: 65378790030208720}
   m_Layer: 0
   m_Name: Tylers Plant
   m_TagString: Untagged
@@ -42,7 +43,6 @@ GameObject:
   - component: {fileID: 434056}
   - component: {fileID: 3358666}
   - component: {fileID: 2380340}
-  - component: {fileID: 6448110}
   m_Layer: 0
   m_Name: pot
   m_TagString: Untagged
@@ -60,7 +60,6 @@ GameObject:
   - component: {fileID: 494110}
   - component: {fileID: 3380818}
   - component: {fileID: 2328066}
-  - component: {fileID: 6435256}
   m_Layer: 0
   m_Name: mud
   m_TagString: Untagged
@@ -101,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133808}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.468627, y: 0.00079416134, z: -7.50825}
+  m_LocalPosition: {x: 53.718487, y: 1.0086937, z: 13.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 494110}
@@ -168,7 +167,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c0814f6c633d2f04ebd1be4837f93945, type: 2}
+  - {fileID: 2100000, guid: a706750e2b11b2b458e8e27be3fd8bd7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,34 +239,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176942}
   m_Mesh: {fileID: 4300000, guid: cae97d4947092ef4599ac5d62a08224a, type: 3}
---- !u!64 &6435256
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: cae97d4947092ef4599ac5d62a08224a, type: 3}
---- !u!64 &6448110
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144922}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300004, guid: cae97d4947092ef4599ac5d62a08224a, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -279,3 +250,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133808}
   m_IsPrefabParent: 1
+--- !u!65 &65378790030208720
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8727226, y: 2.349884, z: 0.74366856}
+  m_Center: {x: -0.06363869, y: 1.1036243, z: 0.15026426}
