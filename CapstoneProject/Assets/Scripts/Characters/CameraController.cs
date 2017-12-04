@@ -28,6 +28,8 @@
 /// -Dynamic bumper check
 /// ------------------------
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -255,17 +257,20 @@ public class CameraController : MonoBehaviour
         return Quaternion.Euler(_mouseY, _mouseX, 0f);
     }
 
+    //This list of for the GetCenterView function!!
+    List<Collider> collidersHit = new List<Collider>();
+
     // Raycasts from the camera's centre of view and returns the first point of collision
     public Vector3 GetCentreView(Vector3 pRayOrigin, LayerMask pIgnorePlayer)
     {
+        bool finished = false;
+
         float xPos = Screen.width / 2f;
         float yPos = Screen.height / 2f;
 
         float maxDistance = 50.0f;
 
-        //Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(xPos, yPos, _mainCam.position.z));
         RaycastHit hit;
-
         Ray ray = new Ray(pRayOrigin, _mainCam.forward);
 
         // This ray *should* represent where the the centre of the camera view is.
@@ -273,13 +278,42 @@ public class CameraController : MonoBehaviour
         // hit.point represents the first collision from the centre of the camera.
         //Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
-        if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer))
+        while (!finished)
         {
-            return hit.point;
+            if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer))
+            {
+                if (Vector3.Distance(hit.point, pRayOrigin) <= 2.0f)
+                {
+                    collidersHit.Add(hit.collider);
+                    hit.collider.enabled = false;
+
+                    return GetCentreView(pRayOrigin, pIgnorePlayer);
+                }
+                else
+                {
+                    if (collidersHit.Count > 0)
+                    {
+                        foreach (Collider c in collidersHit)
+                            c.enabled = true;
+                        collidersHit.Clear();
+                    }
+
+                    return hit.point;
+                }
+            }
+            else
+            {
+                if (collidersHit.Count > 0)
+                {
+                    foreach (Collider c in collidersHit)
+                        c.enabled = true;
+                    collidersHit.Clear();
+                }
+
+                return pRayOrigin + (_mainCam.forward * maxDistance);
+            }
         }
-        else
-        {
-            return pRayOrigin + (_mainCam.forward * maxDistance);
-        }
+
+        return pRayOrigin + (_mainCam.forward * maxDistance);
     }
 }
