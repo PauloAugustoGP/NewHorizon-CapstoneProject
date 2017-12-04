@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_ObjectScript : MonoBehaviour
+public class ProjectileObject : MonoBehaviour
 {
     //this script should be on the projectile prefab
 
     private Rigidbody _rb;
     private Collider _col;
-    private Particle_VisualScript _pvs;
+    private ParticleVisual _pvs;
     private CameraController _cam;
 
     private float _stunTime = 1.0f;
@@ -35,7 +35,7 @@ public class Projectile_ObjectScript : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<Collider>();
-        _pvs = GetComponentInChildren<Particle_VisualScript>();
+        _pvs = GetComponentInChildren<ParticleVisual>();
         _rb.useGravity = false;
         _col.enabled = false;
         _rb.isKinematic = true;
