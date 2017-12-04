@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class WinCanvas : MonoBehaviour {
+public class WinCanvas : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
+
+    }
 
     public void BackToMenu()
     {
