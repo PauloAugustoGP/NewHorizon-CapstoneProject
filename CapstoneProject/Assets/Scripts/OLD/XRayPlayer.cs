@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class XRayPlayer : MonoBehaviour
 {
-    /*
-	Instructions:
-	1: Add this script onto the player.
-	2: Touch distance is the length the ray will shoot out of the player to see if you are close enough to an xrayable object
-	3: Add an empty gameobject to the player. Place it where you want to ray check to start from then drah that gameobject into 
-		the drag and drop variables for RayOrigin
-	4: Click the cirlce to the right of the Shader field and select the shader named "Transparent"
-	5: Place the script called "XRay_ObjectScript onto and object you want to be xrayed.
-	6: Drag every componenet you want disabled into the componenets to disable array. These componenets will be deactivated while this skill is being used.
-	7: Finished :)
-	*/
-
     [Header("Definitions")]
     [SerializeField]
     private float _touchDistance = 1.0f;
