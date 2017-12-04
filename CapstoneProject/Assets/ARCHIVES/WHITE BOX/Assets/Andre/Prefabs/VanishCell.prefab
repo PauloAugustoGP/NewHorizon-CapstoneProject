@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 23797902941992082}
   - component: {fileID: 65653348040443432}
   - component: {fileID: 114068798479732430}
+  - component: {fileID: 114552532225234976}
   m_Layer: 0
   m_Name: Up
   m_TagString: Untagged
@@ -2178,7 +2179,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1841860796689524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81479ce924abed14187e75d5ebab82d6, type: 3}
   m_Name: 
@@ -2189,6 +2190,19 @@ MonoBehaviour:
   player: {fileID: 0}
   distanceToOpen: 0
   enable: 0
+  speed: 3
+--- !u!114 &114552532225234976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841860796689524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7c4c3378a849a46b054d41c8a4f40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theDoor: {fileID: 4663180907065638}
   speed: 3
 --- !u!135 &135097632050763210
 SphereCollider:

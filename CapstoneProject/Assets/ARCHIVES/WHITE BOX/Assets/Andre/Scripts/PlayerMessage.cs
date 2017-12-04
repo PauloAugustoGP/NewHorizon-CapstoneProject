@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerMessage : MonoBehaviour
 {
     public Text text;
-    public float timer = 30.0f;
+    public float timer = 10.0f;
     public float currentTime;
 
     private void Start()
