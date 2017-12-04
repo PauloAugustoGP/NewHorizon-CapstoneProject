@@ -101,8 +101,8 @@ public class Canvas_Manager : MonoBehaviour
 
     public void test3()
     {
-        Scene_Manager.instance.GoTo_LEVEL("ObjectBuilding");
-        Debug.Log("Clement");
+        Scene_Manager.instance.GoTo_LEVEL("Warehouse_Level");
+        Debug.Log("Garrett");
     }
     
 }

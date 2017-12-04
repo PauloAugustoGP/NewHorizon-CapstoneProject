@@ -96,7 +96,7 @@ public class CameraController : MonoBehaviour
     private int _invertX;
     private int _invertY;
 
-    // Toggle camera movement/rotation on/off, intended for testing, CONTROL: [P]
+    // Toggle camera movement/rotation on/off
     private bool _freezeCamera;
 
     private XRay_Ability _xrayRef;
@@ -159,7 +159,7 @@ public class CameraController : MonoBehaviour
         _invertX = 1;
         _invertY = -1;
 
-        _xrayRef = GameObject.Find("Player").GetComponent<XRay_Ability>();
+        _xrayRef = GetComponent<XRay_Ability>();
         if (!_xrayRef)
         {
             _xrayRef = GetComponent<XRay_Ability>();
@@ -171,6 +171,8 @@ public class CameraController : MonoBehaviour
         }
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        Camera.main.nearClipPlane = 0.1f;
     }
 
     void FixedUpdate()
@@ -229,13 +231,32 @@ public class CameraController : MonoBehaviour
         // Check if there is any object behind Player
         RaycastHit hitInfo;
         Vector3 back = -_target.forward;
-        Ray ray = new Ray(_target.position + new Vector3(0f, 1f, 0f), back);
+        Ray ray = new Ray(_target.position + Vector3.up, back);
 
         if (Physics.Raycast(ray, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
             _wallBumperOn = true;
             followPosition.x = hitInfo.point.x;
-            followPosition.z = hitInfo.point.z + 0.5f;
+
+            if (hitInfo.point.x < _mainCam.position.x)
+            {
+                followPosition.x += 0.2f;
+            }
+            else if (hitInfo.point.x > _mainCam.position.x)
+            {
+                followPosition.x -= 0.2f;
+            }
+
+            followPosition.z = hitInfo.point.z;
+
+            if (hitInfo.point.z < _mainCam.position.z)
+            {
+                followPosition.z += 0.2f;
+            }
+            else if (hitInfo.point.z > _mainCam.position.z)
+            {
+                followPosition.z -= 0.2f;
+            }
         }
         else
         {
@@ -251,8 +272,15 @@ public class CameraController : MonoBehaviour
         _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * 0.02f;
         _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * 0.02f;
 
+        
+
         // Clamp vertical rotation
         _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
+        
+        if (_xrayRef.GetIsInXRay())
+        {
+            _mouseX = Mathf.Clamp(_mouseX, -90f, 90f);
+        }
 
         return Quaternion.Euler(_mouseY, _mouseX, 0f);
     }
