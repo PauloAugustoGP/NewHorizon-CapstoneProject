@@ -78,7 +78,11 @@ public class ProjectilePlayer : MonoBehaviour
         if (!_projSpawned)
         {
             if (_useCoolDown)
+            {
                 StartCoroutine(TimeCounter());
+                //Sound_Manager.instance.PowerSound("ProjectileCharge", 1.0f);
+            }
+
 
             var projectile = (GameObject)Instantiate(_projectilePrefab,
                 _projectileSpawn.position,
@@ -107,8 +111,8 @@ public class ProjectilePlayer : MonoBehaviour
         {
             _currentProjectile.Fire();
 
-            if (_useSound)
-                Sound_Manager.instance.PowerSound();
+            //if (_useSound)
+            Sound_Manager.instance.PowerSound("ProjectileFire", 1.0f);
 
             if (_useCoolDown)
             {

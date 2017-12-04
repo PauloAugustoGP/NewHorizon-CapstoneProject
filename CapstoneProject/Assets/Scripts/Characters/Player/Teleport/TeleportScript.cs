@@ -45,6 +45,9 @@ public class TeleportScript : MonoBehaviour
     [SerializeField]
     private MonoBehaviour[] componentsToDisable;
 
+    // hud reference for cooldown display
+    [SerializeField] CoolDown _hudCooldown;
+
     // Use this for initialization
     void Start()
     {
@@ -65,6 +68,11 @@ public class TeleportScript : MonoBehaviour
         {
             Debug.Log("No teleport radius added to scene");
             _radius = GameObject.Find("TeleportRadius");
+        }
+        // make sure cooldown hud reference is set
+        if(!_hudCooldown)
+        {
+            Debug.Log("No Cooldown hud reference set. Assign the correct reference");
         }
 
         // initializing variables
@@ -136,6 +144,9 @@ public class TeleportScript : MonoBehaviour
                 _radius.SetActive(false);
                 //start cool down 
                 StartCoroutine(Cooldown());
+                // call the cooldown function on the HUD
+                if(_hudCooldown != null)
+                    _hudCooldown.StartCoolDown(2.0f);
                 _isCooled = false;
                 // teleport finished
                 _isActive = false;
