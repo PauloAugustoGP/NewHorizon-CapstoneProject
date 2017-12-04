@@ -15,7 +15,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_PlayerScript : MonoBehaviour
+public class ProjectilePlayer : MonoBehaviour
 {
     [Header("Definitions")]
     [SerializeField]
@@ -35,10 +35,12 @@ public class Projectile_PlayerScript : MonoBehaviour
 
     [Header("Disable")]
     [SerializeField]
+    private bool _useSound = true;
+    [SerializeField]
     private MonoBehaviour[] componentsToDisable;
 
     private WaitForSeconds _timeCountWait = new WaitForSeconds(1.0f);
-    private Projectile_ObjectScript _currentProjectile;
+    private ProjectileObject _currentProjectile;
 
     private bool _projSpawned = false;
     private float _coolDownTime = 1.0f;
@@ -64,15 +66,11 @@ public class Projectile_PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) /*&& Time.time > rechargeTime*/)
-        {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
             ProjSpawn();
-        }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) /* && Time.time > rechargeTime*/)
-        {
+        if (Input.GetKeyUp(KeyCode.Mouse0))
             ProjFire();
-        }
     }
 
     private void ProjSpawn()
@@ -87,7 +85,7 @@ public class Projectile_PlayerScript : MonoBehaviour
                 _projectileSpawn.rotation,
                 _projectileSpawn);
 
-            _currentProjectile = projectile.GetComponent<Projectile_ObjectScript>();
+            _currentProjectile = projectile.GetComponent<ProjectileObject>();
 
             _projSpawned = true;
 
@@ -108,7 +106,9 @@ public class Projectile_PlayerScript : MonoBehaviour
         if (_currentProjectile)
         {
             _currentProjectile.Fire();
-            Sound_Manager.instance.PowerSound();
+
+            if (_useSound)
+                Sound_Manager.instance.PowerSound();
 
             if (_useCoolDown)
             {
@@ -125,7 +125,6 @@ public class Projectile_PlayerScript : MonoBehaviour
         }
 
         SetComponentsActive(true);
-
         _currentProjectile = null;
     }
 
@@ -135,9 +134,7 @@ public class Projectile_PlayerScript : MonoBehaviour
             return;
 
         foreach (MonoBehaviour script in componentsToDisable)
-        {
             script.enabled = pState;
-        }
     }
 
     private IEnumerator CoolDown()
@@ -152,10 +149,9 @@ public class Projectile_PlayerScript : MonoBehaviour
     {
         _coolDownTime += 1.0f;
         yield return _timeCountWait;
+
         if (_coolDownTime < 10)
-        {
             StartCoroutine(TimeCounter());
-        }
     }
 
 }

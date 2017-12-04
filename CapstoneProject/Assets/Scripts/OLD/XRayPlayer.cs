@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XRay_PlayerScript : MonoBehaviour
+public class XRayPlayer : MonoBehaviour
 {
     /*
 	Instructions:
@@ -30,9 +30,7 @@ public class XRay_PlayerScript : MonoBehaviour
     [SerializeField]
     private MonoBehaviour[] componentsToDisable;
 
-    private bool _isTouched;
     private bool _xrayActive;
-    private bool _canXray;
 
     private Renderer _currentObject;
     private Shader _currentShader;
@@ -65,23 +63,17 @@ public class XRay_PlayerScript : MonoBehaviour
 
         _currentObject = null;
         _currentShader = null;
-        _isTouched = false;
         _xrayActive = false;
-        _canXray = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
-        {
             EnableXray();
-        }
 
         if (Input.GetKeyUp(KeyCode.E))
-        {
             DisableXray();
-        }
     }
 
     /// <summary>
@@ -89,25 +81,16 @@ public class XRay_PlayerScript : MonoBehaviour
     /// </summary>
     public void EnableXray()
     {
-        if (_canXray)
+        Ray ray = new Ray(_rayOrigin.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, _touchDistance) && hit.collider.gameObject.GetComponent<XRayObject>())
         {
-            Ray ray = new Ray(_rayOrigin.position, transform.forward);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, _touchDistance) && hit.collider.gameObject.GetComponent<XRay_ObjectScript>())
-            {
-                SetComponents(false);
-
-                _currentObject = hit.collider.GetComponent<Renderer>();
-
-                if (!_isTouched)
-                {
-                    _currentShader = _currentObject.material.shader;
-                    _isTouched = true;
-                }
-                _currentObject.material.shader = _transparent;
-                _xrayActive = true;
-            }
+            SetComponents(false);
+            _currentObject = hit.collider.GetComponent<Renderer>();
+            _currentShader = _currentObject.material.shader;
+            _currentObject.material.shader = _transparent;
+            _xrayActive = true;
         }
     }
 
@@ -116,13 +99,11 @@ public class XRay_PlayerScript : MonoBehaviour
     /// </summary>
     public void DisableXray()
     {
-        if (_currentObject && _canXray)
+        if (_currentObject)
         {
             SetComponents(true);
-
             _xrayActive = false;
             _currentObject.material.shader = _currentShader;
-            _isTouched = false;
             _currentObject = null;
             _currentShader = null;
         }
@@ -134,8 +115,6 @@ public class XRay_PlayerScript : MonoBehaviour
             return;
 
         foreach (MonoBehaviour script in componentsToDisable)
-        {
             script.enabled = pState;
-        }
     }
 }
