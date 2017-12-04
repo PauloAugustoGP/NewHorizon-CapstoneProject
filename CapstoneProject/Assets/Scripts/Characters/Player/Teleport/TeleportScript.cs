@@ -181,6 +181,6 @@ public class TeleportScript : MonoBehaviour
     private IEnumerator DelayedTeleport(Vector3 tempTeleportPosition)
     {
         yield return new WaitForSeconds(0.2f);
-        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.x, transform.position.y, tempTeleportPosition.z), transform.rotation);
+        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.x, tempTeleportPosition.y /* Limiting teleport in y: transform.position.y */, tempTeleportPosition.z), transform.rotation);
     }
 }
