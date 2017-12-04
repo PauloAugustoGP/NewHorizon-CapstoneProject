@@ -1519,7 +1519,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307949593399106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7372589, y: -0.00000024616435, z: 1.9350251}
+  m_LocalPosition: {x: 16.61, y: -0.000000028192332, z: 20.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555802104216872}
@@ -2757,7 +2757,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -3018,7 +3018,7 @@ MonoBehaviour:
   _deltaSize: 0.05
   _projectileSpeed: 10
   _maxChargeTime: 10
-  _useCoolDown: 1
+  _useCoolDown: 0
   _enemyTag: Enemy
   _ignorePlayer:
     serializedVersion: 2
@@ -3028,6 +3028,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
     type: 2}
   _projectileRayOrigin: {fileID: 4479663114870690}
+  _useSound: 0
   componentsToDisable:
   - {fileID: 114824296216054126}
   - {fileID: 114302351376918272}

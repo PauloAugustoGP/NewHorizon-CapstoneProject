@@ -142,7 +142,7 @@ public class CameraController : MonoBehaviour
         //_yAngleMin = -10f;
         //_yAngleMax = 35f;
 
-        _bumperHorizontalCheck = _zDist + 1f;
+        _bumperHorizontalCheck = _zDist + 0.5f;
         _bumperCameraHeight = _yDist + 0.5f;
 
         //_damping = 5f;
@@ -225,17 +225,15 @@ public class CameraController : MonoBehaviour
         Vector3 followPosition = _target.TransformPoint(_xDist, _yDist, -_zDist);
 
         // Check if there is any object behind Player
-        RaycastHit hit;
+        RaycastHit hitInfo;
         Vector3 back = -_target.forward;
         Ray ray = new Ray(_target.position + new Vector3(0f, 1f, 0f), back);
 
-        if (Physics.Raycast(ray, out hit, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
             _wallBumperOn = true;
-
-            followPosition.x = hit.point.x;
-            followPosition.z = hit.point.z;
-            //followPosition.y = Mathf.Lerp(hit.point.y + _bumperCameraHeight, followPosition.y, Time.deltaTime * _damping);
+            followPosition.x = hitInfo.point.x;
+            followPosition.z = hitInfo.point.z + 0.5f;
         }
         else
         {
