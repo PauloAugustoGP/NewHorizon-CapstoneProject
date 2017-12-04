@@ -35,7 +35,7 @@ public class ProjectilePlayer : MonoBehaviour
 
     [Header("Disable")]
     [SerializeField]
-    private bool _useSound = true;
+    private bool _useSound;
     [SerializeField]
     private MonoBehaviour[] componentsToDisable;
 
@@ -56,6 +56,7 @@ public class ProjectilePlayer : MonoBehaviour
     void Start()
     {
         _projSpawned = false;
+        _useSound = true;
 
         if (!_projectilePrefab)
             Debug.LogError("No prefab for projectile");
@@ -79,10 +80,12 @@ public class ProjectilePlayer : MonoBehaviour
         {
             if (_useCoolDown)
             {
+
                 StartCoroutine(TimeCounter());
-                //Sound_Manager.instance.PowerSound("ProjectileCharge", 1.0f);
             }
 
+            if (_useSound)
+            Sound_Manager.instance.PowerSound("ProjectileCharging", 1.0f);
 
             var projectile = (GameObject)Instantiate(_projectilePrefab,
                 _projectileSpawn.position,
@@ -102,7 +105,9 @@ public class ProjectilePlayer : MonoBehaviour
                 _camController,
                 _projectileRayOrigin.position,
                 _ignorePlayer);
+
         }
+
     }
 
     public void ProjFire()
@@ -111,8 +116,8 @@ public class ProjectilePlayer : MonoBehaviour
         {
             _currentProjectile.Fire();
 
-            //if (_useSound)
-            Sound_Manager.instance.PowerSound("ProjectileFire", 1.0f);
+            if (_useSound)
+                Sound_Manager.instance.PowerSound("ProjectileFire", 1.0f);
 
             if (_useCoolDown)
             {
