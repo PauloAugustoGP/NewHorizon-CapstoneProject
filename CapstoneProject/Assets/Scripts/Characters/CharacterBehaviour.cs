@@ -82,9 +82,10 @@ public class CharacterBehaviour : CharacterBase
         //Temp Spot //wanted to move to class
         if (moving)
         {   if (slowed == false)
-                _MoveV = 800;
+                ChangeSpeed("Normal");
             else if (slowed == true)
-                _MoveV = 500;
+                ChangeSpeed("Slow");
+
         }//Moving : True
         else if (!moving)
         {
@@ -99,8 +100,11 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.W))
             {
                 //forward
-                if (isCrouching)
+                if (isCrouching && !encumbered)
                     slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
+
 
                 moving = true;
                 ft = 1;
@@ -108,8 +112,10 @@ public class CharacterBehaviour : CharacterBase
             }
             if (Input.GetKey(KeyCode.S))
             {
-                //back
-                slowed = true;
+                if (isCrouching && !encumbered)
+                    slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
 
                 moving = true;
                 ft = -1;
@@ -118,8 +124,10 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.D))
             {
                 //right
-                if (isCrouching)
+                if (isCrouching && !encumbered)
                     slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
 
                 moving = true;
                 rt = 1;
@@ -128,8 +136,10 @@ public class CharacterBehaviour : CharacterBase
             if (Input.GetKey(KeyCode.A))
             {
                 //left
-                if (isCrouching)
+                if (isCrouching && !encumbered)
                     slowed = true;
+                else if (!isCrouching && !encumbered)
+                    slowed = false;
 
                 moving = true;
                 rt = -1;
@@ -138,18 +148,18 @@ public class CharacterBehaviour : CharacterBase
             if ((Input.GetKeyUp(KeyCode.A)) || (Input.GetKeyUp(KeyCode.W))
                 || (Input.GetKeyUp(KeyCode.S)) || (Input.GetKeyUp(KeyCode.D)))
             {
-                slowed = false;
                 moving = false;
                 anim.SetFloat("Speed", 0);
             }
 
             //Movement
-            rb.velocity = (CharGravity + (transform.forward * ft + transform.right * rt).normalized * MoveV * Time.deltaTime);
+            rb.velocity = (CharGravity + (transform.forward * ft + transform.right * rt).normalized * MoveV * Time.fixedDeltaTime);
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                isCrouching = !isCrouching;
+                if (!encumbered)
+                    isCrouching = !isCrouching;
 
                 if (!isCrouching && !encumbered)
                 {
@@ -179,7 +189,8 @@ public class CharacterBehaviour : CharacterBase
             {
                 Damage(50);
             }
-            Debug.Log(rb.velocity);
+            //Debug.Log(rb.velocity);
+            Debug.Log(isCrouching);
         }//Debuger
     }//Update
 
@@ -248,15 +259,11 @@ public class CharacterBehaviour : CharacterBase
         switch (Speed)
         {
             case "Slow":
-                _MoveV = 100;
+                _MoveV = 200;
                 break;
 
             case "Normal":
                 _MoveV = 400;
-                break;
-
-            case "Fast":
-                _MoveV = 450;
                 break;
         }
     }

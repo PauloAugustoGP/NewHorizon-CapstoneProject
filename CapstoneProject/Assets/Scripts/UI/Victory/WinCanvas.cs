@@ -9,8 +9,8 @@ public class WinCanvas : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
+        Cursor.lockState = CursorLockMode.Confined;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -20,12 +20,14 @@ public class WinCanvas : MonoBehaviour {
 
     public void BackToMenu()
     {
+        Sound_Manager.instance.MusicCaller("MenuMusic");
         SceneManager.LoadScene("MainMenu");
     }
 
     public void ReplayLevel()
     {
-        SceneManager.LoadScene("Test");
+        Sound_Manager.instance.MusicCaller("LevelMusic");
+        SceneManager.LoadScene("Level_1");
     }
 
     public void QuitGame()

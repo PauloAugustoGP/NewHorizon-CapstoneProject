@@ -29,9 +29,12 @@ public class Pause : MonoBehaviour
         {
             foreach (GameObject go in _objectsToDisable)
             {
-                foreach (MonoBehaviour mo in go.GetComponentsInChildren<MonoBehaviour>())
+                if (go.GetComponent<MonoBehaviour>() != null)
                 {
-                    _componentsToDisable.AddLast(mo);
+                    foreach (MonoBehaviour mo in go.GetComponentsInChildren<MonoBehaviour>())
+                    {
+                        _componentsToDisable.AddLast(mo);
+                    }
                 }
             }
         }
@@ -57,31 +60,28 @@ public class Pause : MonoBehaviour
 
         if (quitBtn)
         {
-            Debug.Log("quitting");
             quitBtn.onClick.AddListener(Scene_Manager.instance.GoTo_MENU);
-            Debug.Log("quitting2");
-
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.K))
         {
             if (!isPaused)
             {
-                //PauseGame(true);
-                GetComponentInChildren<Canvas>().enabled = true;
+                PauseGame(true);
+                /*GetComponentInChildren<Canvas>().enabled = true;
                 Time.timeScale = 0f;
-                isPaused = true;
+                isPaused = true;*/
             }
             else if (isPaused)
             {
-                //PauseGame(false);
-                GetComponentInChildren<Canvas>().enabled = false;
+                PauseGame(false);
+                /*GetComponentInChildren<Canvas>().enabled = false;
                 Time.timeScale = 1.0f;
-                isPaused = false;
+                isPaused = false;*/
             }
 
 

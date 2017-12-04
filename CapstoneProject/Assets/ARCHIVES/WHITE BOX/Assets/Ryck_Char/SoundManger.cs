@@ -45,7 +45,7 @@ public class SoundManger : MonoBehaviour {
             DontDestroyOnLoad(this);
         }
 
-		MusicCaller("MainTheme");
+		MusicCaller("MenuMusic");
 	}
 	
 	// Update is called once per frame
