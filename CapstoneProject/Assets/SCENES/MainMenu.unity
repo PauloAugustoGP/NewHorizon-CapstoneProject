@@ -144,15 +144,11 @@ MonoBehaviour:
   LevelMusic: {fileID: 8300000, guid: 96dab152a8b531f46aaaace988e8f4a0, type: 3}
   GameOverMusic: {fileID: 8300000, guid: 821b34f646aceee4489cde9c239f6752, type: 3}
   WinningMusic: {fileID: 8300000, guid: 5139184e2276e0f4f9e2788411e87fef, type: 3}
-  Powers:
-  - {fileID: 8300000, guid: 5dabec6f98e4a90418acf6a45cadd98b, type: 3}
-  - {fileID: 8300000, guid: b1f1a723693082646bd8102a21fced1c, type: 3}
-  - {fileID: 8300000, guid: 26e555610d375fd4fbc12385022cf995, type: 3}
-  - {fileID: 8300000, guid: fc8e26231aef44443a426ba0356d5f3a, type: 3}
-  Guards: []
-  Vanish: []
-  Aura: []
-  Quantius: []
+  ProjectileCharging: {fileID: 8300000, guid: 4f16d1ee28f8652478b659e962e92143, type: 3}
+  ProjectileFire: {fileID: 8300000, guid: fc8e26231aef44443a426ba0356d5f3a, type: 3}
+  ProjectileHit: {fileID: 0}
+  Teleport: {fileID: 0}
+  Melee: {fileID: 8300000, guid: 5dabec6f98e4a90418acf6a45cadd98b, type: 3}
 --- !u!82 &96461296
 AudioSource:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ public class Melee : MonoBehaviour {
 	{
         if (_CB.IsCrouching && !_TS.isActive)
         {
-
+            Sound_Manager.instance.PowerSound("Melee", 1.0f);
             _meleeHitBox.SetActive(true);
             yield return _meleeWait;
             _meleeHitBox.SetActive(false);
