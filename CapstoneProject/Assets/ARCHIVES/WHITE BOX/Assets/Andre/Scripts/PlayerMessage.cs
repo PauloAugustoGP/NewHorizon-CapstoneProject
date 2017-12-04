@@ -7,6 +7,7 @@ public class PlayerMessage : MonoBehaviour
 {
     public Text text;
     public float Timer = 30.0f;
+    public GameObject textTriggerBox;
 
     private void Update()
     {
@@ -15,6 +16,10 @@ public class PlayerMessage : MonoBehaviour
         if (Timer <= 0)
         {
             Destroy(gameObject);
+        }
+        if (textTriggerBox == true)
+        {
+            Destroy(textTriggerBox);
         }
     }
 
