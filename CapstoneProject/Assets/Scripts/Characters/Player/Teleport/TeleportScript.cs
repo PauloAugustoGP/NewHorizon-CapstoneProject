@@ -28,7 +28,8 @@ public class TeleportScript : MonoBehaviour
 
 
     // minimum and maximum teleport distances
-    /*[SerializeField]*/ private float _maxTeleportDistance = 10;
+    private float _maxTeleportDistance = 10;
+    private float _maxTeleportHeight = 2;
     [SerializeField] private float _minTeleportDistance = 1;
 
     // used for cooldown of teleport
@@ -97,10 +98,35 @@ public class TeleportScript : MonoBehaviour
 
         // set position of fake player to the position of the teleport point
         if (Vector3.Distance(transform.position, _teleportPoint.transform.position) < _maxTeleportDistance)
-            _fakePlayer.transform.position = _teleportPoint.transform.position;
+        {
+            // old way, no clamp on height
+            // if (Vector3.Distance(transform.position, _teleportPoint.transform.position) < _maxTeleportDistance)
+            // _fakePlayer.transform.position = _teleportPoint.transform.position;
+            // else
+            // _fakePlayer.transform.localPosition = Vector3.Normalize(_teleportPoint.transform.localPosition) * _maxTeleportDistance;
+
+
+            if ((_teleportPoint.transform.position.y - transform.position.y) <= _maxTeleportHeight)
+            {
+                _fakePlayer.transform.position = _teleportPoint.transform.position;
+            }
+            else
+            {
+                _fakePlayer.transform.position = new Vector3(_teleportPoint.transform.position.x, transform.position.y + _maxTeleportHeight, _teleportPoint.transform.position.z);
+            }
+        }
         else
         {
-            _fakePlayer.transform.localPosition = Vector3.Normalize(_teleportPoint.transform.localPosition) * _maxTeleportDistance;
+            if ((_teleportPoint.transform.position.y - transform.position.y) <= _maxTeleportHeight)
+            {
+                Vector3 tempNormalizedPosition = Vector3.Normalize(_teleportPoint.transform.localPosition);
+                _fakePlayer.transform.localPosition = new Vector3(tempNormalizedPosition.x * _maxTeleportDistance, _teleportPoint.transform.position.y, tempNormalizedPosition.z * _maxTeleportDistance);
+            }
+            else
+            {
+                Vector3 tempNormalizedPosition = Vector3.Normalize(_teleportPoint.transform.localPosition);
+                _fakePlayer.transform.localPosition = new Vector3(tempNormalizedPosition.x * _maxTeleportDistance, _maxTeleportHeight, tempNormalizedPosition.z * _maxTeleportDistance);
+            }
         }
 
         // draw ray so we can see in inspector
@@ -114,6 +140,7 @@ public class TeleportScript : MonoBehaviour
             {
                 // activate the fake player and radius for visuals
                 _fakePlayer.SetActive(true);
+                _teleportPoint.SetActive(true);
                 _radius.SetActive(true);
                 //signal the teleport is active
                 _isActive = true;
@@ -127,6 +154,7 @@ public class TeleportScript : MonoBehaviour
             if(Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
             {
                 _fakePlayer.SetActive(false);
+                _teleportPoint.SetActive(false);
                 _radius.SetActive(false);
                 _isCooled = true;
                 _isActive = false;
@@ -141,6 +169,7 @@ public class TeleportScript : MonoBehaviour
             {
                 // deactivate visuals
                 _fakePlayer.SetActive(false);
+                _teleportPoint.SetActive(false);
                 _radius.SetActive(false);
                 //start cool down 
                 StartCoroutine(Cooldown());
