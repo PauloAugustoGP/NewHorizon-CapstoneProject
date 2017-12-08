@@ -5,7 +5,7 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     private bool ElevatorON;
-    private SwitchButton button;
+    private Switch button;
     [SerializeField]
     private float ElevatorUP;
     private float ElevatorDown;
@@ -16,7 +16,6 @@ public class Elevator : MonoBehaviour
 	void Start ()
     {
         ElevatorDown = transform.position.y;
-        
         
     }
 	
@@ -31,19 +30,19 @@ public class Elevator : MonoBehaviour
                 //elevator arrived at the top
                 transform.position = new Vector3(transform.position.x, ElevatorUP, transform.position.z);
                 ElevatorON = false;
-                button.switchTriggered = false;
+                button.isActivated = false;
             }
             if (transform.position.y <= ElevatorDown)
             {
                 //elevator arrived at the bottom
                 transform.position = new Vector3(transform.position.x, ElevatorDown, transform.position.z);
                 ElevatorON = false;
-                button.switchTriggered = false;
+                button.isActivated = false;
             }
         }
 
     }
-    public void ElevatorTriggered(SwitchButton b)
+    public void ElevatorTriggered(Switch b)
     {
         button = b;
         ElevatorON = true;

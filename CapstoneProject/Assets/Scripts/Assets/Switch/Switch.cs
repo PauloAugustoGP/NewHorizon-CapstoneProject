@@ -5,10 +5,32 @@ using UnityEngine;
 public class Switch : MonoBehaviour
 {
     [SerializeField] Doors door;
-    
-    [SerializeField] Material on;
+
+    [SerializeField] Elevator elevator;
 
     bool hasTarget;
+    //To determine if is activated or not
+    private bool _isActivated;
+    //Allows other scripts to acess and change the color of the switch
+    public bool isActivated
+    {
+        get
+        {
+            return _isActivated;
+        }
+        set
+        {
+            _isActivated = value;
+            if (_isActivated)
+            {
+                GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            }
+            else
+            {
+                GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
+        }
+    }
 
     void Update()
     {
@@ -21,12 +43,20 @@ public class Switch : MonoBehaviour
         }
     }
 
-    void RunSwitch()
+    public void RunSwitch()
     {
-        door.EnableDoor();
-        if(on)
-            GetComponent<Renderer>().material = on;
-        GetComponent<BoxCollider>().enabled = false;
+        if (isActivated) return;
+        if (door)
+        {
+            door.EnableDoor();
+            isActivated = true;
+            
+        }
+        if (elevator)
+        {
+            elevator.ElevatorTriggered(this);
+            isActivated = true;
+        }
     }
 
     void OnTriggerEnter(Collider c)
