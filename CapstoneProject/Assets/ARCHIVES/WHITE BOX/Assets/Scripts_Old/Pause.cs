@@ -110,6 +110,7 @@ public class Pause : MonoBehaviour
             SetGame(false);
             _cameraController.inGame = false;
             Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             GetComponentInChildren<Canvas>().enabled = true;
             Time.timeScale = 0f;
             isPaused = true;

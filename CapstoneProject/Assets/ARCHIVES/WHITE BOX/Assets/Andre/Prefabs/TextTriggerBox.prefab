@@ -34,13 +34,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229309087100570}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.31626296, z: -0, w: 0.9486716}
+  m_LocalPosition: {x: -0.76, y: 0, z: -0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 36.874, z: 0}
 --- !u!65 &65773672117529868
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -51,8 +51,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.2590714, y: 1, z: 1.4703422}
-  m_Center: {x: -5.926956, y: 0, z: 2.3274176}
+  m_Size: {x: 8.779899, y: 1, z: 1.4703422}
+  m_Center: {x: -5.6091886, y: 0, z: 2.327412}
 --- !u!114 &114762842723235904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,5 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6bdbcf63dad654faff8bbd9fa7e1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textToTrigger: {fileID: 0}
-  triggerBox: {fileID: 1229309087100570}
+  textToTrigger: To throw a ball of electricity from you hand press the left click.
+    (Throw it at the door to ecsape the cell).
+  bottomText: {fileID: 0}
+  textLifeTime: 10

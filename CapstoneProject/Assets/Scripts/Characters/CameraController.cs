@@ -28,6 +28,8 @@
 /// -Dynamic bumper check
 /// ------------------------
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -94,7 +96,7 @@ public class CameraController : MonoBehaviour
     private int _invertX;
     private int _invertY;
 
-    // Toggle camera movement/rotation on/off, intended for testing, CONTROL: [P]
+    // Toggle camera movement/rotation on/off
     private bool _freezeCamera;
 
     private XRay_Ability _xrayRef;
@@ -142,7 +144,7 @@ public class CameraController : MonoBehaviour
         //_yAngleMin = -10f;
         //_yAngleMax = 35f;
 
-        _bumperHorizontalCheck = _zDist + 1f;
+        _bumperHorizontalCheck = _zDist + 0.5f;
         _bumperCameraHeight = _yDist + 0.5f;
 
         //_damping = 5f;
@@ -157,7 +159,7 @@ public class CameraController : MonoBehaviour
         _invertX = 1;
         _invertY = -1;
 
-        _xrayRef = GameObject.Find("Player").GetComponent<XRay_Ability>();
+        _xrayRef = GetComponent<XRay_Ability>();
         if (!_xrayRef)
         {
             _xrayRef = GetComponent<XRay_Ability>();
@@ -169,6 +171,8 @@ public class CameraController : MonoBehaviour
         }
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        Camera.main.nearClipPlane = 0.1f;
     }
 
     void FixedUpdate()
@@ -225,17 +229,34 @@ public class CameraController : MonoBehaviour
         Vector3 followPosition = _target.TransformPoint(_xDist, _yDist, -_zDist);
 
         // Check if there is any object behind Player
-        RaycastHit hit;
+        RaycastHit hitInfo;
         Vector3 back = -_target.forward;
-        Ray ray = new Ray(_target.position + new Vector3(0f, 1f, 0f), back);
+        Ray ray = new Ray(_target.position + Vector3.up, back);
 
-        if (Physics.Raycast(ray, out hit, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
             _wallBumperOn = true;
+            followPosition.x = hitInfo.point.x;
 
-            followPosition.x = hit.point.x;
-            followPosition.z = hit.point.z;
-            //followPosition.y = Mathf.Lerp(hit.point.y + _bumperCameraHeight, followPosition.y, Time.deltaTime * _damping);
+            if (hitInfo.point.x < _mainCam.position.x)
+            {
+                followPosition.x += 0.2f;
+            }
+            else if (hitInfo.point.x > _mainCam.position.x)
+            {
+                followPosition.x -= 0.2f;
+            }
+
+            followPosition.z = hitInfo.point.z;
+
+            if (hitInfo.point.z < _mainCam.position.z)
+            {
+                followPosition.z += 0.2f;
+            }
+            else if (hitInfo.point.z > _mainCam.position.z)
+            {
+                followPosition.z -= 0.2f;
+            }
         }
         else
         {
@@ -251,23 +272,33 @@ public class CameraController : MonoBehaviour
         _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * 0.02f;
         _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * 0.02f;
 
+        
+
         // Clamp vertical rotation
         _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
+        
+        if (_xrayRef.GetIsInXRay())
+        {
+            _mouseX = Mathf.Clamp(_mouseX, -90f, 90f);
+        }
 
         return Quaternion.Euler(_mouseY, _mouseX, 0f);
     }
 
+    //This list of for the GetCenterView function!!
+    List<Collider> collidersHit = new List<Collider>();
+
     // Raycasts from the camera's centre of view and returns the first point of collision
     public Vector3 GetCentreView(Vector3 pRayOrigin, LayerMask pIgnorePlayer)
     {
+        bool finished = false;
+
         float xPos = Screen.width / 2f;
         float yPos = Screen.height / 2f;
 
         float maxDistance = 50.0f;
 
-        //Vector3 rayOrigin = Camera.main.ViewportToScreenPoint(new Vector3(xPos, yPos, _mainCam.position.z));
         RaycastHit hit;
-
         Ray ray = new Ray(pRayOrigin, _mainCam.forward);
 
         // This ray *should* represent where the the centre of the camera view is.
@@ -275,13 +306,42 @@ public class CameraController : MonoBehaviour
         // hit.point represents the first collision from the centre of the camera.
         //Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
-        if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer))
+        while (!finished)
         {
-            return hit.point;
+            if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer))
+            {
+                if (Vector3.Distance(hit.point, pRayOrigin) <= 2.0f)
+                {
+                    collidersHit.Add(hit.collider);
+                    hit.collider.enabled = false;
+
+                    return GetCentreView(pRayOrigin, pIgnorePlayer);
+                }
+                else
+                {
+                    if (collidersHit.Count > 0)
+                    {
+                        foreach (Collider c in collidersHit)
+                            c.enabled = true;
+                        collidersHit.Clear();
+                    }
+
+                    return hit.point;
+                }
+            }
+            else
+            {
+                if (collidersHit.Count > 0)
+                {
+                    foreach (Collider c in collidersHit)
+                        c.enabled = true;
+                    collidersHit.Clear();
+                }
+
+                return pRayOrigin + (_mainCam.forward * maxDistance);
+            }
         }
-        else
-        {
-            return pRayOrigin + (_mainCam.forward * maxDistance);
-        }
+
+        return pRayOrigin + (_mainCam.forward * maxDistance);
     }
 }

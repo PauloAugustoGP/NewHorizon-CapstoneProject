@@ -24,18 +24,18 @@ public class Sound_Manager : MonoBehaviour {
     [SerializeField] private AudioClip GameOverMusic;
     [SerializeField] private AudioClip WinningMusic;
     
-    [SerializeField] private AudioClip[] Powers;
+    /*[SerializeField] private AudioClip[] Powers;
     [SerializeField] private AudioClip[] Guards;
     [SerializeField] private AudioClip[] Vanish;
     [SerializeField] private AudioClip[] Aura;
-    [SerializeField] private AudioClip[] Quantius;
+    [SerializeField] private AudioClip[] Quantius;*/
 
-    /*[Header("Powers")]
+    [Header("Powers")]
     [SerializeField] private AudioClip ProjectileCharging;
     [SerializeField] private AudioClip ProjectileFire;
     [SerializeField] private AudioClip ProjectileHit;
     [SerializeField] private AudioClip Teleport;
-    [SerializeField] private AudioClip Melee;*/
+    [SerializeField] private AudioClip Melee;
 
     /*[Header("Guards")]
     [SerializeField] private AudioClip GuardsBanter1;
@@ -126,11 +126,28 @@ void Update ()
         }
     }
 
-    public void PowerSound()
+    public void PowerSound(string soundName, float volume = 1.0f)
     {
-        playSound(Powers[0], 1.0f);    
+        switch (soundName)
+        {
+            case "ProjectileCharging":
+                playSound(ProjectileCharging, volume);
+                break;
+            case "ProjectileFire":
+                playSound(ProjectileFire, volume);
+                break;
+            case " ProjectileHit":
+                playSound(ProjectileHit, volume);
+                break;
+            case "Teleport":
+                playSound(Teleport, volume);
+                break;
+            case "Melee":
+                playSound(Melee, volume);
+                break;
+        }
     }
-
+   
     private void playSound(AudioClip clip, float volume = 1.0f)
     {
         // Assign volume to AudioSource volume

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1538767823257890}
+  m_IsPrefabParent: 1
+--- !u!1 &1538767823257890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4724833803611610}
+  - component: {fileID: 114764052457864552}
+  - component: {fileID: 65955846562055660}
+  m_Layer: 0
+  m_Name: TeleportDirections 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4724833803611610
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538767823257890}
+  m_LocalRotation: {x: -0, y: 0.31626296, z: -0, w: 0.9486716}
+  m_LocalPosition: {x: -2.582242, y: 0, z: -3.0909383}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 36.874, z: 0}
+--- !u!65 &65955846562055660
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538767823257890}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.936051, y: 1, z: 1.4703422}
+  m_Center: {x: -4.031118, y: 0, z: 2.3274117}
+--- !u!114 &114764052457864552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538767823257890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6bdbcf63dad654faff8bbd9fa7e1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textToTrigger: Press shift to use teleport. Move mouse to the are you want to teleport.
+    Click left mouse.
+  bottomText: {fileID: 0}
+  textLifeTime: 10

@@ -9,34 +9,34 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1589380513553000}
+  m_RootGameObject: {fileID: 1069831386774802}
   m_IsPrefabParent: 1
---- !u!1 &1589380513553000
+--- !u!1 &1069831386774802
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224189683683706196}
-  - component: {fileID: 114388705161520908}
+  - component: {fileID: 224771149755879320}
+  - component: {fileID: 114003506617906286}
   m_Layer: 5
-  m_Name: TextDirectionsOnHUB
+  m_Name: CellExitDirections
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!1 &1926618762012230
+--- !u!1 &1544348639660712
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224321139133753066}
-  - component: {fileID: 222589727969310930}
-  - component: {fileID: 114907919377999518}
+  - component: {fileID: 224654035976557386}
+  - component: {fileID: 222866960275578598}
+  - component: {fileID: 114815478829369742}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -44,25 +44,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114388705161520908
+--- !u!114 &114003506617906286
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1589380513553000}
+  m_GameObject: {fileID: 1069831386774802}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60675426da197b34ebabc52486c305cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 114907919377999518}
-  Timer: 10
---- !u!114 &114907919377999518
+  text: {fileID: 114815478829369742}
+  timer: 30
+  currentTime: 0
+--- !u!114 &114815478829369742
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926618762012230}
+  m_GameObject: {fileID: 1544348639660712}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -89,25 +90,43 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press shift to use teleport. Move mouse to the are you want to teleport.
-    Let go of shift.
---- !u!222 &222589727969310930
+  m_Text: To throw a ball of electricity from you hand press the left click. (Throw
+    it at the door to ecsape the cell).
+--- !u!222 &222866960275578598
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926618762012230}
---- !u!224 &224189683683706196
+  m_GameObject: {fileID: 1544348639660712}
+--- !u!224 &224654035976557386
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1589380513553000}
+  m_GameObject: {fileID: 1544348639660712}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224771149755879320}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.5, y: -200.7}
+  m_SizeDelta: {x: 785.2, y: 52.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224771149755879320
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069831386774802}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224321139133753066}
+  - {fileID: 224654035976557386}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,22 +134,4 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224321139133753066
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926618762012230}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224189683683706196}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5, y: -200.7}
-  m_SizeDelta: {x: 785.2, y: 52.8}
   m_Pivot: {x: 0.5, y: 0.5}

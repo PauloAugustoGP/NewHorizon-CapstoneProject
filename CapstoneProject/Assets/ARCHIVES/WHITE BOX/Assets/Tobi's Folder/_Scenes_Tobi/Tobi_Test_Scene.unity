@@ -1108,6 +1108,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114226013747585616, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1653056942}
+    - target: {fileID: 114891879357644400, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: projectilePlayerScript
+      value: 
+      objectReference: {fileID: 1653056939}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
   m_IsPrefabParent: 0
@@ -5793,6 +5803,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 1412875495430840, guid: 120e33470e9ea4ee5a6bf483a48022e9,
     type: 2}
   _projectileRayOrigin: {fileID: 324900591}
+  _useSound: 0
   componentsToDisable:
   - {fileID: 1653056938}
   - {fileID: 1653056940}

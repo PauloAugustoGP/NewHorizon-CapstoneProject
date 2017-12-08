@@ -6,21 +6,27 @@ using UnityEngine.UI;
 public class PlayerMessage : MonoBehaviour
 {
     public Text text;
-    public float Timer = 30.0f;
+    public float timer = 10.0f;
+    public float currentTime;
 
+    private void Start()
+    {
+        currentTime = timer;
+    }
     private void Update()
     {
 
-        Timer -= Time.deltaTime;
-        if (Timer <= 0)
+        currentTime -= Time.deltaTime;
+        if (currentTime <= 0)
         {
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
+       
     }
 
-    public void SetLifeTime(float life)
+    public void SetLifeTime(float time = 10f)
     {
-        Timer = life;
+        currentTime = time;
     }
 
 }

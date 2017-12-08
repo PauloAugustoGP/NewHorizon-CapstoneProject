@@ -83,8 +83,14 @@ public class ProjectileObject : MonoBehaviour
             Destroy(gameObject);
             //collision.gameObject.GetComponent<Enemy>().StunFunction();
         }
+        else if (c.gameObject.GetComponent<Collider>().isTrigger)
+        {
+            Debug.Log("Ignore");
+            return;
+        }
         else if (c.gameObject.tag != "Player")
         {
+            Debug.Log("Destroy");
             Destroy(gameObject);
         }
     }
