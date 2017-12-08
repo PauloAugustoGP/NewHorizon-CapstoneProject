@@ -24,6 +24,8 @@ public class CoolDown : MonoBehaviour {
     public ProjectilePlayer projectilePlayerScript;
     [Tooltip("Disable logging for this script")]
     public bool disableLogging;
+    [Tooltip("If the game is paused this becomes visible and turns yellow.")]
+    [SerializeField] private Image pausedIndicator;
 
 
     void Start() {
@@ -34,6 +36,9 @@ public class CoolDown : MonoBehaviour {
             }
             coolDownTime = projectilePlayerScript.coolDownTime;
         }
+        if(!pausedIndicator) {
+            Log("Paused Indicator not found.", "warn");
+        }
         if (!coolDown) {
             Log("Error:  Missing coolDown image gameobject.", "error");
         }
@@ -42,6 +47,8 @@ public class CoolDown : MonoBehaviour {
             Log("Warning coolDownTime not set, defaulting to " + coolDownTime, "warning");
         }
         coolDown.color = cooledDownColor;
+        pausedIndicator.gameObject.SetActive(false);
+        pausedIndicator.color = Color.white;
     }
 
     void Update() {
@@ -50,8 +57,12 @@ public class CoolDown : MonoBehaviour {
         }
         if (Time.timeScale == 0) {
             paused = true;
+            pausedIndicator.gameObject.SetActive(true);
+            pausedIndicator.color = Color.yellow;
         } else {
             paused = false;
+            pausedIndicator.gameObject.SetActive(false);
+            pausedIndicator.color = Color.white;
             if (stop) {
                 return;
             }
