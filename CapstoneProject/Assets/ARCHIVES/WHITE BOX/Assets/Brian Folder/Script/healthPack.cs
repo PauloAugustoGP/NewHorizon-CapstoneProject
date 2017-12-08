@@ -7,9 +7,12 @@ public class HealthPack : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.CompareTag("Player"))
-        {                 
-            c.GetComponent<CharacterBase>().AddHealth(50);
-            Destroy(gameObject);
+        {
+            if (c.GetComponent<CharacterBase>().GetHealthRatio() != 100)
+            {
+                c.GetComponent<CharacterBase>().AddHealth(50);
+                Destroy(gameObject);
+            }
         }
     }
 }
