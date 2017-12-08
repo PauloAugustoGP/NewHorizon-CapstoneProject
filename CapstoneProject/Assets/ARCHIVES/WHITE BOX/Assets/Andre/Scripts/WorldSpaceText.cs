@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class WorldSpaceText : MonoBehaviour {
     //Attach any object you want to have a text above when you enter the trigger to this worldSpaceText Prefab.
     //Drag the game object into "theGameObjecttheTextisAttachedTo" to make the trigger work.
@@ -13,8 +11,6 @@ public class WorldSpaceText : MonoBehaviour {
     [SerializeField] BoxCollider TheGameObjectBoxCollider;
     public GameObject targetToRotateTO;
     public bool theGameObject = true;
-    public GameObject triggerToDestroy;
-    
 
     void Update()
     {
@@ -39,10 +35,9 @@ public class WorldSpaceText : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         worldSpaceText.gameObject.SetActive(true);
-        if (other.GetComponent<CharacterBehaviour>().atFullHealth == false)
+        if (other.GetComponent<CharacterBehaviour>().GetHealthRatio() !=100)
         {
-            theGameObject = false;
-            
+            theGameObject = false; 
         }
     }
    
@@ -52,7 +47,7 @@ public class WorldSpaceText : MonoBehaviour {
        
             if (theGameObject == false)
             {
-                Destroy(triggerToDestroy);
+                Destroy(worldSpaceText);
             }
         
     }
