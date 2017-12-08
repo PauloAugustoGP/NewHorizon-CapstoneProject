@@ -5,7 +5,7 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     private bool ElevatorON;
-    private Switch button;
+    private Switch2 button;
     [SerializeField]
     private float ElevatorUP;
     private float ElevatorDown;
@@ -42,7 +42,7 @@ public class Elevator : MonoBehaviour
         }
 
     }
-    public void ElevatorTriggered(Switch b)
+    public void ElevatorTriggered(Switch2 b)
     {
         button = b;
         ElevatorON = true;
