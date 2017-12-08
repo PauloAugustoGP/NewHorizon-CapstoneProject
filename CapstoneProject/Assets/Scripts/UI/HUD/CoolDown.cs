@@ -4,28 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CoolDown : MonoBehaviour {
+    [Header("CoolDown Control")]
     [Tooltip("CoolDown progress bar reference.")]
     public Image coolDown;
     [Tooltip("If coolDown is stopped.")]
     [SerializeField] bool stop;
-    [Tooltip("Is the game paused?")]
-    [SerializeField] bool paused;
-    [Tooltip("The cooldown time.")]
-    public float coolDownTime;
     [Tooltip("If the cooldown is triggered.")]
     [SerializeField] bool isCoolingDown;
-    [Tooltip("Use a script value.")]
-    public bool useScriptValue;
+    [Tooltip("The cooldown time.")]
+    public float coolDownTime;
+
+    [Header("Indicator Colors")]
     [Tooltip("The color to display when the cooldown has not been triggered.")]
     public Color cooledDownColor = Color.yellow;
     [Tooltip("The color to display when the cooldown has been triggered.")]
     public Color coolingDownColor = Color.red;
+
+    [Header("Projectile")]
+    [Tooltip("Use a script value.")]
+    public bool useScriptValue;
     [Tooltip("The projectile script with a '.coolDownTime' variable")]
     public ProjectilePlayer projectilePlayerScript;
-    [Tooltip("Disable logging for this script")]
-    public bool disableLogging;
+    
+    [Header("Paused")]
+    [Tooltip("Is the game paused?")]
+    [SerializeField] bool paused;
     [Tooltip("If the game is paused this becomes visible and turns yellow.")]
     [SerializeField] private Image pausedIndicator;
+
+    [Header("Debugger")]
+    [Tooltip("Disable logging for this script")]
+    public bool disableLogging;
 
 
     void Start() {
