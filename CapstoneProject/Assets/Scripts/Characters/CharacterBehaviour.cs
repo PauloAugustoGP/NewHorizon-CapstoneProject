@@ -18,26 +18,26 @@ public class CharacterBehaviour : CharacterBase
     [SerializeField] protected bool UseRagdoll;
 
     [Header("Drag and Drop")]//DRAG AND DROPS
-    [SerializeField] DataTable DT;
+    [SerializeField] DataTable dataTable;
     [SerializeField] Transform StartPosition;
 
-    [SerializeField] LayerMask LM;
+    [SerializeField] LayerMask layerMask;
 
-    Animator anim;
-    CapsuleCollider cc;
+    //Animator anim;
+    //CapsuleCollider cc;
    
     void Start ()
     {
-        rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-        cc = GetComponent<CapsuleCollider>();
+        rigidBody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        capsule = GetComponent<CapsuleCollider>();
 
         //DT.GetTableValue("MaxHealth"); //ON HOLD FOR TESTING
 
         _maxHealth = 100;
-        SetHealth(_maxHealth);
+        _health = _maxHealth;
 
-        TeleportResource = 1;
+        resource = 1;
 
         isAlive = true;
 
@@ -49,7 +49,7 @@ public class CharacterBehaviour : CharacterBase
     {
         RaycastHit OverHeadHit;
 
-        if (Physics.Raycast(transform.position, transform.up, out OverHeadHit, (length + (length * 1.5f)), LM))
+        if (Physics.Raycast(transform.position, transform.up, out OverHeadHit, (length + (length * 1.5f)), layerMask))
         {
             encumbered = true;
         }
@@ -74,9 +74,9 @@ public class CharacterBehaviour : CharacterBase
         }
 
         //NOT USED ANY WHERE CAN BE REFERENCED
-        if (TeleportResource < 100)
+        if (resource < 100)
         {
-            RecoveryRate(1);
+            RecoverResource();
         }
 
         //Temp Spot //wanted to move to class
@@ -89,7 +89,7 @@ public class CharacterBehaviour : CharacterBase
         }//Moving : True
         else if (!moving)
         {
-            _MoveV = 0;
+            movementSpeed = 0;
         }
 
         if (isAlive)
@@ -108,7 +108,7 @@ public class CharacterBehaviour : CharacterBase
 
                 moving = true;
                 ft = 1;
-                anim.SetFloat("Speed", MoveV);
+                animator.SetFloat("Speed", movementSpeed);
             }
             if (Input.GetKey(KeyCode.S))
             {
@@ -119,7 +119,7 @@ public class CharacterBehaviour : CharacterBase
 
                 moving = true;
                 ft = -1;
-                anim.SetFloat("Speed", -MoveV);
+                animator.SetFloat("Speed", -movementSpeed);
             }
             if (Input.GetKey(KeyCode.D))
             {
@@ -131,7 +131,7 @@ public class CharacterBehaviour : CharacterBase
 
                 moving = true;
                 rt = 1;
-                anim.SetFloat("Speed", MoveV);
+                animator.SetFloat("Speed", movementSpeed);
             }
             if (Input.GetKey(KeyCode.A))
             {
@@ -143,17 +143,17 @@ public class CharacterBehaviour : CharacterBase
 
                 moving = true;
                 rt = -1;
-                anim.SetFloat("Speed", MoveV);
+                animator.SetFloat("Speed", movementSpeed);
             }
             if ((Input.GetKeyUp(KeyCode.A)) || (Input.GetKeyUp(KeyCode.W))
                 || (Input.GetKeyUp(KeyCode.S)) || (Input.GetKeyUp(KeyCode.D)))
             {
                 moving = false;
-                anim.SetFloat("Speed", 0);
+                animator.SetFloat("Speed", 0);
             }
 
             //Movement
-            rb.velocity = (CharGravity + (transform.forward * ft + transform.right * rt).normalized * MoveV * Time.fixedDeltaTime);
+            rigidBody.velocity = (Physics.gravity + (transform.forward * ft + transform.right * rt).normalized * movementSpeed * Time.fixedDeltaTime);
 
             //Crouching
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -163,16 +163,16 @@ public class CharacterBehaviour : CharacterBase
 
                 if (!isCrouching && !encumbered)
                 {
-                    anim.SetBool("Crouching", isCrouching);
-                    cc.height = StandardHeight;
-                    cc.center = new Vector3(0, 1f, 0);
+                    animator.SetBool("Crouching", isCrouching);
+                    capsule.height = StandardHeight;
+                    capsule.center = new Vector3(0, 1f, 0);
                 }
 
                 if (isCrouching)
                 {
-                    anim.SetBool("Crouching", isCrouching);
-                    cc.height = CrouchedHeight;
-                    cc.center = new Vector3(0, 0.5f, 0);
+                    animator.SetBool("Crouching", isCrouching);
+                    capsule.height = CrouchedHeight;
+                    capsule.center = new Vector3(0, 0.5f, 0);
                 } 
             }//LeftControl
         }//isAlive
@@ -182,12 +182,12 @@ public class CharacterBehaviour : CharacterBase
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Heal(20);
+                AddHealth(20);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Damage(50);
+                TakeDamage(50);
             }
             //Debug.Log(rb.velocity);
             Debug.Log(isCrouching);
@@ -225,7 +225,7 @@ public class CharacterBehaviour : CharacterBase
     protected void ResetPos()
     {
         isAlive = true;
-        SetHealth(_maxHealth);
+        _health = _maxHealth;
         transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
     }
 
@@ -242,28 +242,16 @@ public class CharacterBehaviour : CharacterBase
         }
     }//Died
 
-    //Take Damage Function
-    public void Damage(int value)
-    {
-        SetHealth(_health -= value);
-    }
-
-    //Heal Function
-    public void Heal(int value)
-    {
-        SetHealth(_health += value);
-    }
-
     public void ChangeSpeed(string Speed)
     {
         switch (Speed)
         {
             case "Slow":
-                _MoveV = 200;
+                movementSpeed = 200;
                 break;
 
             case "Normal":
-                _MoveV = 400;
+                movementSpeed = 400;
                 break;
         }
     }
@@ -278,7 +266,7 @@ public class CharacterBehaviour : CharacterBase
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
         if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
-            Heal(20);
+            AddHealth(20);
         }
     }//ColENTER
 
@@ -287,15 +275,15 @@ public class CharacterBehaviour : CharacterBase
         //Healing Gameobject Name!!!! SUBJECT TO CHANGE | OPTIONAL
         if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
-            Heal(20);
+            AddHealth(20);
         }
     }//ColTRIGGER
 
-    private void OnParticleCollision(GameObject D)
+    private void OnParticleCollision(GameObject obj)
     {
-        if (D.name == "Enemy_Projectile")
+        if (obj.name == "Enemy_Projectile")
         {
-            Damage(5);
+            TakeDamage(5);
         }
     }
 }
