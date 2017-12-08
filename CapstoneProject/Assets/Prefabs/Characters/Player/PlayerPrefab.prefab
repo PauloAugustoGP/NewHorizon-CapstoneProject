@@ -1535,8 +1535,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307949593399106}
-  m_LocalRotation: {x: -0, y: 0.7437605, z: -0, w: 0.6684462}
-  m_LocalPosition: {x: -26.3, y: 4.18, z: 3.2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555802104216872}
@@ -2259,7 +2259,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356648009834054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4285981517927718}
@@ -2940,7 +2940,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 50
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -3003,7 +3003,7 @@ MonoBehaviour:
   _mainCam: {fileID: 4479663114870690}
   _target: {fileID: 4032238368074618}
   _xDist: 0.5
-  _yDist: 2
+  _yDist: 1
   _zDist: 1.5
   _yAngleMin: -10
   _yAngleMax: 35
@@ -3041,14 +3041,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fccbd07f840014cba64834638f0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
+  _maxHealth: 0
   atFullHealth: 0
   ValueDebuger: 0
   Invincibility: 0
   UseRagdoll: 0
-  DT: {fileID: 0}
+  dataTable: {fileID: 0}
   StartPosition: {fileID: 0}
-  LM:
+  layerMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!114 &114302351376918272
@@ -3151,7 +3151,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137130387508086294
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
