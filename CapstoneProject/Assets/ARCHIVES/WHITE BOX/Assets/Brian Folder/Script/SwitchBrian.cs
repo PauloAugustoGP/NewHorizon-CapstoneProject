@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Switch2 : MonoBehaviour
+public class SwitchBrian : MonoBehaviour
 {
     [SerializeField] Doors door;
 
