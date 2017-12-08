@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class CoolDown : MonoBehaviour {
     [Tooltip("CoolDown progress bar reference.")]
     public Image coolDown;
-    [Tooltip("If coolDOwn is stopped.")]
-    public bool stop;
+    [Tooltip("If coolDown is stopped.")]
+    [SerializeField] bool stop;
     [Tooltip("Is the game paused?")]
-    public bool paused;
+    [SerializeField] bool paused;
     [Tooltip("The cooldown time.")]
     public float coolDownTime;
     [Tooltip("If the cooldown is triggered.")]
-    public bool isCoolingDown;
+    [SerializeField] bool isCoolingDown;
     [Tooltip("Use a script value.")]
     public bool useScriptValue;
     [Tooltip("The color to display when the cooldown has not been triggered.")]
@@ -28,18 +28,17 @@ public class CoolDown : MonoBehaviour {
 
     void Start() {
         stop = true;
-        if (!projectilePlayerScript) {
-            projectilePlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<ProjectilePlayer>();
+        if (useScriptValue) {
+            if (!projectilePlayerScript) {
+                projectilePlayerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<ProjectilePlayer>();
+            }
+            coolDownTime = projectilePlayerScript.coolDownTime;
         }
         if (!coolDown) {
             Log("Error:  Missing coolDown image gameobject.", "error");
         }
-        if (useScriptValue) {
-            coolDownTime = projectilePlayerScript.coolDownTime;
-        }
         if (coolDownTime <= 0) {
             coolDownTime = 2f;
-
             Log("Warning coolDownTime not set, defaulting to " + coolDownTime, "warning");
         }
         coolDown.color = cooledDownColor;
@@ -57,12 +56,9 @@ public class CoolDown : MonoBehaviour {
                 return;
             }
             coolDown.fillAmount -= 1f / coolDownTime * Time.deltaTime;
-
         }
-        if (isCoolingDown == false) {
-            if (coolDown.color != cooledDownColor) {
-                coolDown.color = cooledDownColor;
-            }
+        if (!isCoolingDown) {
+            SetColor(cooledDownColor);
         }
         CheckCoolDown();
     }
@@ -71,11 +67,15 @@ public class CoolDown : MonoBehaviour {
         stop = false;
         coolDownTime = start;
         isCoolingDown = true;
-        if (coolDown.color != coolingDownColor) {
-            coolDown.color = coolingDownColor;
-        }
+        SetColor(coolingDownColor);
         //Update();
-        Log("Initiated cooldown.", "default");
+        Log("Initiated cooldown.");
+    }
+
+    protected void SetColor(Color c) {
+        if (coolDown.color != c) {
+            coolDown.color = c;
+        }
     }
 
     public void ForceEnd() {
@@ -83,7 +83,7 @@ public class CoolDown : MonoBehaviour {
         coolDownTime = 0;
         coolDown.fillAmount = 1;
         coolDown.color = cooledDownColor;
-        Log("Cooldown has been force ended.", "default");
+        Log("Cooldown has been force ended.");
     }
 
     public void TogglePause() {
@@ -92,7 +92,7 @@ public class CoolDown : MonoBehaviour {
         } else {
             paused = false;
         }
-        Log("Paused: " + paused, "default");
+        Log("Paused: " + paused);
     }
 
     public void CheckCoolDown() {
@@ -106,7 +106,7 @@ public class CoolDown : MonoBehaviour {
         coolDown.color = cooledDownColor;
         isCoolingDown = false;
         stop = true;
-        Log("Cooldown has been reset.", "default");
+        Log("Cooldown has been reset.");
     }
 
     public void Log(string value, string type = "default") {
