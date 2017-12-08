@@ -32,6 +32,7 @@ public class ProjectilePlayer : MonoBehaviour
     [SerializeField] private CameraController _camController;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _projectileRayOrigin;
+    [SerializeField] private CoolDown _coolDown;
 
     [Header("Disable")]
     [SerializeField]
@@ -58,10 +59,16 @@ public class ProjectilePlayer : MonoBehaviour
         _projSpawned = false;
         _useSound = true;
 
+        if (!_camController)
+            Debug.LogError("No CameraController reference in inspector");
         if (!_projectilePrefab)
             Debug.LogError("No prefab for projectile");
         if (!_projectileSpawn)
             Debug.LogError("No spawnpoint for projectile");
+        if (_coolDown)
+            Debug.LogError("No CoolDown reference in inspector");
+
+
     }
 
     // Update is called once per frame
@@ -85,7 +92,7 @@ public class ProjectilePlayer : MonoBehaviour
             }
 
             if (_useSound)
-            Sound_Manager.instance.PowerSound("ProjectileCharging", 1.0f);
+                Sound_Manager.instance.PowerSound("ProjectileCharging", 1.0f);
 
             var projectile = (GameObject)Instantiate(_projectilePrefab,
                 _projectileSpawn.position,
@@ -123,6 +130,8 @@ public class ProjectilePlayer : MonoBehaviour
             {
                 if (_coolDownTime < 1.0f)
                     _coolDownTime = 1.0f;
+
+                _coolDown.StartCoolDown(_coolDownTime);
 
                 StopAllCoroutines();
                 StartCoroutine(CoolDown());
