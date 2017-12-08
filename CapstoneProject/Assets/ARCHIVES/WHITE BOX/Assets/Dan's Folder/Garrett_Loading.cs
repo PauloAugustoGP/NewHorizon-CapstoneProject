@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Garrett_Loading : MonoBehaviour
 {
-    static Garrett_Loading _instance = null;
     public bool startPlay;
     public bool isLoading;
     [SerializeField] Text loadingText;
@@ -43,7 +42,6 @@ public class Garrett_Loading : MonoBehaviour
     }
 
 
-
     IEnumerator LoadGarrettScene()
     {
         Debug.Log("Is Loading");
@@ -58,11 +56,4 @@ public class Garrett_Loading : MonoBehaviour
         }
 
     }
-
-    public static Garrett_Loading instance
-    {
-        get { return _instance; }
-        set { _instance = value; }
-    }
-
 }
