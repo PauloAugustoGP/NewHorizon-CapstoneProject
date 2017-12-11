@@ -30,7 +30,7 @@ public class BTIdle : BTLeaf
             timeRunning = 0.0f;
 
             agent.SetNextDestination();
-            agent.SetHasPath(true);
+            agent.ResumeAgent();
             agent.SetCanTurn(true);
 
             return 0;

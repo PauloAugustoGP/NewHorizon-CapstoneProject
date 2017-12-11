@@ -38,4 +38,13 @@ public class BTManager : MonoBehaviour
             root.AddChild(newNode);
         }
     }
+
+    void OnDrawGizmos()
+    {
+        Vector3 origin = transform.position;
+        Vector3 direction = (target.transform.position - transform.position);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(origin, origin+ direction);
+    }
 }

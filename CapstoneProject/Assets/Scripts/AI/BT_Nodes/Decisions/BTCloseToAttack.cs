@@ -24,10 +24,13 @@ public class BTCloseToAttack : BTDecision
         int nodeResult = 0;
 
         float distance = Vector3.Distance(agentTransform.position, target.transform.position);
-        
+
         //Check if is in range
         if (distance <= rangeDistance)
+        {
+            agent.StopAgent();
             return 0;
+        }
         
         // Else chase the player
         for (int i = 0; i < childs.Count; i++)

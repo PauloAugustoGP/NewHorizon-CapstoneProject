@@ -27,7 +27,7 @@ public class BTWalk : BTLeaf
 
         if (Vector3.Distance(agentTransform.position, agent.GetDestination()) <= reachDistance)
         {
-            agent.SetHasPath(false);
+            agent.StopAgent();
 
             return 0; // SUCCESS
         }
