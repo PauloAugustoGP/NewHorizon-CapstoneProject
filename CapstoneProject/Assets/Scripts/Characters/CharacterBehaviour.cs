@@ -225,7 +225,7 @@ public class CharacterBehaviour : CharacterBase
     {
         isAlive = true;
         _health = _maxHealth;
-        transform.SetPositionAndRotation(StartPosition.position + (new Vector3(0,1f,0)), transform.rotation);
+        transform.SetPositionAndRotation(StartPosition.position + (new Vector3(0, 1f, 0)), transform.rotation);
     }
 
     protected void FakeDied()
@@ -266,6 +266,11 @@ public class CharacterBehaviour : CharacterBase
         if (H.gameObject.name == "HealthPack" || H.gameObject.name == "Health")
         {
             AddHealth(20);
+        }
+
+        if (H.gameObject.name == "Punch")
+        {
+            TakeDamage(5);
         }
     }//ColENTER
 
