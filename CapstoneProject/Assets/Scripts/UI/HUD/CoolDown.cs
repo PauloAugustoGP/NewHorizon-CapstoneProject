@@ -16,7 +16,7 @@ public class CoolDown : MonoBehaviour {
 
     [Header("Indicator Colors")]
     [Tooltip("The color to display when the cooldown has not been triggered.")]
-    public Color cooledDownColor = Color.yellow;
+    public Color cooledDownColor = Color.green;
     [Tooltip("The color to display when the cooldown has been triggered.")]
     public Color coolingDownColor = Color.red;
 
