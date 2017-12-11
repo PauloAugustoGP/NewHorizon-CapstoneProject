@@ -57,7 +57,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4278846484506728}
   - component: {fileID: 33078802545898210}
-  - component: {fileID: 65400409052928614}
   - component: {fileID: 23782425026448780}
   m_Layer: 9
   m_Name: Cube
@@ -243,18 +242,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65400409052928614
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1590633034695736}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65819181306448762
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -278,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba71ee7791e779940bd0fab577c7c6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
+  _maxHealth: 0
   atFullHealth: 0
   enemyData: {fileID: 0}
   btData: {fileID: 0}
