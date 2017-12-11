@@ -230,32 +230,44 @@ public class CameraController : MonoBehaviour
 
         // Check if there is any object behind Player
         RaycastHit hitInfo;
-        Vector3 back = -_target.forward;
-        Ray ray = new Ray(_target.position + Vector3.up, back);
+        Vector3 rayDir = -_target.forward;
+        Vector3 rayOrigin = _target.position + _target.up;
+        //Vector3 rayLeft = _target.position + _target.up + _target.right * -0.5f;
+        //Vector3 rayRight = _target.position + _target.up + _target.right * 0.5f;
 
-        if (Physics.Raycast(ray, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+        //if (Physics.Raycast(rayLeft, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore)
+        //    || Physics.Raycast(rayRight, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+
+        Debug.DrawRay(rayOrigin, rayDir * _bumperHorizontalCheck, Color.red);
+
+        if (Physics.Raycast(rayOrigin, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
+            //Debug.DrawRay(rayLeft, rayDir * _bumperHorizontalCheck, Color.red);
+            //Debug.DrawRay(rayRight, rayDir * _bumperHorizontalCheck, Color.green);
+
             _wallBumperOn = true;
+            Debug.DrawLine(rayOrigin, hitInfo.point, Color.green);
+    
             followPosition.x = hitInfo.point.x;
 
-            if (hitInfo.point.x < _mainCam.position.x)
-            {
-                followPosition.x += 0.2f;
-            }
-            else if (hitInfo.point.x > _mainCam.position.x)
-            {
-                followPosition.x -= 0.2f;
-            }
+            //if (hitInfo.point.x < _mainCam.position.x)
+            //{
+            //    followPosition.x += 0.4f;
+            //}
+            //else if (hitInfo.point.x > _mainCam.position.x)
+            //{
+            //    followPosition.x -= 0.4f;
+            //}
 
             followPosition.z = hitInfo.point.z;
 
             if (hitInfo.point.z < _mainCam.position.z)
             {
-                followPosition.z += 0.2f;
+                followPosition.z += 0.5f;
             }
             else if (hitInfo.point.z > _mainCam.position.z)
             {
-                followPosition.z -= 0.2f;
+                followPosition.z -= 0.5f;
             }
         }
         else
@@ -272,14 +284,12 @@ public class CameraController : MonoBehaviour
         _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * 0.02f;
         _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * 0.02f;
 
-        
-
         // Clamp vertical rotation
         _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
         
         if (_xrayRef.GetIsInXRay())
         {
-            _mouseX = Mathf.Clamp(_mouseX, -90f, 90f);
+            _mouseX = Mathf.Clamp(_mouseX, _target.localEulerAngles.y - 90f, _target.localEulerAngles.y + 90f);
         }
 
         return Quaternion.Euler(_mouseY, _mouseX, 0f);
@@ -300,11 +310,6 @@ public class CameraController : MonoBehaviour
 
         RaycastHit hit;
         Ray ray = new Ray(pRayOrigin, _mainCam.forward);
-
-        // This ray *should* represent where the the centre of the camera view is.
-        // Ignore the length of the ray in this Debug statement.
-        // hit.point represents the first collision from the centre of the camera.
-        //Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
         while (!finished)
         {
