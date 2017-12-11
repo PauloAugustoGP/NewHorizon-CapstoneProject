@@ -34,16 +34,16 @@ public class BTSearch : BTLeaf
         {
             agent.SetupNavMeshValues(speed, distance);
             agent.SetDestination(target.transform.position);
-
-            agent.SetHasPath(true);
+            
+            agent.ResumeAgent();
 
             isSetup = true;
         }
         
         if (Vector3.Distance(agentTransform.position, agent.GetDestination()) <= distance)
         {
-            agent.SetHasPath(false);
-
+            agent.StopAgent();
+            
             currentTime += Time.deltaTime;
             if (currentTime >= timeSearching)
             {

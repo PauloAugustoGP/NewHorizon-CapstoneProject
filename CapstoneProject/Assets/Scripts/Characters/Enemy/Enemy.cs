@@ -9,9 +9,7 @@ public class Enemy : CharacterBase
     [SerializeField] DataFile btData;
 
     NavMeshAgent agent;
-
-    bool bHasPath;
-    bool bIsAttacking;
+    
     bool bIsSearching;
     bool bIsStunned;
     bool canTurn;
@@ -30,9 +28,7 @@ public class Enemy : CharacterBase
 	void Start ()
     {
         gameObject.AddComponent<BTManager>().Init(btData);
-
-        bHasPath = false;
-        bIsAttacking = false;
+        
         bIsStunned = false;
         canTurn = false;
 
@@ -42,11 +38,12 @@ public class Enemy : CharacterBase
         currentMilestone = -1;
 
         agent = GetComponent<NavMeshAgent>();
-	}
+        StopAgent();
+    }
 	
 	void Update ()
     {
-		if(bHasPath)
+		/*if(bHasPath)
         {
             agent.destination = destination;
             agent.speed = agentSpeed;
@@ -57,7 +54,7 @@ public class Enemy : CharacterBase
             agent.destination = transform.position;
             agent.speed = 0.0f;
             agent.stoppingDistance = 5.0f;
-        }
+        }*/
 	}
 
     public void SetNextDestination()
@@ -67,16 +64,12 @@ public class Enemy : CharacterBase
 
         destination = milestones[currentMilestone].position;
     }
-
-    public bool GetHasPath() { return bHasPath; }
-    public bool GetIsAttacking() { return bIsAttacking; }
+    
     public bool GetIsSearching() { return bIsSearching; }
     public bool GetIsStunned() { return bIsStunned; }
     public bool GetCanTurn() { return canTurn; }
     public Vector3 GetDestination() { return destination; }
-
-    public void SetHasPath( bool newHasPath ) { bHasPath = newHasPath; }
-    public void SetIsAttacking( bool newIsAttacking) { bIsAttacking = newIsAttacking; }
+    
     public void SetIsSearching(bool newIsSearching) { bIsSearching = newIsSearching; }
     public void SetIsStunned(bool newIsStunned) { bIsStunned = newIsStunned; }
     public void SetCanTurn( bool newCanTurn ) { canTurn = newCanTurn; }
@@ -84,9 +77,22 @@ public class Enemy : CharacterBase
 
     public void SetupNavMeshValues(float speed, float reachDistance)
     {
+        agent.destination = destination;
         agentSpeed = speed;
         agentStopDistance = reachDistance;
     }
+
+    public void StopAgent()
+    {
+        agent.isStopped = true;
+    }
+
+    public void ResumeAgent()
+    {
+        agent.isStopped = false;
+    }
+
+    public bool GetAgentStatus() { return agent.isStopped; }
 
     public float GetDataFromEnemyTable(string key)
     {
@@ -119,7 +125,5 @@ public class Enemy : CharacterBase
     {
         if (particle.name == "Player_Projectile")
             SetIsStunned(true);
-
-        //particle.GetComponent<ParticleSystem>().main.startSize
     }
 }

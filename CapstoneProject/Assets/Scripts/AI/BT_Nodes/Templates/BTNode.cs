@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class BTNode : ScriptableObject
 {
+    Rect windowRect;
+
     int parentid;
     int id;
     
@@ -34,6 +36,8 @@ public class BTNode : ScriptableObject
 
     public int GetNodeID() { return id; }
     public int GetNodeParentID() { return parentid; }
+
+    public Rect GetWindowRect() { return windowRect; }
 
     /*************************************************************************/
     /*                          CHILD MANAGEMENT                             */

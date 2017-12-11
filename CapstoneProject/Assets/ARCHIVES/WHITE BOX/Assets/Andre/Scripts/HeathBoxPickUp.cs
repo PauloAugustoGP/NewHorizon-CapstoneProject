@@ -14,7 +14,7 @@ public class HeathBoxPickUp : MonoBehaviour {
     {
         if (c.GetComponent<CharacterBehaviour>())
         {
-            if (c.GetComponent<CharacterBehaviour>().atFullHealth == false)
+            if (c.GetComponent<CharacterBehaviour>().GetHealthRatio() !=100)
             {
                 c.GetComponent<CharacterBehaviour>().AddHealth(20);
                 thisObject = true;

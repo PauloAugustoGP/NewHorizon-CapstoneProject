@@ -9,6 +9,8 @@ public class BTFoundPlayer : BTDecision
     float lineOfSight;
     float angleConeOfSight;
 
+    bool isEngaged;
+
     public BTFoundPlayer() : base()
     {
     }
@@ -19,6 +21,8 @@ public class BTFoundPlayer : BTDecision
 
         lineOfSight = agent.GetDataFromEnemyTable("Line Of Sight");
         angleConeOfSight = agent.GetDataFromEnemyTable("Angle Cone Of Sight");
+
+        isEngaged = false;
     }
 
     public override int Run(GameObject target)
@@ -29,37 +33,57 @@ public class BTFoundPlayer : BTDecision
         if (Vector3.Distance(agentTransform.position, target.transform.position) <= lineOfSight)
         {
             Vector3 directionToTarget = (target.transform.position - agentTransform.position);
-
+            
             if (Vector3.Angle(agentTransform.forward, directionToTarget) <= angleConeOfSight)
             {
-                if (LineCastToTarget(target.transform))
+                if (RayCastToTarget(target.transform))
                 {
-                    Debug.Log("FOUND PLAYER");
-                    agent.SetHasPath(false);
-                    agent.SetIsAttacking(true);
+                    isEngaged = true;
                     agent.SetIsSearching(false);
-                    return 0;
+                    return 0; // SUCCESS
                 }
             }
         }
 
-        if(agent.GetIsAttacking())
+        if(isEngaged)
         {
-            agent.SetIsAttacking(false);
+            isEngaged = false;
             agent.SetIsSearching(true);
         }
 
-        return -1;
+        return -1; // FAIL
     }
 
+    /*
     bool LineCastToTarget(Transform targetLocation)
     {
         RaycastHit hit;
-        //Debug.DrawLine(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y + 1.0f, targetLocation.position.z));
-        if (Physics.Linecast(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y+1.0f, targetLocation.position.z), out hit))
+        
+        if (Physics.Linecast(agentTransform.position, targetLocation.position, out hit))
         {
-            if (hit.transform.CompareTag("Player"))
+            if (hit.transform.tag == "Player")
                 return true;
+        }
+
+        return false;
+    }*/
+
+    bool RayCastToTarget(Transform targetLocation)
+    {
+        Vector3 origin = agentTransform.position;
+        Vector3 direction = (targetLocation.position - agentTransform.position);
+
+        RaycastHit hit;
+
+        
+        //Debug.DrawRay(origin, origin + direction, Color.green);
+        if(Physics.Raycast(origin, direction, out hit))
+        {
+            Debug.Log(hit.transform.name);
+            if(hit.transform.CompareTag("Player"))
+            {
+                return true;
+            }
         }
 
         return false;

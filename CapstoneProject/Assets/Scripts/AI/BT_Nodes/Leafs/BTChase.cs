@@ -21,11 +21,13 @@ public class BTChase : BTLeaf
 
     public override int Run(GameObject target)
     {
+        agent.SetDestination(target.transform.position);
         agent.SetupNavMeshValues(chaseSpeed, rangeDistance);
+        agent.ResumeAgent();
 
         if (Vector3.Distance(agentTransform.position, target.transform.position) <= rangeDistance)
         {
-            agent.SetHasPath(false);
+            agent.StopAgent();
             return 0; // SUCCESS
         }
 

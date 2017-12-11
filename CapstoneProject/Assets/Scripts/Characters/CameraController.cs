@@ -52,6 +52,8 @@ public class CameraController : MonoBehaviour
     [Tooltip("Distance behind target's pivot.")]
     private float _zDist = 1.5f;   // Distance between camera and player (pivot point)
 
+    private Vector3 _followPosition;
+
     // Used for calculating camera local position while rotating view
     private float _mouseX;
     private float _mouseY;
@@ -62,7 +64,11 @@ public class CameraController : MonoBehaviour
     private float _yAngleMin = -10f;
     [SerializeField]
     private float _yAngleMax = 35f;
-
+    [Header("Range of Horizontal Rotation in XRAY")]
+    [SerializeField]
+    private float _xAngleMin = -90f;
+    [SerializeField]
+    private float _xAngleMax = 90f;
     // Represents whether the camera is interacting with a wall or not
     private bool _wallBumperOn;
 
@@ -138,8 +144,10 @@ public class CameraController : MonoBehaviour
         //_yDist = 2f;
         //_xDist = 0.25f;
 
+        _followPosition = new Vector3(_xDist, _yDist, -_zDist);
+
         _mainCam.SetParent(_target);
-        _mainCam.localPosition = new Vector3(_xDist, _yDist, -_zDist);
+        _mainCam.localPosition = _followPosition;
 
         //_yAngleMin = -10f;
         //_yAngleMax = 35f;
@@ -226,41 +234,48 @@ public class CameraController : MonoBehaviour
     private Vector3 FindPosition()
     {
         // Cache the desired location of the camera in world space
-        Vector3 followPosition = _target.TransformPoint(_xDist, _yDist, -_zDist);
+        Vector3 followPosition = _target.TransformPoint(_followPosition);
 
         // Check if there is any object behind Player
         RaycastHit hitInfo;
-        Vector3 back = -_target.forward;
-        Ray ray = new Ray(_target.position + Vector3.up, back);
+        Vector3 rayDir = -_target.forward;
+        Vector3 rayOrigin = _target.position + _target.up;
+        //Vector3 rayLeft = _target.position + _target.up + _target.right * -0.5f;
+        //Vector3 rayRight = _target.position + _target.up + _target.right * 0.5f;
 
-        if (Physics.Raycast(ray, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+        //if (Physics.Raycast(rayLeft, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore)
+        //    || Physics.Raycast(rayRight, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+
+        Debug.DrawRay(rayOrigin, rayDir * _bumperHorizontalCheck, Color.red);
+
+        if (Physics.Raycast(rayOrigin, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
-            _wallBumperOn = true;
+            //Debug.DrawRay(rayLeft, rayDir * _bumperHorizontalCheck, Color.red);
+            //Debug.DrawRay(rayRight, rayDir * _bumperHorizontalCheck, Color.green);
+
+            Debug.DrawLine(rayOrigin, hitInfo.point, Color.green);
+    
             followPosition.x = hitInfo.point.x;
 
-            if (hitInfo.point.x < _mainCam.position.x)
-            {
-                followPosition.x += 0.2f;
-            }
-            else if (hitInfo.point.x > _mainCam.position.x)
-            {
-                followPosition.x -= 0.2f;
-            }
+            //if (hitInfo.point.x < _mainCam.position.x)
+            //{
+            //    followPosition.x += 0.4f;
+            //}
+            //else if (hitInfo.point.x > _mainCam.position.x)
+            //{
+            //    followPosition.x -= 0.4f;
+            //}
 
             followPosition.z = hitInfo.point.z;
 
-            if (hitInfo.point.z < _mainCam.position.z)
-            {
-                followPosition.z += 0.2f;
-            }
-            else if (hitInfo.point.z > _mainCam.position.z)
-            {
-                followPosition.z -= 0.2f;
-            }
-        }
-        else
-        {
-            _wallBumperOn = false;
+            //if (hitInfo.point.z < _mainCam.position.z)
+            //{
+            //    followPosition.z += 0.5f;
+            //}
+            //else if (hitInfo.point.z > _mainCam.position.z)
+            //{
+            //    followPosition.z -= 0.5f;
+            //}
         }
 
         return followPosition;
@@ -268,18 +283,18 @@ public class CameraController : MonoBehaviour
 
     private Quaternion FindRotation()
     {
+        // PROBLEM: When entering XRAY, camera rotation Y turns 90 degrees instead of facing forward
+
         // Finds the angle (in degrees) the new mouse position is making with original orientation
         _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * 0.02f;
         _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * 0.02f;
-
-        
 
         // Clamp vertical rotation
         _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
         
         if (_xrayRef.GetIsInXRay())
         {
-            _mouseX = Mathf.Clamp(_mouseX, -90f, 90f);
+            _mouseX = Mathf.Clamp(_mouseX, _target.localEulerAngles.y + _xAngleMin, _target.localEulerAngles.y + _xAngleMax);
         }
 
         return Quaternion.Euler(_mouseY, _mouseX, 0f);
@@ -300,11 +315,6 @@ public class CameraController : MonoBehaviour
 
         RaycastHit hit;
         Ray ray = new Ray(pRayOrigin, _mainCam.forward);
-
-        // This ray *should* represent where the the centre of the camera view is.
-        // Ignore the length of the ray in this Debug statement.
-        // hit.point represents the first collision from the centre of the camera.
-        //Debug.DrawRay(rayScreen.origin, _mainCam.forward * 100, Color.red);
 
         while (!finished)
         {

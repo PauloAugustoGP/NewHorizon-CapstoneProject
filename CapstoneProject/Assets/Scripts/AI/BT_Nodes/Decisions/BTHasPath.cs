@@ -14,7 +14,7 @@ public class BTHasPath : BTDecision
         int nodeResult = 0;
 
         // CONDITION TO STOP
-        if (!agent.GetHasPath())
+        if (agent.GetAgentStatus())
             return -1; // FAIL
 
         for(int i = 0; i < childs.Count; i++)

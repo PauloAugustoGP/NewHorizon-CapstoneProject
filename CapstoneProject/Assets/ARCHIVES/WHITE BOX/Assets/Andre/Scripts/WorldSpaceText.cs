@@ -1,20 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.UI;
 
 public class WorldSpaceText : MonoBehaviour {
     //Attach any object you want to have a text above when you enter the trigger to this worldSpaceText Prefab.
     //Drag the game object into "theGameObjecttheTextisAttachedTo" to make the trigger work.
     //Drag in the camera or player to "Target to rotate TO", to make the text rotate in world space to the camera or player.
     public GameObject worldSpaceText;
+    public GameObject firstText;
     public GameObject theGameObjecttheTextisAttachedTo;
     [SerializeField] BoxCollider TheGameObjectBoxCollider;
     public GameObject targetToRotateTO;
+    public bool firstDiscriptionON;
     public bool theGameObject = true;
-    public GameObject triggerToDestroy;
-    
+    public Image imageBlack;
+    public Image imageWhite;
+    public GameObject headerText;
 
     void Update()
     {
@@ -32,17 +34,32 @@ public class WorldSpaceText : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {  
-            TheGameObjectBoxCollider.enabled = false;
-            
+            TheGameObjectBoxCollider.enabled = false;    
     }
 
     private void OnTriggerEnter(Collider other)
     {
         worldSpaceText.gameObject.SetActive(true);
-        if (other.GetComponent<CharacterBehaviour>().atFullHealth == false)
+        
+
+        if (firstDiscriptionON == true)
         {
-            theGameObject = false;
-            
+            headerText.gameObject.SetActive(true);
+            imageBlack.gameObject.SetActive(true);
+            imageWhite.gameObject.SetActive(true);
+            firstText.gameObject.SetActive(true);
+        }
+        if(firstDiscriptionON == false)
+        {
+            firstText.gameObject.SetActive(false);
+            headerText.gameObject.SetActive(false);
+            imageBlack.gameObject.SetActive(false);
+            imageWhite.gameObject.SetActive(false);
+        }
+
+        if (other.GetComponent<CharacterBehaviour>().GetHealthRatio() !=100)
+        {
+            theGameObject = false; 
         }
     }
    
@@ -52,7 +69,7 @@ public class WorldSpaceText : MonoBehaviour {
        
             if (theGameObject == false)
             {
-                Destroy(triggerToDestroy);
+                Destroy(worldSpaceText);
             }
         
     }
