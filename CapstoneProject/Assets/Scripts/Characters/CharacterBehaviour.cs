@@ -225,7 +225,7 @@ public class CharacterBehaviour : CharacterBase
     {
         isAlive = true;
         _health = _maxHealth;
-        transform.SetPositionAndRotation(StartPosition.position, transform.rotation);
+        transform.SetPositionAndRotation(StartPosition.position + (new Vector3(0,1f,0)), transform.rotation);
     }
 
     protected void FakeDied()
