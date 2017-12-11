@@ -9,6 +9,7 @@ public class TextAbovePlayer : MonoBehaviour
 
     public GameObject player;
     public Font TheFont;
+    public GameObject WorldCanvasTriggerDel;
 
     private GameObject m_floatingText;
     private TextMesh m_textMesh;
@@ -81,12 +82,10 @@ public class TextAbovePlayer : MonoBehaviour
                 playersCurrentPos = player.transform.position;
                 m_transform.forward = new Vector3(playersCurrentPos.x, 0, playersCurrentPos.z);
             }
-
             yield return null;
             //m_floatingText_Transform.position = start_pos;
         }
-
-
+        Destroy(WorldCanvasTriggerDel);
     }
 
     public IEnumerator DisplayTextMeshFloatingText()
@@ -131,9 +130,6 @@ public class TextAbovePlayer : MonoBehaviour
                 playersCurrentPos = player.transform.position;
                 m_transform.forward = new Vector3(playersCurrentPos.x, 0, playersCurrentPos.z);
             }
-
-
-
             yield return new WaitForEndOfFrame();
         }
 
