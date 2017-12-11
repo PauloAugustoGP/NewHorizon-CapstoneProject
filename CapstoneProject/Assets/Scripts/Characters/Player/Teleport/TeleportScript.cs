@@ -29,7 +29,7 @@ public class TeleportScript : MonoBehaviour
 
     // minimum and maximum teleport distances
     private float _maxTeleportDistance = 10;
-    private float _maxTeleportHeight = 2;
+    private float _maxTeleportHeight = 1;
     [SerializeField] private float _minTeleportDistance = 1;
 
     // used for cooldown of teleport
@@ -125,7 +125,7 @@ public class TeleportScript : MonoBehaviour
             else
             {
                 Vector3 tempNormalizedPosition = Vector3.Normalize(_teleportPoint.transform.localPosition);
-                _fakePlayer.transform.localPosition = new Vector3(tempNormalizedPosition.x * _maxTeleportDistance, transform.position.y + _maxTeleportHeight, tempNormalizedPosition.z * _maxTeleportDistance);
+                _fakePlayer.transform.localPosition = new Vector3(tempNormalizedPosition.x * _maxTeleportDistance, transform.position.y /*+ _maxTeleportHeight*/, tempNormalizedPosition.z * _maxTeleportDistance);
             }
         }
 
@@ -210,6 +210,6 @@ public class TeleportScript : MonoBehaviour
     private IEnumerator DelayedTeleport(Vector3 tempTeleportPosition)
     {
         yield return new WaitForSeconds(0.2f);
-        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.x, tempTeleportPosition.y /* Limiting teleport in y: transform.position.y */, tempTeleportPosition.z), transform.rotation);
+        transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.x, tempTeleportPosition.y + 1.0f /* adding 1 to counteract the new player prefab origin point */ /* Limiting teleport in y: transform.position.y */, tempTeleportPosition.z), transform.rotation);
     }
 }
