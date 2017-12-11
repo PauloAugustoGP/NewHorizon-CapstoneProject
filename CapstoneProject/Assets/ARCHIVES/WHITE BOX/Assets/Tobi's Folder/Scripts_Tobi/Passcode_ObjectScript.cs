@@ -7,62 +7,32 @@ using UnityEngine.Events;
 public class Passcode_ObjectScript : MonoBehaviour
 {
     [SerializeField] private Text _codeText;
-    [SerializeField] private Text _worldCodeText;
+    [SerializeField] private Text[] _worldCodeText;
 
-    public int[] passCode = new int[4];
+    private Passcode[] _passcodes;
 
+    //public int[] passCode = new int[4];
+
+    private int _correctPasscodeIndex = 0;
     private int _playerCodeIndex = 0;
     private int[] _playerCode = new int[4];
 
     private bool _canInput = true;
 
-    [SerializeField] private UnityEvent onPasscodeAccept;
+    [SerializeField] private UnityEvent[] onPasscodeAccept;
 
     // Use this for initialization
     void Start()
     {
-        GenerateCode();
+        _passcodes = new Passcode[_worldCodeText.Length];
+
+        for (int i = 0; i < _passcodes.Length; ++i)
+        {
+            _passcodes[i] = new Passcode();
+            _worldCodeText[i].text = string.Format("{0}\t{1}\t{2}\t{3}", _passcodes[i].passCode[0], _passcodes[i].passCode[1], _passcodes[i].passCode[2], _passcodes[i].passCode[3]);
+        }
+
         UpdateText();
-        _worldCodeText.text = string.Format("{0}\t{1}\t{2}\t{3}", passCode[0], passCode[1], passCode[2], passCode[3]);
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-            GenerateCode();
-    }
-
-    // Update is called once per frame
-    void GenerateCode()
-    {
-        int[] usedNum = new int[20];
-
-        for (int i = 0; i < passCode.Length; ++i)
-        {
-            usedNum[i] = 10;
-        }
-
-        int usedNumIndex = 0;
-        for (int i = 0; i < passCode.Length; ++i)
-        {
-            int newNum = (int)Random.Range(0, 10);
-
-            int used = 0;
-
-            for (int j = 0; j < usedNum.Length; ++j)
-            {
-                if (newNum == usedNum[j])
-                    used++;
-            }
-
-            if (used < 2)
-            {
-                usedNum[usedNumIndex] = newNum;
-                usedNumIndex++;
-                passCode[i] = newNum;
-            }
-            else
-                --i;
-        }
     }
 
     public void OnNumberAdd(int pEntry)
@@ -78,20 +48,27 @@ public class Passcode_ObjectScript : MonoBehaviour
 
     public void OnPasscodeCompaire()
     {
-        int equal = 0;
-
-        for (int i = 0; i < passCode.Length; ++i)
+        for (int i = 0; i < _passcodes.Length; ++i)
         {
-            if (passCode[i] == _playerCode[i])
+            int equal = 0;
+
+            for (int j = 0; j < _passcodes[i].passCode.Length; ++j)
             {
-                equal++;
+                if (_passcodes[i].passCode[i] == _playerCode[i])
+                {
+                    equal++;
+                }
+            }
+
+            if (equal >= 4)
+            {
+                _correctPasscodeIndex = i;
+                Result(true);
+                return;
             }
         }
 
-        if (equal >= 4)
-            Result(true);
-        else
-            Result(false);
+        Result(false);
     }
 
     void Result(bool pass)
@@ -100,7 +77,8 @@ public class Passcode_ObjectScript : MonoBehaviour
         {
             Debug.Log("Codes are the same");
             _codeText.color = Color.green;
-            onPasscodeAccept.Invoke();
+            onPasscodeAccept[_correctPasscodeIndex].Invoke();
+            StartCoroutine(Reset_playerCode());
         }
         else
         {
@@ -138,5 +116,43 @@ public class Passcode_ObjectScript : MonoBehaviour
         _codeText.color = Color.black;
         UpdateText();
         _canInput = true;
+    }
+
+    public class Passcode
+    {
+        public int[] passCode = new int[4];
+
+        public Passcode()
+        {
+            int[] usedNum = new int[20];
+
+            for (int i = 0; i < passCode.Length; ++i)
+            {
+                usedNum[i] = 10;
+            }
+
+            int usedNumIndex = 0;
+            for (int i = 0; i < passCode.Length; ++i)
+            {
+                int newNum = (int)Random.Range(0, 10);
+
+                int used = 0;
+
+                for (int j = 0; j < usedNum.Length; ++j)
+                {
+                    if (newNum == usedNum[j])
+                        used++;
+                }
+
+                if (used < 2)
+                {
+                    usedNum[usedNumIndex] = newNum;
+                    usedNumIndex++;
+                    passCode[i] = newNum;
+                }
+                else
+                    --i;
+            }
+        }
     }
 }

@@ -4899,6 +4899,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114116432932695738, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+        type: 2}
+      propertyPath: projectilePlayerScript
+      value: 
+      objectReference: {fileID: 1356885298}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
   m_IsPrefabParent: 0
@@ -12032,6 +12037,11 @@ Prefab:
       propertyPath: dataTable
       value: 
       objectReference: {fileID: 1593743405}
+    - target: {fileID: 114752370455200560, guid: 967315f16a45aff4ea9319a35ab5a7c2,
+        type: 2}
+      propertyPath: _coolDown
+      value: 
+      objectReference: {fileID: 1285444924}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 967315f16a45aff4ea9319a35ab5a7c2, type: 2}
   m_IsPrefabParent: 0
@@ -12933,6 +12943,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1285444924 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114116432932695738, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+    type: 2}
+  m_PrefabInternal: {fileID: 418383488}
+  m_Script: {fileID: 11500000, guid: 0b8e2cac2726e9b4d9e5a5d75d097362, type: 3}
 --- !u!1001 &1295795919
 Prefab:
   m_ObjectHideFlags: 0
@@ -13545,6 +13561,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4501011425466802, guid: bd48dafdf37f9784ea4725f0d49e8107,
     type: 2}
   m_PrefabInternal: {fileID: 1356562498}
+--- !u!114 &1356885298 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114752370455200560, guid: 967315f16a45aff4ea9319a35ab5a7c2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1184213003}
+  m_Script: {fileID: 11500000, guid: 838b50d92fd2f4d78a95b3883acf1fb8, type: 3}
 --- !u!1 &1383181840 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1286539718360642, guid: 9b340808105b3bc429308a40af2e3ef1,

@@ -53,7 +53,7 @@ public class TeleportScript : MonoBehaviour
     void Start()
     {
         // make sure there is a teleport point in the scene
-        if(!_teleportPoint)
+        if (!_teleportPoint)
         {
             Debug.Log("No Teleport Point Prefab added to Player.");
             _teleportPoint = GameObject.Find("TeleportPoint");
@@ -71,7 +71,7 @@ public class TeleportScript : MonoBehaviour
             _radius = GameObject.Find("TeleportRadius");
         }
         // make sure cooldown hud reference is set
-        if(!_hudCooldown)
+        if (!_hudCooldown)
         {
             Debug.Log("No Cooldown hud reference set. Assign the correct reference");
         }
@@ -94,7 +94,7 @@ public class TeleportScript : MonoBehaviour
             // set the teleport points position to the raycasts hit point    
             _teleportPoint.transform.position = tempHit.point;
         }
-        else Debug.Log("Raycast not working properly!");
+        //else Debug.Log("Raycast not working properly!");
 
         // set position of fake player to the position of the teleport point
         if (Vector3.Distance(transform.position, _teleportPoint.transform.position) < _maxTeleportDistance)
@@ -151,7 +151,7 @@ public class TeleportScript : MonoBehaviour
                 }
             }
 
-            if(Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
+            if (Input.GetKeyUp(KeyCode.LeftShift) && _isActive)
             {
                 _fakePlayer.SetActive(false);
                 _teleportPoint.SetActive(false);
@@ -174,7 +174,7 @@ public class TeleportScript : MonoBehaviour
                 //start cool down 
                 StartCoroutine(Cooldown());
                 // call the cooldown function on the HUD
-                if(_hudCooldown != null)
+                if (_hudCooldown != null)
                     _hudCooldown.StartCoolDown(2.0f);
                 _isCooled = false;
                 // teleport finished

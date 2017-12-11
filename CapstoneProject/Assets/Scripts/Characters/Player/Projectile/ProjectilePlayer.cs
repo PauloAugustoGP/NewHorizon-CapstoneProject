@@ -57,7 +57,7 @@ public class ProjectilePlayer : MonoBehaviour
     void Start()
     {
         _projSpawned = false;
-        _useSound = true;
+        //_useSound = true;
 
         if (!_camController)
             Debug.LogError("No CameraController reference in inspector");
@@ -65,7 +65,7 @@ public class ProjectilePlayer : MonoBehaviour
             Debug.LogError("No prefab for projectile");
         if (!_projectileSpawn)
             Debug.LogError("No spawnpoint for projectile");
-        if (_coolDown)
+        if (!_coolDown)
             Debug.LogError("No CoolDown reference in inspector");
 
 
