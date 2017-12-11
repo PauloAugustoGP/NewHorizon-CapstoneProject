@@ -105,7 +105,6 @@ public class CharacterBehaviour : CharacterBase
                 else if (!isCrouching && !encumbered)
                     slowed = false;
 
-
                 moving = true;
                 ft = 1;
                 animator.SetFloat("Speed", movementSpeed);
@@ -165,14 +164,14 @@ public class CharacterBehaviour : CharacterBase
                 {
                     animator.SetBool("Crouching", isCrouching);
                     capsule.height = StandardHeight;
-                    capsule.center = new Vector3(0, 1f, 0);
+                    capsule.center = new Vector3(0, 0, 0);
                 }
 
                 if (isCrouching)
                 {
                     animator.SetBool("Crouching", isCrouching);
                     capsule.height = CrouchedHeight;
-                    capsule.center = new Vector3(0, 0.5f, 0);
+                    capsule.center = new Vector3(0, -0.5f, 0);
                 } 
             }//LeftControl
         }//isAlive
