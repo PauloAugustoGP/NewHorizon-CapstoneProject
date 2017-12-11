@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WinTrigger : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
+public class WinTrigger : MonoBehaviour
+{
 	void Update ()
     {
         transform.Rotate(0.5f, 0.5f, 0.5f);
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider c)
     {
-        if (other.gameObject.tag == "Player")
+        if (c.gameObject.CompareTag("Player"))
         {
             Sound_Manager.instance.MusicCaller("WinningMusic");
             Scene_Manager.instance.GoTo_LEVEL("Winning");

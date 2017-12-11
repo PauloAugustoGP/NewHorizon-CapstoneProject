@@ -7,7 +7,7 @@ public class Doors : MonoBehaviour
     enum Type
     {
         Vertical,
-        Horizontal
+        Horizontal       
     }
 
     [SerializeField] Type doorType;

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider c)
     {
-        if (other.GetComponent<CharacterBehaviour>())
-        {                 
-            other.GetComponent<CharacterBehaviour>().Heal(50);
-            Destroy(gameObject);
+        if (c.gameObject.CompareTag("Player"))
+        {
+            if (c.GetComponent<CharacterBase>().GetHealthRatio() != 100)
+            {
+                c.GetComponent<CharacterBase>().AddHealth(50);
+                Destroy(gameObject);
+            }
         }
     }
 }
-
-

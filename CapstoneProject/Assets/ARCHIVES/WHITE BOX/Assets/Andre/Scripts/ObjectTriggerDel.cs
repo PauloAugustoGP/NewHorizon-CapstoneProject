@@ -11,15 +11,15 @@ public class ObjectTriggerDel : MonoBehaviour {
     private void OnTriggerEnter(Collider c)
     {
         //change get component to get the bool that is or is not true for what ever object you might want to implement.
-        if (c.GetComponent<CharacterBehaviour>().atFullHealth == true)
+        if (c.GetComponent<CharacterBehaviour>().GetHealthRatio() != 100)
         {
             TextFirstDiscription.gameObject.SetActive(false);
-            TextToSetActiveIfTrue.gameObject.SetActive(true);
+            TextToSetActive.gameObject.SetActive(true);
         }
         else
         {
             TextFirstDiscription.gameObject.SetActive(false);
-            TextToSetActive.gameObject.SetActive(true);
+            TextToSetActiveIfTrue.gameObject.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider other)

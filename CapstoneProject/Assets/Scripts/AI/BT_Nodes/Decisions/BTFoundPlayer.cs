@@ -55,8 +55,8 @@ public class BTFoundPlayer : BTDecision
     bool LineCastToTarget(Transform targetLocation)
     {
         RaycastHit hit;
-        //Debug.DrawLine(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y + 1.0f, targetLocation.position.z));
-        if (Physics.Linecast(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y+1.0f, targetLocation.position.z), out hit))
+        Debug.DrawLine(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y, targetLocation.position.z));
+        if (Physics.Linecast(agentTransform.position, new Vector3(targetLocation.position.x, targetLocation.position.y, targetLocation.position.z), out hit))
         {
             if (hit.transform.CompareTag("Player"))
                 return true;

@@ -15,7 +15,7 @@ public class BTCheckHP : BTDecision
         return -1; //REMOVE THIS LATER
 
         // CONDITION TO STOP
-        if (agent.GetHealth() > 70f)
+        if (agent.GetHealthRatio() > 70f)
             return -1; // FAIL
 
         for (int i = 0; i < childs.Count; i++)

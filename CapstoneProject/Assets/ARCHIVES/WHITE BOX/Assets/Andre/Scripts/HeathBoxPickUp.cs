@@ -7,15 +7,16 @@ using UnityEngine;
 public class HeathBoxPickUp : MonoBehaviour {
     public GameObject textAbovePlayer;
     public GameObject theObject;
+    public GameObject WorldCanvas;
     public bool thisObject;
 
     private void OnTriggerEnter(Collider c)
     {
         if (c.GetComponent<CharacterBehaviour>())
         {
-            if (c.GetComponent<CharacterBehaviour>().atFullHealth == false)
+            if (c.GetComponent<CharacterBehaviour>().GetHealthRatio() !=100)
             {
-                c.GetComponent<CharacterBehaviour>().Heal(20);
+                c.GetComponent<CharacterBehaviour>().AddHealth(20);
                 thisObject = true;
                 textAbovePlayer.gameObject.SetActive(true);
             }
@@ -26,6 +27,7 @@ public class HeathBoxPickUp : MonoBehaviour {
         if (thisObject == true)
         {
             Destroy(theObject);
+            WorldCanvas.gameObject.SetActive(false);
         }
     }
 

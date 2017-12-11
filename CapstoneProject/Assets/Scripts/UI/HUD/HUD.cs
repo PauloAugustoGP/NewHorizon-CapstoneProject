@@ -80,7 +80,7 @@ public class HUD : MonoBehaviour {
     }
     
     public float getHealth() {
-        return player.GetHealth();
+        return player.GetHealthRatio();
     }
 
     IEnumerator damageFlash(float delay) {

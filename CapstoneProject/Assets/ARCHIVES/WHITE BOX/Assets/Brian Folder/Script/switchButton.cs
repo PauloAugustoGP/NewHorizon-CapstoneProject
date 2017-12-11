@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchButton : MonoBehaviour
+public class SwitchButton : MonoBehaviour { }
+    /*
 {
     [Tooltip("Assign the object you want to control")]
     [SerializeField]
@@ -21,6 +22,7 @@ public class SwitchButton : MonoBehaviour
         buttonMesh = GetComponent<MeshRenderer>();
         if(Interactable != null)
             {
+            GetComponent<SphereCollider>().enabled = true;
             actualDoor = Interactable.GetComponentInChildren<Doors>();
             actualElevator = Interactable.GetComponent<Elevator>();
             }
@@ -29,7 +31,7 @@ public class SwitchButton : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {   
         //Verifies if the projectile that hitted and if the button is not activated
-        if (other.gameObject.tag == "Projectile" && !switchTriggered)
+        if (other.gameObject.tag == "Projectile" && !switchTriggered && other.gameObject.tag == "Player")
         {
             if (actualDoor)
             {
@@ -44,6 +46,22 @@ public class SwitchButton : MonoBehaviour
             }
         }    
     }
+    private void OnTriggerExit(Collider other)
+    {
+        switchTriggered = false;
+    }
+
+    void Update()
+    {
+        if (switchTriggered)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                switchTriggered = true;
+            }
+        }
+    }
+
     public bool switchTriggered
     {
         get { return _switchTriggered; }
@@ -60,6 +78,6 @@ public class SwitchButton : MonoBehaviour
             }
         }
     }
-   
 
 }
+*/

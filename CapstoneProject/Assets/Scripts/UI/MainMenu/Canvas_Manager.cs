@@ -12,10 +12,8 @@ public class Canvas_Manager : MonoBehaviour
     [SerializeField] private GameObject CreditsPanel;
     [SerializeField] private GameObject TestPanel;
     [SerializeField] private GameObject LoadingPanel;
+    [SerializeField] private GameObject GarrettLoadingPanel;
     [SerializeField] private GameObject AudioPanel;
-
-    //[SerializeField] private Text ButtonDisplay;
-    //[SerializeField] private Button[] MenuButtons;
 
     [SerializeField] private Slider MasterSlider;
     [SerializeField] private Slider MusicSlider;
@@ -101,8 +99,8 @@ public class Canvas_Manager : MonoBehaviour
 
     public void test3()
     {
-        Scene_Manager.instance.GoTo_LEVEL("Warehouse_Level");
-        Debug.Log("Garrett");
+        TestPanel.gameObject.SetActive(false);
+        GarrettLoadingPanel.gameObject.SetActive(true);
     }
     
 }
