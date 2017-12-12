@@ -20,8 +20,11 @@ public class XRayPlayer : MonoBehaviour
 
     private bool _xrayActive;
 
-    private Renderer _currentObject;
-    private Shader _currentShader;
+    [SerializeField] private Renderer _currentObject;
+    [SerializeField] private Shader _currentShader;
+
+    [SerializeField] private List<Renderer> _currentObjects;
+    [SerializeField] private List<Shader> _currentShaders;
 
     /// <summary>
     /// Returns if _xrayActive is true or false
@@ -80,6 +83,24 @@ public class XRayPlayer : MonoBehaviour
             _currentObject.material.shader = _transparent;
             _xrayActive = true;
         }
+        else if (Physics.Raycast(ray, out hit, _touchDistance) && hit.collider.gameObject.GetComponentInParent<XRayObject>())
+        {
+            SetComponents(false);
+            GameObject parent = hit.collider.transform.parent.gameObject;
+
+            foreach (Renderer renderer in parent.GetComponentsInChildren<Renderer>())
+            {
+                _currentObjects.Add(renderer);
+            }
+
+            foreach (Renderer renderer in _currentObjects)
+            {
+                _currentShaders.Add(renderer.material.shader);
+                renderer.material.shader = _transparent;
+            }
+
+            _xrayActive = true;
+        }
     }
 
     /// <summary>
@@ -94,6 +115,19 @@ public class XRayPlayer : MonoBehaviour
             _currentObject.material.shader = _currentShader;
             _currentObject = null;
             _currentShader = null;
+        }
+        else if (_currentObjects.Count > 0)
+        {
+            SetComponents(true);
+            _xrayActive = false;
+
+            for (int i = 0; i < _currentObjects.Count; ++i)
+            {
+                _currentObjects[i].material.shader = _currentShaders[i];
+            }
+
+            _currentObjects.Clear();
+            _currentShaders.Clear();
         }
     }
 
