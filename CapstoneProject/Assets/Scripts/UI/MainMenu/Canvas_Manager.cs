@@ -102,5 +102,10 @@ public class Canvas_Manager : MonoBehaviour
         TestPanel.gameObject.SetActive(false);
         GarrettLoadingPanel.gameObject.SetActive(true);
     }
+
+    public void PowerRoom()
+    {
+        Scene_Manager.instance.GoTo_LEVEL("PowerRoom_Level");
+    }
     
 }
