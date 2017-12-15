@@ -251,7 +251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1886567292736574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,6 +1089,10 @@ MonoBehaviour:
   TextFirstDiscription: {fileID: 1758319309381040}
   TextToSetActive: {fileID: 1203806259358768}
   TextToSetActiveIfTrue: {fileID: 1338315100616042}
+  imageBlack: {fileID: 114246498483904372}
+  imageWhite: {fileID: 114009384816665398}
+  headerText: {fileID: 1918350739207138}
+  firstTextON: 0
 --- !u!114 &114565736034169382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1135,10 +1139,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSpaceText: {fileID: 1056561026683536}
+  firstText: {fileID: 1758319309381040}
   theGameObjecttheTextisAttachedTo: {fileID: 1571260053115560}
   TheGameObjectBoxCollider: {fileID: 65559839707113962}
   targetToRotateTO: {fileID: 0}
+  firstDiscriptionON: 0
   theGameObject: 1
+  imageBlack: {fileID: 114246498483904372}
+  imageWhite: {fileID: 114009384816665398}
+  headerText: {fileID: 1918350739207138}
 --- !u!114 &114779857233301732
 MonoBehaviour:
   m_ObjectHideFlags: 1
