@@ -42,11 +42,11 @@ public class Canvas_Manager : MonoBehaviour
         OptionsPanel.gameObject.SetActive(false);
         CreditsPanel.gameObject.SetActive(false);
         TestPanel.gameObject.SetActive(false);
+        ControlsPanel.gameObject.SetActive(false);
     }
 
     public void BackToOptions()
     {
-        ControlsPanel.gameObject.SetActive(false);
         AudioPanel.gameObject.SetActive(false);
         OptionsPanel.gameObject.SetActive(true);
     }
@@ -54,7 +54,7 @@ public class Canvas_Manager : MonoBehaviour
     public void controls()
     {
         ControlsPanel.gameObject.SetActive(true);
-        OptionsPanel.gameObject.SetActive(false);
+        MainPanel.gameObject.SetActive(false);
     }
 
     public void Credits()
