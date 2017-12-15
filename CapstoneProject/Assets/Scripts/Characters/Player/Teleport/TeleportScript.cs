@@ -135,7 +135,7 @@ public class TeleportScript : MonoBehaviour
             else
             {
                 Vector3 tempNormalizedPosition = Vector3.Normalize(_teleportPoint.transform.localPosition);
-                _fakePlayer.transform.localPosition = new Vector3(tempNormalizedPosition.x * _maxTeleportDistance, transform.position.y /*+ _maxTeleportHeight*/, tempNormalizedPosition.z * _maxTeleportDistance);
+                _fakePlayer.transform.localPosition = new Vector3(tempNormalizedPosition.x * _maxTeleportDistance, _maxTeleportHeight/*transform.position.y*/ /*+ _maxTeleportHeight*/, tempNormalizedPosition.z * _maxTeleportDistance);
             }
         }
 
