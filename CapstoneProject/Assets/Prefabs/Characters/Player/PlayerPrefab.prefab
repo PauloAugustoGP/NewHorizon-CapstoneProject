@@ -302,7 +302,6 @@ GameObject:
   - component: {fileID: 114251546739806420}
   - component: {fileID: 114137388532282866}
   - component: {fileID: 114302351376918272}
-  - component: {fileID: 114824296216054126}
   - component: {fileID: 114058605229595450}
   - component: {fileID: 114752370455200560}
   - component: {fileID: 114699105192309438}
@@ -3104,7 +3103,7 @@ MonoBehaviour:
     m_Bits: 256
   componentsToDisable:
   - {fileID: 114752370455200560}
-  - {fileID: 114824296216054126}
+  - {fileID: 0}
   - {fileID: 114137388532282866}
   _hudCooldown: {fileID: 0}
 --- !u!114 &114699105192309438
@@ -3126,6 +3125,10 @@ MonoBehaviour:
   - {fileID: 114137388532282866}
   - {fileID: 114302351376918272}
   - {fileID: 114752370455200560}
+  _currentObject: {fileID: 0}
+  _currentShader: {fileID: 0}
+  _currentObjects: []
+  _currentShaders: []
 --- !u!114 &114752370455200560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3153,26 +3156,9 @@ MonoBehaviour:
   _coolDown: {fileID: 0}
   _useSound: 0
   componentsToDisable:
-  - {fileID: 114824296216054126}
+  - {fileID: 0}
   - {fileID: 114302351376918272}
   - {fileID: 114137388532282866}
---- !u!114 &114824296216054126
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1307949593399106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32932ac0aa0844b41ae5577a973813b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 0
-  components:
-  - {fileID: 114251546739806420}
-  - {fileID: 114137388532282866}
-  - {fileID: 114302351376918272}
-  - {fileID: 114752370455200560}
 --- !u!114 &114886981072393884
 MonoBehaviour:
   m_ObjectHideFlags: 1
