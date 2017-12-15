@@ -227,7 +227,7 @@ public class CameraController : MonoBehaviour
     private Vector3 FindPosition()
     {
         // Cache the desired location of the camera in world space
-        Vector3 followPosition =  _followPosition;
+        Vector3 followPosition = _followPosition;
 
         // Check if there is any object behind Player
         RaycastHit hitInfo;
@@ -253,7 +253,7 @@ public class CameraController : MonoBehaviour
 
         // Clamp vertical rotation
         _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
-        
+
         //if (_xrayRef.GetIsInXRay())
         //{
         //    _mouseX = Mathf.Clamp(_mouseX, _target.localEulerAngles.y + _xAngleMin, _target.localEulerAngles.y + _xAngleMax);
@@ -277,7 +277,7 @@ public class CameraController : MonoBehaviour
 
         while (!finished)
         {
-            if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer))
+            if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer, QueryTriggerInteraction.Ignore))
             {
                 if (Vector3.Distance(hit.point, pRayOrigin) <= 2.0f)
                 {
