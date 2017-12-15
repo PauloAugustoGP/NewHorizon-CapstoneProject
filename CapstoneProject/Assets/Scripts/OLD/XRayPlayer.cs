@@ -11,8 +11,7 @@ public class XRayPlayer : MonoBehaviour
     [Header("Drag and Drop")]
     [SerializeField]
     private Transform _rayOrigin;
-    [SerializeField]
-    private Shader _transparent;
+    [SerializeField] private Shader _transparent;
 
     [Header("Disable")]
     [SerializeField]
@@ -20,10 +19,12 @@ public class XRayPlayer : MonoBehaviour
 
     private bool _xrayActive;
 
-    [SerializeField] private Renderer _currentObject;
-    [SerializeField] private Shader _currentShader;
+    private Renderer _currentObject;
+    private Shader _currentShader;
 
-    [SerializeField] private List<Renderer> _currentObjects;
+    [Header("DON'T TOUCH THESE")]
+    [SerializeField]
+    private List<Renderer> _currentObjects;
     [SerializeField] private List<Shader> _currentShaders;
 
     /// <summary>
@@ -42,7 +43,6 @@ public class XRayPlayer : MonoBehaviour
             Debug.LogError("No Touch Distance set in the Inspector. Defaulting to 1.0f");
             _touchDistance = 1.0f;
         }
-
         if (!_rayOrigin)
         {
             Debug.LogError("No ray origin attached.");

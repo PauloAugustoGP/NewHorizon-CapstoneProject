@@ -105,7 +105,7 @@ public class CameraController : MonoBehaviour
     // Toggle camera movement/rotation on/off
     private bool _freezeCamera;
 
-    private XRay_Ability _xrayRef;
+    private XRayPlayer _xrayRef;
 
     private TeleportScript _tpRef;
 
@@ -167,10 +167,10 @@ public class CameraController : MonoBehaviour
         _invertX = 1;
         _invertY = -1;
 
-        _xrayRef = GetComponent<XRay_Ability>();
+        _xrayRef = GetComponent<XRayPlayer>();
         if (!_xrayRef)
         {
-            _xrayRef = GetComponent<XRay_Ability>();
+            _xrayRef = GetComponent<XRayPlayer>();
         }
 
         if (!_tpRef)
@@ -197,7 +197,7 @@ public class CameraController : MonoBehaviour
             _mainCam.rotation = Quaternion.Lerp(_mainCam.rotation, FindRotation(), 0.02f * _rotationDamping);
 
             //Apply horizontal rotation to player, if Xray is _not_ active
-            if (!_xrayRef.GetIsInXRay())
+            if (!_xrayRef.xrayActive)
             {
                 // This adds a slight lag behind for the player's rotation
                 _target.rotation = Quaternion.Lerp(_target.rotation, Quaternion.Euler(0f, _mouseX, 0f), 0.02f * _rotationDamping);
@@ -254,7 +254,7 @@ public class CameraController : MonoBehaviour
             //Debug.DrawRay(rayRight, rayDir * _bumperHorizontalCheck, Color.green);
 
             Debug.DrawLine(rayOrigin, hitInfo.point, Color.green);
-    
+
             followPosition.x = hitInfo.point.x;
 
             //if (hitInfo.point.x < _mainCam.position.x)
@@ -291,8 +291,8 @@ public class CameraController : MonoBehaviour
 
         // Clamp vertical rotation
         _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
-        
-        if (_xrayRef.GetIsInXRay())
+
+        if (_xrayRef.xrayActive)
         {
             _mouseX = Mathf.Clamp(_mouseX, _target.localEulerAngles.y + _xAngleMin, _target.localEulerAngles.y + _xAngleMax);
         }
