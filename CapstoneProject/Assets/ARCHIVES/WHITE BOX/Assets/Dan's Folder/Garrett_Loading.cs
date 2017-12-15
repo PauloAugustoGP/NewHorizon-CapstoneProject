@@ -45,7 +45,6 @@ public class Garrett_Loading : MonoBehaviour
     IEnumerator LoadGarrettScene()
     {
         Debug.Log("Is Loading");
-        yield return new WaitForSeconds(3);
 
         AsyncOperation async = SceneManager.LoadSceneAsync("Warehouse_Level");
         Sound_Manager.instance.MusicCaller("LevelMusic", 0.5f);

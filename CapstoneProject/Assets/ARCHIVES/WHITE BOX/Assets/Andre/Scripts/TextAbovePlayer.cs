@@ -43,7 +43,10 @@ public class TextAbovePlayer : MonoBehaviour
 
     private void Start()
     {
-
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
         m_floatingText_Transform = m_floatingText.transform;
         m_floatingText_Transform.position = m_transform.position + new Vector3(0, 1f, 0);
 
