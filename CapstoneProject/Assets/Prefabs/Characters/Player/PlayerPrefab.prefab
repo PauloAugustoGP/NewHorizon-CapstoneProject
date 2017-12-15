@@ -1551,7 +1551,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307949593399106}
   m_LocalRotation: {x: -0, y: 0.7437605, z: -0, w: 0.6684462}
-  m_LocalPosition: {x: 4.65, y: 0.18, z: -28.09}
+  m_LocalPosition: {x: 4.65, y: 1, z: -28.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555802104216872}
@@ -2363,7 +2363,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057168927618524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.9}
+  m_LocalPosition: {x: 0, y: -0.35, z: 1.25}
   m_LocalScale: {x: 1.00001, y: 1, z: 1}
   m_Children:
   - {fileID: 4218371211464090}
@@ -3125,8 +3125,6 @@ MonoBehaviour:
   - {fileID: 114137388532282866}
   - {fileID: 114302351376918272}
   - {fileID: 114752370455200560}
-  _currentObject: {fileID: 0}
-  _currentShader: {fileID: 0}
   _currentObjects: []
   _currentShaders: []
 --- !u!114 &114752370455200560
@@ -3143,7 +3141,7 @@ MonoBehaviour:
   _deltaSize: 0.05
   _projectileSpeed: 10
   _maxChargeTime: 10
-  _useCoolDown: 0
+  _useCoolDown: 1
   _enemyTag: Enemy
   _ignorePlayer:
     serializedVersion: 2

@@ -45,16 +45,16 @@ public class WorldSpaceText : MonoBehaviour {
         if (firstDiscriptionON == true)
         {
             headerText.gameObject.SetActive(true);
-            imageBlack.gameObject.SetActive(true);
-            imageWhite.gameObject.SetActive(true);
+            imageBlack.enabled = true;
+            imageWhite.enabled = true;
             firstText.gameObject.SetActive(true);
         }
         if(firstDiscriptionON == false)
         {
             firstText.gameObject.SetActive(false);
             headerText.gameObject.SetActive(false);
-            imageBlack.gameObject.SetActive(false);
-            imageWhite.gameObject.SetActive(false);
+            imageBlack.enabled = false;
+            imageWhite.enabled = false;
         }
 
         if (other.GetComponent<CharacterBehaviour>().GetHealthRatio() !=100)

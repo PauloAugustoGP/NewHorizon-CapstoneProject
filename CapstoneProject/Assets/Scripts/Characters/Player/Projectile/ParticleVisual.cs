@@ -17,7 +17,8 @@ public class ParticleVisual : MonoBehaviour
 
     void Update()
     {
-        _ps.Emit(_count);
+        if (Time.timeScale != 0.0f)
+            _ps.Emit(_count);
     }
 
     // Update is called once per frame

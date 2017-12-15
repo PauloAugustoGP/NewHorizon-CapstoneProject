@@ -11,21 +11,47 @@ public class Elevator : MonoBehaviour
     private float ElevatorDown;
     [SerializeField]
     private float direction;
+    private Transform Player;
+    [SerializeField]
+    private bool Automatic;
 
 	// Use this for initialization
 	void Start ()
     {
         ElevatorDown = transform.position.y;
-        
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (ElevatorON)
+        if (ElevatorON && Automatic)
+        {
+            Automatic = true;
+            transform.Translate(0, direction * Time.deltaTime, 0);
+            //If the player is under elevator's height, the elevator will go to the lowest position.
+            if (direction > 0 && transform.position.y > Player.position.y)
+            {
+                direction *= -1;
+            }
+            if (transform.position.y > ElevatorUP)
+            {
+                //elevator arrived at the top
+                transform.position = new Vector3(transform.position.x, ElevatorUP, transform.position.z);
+                ElevatorON = false;
+                button.isActivated = false;
+            }
+            if (transform.position.y <= ElevatorDown)
+            {
+                //elevator arrived at the bottom
+                transform.position = new Vector3(transform.position.x, ElevatorDown, transform.position.z);
+                ElevatorON = false;
+                button.isActivated = false;
+            }
+        }
+        else if (ElevatorON & !Automatic)
         {
             transform.Translate(0, direction * Time.deltaTime, 0);
-            if(transform.position.y > ElevatorUP)
+            if (transform.position.y > ElevatorUP)
             {
                 //elevator arrived at the top
                 transform.position = new Vector3(transform.position.x, ElevatorUP, transform.position.z);
@@ -56,5 +82,13 @@ public class Elevator : MonoBehaviour
             //Forcing direction to be negative number
             direction = -Mathf.Abs(direction);
         }  
+    }
+
+    void OnCollisionEnter(Collision c)
+    {
+        if(c.gameObject.CompareTag("Player"))
+        {
+            Player = c.transform;
+        }
     }
 }
