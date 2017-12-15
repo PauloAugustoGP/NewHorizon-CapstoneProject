@@ -28,7 +28,6 @@
 /// -Dynamic bumper check
 /// ------------------------
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,7 +46,7 @@ public class CameraController : MonoBehaviour
     private float _xDist = 0f;
     [SerializeField]
     [Tooltip("Height above target's pivot.")]
-    private float _yDist = 2f;   // Height above the floor (Player pivot point) camera will be
+    private float _yDist = 1f;   // Height above the floor (Player pivot point) camera will be
     [SerializeField]
     [Tooltip("Distance behind target's pivot.")]
     private float _zDist = 1.5f;   // Distance between camera and player (pivot point)
@@ -105,6 +104,8 @@ public class CameraController : MonoBehaviour
     // Toggle camera movement/rotation on/off
     private bool _freezeCamera;
 
+    //private XRay_Ability _xrayRef;
+
     private XRayPlayer _xrayRef;
 
     private TeleportScript _tpRef;
@@ -112,6 +113,9 @@ public class CameraController : MonoBehaviour
     [Header("Layer Mask - Projectile")]
     [SerializeField]
     private LayerMask _playerIgnoreLM;
+
+    //This list of for the GetCenterView function!!
+    List<Collider> collidersHit = new List<Collider>();
 
     // Pause behaviour for Cursor
     private bool _inGame = true;
@@ -140,26 +144,13 @@ public class CameraController : MonoBehaviour
             _target = GetComponent<Transform>();
         }
 
-        //_zDist = 2f;
-        //_yDist = 2f;
-        //_xDist = 0.25f;
-
         _followPosition = new Vector3(_xDist, _yDist, -_zDist);
 
         _mainCam.SetParent(_target);
         _mainCam.localPosition = _followPosition;
 
-        //_yAngleMin = -10f;
-        //_yAngleMax = 35f;
-
-        _bumperHorizontalCheck = _zDist + 0.5f;
+        _bumperHorizontalCheck = _zDist * 2f;
         _bumperCameraHeight = _yDist + 0.5f;
-
-        //_damping = 5f;
-        //_rotationDamping = 10f;
-
-        //_sensitivityX = 0.5f;
-        //_sensitivityY = 0.4f;
 
         _rotSpeedX = 500f * _sensitivityX;
         _rotSpeedY = 500f * _sensitivityY;
@@ -167,7 +158,6 @@ public class CameraController : MonoBehaviour
         _invertX = 1;
         _invertY = -1;
 
-        _xrayRef = GetComponent<XRayPlayer>();
         if (!_xrayRef)
         {
             _xrayRef = GetComponent<XRayPlayer>();
@@ -191,9 +181,12 @@ public class CameraController : MonoBehaviour
         if (!_freezeCamera)
         {
             // Move the camera to the desired position
-            _mainCam.position = Vector3.Lerp(_mainCam.position, FindPosition(), 0.02f * _damping);
+            //_mainCam.position = Vector3.Lerp(_mainCam.position, FindPosition(), 0.02f * _damping);
 
-            // Apply horizontal and vertical rotation to camera
+            // Apply local position
+            _mainCam.localPosition = Vector3.Lerp(_mainCam.localPosition, FindPosition(), 0.02f * _damping);
+
+            // Apply horizontal and vertical rotation
             _mainCam.rotation = Quaternion.Lerp(_mainCam.rotation, FindRotation(), 0.02f * _rotationDamping);
 
             //Apply horizontal rotation to player, if Xray is _not_ active
@@ -234,48 +227,19 @@ public class CameraController : MonoBehaviour
     private Vector3 FindPosition()
     {
         // Cache the desired location of the camera in world space
-        Vector3 followPosition = _target.TransformPoint(_followPosition);
+        Vector3 followPosition =  _followPosition;
 
         // Check if there is any object behind Player
         RaycastHit hitInfo;
         Vector3 rayDir = -_target.forward;
-        Vector3 rayOrigin = _target.position + _target.up;
-        //Vector3 rayLeft = _target.position + _target.up + _target.right * -0.5f;
-        //Vector3 rayRight = _target.position + _target.up + _target.right * 0.5f;
-
-        //if (Physics.Raycast(rayLeft, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore)
-        //    || Physics.Raycast(rayRight, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
+        Vector3 rayOrigin = _target.position + _target.up * 0.5f;
 
         Debug.DrawRay(rayOrigin, rayDir * _bumperHorizontalCheck, Color.red);
 
         if (Physics.Raycast(rayOrigin, rayDir, out hitInfo, _bumperHorizontalCheck, _playerIgnoreLM, QueryTriggerInteraction.Ignore))
         {
-            //Debug.DrawRay(rayLeft, rayDir * _bumperHorizontalCheck, Color.red);
-            //Debug.DrawRay(rayRight, rayDir * _bumperHorizontalCheck, Color.green);
-
-            Debug.DrawLine(rayOrigin, hitInfo.point, Color.green);
-
-            followPosition.x = hitInfo.point.x;
-
-            //if (hitInfo.point.x < _mainCam.position.x)
-            //{
-            //    followPosition.x += 0.4f;
-            //}
-            //else if (hitInfo.point.x > _mainCam.position.x)
-            //{
-            //    followPosition.x -= 0.4f;
-            //}
-
-            followPosition.z = hitInfo.point.z;
-
-            //if (hitInfo.point.z < _mainCam.position.z)
-            //{
-            //    followPosition.z += 0.5f;
-            //}
-            //else if (hitInfo.point.z > _mainCam.position.z)
-            //{
-            //    followPosition.z -= 0.5f;
-            //}
+            // Find the halfway point between the raycast hit and the raycast origin
+            followPosition.z = -(0.5f * Vector3.Distance(rayOrigin, hitInfo.point));
         }
 
         return followPosition;
@@ -283,25 +247,20 @@ public class CameraController : MonoBehaviour
 
     private Quaternion FindRotation()
     {
-        // PROBLEM: When entering XRAY, camera rotation Y turns 90 degrees instead of facing forward
-
         // Finds the angle (in degrees) the new mouse position is making with original orientation
         _mouseX += Input.GetAxis("Mouse X") * _rotSpeedX * _invertX * 0.02f;
         _mouseY += Input.GetAxis("Mouse Y") * _rotSpeedY * _invertY * 0.02f;
 
         // Clamp vertical rotation
         _mouseY = Mathf.Clamp(_mouseY, _yAngleMin, _yAngleMax);
-
-        if (_xrayRef.xrayActive)
-        {
-            _mouseX = Mathf.Clamp(_mouseX, _target.localEulerAngles.y + _xAngleMin, _target.localEulerAngles.y + _xAngleMax);
-        }
+        
+        //if (_xrayRef.GetIsInXRay())
+        //{
+        //    _mouseX = Mathf.Clamp(_mouseX, _target.localEulerAngles.y + _xAngleMin, _target.localEulerAngles.y + _xAngleMax);
+        //}
 
         return Quaternion.Euler(_mouseY, _mouseX, 0f);
     }
-
-    //This list of for the GetCenterView function!!
-    List<Collider> collidersHit = new List<Collider>();
 
     // Raycasts from the camera's centre of view and returns the first point of collision
     public Vector3 GetCentreView(Vector3 pRayOrigin, LayerMask pIgnorePlayer)
