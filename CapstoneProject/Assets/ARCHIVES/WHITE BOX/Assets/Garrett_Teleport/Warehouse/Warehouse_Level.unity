@@ -7504,7 +7504,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4032238368074618, guid: 967315f16a45aff4ea9319a35ab5a7c2, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.18
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4032238368074618, guid: 967315f16a45aff4ea9319a35ab5a7c2, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7539,7 +7539,7 @@ Prefab:
         type: 2}
       propertyPath: _coolDown
       value: 
-      objectReference: {fileID: 1839751829}
+      objectReference: {fileID: 1641146001}
     - target: {fileID: 1307949593399106, guid: 967315f16a45aff4ea9319a35ab5a7c2, type: 2}
       propertyPath: m_Name
       value: Player
@@ -7553,6 +7553,14 @@ Prefab:
         type: 2}
       propertyPath: _ignorePlayer.m_Bits
       value: 4294966783
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166763576985304, guid: 967315f16a45aff4ea9319a35ab5a7c2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550264542796756, guid: 967315f16a45aff4ea9319a35ab5a7c2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 967315f16a45aff4ea9319a35ab5a7c2, type: 2}
@@ -13064,6 +13072,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1578205208678004, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
+      propertyPath: m_Name
+      value: CoolDownProj
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7f15c92e88a7ff4ab9e7c09da115f74, type: 2}
   m_IsPrefabParent: 0
@@ -15907,6 +15919,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.219, y: 1.0160002, z: 1.5240003}
   m_Center: {x: 0, y: 0.0000019073486, z: 0.76200014}
+--- !u!114 &1641146001 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114116432932695738, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+    type: 2}
+  m_PrefabInternal: {fileID: 1390861153}
+  m_Script: {fileID: 11500000, guid: 0b8e2cac2726e9b4d9e5a5d75d097362, type: 3}
 --- !u!4 &1642040121 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: edde733db38e7f04db57ac9f360bd551, type: 3}
@@ -17682,12 +17700,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1838952387}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1839751829 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114891879357644400, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
-    type: 2}
-  m_PrefabInternal: {fileID: 1390861153}
-  m_Script: {fileID: 11500000, guid: 0b8e2cac2726e9b4d9e5a5d75d097362, type: 3}
 --- !u!1 &1842624541
 GameObject:
   m_ObjectHideFlags: 0

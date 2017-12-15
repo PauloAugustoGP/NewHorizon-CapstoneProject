@@ -30,7 +30,6 @@ public class WinCanvas : MonoBehaviour
     {
         Sound_Manager.instance.MusicCaller("LevelMusic");
         SceneManager.LoadScene("Level_1");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()

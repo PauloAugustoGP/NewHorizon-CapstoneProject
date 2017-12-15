@@ -8,8 +8,6 @@ public class Scene_Manager : MonoBehaviour
 
     static Scene_Manager _instance = null;
 
-    private const string LEVEL_KEY = "LastLevel";
-
     // Use this for initialization
     void Start()
     {
@@ -51,9 +49,7 @@ public class Scene_Manager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name != lvlName)
         {
-            PlayerPrefs.SetString(LEVEL_KEY, lvlName);
-            if (lvlName != "Winning")
-                SceneManager.LoadScene(lvlName);
+            SceneManager.LoadScene(lvlName);
             //Sound_Manager.instance.MusicCaller("LevelMusic");
         }
         else
@@ -71,7 +67,7 @@ public class Scene_Manager : MonoBehaviour
             return;
         }
         Sound_Manager.instance.MusicCaller("LevelMusic", 0.5f);
-        SceneManager.LoadScene(PlayerPrefs.GetString(LEVEL_KEY));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 
