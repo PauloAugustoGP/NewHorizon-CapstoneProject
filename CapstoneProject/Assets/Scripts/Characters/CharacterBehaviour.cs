@@ -13,20 +13,22 @@ public class CharacterBehaviour : CharacterBase
     protected bool encumbered;
 
     [Header("Test Bools")]//LIVE TEST VALUES
-    [SerializeField] protected bool ValueDebuger;
+    [SerializeField]
+    protected bool ValueDebuger;
     [SerializeField] protected bool Invincibility;
     [SerializeField] protected bool UseRagdoll;
 
     [Header("Drag and Drop")]//DRAG AND DROPS
-    [SerializeField] DataTable dataTable;
+    [SerializeField]
+    DataTable dataTable;
     [SerializeField] Transform StartPosition;
 
     [SerializeField] LayerMask layerMask;
 
     //Animator anim;
     //CapsuleCollider cc;
-   
-    void Start ()
+
+    void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -45,7 +47,7 @@ public class CharacterBehaviour : CharacterBase
             Lives = 3;
     }
 
-    void Update ()
+    void Update()
     {
         RaycastHit OverHeadHit;
 
@@ -81,7 +83,8 @@ public class CharacterBehaviour : CharacterBase
 
         //Temp Spot //wanted to move to class
         if (moving)
-        {   if (slowed == false)
+        {
+            if (slowed == false)
                 ChangeSpeed("Normal");
             else if (slowed == true)
                 ChangeSpeed("Slow");
@@ -172,7 +175,7 @@ public class CharacterBehaviour : CharacterBase
                     animator.SetBool("Crouching", isCrouching);
                     capsule.height = CrouchedHeight;
                     capsule.center = new Vector3(0, -0.5f, 0);
-                } 
+                }
             }//LeftControl
         }//isAlive
 
@@ -206,7 +209,7 @@ public class CharacterBehaviour : CharacterBase
         else
         {
             StartCoroutine(DeathTime(1.5f));
-        }     
+        }
     }//Died
 
     IEnumerator DeathTime(float waitTime)
@@ -257,7 +260,7 @@ public class CharacterBehaviour : CharacterBase
 
     public bool IsCrouching
     {
-        get { return isCrouching; }        
+        get { return isCrouching; }
     }
 
     void OnCollisionEnter(Collision H)

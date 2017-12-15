@@ -1550,8 +1550,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307949593399106}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.59, y: 2.1406724, z: 33.25058}
+  m_LocalRotation: {x: -0, y: 0.7437605, z: -0, w: 0.6684462}
+  m_LocalPosition: {x: 4.65, y: 0.18, z: -28.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4555802104216872}
@@ -3078,7 +3078,7 @@ MonoBehaviour:
   Invincibility: 0
   UseRagdoll: 0
   dataTable: {fileID: 0}
-  StartPosition: {fileID: 4032238368074618}
+  StartPosition: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -3125,8 +3125,6 @@ MonoBehaviour:
   - {fileID: 114137388532282866}
   - {fileID: 114302351376918272}
   - {fileID: 114752370455200560}
-  _currentObject: {fileID: 0}
-  _currentShader: {fileID: 0}
   _currentObjects: []
   _currentShaders: []
 --- !u!114 &114752370455200560
@@ -3154,8 +3152,9 @@ MonoBehaviour:
     type: 2}
   _projectileRayOrigin: {fileID: 4479663114870690}
   _coolDown: {fileID: 0}
-  _useSound: 1
+  _useSound: 0
   componentsToDisable:
+  - {fileID: 114699105192309438}
   - {fileID: 114302351376918272}
   - {fileID: 114137388532282866}
 --- !u!114 &114886981072393884

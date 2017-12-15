@@ -15,12 +15,11 @@ public class ObjectTriggerDel : MonoBehaviour {
 
     private void OnTriggerEnter(Collider c)
     {
-        imageBlack.gameObject.SetActive(true);
-        imageWhite.gameObject.SetActive(true);
-        headerText.gameObject.SetActive(true);
-        TextFirstDiscription.gameObject.SetActive(true);
         if (firstTextON == false)
         {
+            imageBlack.enabled = true;
+            imageWhite.enabled = true;
+            headerText.gameObject.SetActive(true);
             TextFirstDiscription.gameObject.SetActive(false);
         }
 
@@ -37,20 +36,18 @@ public class ObjectTriggerDel : MonoBehaviour {
     }
     private void OnTriggerExit(Collider other)
     {
+        if (firstTextON == false)
+        {
+            imageBlack.enabled = false;
+            imageWhite.enabled = false;
+            headerText.gameObject.SetActive(false);
+            TextToSetActiveIfTrue.gameObject.SetActive(false);
+        }
         if (firstTextON == true)
         {
-            TextFirstDiscription.gameObject.SetActive(false);
-        }
-    
             TextToSetActive.gameObject.SetActive(false);
             TextFirstDiscription.gameObject.SetActive(true);
             TextToSetActiveIfTrue.gameObject.SetActive(false);
-        //if (firstTextON == true)
-        //{
-        //    imageBlack.gameObject.SetActive(false);
-        //    imageWhite.gameObject.SetActive(false);
-        //    headerText.gameObject.SetActive(false);
-        //}
-    
+        }
     }
 }
