@@ -12,7 +12,7 @@
 // Check each newly added prefabs transform positions and make sure they are all set to (0,0,0);
 // Check to make sure that the camera in the scene is tagged as "MainCamera"
 
-// Draw the Player/CameraController into the Main Cam variable
+// Drag the Player/CameraController into the Main Cam variable
 
 
 
