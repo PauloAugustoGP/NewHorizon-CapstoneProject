@@ -22,9 +22,7 @@ public class Loading : MonoBehaviour {
 		if (isLoading == false && startPlay == true)
         {
             isLoading = true;
-
             StartCoroutine(LoadNextScene());
-
             loadingText.text = "Loading...";
             //SceneManager.LoadSceneAsync("Loading Screen");
         }
@@ -44,11 +42,9 @@ public class Loading : MonoBehaviour {
     IEnumerator LoadNextScene()
     {
         Debug.Log("Is Loading");
-        yield return new WaitForSeconds(3);
-
+        //yield return new WaitForSeconds(3);
         AsyncOperation async = SceneManager.LoadSceneAsync("Level_1");
         Sound_Manager.instance.MusicCaller("LevelMusic", 0.5f);
-
         while (!async.isDone)
         {
             yield return null;

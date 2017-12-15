@@ -12,6 +12,8 @@
 // Check each newly added prefabs transform positions and make sure they are all set to (0,0,0);
 // Check to make sure that the camera in the scene is tagged as "MainCamera"
 
+// Drag the Player/CameraController into the Main Cam variable
+
 
 
 
@@ -49,6 +51,9 @@ public class TeleportScript : MonoBehaviour
     // hud reference for cooldown display
     [SerializeField] CoolDown _hudCooldown;
 
+    // Cam Controller
+    [SerializeField] CameraController _mainCam;
+
     // Use this for initialization
     void Start()
     {
@@ -74,6 +79,11 @@ public class TeleportScript : MonoBehaviour
         if (!_hudCooldown)
         {
             Debug.Log("No Cooldown hud reference set. Assign the correct reference");
+        }
+
+        if (!_mainCam)
+        {
+            _mainCam = GetComponent<CameraController>();
         }
 
         // initializing variables
@@ -209,6 +219,7 @@ public class TeleportScript : MonoBehaviour
 
     private IEnumerator DelayedTeleport(Vector3 tempTeleportPosition)
     {
+        StartCoroutine(_mainCam.TeleportTransition());
         yield return new WaitForSeconds(0.2f);
         transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.x, tempTeleportPosition.y + 1.0f /* adding 1 to counteract the new player prefab origin point */ /* Limiting teleport in y: transform.position.y */, tempTeleportPosition.z), transform.rotation);
     }

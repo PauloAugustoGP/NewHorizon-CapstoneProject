@@ -28,6 +28,7 @@
 /// -Dynamic bumper check
 /// ------------------------
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -183,8 +184,11 @@ public class CameraController : MonoBehaviour
             // Move the camera to the desired position
             //_mainCam.position = Vector3.Lerp(_mainCam.position, FindPosition(), 0.02f * _damping);
 
-            // Apply local position
-            _mainCam.localPosition = Vector3.Lerp(_mainCam.localPosition, FindPosition(), 0.02f * _damping);
+            // Apply local position, only if there is a parent object
+            if (_mainCam.parent != null)
+            {
+                _mainCam.localPosition = Vector3.Lerp(_mainCam.localPosition, FindLocalPosition(), 0.02f * _damping);
+            }
 
             // Apply horizontal and vertical rotation
             _mainCam.rotation = Quaternion.Lerp(_mainCam.rotation, FindRotation(), 0.02f * _rotationDamping);
@@ -224,7 +228,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private Vector3 FindPosition()
+    private Vector3 FindLocalPosition()
     {
         // Cache the desired location of the camera in world space
         Vector3 followPosition = _followPosition;
@@ -260,6 +264,14 @@ public class CameraController : MonoBehaviour
         //}
 
         return Quaternion.Euler(_mouseY, _mouseX, 0f);
+    }
+
+    public IEnumerator TeleportTransition()
+    {
+        Vector3 camGlobalPos = _mainCam.position;
+        _mainCam.SetParent(null);
+        yield return new WaitForSeconds(0.3f);
+        _mainCam.SetParent(_target);
     }
 
     // Raycasts from the camera's centre of view and returns the first point of collision
