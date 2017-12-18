@@ -277,38 +277,23 @@ public class CameraController : MonoBehaviour
     // Raycasts from the camera's centre of view and returns the first point of collision
     public Vector3 GetCentreView(Vector3 pRayOrigin, LayerMask pIgnorePlayer)
     {
-        bool finished = false;
-
         float xPos = Screen.width / 2f;
         float yPos = Screen.height / 2f;
 
         float maxDistance = 50.0f;
 
         RaycastHit hit;
-        Ray ray = new Ray(pRayOrigin, _mainCam.forward);
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        //new Ray(pRayOrigin, _mainCam.forward);
 
-        while (!finished)
+        if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer, QueryTriggerInteraction.Ignore))
         {
-            if (Physics.Raycast(ray, out hit, maxDistance, pIgnorePlayer, QueryTriggerInteraction.Ignore))
+            if (Vector3.Distance(hit.point, pRayOrigin) <= 2.0f)
             {
-                if (Vector3.Distance(hit.point, pRayOrigin) <= 2.0f)
-                {
-                    collidersHit.Add(hit.collider);
-                    hit.collider.enabled = false;
+                collidersHit.Add(hit.collider);
+                hit.collider.enabled = false;
 
-                    return GetCentreView(pRayOrigin, pIgnorePlayer);
-                }
-                else
-                {
-                    if (collidersHit.Count > 0)
-                    {
-                        foreach (Collider c in collidersHit)
-                            c.enabled = true;
-                        collidersHit.Clear();
-                    }
-
-                    return hit.point;
-                }
+                return GetCentreView(pRayOrigin, pIgnorePlayer);
             }
             else
             {
@@ -319,10 +304,19 @@ public class CameraController : MonoBehaviour
                     collidersHit.Clear();
                 }
 
-                return pRayOrigin + (_mainCam.forward * maxDistance);
+                return hit.point;
             }
         }
+        else
+        {
+            if (collidersHit.Count > 0)
+            {
+                foreach (Collider c in collidersHit)
+                    c.enabled = true;
+                collidersHit.Clear();
+            }
 
-        return pRayOrigin + (_mainCam.forward * maxDistance);
+            return pRayOrigin + (_mainCam.forward * maxDistance);
+        }
     }
 }
