@@ -7650,7 +7650,7 @@ Prefab:
         type: 2}
       propertyPath: _coolDown
       value: 
-      objectReference: {fileID: 1839751829}
+      objectReference: {fileID: 1085945759}
     - target: {fileID: 114302351376918272, guid: 967315f16a45aff4ea9319a35ab5a7c2,
         type: 2}
       propertyPath: _hudCooldown
@@ -10339,6 +10339,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 3cd5db279aa88674bbdc0fbb8454b9cf, type: 3}
   m_PrefabInternal: {fileID: 1082282212}
+--- !u!114 &1085945759 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114116432932695738, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
+    type: 2}
+  m_PrefabInternal: {fileID: 1390861153}
+  m_Script: {fileID: 11500000, guid: 0b8e2cac2726e9b4d9e5a5d75d097362, type: 3}
 --- !u!1001 &1086280438
 Prefab:
   m_ObjectHideFlags: 0
@@ -18005,12 +18011,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1838952387}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1839751829 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114891879357644400, guid: f7f15c92e88a7ff4ab9e7c09da115f74,
-    type: 2}
-  m_PrefabInternal: {fileID: 1390861153}
-  m_Script: {fileID: 11500000, guid: 0b8e2cac2726e9b4d9e5a5d75d097362, type: 3}
 --- !u!1 &1842624541
 GameObject:
   m_ObjectHideFlags: 0
