@@ -112,4 +112,9 @@ public class Canvas_Manager : MonoBehaviour
     {
         Scene_Manager.instance.GoTo_LEVEL("Hangar_v1");
     }
+
+    public void KeyPadTest()
+    {
+        Scene_Manager.instance.GoTo_LEVEL("Keypad_Level");
+    }
 }
