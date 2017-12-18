@@ -2274,7 +2274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1166763576985304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 4.4, y: 1, z: 4.4}
   m_Children:
   - {fileID: 4902521386595238}
@@ -3031,7 +3031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 4479663114870690}
   _target: {fileID: 4032238368074618}
-  _xDist: 0
+  _xDist: 0.5
   _yDist: 1
   _zDist: 1.5
   _yAngleMin: -10
@@ -3103,10 +3103,10 @@ MonoBehaviour:
     m_Bits: 256
   componentsToDisable:
   - {fileID: 114752370455200560}
-  - {fileID: 0}
   - {fileID: 114137388532282866}
   _hudCooldown: {fileID: 0}
-  _mainCam: {fileID: 0}
+  _mainCam: {fileID: 114058605229595450}
+  _charBehaviourScript: {fileID: 114251546739806420}
 --- !u!114 &114699105192309438
 MonoBehaviour:
   m_ObjectHideFlags: 1
