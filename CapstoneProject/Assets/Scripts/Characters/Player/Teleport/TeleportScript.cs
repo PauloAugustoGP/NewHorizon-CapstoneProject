@@ -54,6 +54,9 @@ public class TeleportScript : MonoBehaviour
     // Cam Controller
     [SerializeField] CameraController _mainCam;
 
+    // player movement script
+    [SerializeField] private CharacterBehaviour _charBehaviourScript;
+
     // Use this for initialization
     void Start()
     {
@@ -84,6 +87,11 @@ public class TeleportScript : MonoBehaviour
         if (!_mainCam)
         {
             _mainCam = GetComponent<CameraController>();
+        }
+
+        if(!_charBehaviourScript)
+        {
+            _charBehaviourScript = gameObject.GetComponent<CharacterBehaviour>();
         }
 
         // initializing variables
@@ -198,6 +206,9 @@ public class TeleportScript : MonoBehaviour
                 _playerShadowPosition = _fakePlayer.transform.position;
                 StartCoroutine(DelayedTeleport(_playerShadowPosition));
 
+                // disable character movement to be reenabled after teleporting
+                _charBehaviourScript.enabled = false;
+
                 foreach (MonoBehaviour script in componentsToDisable)
                 {
                     script.enabled = true;
@@ -222,5 +233,6 @@ public class TeleportScript : MonoBehaviour
         StartCoroutine(_mainCam.TeleportTransition());
         yield return new WaitForSeconds(0.2f);
         transform.SetPositionAndRotation(new Vector3(tempTeleportPosition.x, tempTeleportPosition.y + 1.0f /* adding 1 to counteract the new player prefab origin point */ /* Limiting teleport in y: transform.position.y */, tempTeleportPosition.z), transform.rotation);
+        _charBehaviourScript.enabled = true;
     }
 }
