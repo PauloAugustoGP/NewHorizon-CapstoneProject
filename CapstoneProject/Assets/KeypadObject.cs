@@ -20,6 +20,9 @@ public class KeypadObject : MonoBehaviour
 
     void Update()
     {
+        if (_keypadCanvas.enabled)
+            DisablePlayer(true);
+
         if (Input.GetKeyDown(KeyCode.F) && _inRange)
         {
             if (_player.GetComponent<XRayPlayer>().xrayActive)
