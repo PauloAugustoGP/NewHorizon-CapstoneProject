@@ -12043,6 +12043,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 114497039390468282, guid: aaa19c6d3f3b378489805cbcbceb6dc9,
+        type: 2}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1776762381}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaa19c6d3f3b378489805cbcbceb6dc9, type: 2}
   m_IsPrefabParent: 0
@@ -14789,7 +14794,7 @@ Prefab:
         type: 2}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 909ab20814c6cc448a1a93f4ef6639b2, type: 3}
+      objectReference: {fileID: 8300000, guid: 0c45f5c875c2f2e4f9b8e74a367d71e4, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317918b8b6bf44df284fe8d1b50a7c95, type: 2}
   m_IsPrefabParent: 0
@@ -21574,6 +21579,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 338a87aadd7adcb4498490949d095cd5, type: 3}
   m_PrefabInternal: {fileID: 1774968534}
+--- !u!114 &1776762381 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114153130026432108, guid: c474d13481ed58e46a20e89fa83b6925,
+    type: 2}
+  m_PrefabInternal: {fileID: 1894382332}
+  m_Script: {fileID: 11500000, guid: 6f656656f90f1bc4b8ee388a689c2990, type: 3}
 --- !u!1 &1782470434 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 17bcb1bd0b8acc545bd65705772b3764, type: 3}

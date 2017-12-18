@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33706925766440126}
   - component: {fileID: 23466755042777874}
   - component: {fileID: 65292369149129402}
-  - component: {fileID: 114003599276378468}
+  - component: {fileID: 114497039390468282}
   m_Layer: 0
   m_Name: SwitchButton 1
   m_TagString: Untagged
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264238128139270}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: -19.82, y: -2.6778016, z: -15.18}
+  m_LocalPosition: {x: -19.82, y: -2.6778016, z: -15.543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +100,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1286232, y: 1.1286232, z: 0.57470924}
   m_Center: {x: 0.000017762184, y: -0.000021398067, z: 0.19906804}
---- !u!114 &114003599276378468
+--- !u!114 &114497039390468282
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,8 +108,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1264238128139270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013555c35f8b47f4ca301a92aebf6f19, type: 3}
+  m_Script: {fileID: 11500000, guid: 65612bf667206c04cb41cd531bb7b642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 0}
-  _switchTriggered: 0
+  elevator: {fileID: 0}
