@@ -56,6 +56,8 @@ public class TeleportScript : MonoBehaviour
 
     // player movement script
     [SerializeField] private CharacterBehaviour _charBehaviourScript;
+    private Rigidbody _rb;
+
 
     // Use this for initialization
     void Start()
@@ -93,6 +95,8 @@ public class TeleportScript : MonoBehaviour
         {
             _charBehaviourScript = gameObject.GetComponent<CharacterBehaviour>();
         }
+
+        _rb = gameObject.GetComponent<Rigidbody>();
 
         // initializing variables
         _isCooled = true;
@@ -208,6 +212,8 @@ public class TeleportScript : MonoBehaviour
 
                 // disable character movement to be reenabled after teleporting
                 _charBehaviourScript.enabled = false;
+                _rb.velocity = Vector3.zero;
+                
 
                 foreach (MonoBehaviour script in componentsToDisable)
                 {

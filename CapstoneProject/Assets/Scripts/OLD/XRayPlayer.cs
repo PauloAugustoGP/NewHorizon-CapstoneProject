@@ -78,6 +78,7 @@ public class XRayPlayer : MonoBehaviour
         if (Physics.Raycast(ray, out hit, _touchDistance) && hit.collider.gameObject.GetComponent<XRayObject>())
         {
             SetComponents(false);
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             _currentObject = hit.collider.GetComponent<Renderer>();
             _currentShader = _currentObject.material.shader;
             _currentObject.material.shader = _transparent;
@@ -86,6 +87,7 @@ public class XRayPlayer : MonoBehaviour
         else if (Physics.Raycast(ray, out hit, _touchDistance) && hit.collider.gameObject.GetComponentInParent<XRayObject>())
         {
             SetComponents(false);
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             GameObject parent = hit.collider.transform.parent.gameObject;
 
             foreach (Renderer renderer in parent.GetComponentsInChildren<Renderer>())
