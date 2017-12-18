@@ -108,4 +108,8 @@ public class Canvas_Manager : MonoBehaviour
         Scene_Manager.instance.GoTo_LEVEL("PowerRoom_Level");
     }
     
+    public void HangarLevel()
+    {
+        Scene_Manager.instance.GoTo_LEVEL("Hangar_v1");
+    }
 }
