@@ -54,11 +54,14 @@ public class Passcode_ObjectScript : MonoBehaviour
 
             for (int j = 0; j < _passcodes[i].passCode.Length; ++j)
             {
-                if (_passcodes[i].passCode[i] == _playerCode[i])
+                if (_passcodes[i].passCode[j] == _playerCode[j])
                 {
+                    Debug.LogFormat("Your code: {0}, Their code: {1}", _passcodes[i].passCode[j], _playerCode[j]);
                     equal++;
                 }
             }
+
+            Debug.Log(equal);
 
             if (equal >= 4)
             {
